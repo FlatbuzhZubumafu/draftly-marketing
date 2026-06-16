@@ -8,6 +8,40 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "secure.gravatar.com" },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/draftly-blog-shifts-from-agency-to-customer-focus",
+        destination: "/blog/draftly-blog-shifts-from-agency-to-customer-focus",
+        permanent: true,
+      },
+      {
+        source: "/the-death-of-keyword-how-aeo-aio-is-leaving-keywords-behind",
+        destination: "/blog/the-death-of-keyword-how-aeo-aio-is-leaving-keywords-behind",
+        permanent: true,
+      },
+      {
+        source: "/how-i-accidentally-built-an-ai-content-platform-while-trying-to-save-my-companys-seo",
+        destination: "/blog/how-i-accidentally-built-an-ai-content-platform-while-trying-to-save-my-companys-seo",
+        permanent: true,
+      },
+      {
+        source: "/faq",
+        destination: "/#faq",
+        permanent: true,
+      },
+      {
+        source: "/privacy-policy",
+        destination: "/",
+        permanent: false,
+      },
+      {
+        source: "/terms-and-conditions",
+        destination: "/",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

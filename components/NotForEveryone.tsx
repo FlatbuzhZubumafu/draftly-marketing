@@ -1,7 +1,7 @@
 import { getHomepageData } from "@/lib/graphql";
 import { AccentText } from "./AccentText";
 
-const MOBILE_SCREENSHOT_URL = "https://draftly.blog/wp-content/uploads/2025/10/Draftly.blog-Mobile-2.png";
+const MOBILE_SCREENSHOT_URL = "https://wp.draftly.blog/wp-content/uploads/2025/10/Draftly.blog-Mobile-2.png";
 
 export async function NotForEveryone() {
   const { marketingSettings: s } = await getHomepageData();

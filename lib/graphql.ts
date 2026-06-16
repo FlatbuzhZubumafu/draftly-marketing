@@ -1,4 +1,4 @@
-const WP_GRAPHQL_URL = process.env.WORDPRESS_API_URL || "https://draftly.blog/graphql";
+const WP_GRAPHQL_URL = process.env.WORDPRESS_API_URL || "https://wp.draftly.blog/graphql";
 
 export async function fetchGQL<T>(query: string, variables: Record<string, unknown> = {}): Promise<T> {
   const res = await fetch(WP_GRAPHQL_URL, {

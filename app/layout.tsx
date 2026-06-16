@@ -23,8 +23,8 @@ export const metadata: Metadata = {
     url: "https://draftly.blog",
   },
   icons: {
-    icon: "https://draftly.blog/wp-content/uploads/2025/10/cropped-Draftly.blog_.png",
-    apple: "https://draftly.blog/wp-content/uploads/2025/10/cropped-Draftly.blog_.png",
+    icon: "https://wp.draftly.blog/wp-content/uploads/2025/10/cropped-Draftly.blog_.png",
+    apple: "https://wp.draftly.blog/wp-content/uploads/2025/10/cropped-Draftly.blog_.png",
   },
 };
 

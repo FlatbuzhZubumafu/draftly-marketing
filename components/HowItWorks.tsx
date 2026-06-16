@@ -5,7 +5,7 @@ import { AccentText } from "./AccentText";
 
 const ICON_MAP: Record<string, LucideIcon> = { Target, Rss, PenTool };
 
-const SCREENSHOT_URL = "https://draftly.blog/wp-content/uploads/2025/10/Screenshot-2025-10-15-at-11.26.01-AM.png";
+const SCREENSHOT_URL = "https://wp.draftly.blog/wp-content/uploads/2025/10/Screenshot-2025-10-15-at-11.26.01-AM.png";
 
 export async function HowItWorks() {
   const { steps, marketingSettings: s } = await getHomepageData();

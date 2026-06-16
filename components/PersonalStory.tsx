@@ -1,7 +1,7 @@
 import { getHomepageData } from "@/lib/graphql";
 import { AccentText } from "./AccentText";
 
-const PORTRAIT_URL = "https://draftly.blog/wp-content/uploads/2025/10/DSC03429-Edit-1-scaled.jpg";
+const PORTRAIT_URL = "https://wp.draftly.blog/wp-content/uploads/2025/10/DSC03429-Edit-1-scaled.jpg";
 
 export async function PersonalStory() {
   const { marketingSettings: s } = await getHomepageData();
