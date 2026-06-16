@@ -1,26 +1,316 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Backgrounds */
+  --color-bg-primary:     #ffffff;
+  --color-bg-surface:     #f7f7f5;
+  --color-bg-elevated:    #f0efed;
+  --color-bg-subtle:      #e8e7e4;
+
+  /* Accent */
+  --color-accent:         #ff6b3d;
+  --color-accent-hover:   #e85a2d;
+  --color-accent-muted:   rgba(255, 107, 61, 0.10);
+
+  /* Blue */
+  --color-blue:           #2f8ccc;
+  --color-blue-muted:     rgba(47, 140, 204, 0.10);
+
+  /* Yellow */
+  --color-yellow:         #f5b800;
+  --color-yellow-muted:   rgba(245, 184, 0, 0.12);
+
+  /* Purple */
+  --color-purple:         #9b5fcf;
+  --color-purple-muted:   rgba(155, 95, 207, 0.10);
+
+  /* Gradients */
+  --gradient-accent:      linear-gradient(135deg, #ff6b3d 0%, #ffce59 100%);
+  --gradient-cool:        linear-gradient(135deg, #2f8ccc 0%, #9b5fcf 100%);
+
+  /* Text */
+  --color-text-primary:   #111111;
+  --color-text-secondary: #555555;
+  --color-text-muted:     #999999;
+  --color-text-inverted:  #ffffff;
+
+  /* Borders */
+  --color-border:         rgba(0, 0, 0, 0.08);
+  --color-border-strong:  rgba(0, 0, 0, 0.16);
+  --color-border-accent:  rgba(255, 107, 61, 0.35);
+
+  /* Footer */
+  --color-footer-bg:      #111111;
+  --color-footer-text:    #f0f0f0;
+  --color-footer-muted:   #888888;
+  --color-footer-border:  rgba(255, 255, 255, 0.08);
+
+  /* Fonts */
+  --font-display: 'Rockwell', 'Rockwell Nova', Georgia, serif;
+  --font-ui: var(--font-plus-jakarta-sans), system-ui, sans-serif;
+
+  /* Typography */
+  --tracking-logo:     -0.04em;
+  --tracking-headings: -0.03em;
+  --tracking-body:     -0.02em;
+  --tracking-wide:      0.06em;
+  --tracking-widest:    0.12em;
+
+  /* Radii */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-2xl:  24px;
+
+  /* Shadows — layered for depth */
+  --shadow-sm:          0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-card:        0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.03);
+  --shadow-card-hover:  0 20px 40px rgba(0, 0, 0, 0.08), 0 8px 16px rgba(0, 0, 0, 0.04);
+  --shadow-float:       0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  --shadow-accent:      0 0 24px rgba(255, 107, 61, 0.25);
+  --shadow-glow:        0 0 40px rgba(255, 107, 61, 0.15);
+  --shadow-deep:        0 30px 60px -15px rgba(0, 0, 0, 0.12), 0 15px 30px -8px rgba(0, 0, 0, 0.06);
+
+  /* Transitions */
+  --transition-base:   0.2s ease;
+  --transition-slow:   0.35s ease;
+  --transition-lift:   0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+
+  /* Spacing */
+  --container-max:     1200px;
+  --section-padding-y: 6rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-ui);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 30px;
+  letter-spacing: var(--tracking-body);
+}
+
+h1 {
+  font-family: var(--font-ui);
+  font-size: clamp(2rem, 6vw, 62px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: var(--tracking-headings);
+}
+
+h2 {
+  font-family: var(--font-ui);
+  font-size: clamp(1.75rem, 4vw, 46px);
+  font-weight: 500;
+  line-height: 1.22;
+  letter-spacing: var(--tracking-headings);
+}
+
+h3 {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  letter-spacing: var(--tracking-headings);
+}
+
+a {
+  color: var(--color-blue);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+a:hover { color: var(--color-text-primary); }
+
+::selection {
+  background: var(--color-accent-muted);
+  color: var(--color-accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Page heading — Rockwell, hero element only */
+.page-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 7vw, 80px);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.page-heading em {
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+/* Eyebrow / section label */
+.eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--color-accent);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: var(--tracking-wide);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--color-accent);
+  color: var(--color-text-inverted);
+  box-shadow: var(--shadow-accent);
+}
+.btn-primary:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+  color: var(--color-text-inverted);
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-strong);
+}
+.btn-secondary:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+/* === DEPTH: Card system === */
+.card-depth {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-lift), box-shadow var(--transition-lift), border-color var(--transition-base);
+}
+.card-depth:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--color-border-strong);
+}
+
+/* === DEPTH: Section divider === */
+.section-divider {
+  width: 100%;
+  height: 2px;
+  background: var(--gradient-accent);
+  border: none;
+  opacity: 0.15;
+}
+
+/* === ANIMATION: Scroll reveal === */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === ANIMATION: Squiggle draw-on === */
+.squiggle-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1.2s ease 0.3s;
+}
+.squiggle-path.in-view {
+  stroke-dashoffset: 0;
+}
+
+/* Marquee */
+.marquee-wrapper {
+  overflow: hidden;
+  padding-block: 1.5rem;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+.marquee-item {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  padding-inline: 2rem;
+  white-space: nowrap;
+}
+.marquee-item.outline {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--color-border-strong);
+}
+.marquee-item.filled {
+  color: var(--color-text-primary);
+  -webkit-text-stroke: 0;
+}
+.marquee-wrapper:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Container helper */
+.container-draftly {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+@media (min-width: 1024px) {
+  .container-draftly {
+    padding-inline: 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+  .squiggle-path { stroke-dashoffset: 0; }
 }
