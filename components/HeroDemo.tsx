@@ -20,6 +20,7 @@ export function HeroDemo({ settings }: { settings: MarketingSettings }) {
 
   return (
     <section
+      id="hero"
       className="relative flex items-center overflow-hidden pt-24 pb-16 px-4"
       style={{ background: "var(--color-bg-primary)", minHeight: "90vh" }}
     >

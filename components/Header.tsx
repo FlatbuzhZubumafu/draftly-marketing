@@ -43,10 +43,19 @@ export async function Header() {
             <a href={loginUrl} className="hidden sm:inline text-[15px] font-medium text-text-secondary hover:text-text-primary transition-colors">
               Log in
             </a>
-            <a href={registerUrl} className="btn btn-primary text-sm">
-              {s.heroCtaText}
-            </a>
-            <button id="mobile-toggle" className="md:hidden p-2" aria-label="Menu">
+            {/* Below md the CTA lives in the mobile menu and the sticky bottom bar */}
+            <div className="hidden md:block">
+              <a href={registerUrl} className="btn btn-primary text-sm">
+                {s.heroCtaText}
+              </a>
+            </div>
+            <button
+              id="mobile-toggle"
+              className="md:hidden p-2"
+              aria-label="Menu"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+            >
               <Menu className="w-5 h-5" />
             </button>
           </div>
@@ -63,8 +72,35 @@ export async function Header() {
           <a href="/blog" className="block text-[15px] font-medium text-text-secondary">Blog</a>
           <a href="/#faq" className="block text-[15px] font-medium text-text-secondary">FAQ</a>
           <a href={loginUrl} className="block text-[15px] font-medium text-text-secondary">Log in</a>
+          <div className="flex pt-2">
+            <a href={registerUrl} className="btn btn-primary w-full justify-center">
+              {s.heroCtaText}
+            </a>
+          </div>
         </nav>
       </header>
+
+      {/* Sticky mobile CTA — revealed by HeaderInteractions once the hero scrolls out of view */}
+      <div
+        id="mobile-cta-bar"
+        className="md:hidden fixed bottom-0 left-0 right-0 z-40 flex px-4 pt-3"
+        style={{
+          background: "rgba(255, 255, 255, 0.92)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+          borderTop: "1px solid var(--color-border)",
+          paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom))",
+          transform: "translateY(120%)",
+          opacity: 0,
+          visibility: "hidden",
+          pointerEvents: "none",
+          transition: "transform var(--transition-slow), opacity var(--transition-slow), visibility var(--transition-slow)",
+        }}
+      >
+        <a href={registerUrl} className="btn btn-primary w-full justify-center">
+          {s.heroCtaText}
+        </a>
+      </div>
     </>
   );
 }

@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 export function HeaderInteractions() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [heroInView, setHeroInView] = useState(true);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -28,18 +29,48 @@ export function HeaderInteractions() {
     }
   }, [scrolled]);
 
+  // The hero carries its own CTA, so the sticky bar stays out of the way while it is on screen.
+  useEffect(() => {
+    const hero = document.getElementById("hero");
+    if (!hero) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setHeroInView(entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const bar = document.getElementById("mobile-cta-bar");
+    if (!bar) return;
+    // Pages without a hero (the blog) have no CTA of their own, so the bar rides along there.
+    const hero = document.getElementById("hero");
+    const show = !mobileOpen && !(hero && heroInView);
+    bar.style.transform = show ? "translateY(0)" : "translateY(120%)";
+    bar.style.opacity = show ? "1" : "0";
+    bar.style.visibility = show ? "visible" : "hidden";
+    bar.style.pointerEvents = show ? "auto" : "none";
+  }, [heroInView, mobileOpen]);
+
   useEffect(() => {
     const menu = document.getElementById("mobile-menu");
-    if (!menu) return;
-    menu.style.display = mobileOpen ? "block" : "none";
+    if (menu) menu.style.display = mobileOpen ? "block" : "none";
+    const btn = document.getElementById("mobile-toggle");
+    if (btn) btn.setAttribute("aria-expanded", String(mobileOpen));
   }, [mobileOpen]);
 
   useEffect(() => {
     const btn = document.getElementById("mobile-toggle");
-    if (!btn) return;
-    btn.addEventListener("click", () => setMobileOpen(prev => !prev));
-    const links = document.querySelectorAll("#mobile-menu a");
-    links.forEach(link => link.addEventListener("click", () => setMobileOpen(false)));
+    const toggle = () => setMobileOpen(prev => !prev);
+    const close = () => setMobileOpen(false);
+    const links = Array.from(document.querySelectorAll("#mobile-menu a"));
+    btn?.addEventListener("click", toggle);
+    links.forEach(link => link.addEventListener("click", close));
+    return () => {
+      btn?.removeEventListener("click", toggle);
+      links.forEach(link => link.removeEventListener("click", close));
+    };
   }, []);
 
   return null;
