@@ -8,7 +8,8 @@ export async function Footer() {
   return (
     <>
       <section style={{ background: "#000" }} className="px-4">
-        <div className="container-draftly py-20">
+        {/* Extra bottom padding below md keeps the sticky mobile CTA off the copyright line */}
+        <div className="container-draftly py-20 pb-32 md:pb-20">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
             {/* Heading */}
             <div className="md:col-span-8">
