@@ -40,27 +40,20 @@ export async function HowItWorks() {
         </div>
 
         {/* Steps */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {steps.nodes.map((step, index) => {
             const Icon = ICON_MAP[step.iconName] || Target;
             return (
               <div
                 key={step.stepNumber}
-                className="reveal rounded-xl p-8 card-depth"
-                style={{
-                  borderLeft: "3px solid transparent",
-                  borderImage: "var(--gradient-accent) 1",
-                  background: "var(--color-bg-surface)",
-                  transitionDelay: `${index * 0.1}s`,
-                }}
+                className="reveal p-6 card-depth"
+                style={{ transitionDelay: `${index * 0.08}s` }}
               >
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="w-10 h-10 rounded-lg flex items-center justify-center"
-                       style={{ background: "var(--color-accent-muted)" }}>
-                    <Icon className="w-5 h-5" style={{ color: "var(--color-accent)" }} />
-                  </div>
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4"
+                     style={{ background: "var(--color-accent-muted)" }}>
+                  <Icon className="w-5 h-5" style={{ color: "var(--color-accent)" }} />
                 </div>
-                <h3 className="text-lg font-semibold mb-3">{step.title}</h3>
+                <h3 className="font-semibold mb-2">{step.title}</h3>
                 <p className="text-sm leading-relaxed whitespace-pre-line" style={{ color: "var(--color-text-secondary)" }}>
                   {step.stepDescription}
                 </p>
