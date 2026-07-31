@@ -1,5 +1,4 @@
 import { getHomepageData } from "@/lib/graphql";
-import { VideoLightbox } from "./VideoLightbox";
 import { AccentText } from "./AccentText";
 
 export async function VideoSection() {
@@ -30,9 +29,25 @@ export async function VideoSection() {
           </h2>
         </div>
 
-        <div className="reveal mt-8" style={{ transitionDelay: "0.15s" }}>
-          {s.heroVideoUrl && <VideoLightbox videoUrl={s.heroVideoUrl} />}
-        </div>
+        {s.heroVideoUrl && (
+          <div className="reveal mt-10 w-full max-w-3xl" style={{ transitionDelay: "0.15s" }}>
+            <div
+              className="rounded-2xl overflow-hidden"
+              style={{ boxShadow: "var(--shadow-deep)", background: "#000" }}
+            >
+              <video
+                className="w-full h-auto block"
+                style={{ aspectRatio: "16 / 9" }}
+                controls
+                playsInline
+                preload="metadata"
+                controlsList="nodownload"
+              >
+                <source src={s.heroVideoUrl} type="video/mp4" />
+              </video>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
