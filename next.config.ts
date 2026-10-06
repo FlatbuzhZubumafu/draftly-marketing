@@ -26,6 +26,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/best-ai-models-for-blogging",
+        destination: "/best-ai-for-writing",
+        permanent: true,
+      },
+      {
         source: "/faq",
         destination: "/#faq",
         permanent: true,

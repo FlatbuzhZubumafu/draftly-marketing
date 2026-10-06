@@ -32,7 +32,7 @@ export const PLANS: Plan[] = [
     name: "Solopreneur",
     price: 29,
     credits: "10,000 credits a month",
-    posts: "About 40 posts a month",
+    posts: "About 66 posts a month",
     pitch: "For one person running one blog who wants to publish every week.",
     includesFrom: "Free",
     features: [
@@ -47,7 +47,7 @@ export const PLANS: Plan[] = [
     name: "Growth",
     price: 69,
     credits: "35,000 credits a month",
-    posts: "About 140 posts a month",
+    posts: "About 233 posts a month",
     pitch: "For teams and agencies publishing most days of the week.",
     includesFrom: "Solopreneur",
     features: [
@@ -61,7 +61,7 @@ export const PLANS: Plan[] = [
     name: "Autopilot",
     price: 100,
     credits: "50,000 credits a month",
-    posts: "About 200 posts a month",
+    posts: "About 333 posts a month",
     pitch: "Set a schedule once and Draftly keeps your blog publishing.",
     includesFrom: "Growth",
     features: [
