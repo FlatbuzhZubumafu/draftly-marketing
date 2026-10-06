@@ -97,6 +97,17 @@ export async function Footer() {
               <p className="text-sm" style={{ color: "#666" }}>
                 © {s.footerText} {year}.
               </p>
+              <p className="text-sm mt-1" style={{ color: "#666" }}>
+                A{" "}
+                <a
+                  href="https://prestonvawdrey.com"
+                  className="underline underline-offset-2 transition-colors hover:text-white"
+                  style={{ color: "#888" }}
+                >
+                  Preston Vawdrey
+                </a>{" "}
+                SEO product
+              </p>
             </div>
           </div>
         </div>
