@@ -481,7 +481,7 @@ export default async function BenchmarkPage() {
 
           <section className="mt-20 rounded-2xl p-8 sm:p-12" style={{ background: "#111", color: "var(--color-text-inverted)" }}>
             <h2 className="text-3xl font-medium mb-4" style={{ letterSpacing: "-0.03em" }}>
-              Write With the Winners
+              Start Writing With the Best Models and Draftly&apos;s SEO-Optimized Copywriting Tools Today
             </h2>
             <p className="max-w-2xl mb-8 leading-relaxed" style={{ color: "#bbb" }}>
               Draftly writes with GPT 5.4 Mini by default, offers Claude Sonnet 5.5 as its recommended premium model, and
