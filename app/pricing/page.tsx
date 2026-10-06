@@ -52,7 +52,8 @@ const PLANS: Plan[] = [
     features: [
       "Pick from 6 AI models, including Claude, GPT, Gemini and DeepSeek",
       "Outlines and topic refreshes use no credits",
-      "MCP connector for Claude, ChatGPT and Cursor (coming soon)",
+      "MCP connector for Claude, ChatGPT and Cursor, with your Search Console and GA4 data (coming soon)",
+      "Import your own keyword lists and brand docs (coming soon)",
     ],
   },
   {
@@ -76,6 +77,7 @@ const PLANS: Plan[] = [
       "Posting schedules: Draftly picks topics, writes and publishes on your cadence",
       "Automatic publishing to WordPress and Shopify",
       "Weekly digest email of everything it published",
+      "Live SEO data: search volume, keyword difficulty, top 10 results and People Also Ask (coming soon)",
     ],
   },
 ];
@@ -244,11 +246,12 @@ export default async function PricingPage() {
           </h2>
           <div className="max-w-2xl space-y-4 text-base leading-relaxed" style={{ color: "#bbb" }}>
             <p>
-              Connect Draftly to Claude, ChatGPT or Cursor through MCP. Your assistant gets your brand memory, live
-              keyword research and Draftly&apos;s editing checks, then helps you decide what to write and writes it with
-              you.
+              Connect Draftly to Claude, ChatGPT or Cursor through MCP. Your assistant gets your brand memory, your
+              Search Console and GA4 numbers, and Draftly&apos;s editing checks, then helps you decide what to write and
+              writes it with you.
             </p>
             <p>Draftly picks the best model for each step, or your own assistant does the writing. Your call.</p>
+            <p>On Autopilot it also pulls live search volume, keyword difficulty and the current top 10 for any topic.</p>
             <p className="font-semibold text-white">Included with every paid plan when it launches.</p>
           </div>
         </section>
