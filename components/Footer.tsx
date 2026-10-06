@@ -53,7 +53,7 @@ export async function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href="/best-ai-models-for-blogging" className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
+                  <a href="/best-ai-for-writing" className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
                     AI Model Benchmark
                   </a>
                 </li>

@@ -80,7 +80,7 @@ export default async function PricingPage() {
 
           <p className="mt-6 text-sm text-center max-w-2xl mx-auto" style={{ color: "var(--color-text-muted)" }}>
             Post counts assume the default model, GPT 5.4 Mini, which led our{" "}
-            <a href="/best-ai-models-for-blogging" style={{ color: "var(--color-accent)" }}>
+            <a href="/best-ai-for-writing" style={{ color: "var(--color-accent)" }}>
               blogging benchmark
             </a>{" "}
             on value. Claude Sonnet 4.6 and GPT 5.4 use about 1.7x the credits per post, so a plan covers fewer posts
