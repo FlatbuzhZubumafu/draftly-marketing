@@ -11,6 +11,7 @@ import { Integrations } from "@/components/Integrations";
 import { NotForEveryone } from "@/components/NotForEveryone";
 import { ScrollingBands } from "@/components/ScrollingBands";
 import { FAQ } from "@/components/FAQ";
+import { HomePricing } from "@/components/HomePricing";
 
 export default async function HomePage() {
   const data = await getHomepageData();
@@ -28,6 +29,7 @@ export default async function HomePage() {
         <Integrations />
         <NotForEveryone />
         <ScrollingBands />
+        <HomePricing />
         <FAQ faqs={data.faqs.nodes} />
       </main>
       <Footer />
