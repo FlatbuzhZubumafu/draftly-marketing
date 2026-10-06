@@ -44,14 +44,14 @@ const EVERY_PLAN = [
 ];
 
 const CREDIT_COSTS = [
-  { action: "Blog post", credits: "150 (250 on Sonnet 4.6 and GPT 5.4)" },
+  { action: "Blog post", credits: "150 (250 on premium models such as Claude Sonnet 5.5)" },
   { action: "Thumbnail image", credits: "50" },
   { action: "Outline", credits: "15 (free on paid plans)" },
   { action: "Topic refresh", credits: "10 (free on paid plans)" },
   { action: "Rewrite", credits: "0" },
 ];
 
-const MODELS = ["GPT 5.4 Mini (default)", "Claude Sonnet 4.6", "Claude Haiku 4.5", "GPT 5.4", "Gemini 3 Flash", "DeepSeek V3.2"];
+const MODELS = ["GPT 5.4 Mini (default, best value)", "Claude Sonnet 5.5 (recommended premium)", "Claude Sonnet 4.6", "Claude Haiku 4.5", "GPT 5.4", "Gemini 3 Flash", "DeepSeek V3.2"];
 
 export default async function PricingPage() {
   const { marketingSettings: s } = await getHomepageData();
@@ -83,7 +83,7 @@ export default async function PricingPage() {
             <a href="/best-ai-for-writing" style={{ color: "var(--color-accent)" }}>
               blogging benchmark
             </a>{" "}
-            on value. Claude Sonnet 4.6 and GPT 5.4 use about 1.7x the credits per post, so a plan covers fewer posts
+            on value. Premium models such as Claude Sonnet 5.5 use about 1.7x the credits per post, so a plan covers fewer posts
             on them. SEO data calls come
             from a separate monthly allowance, with data packs of 100 extra calls for $10. Start free and upgrade any
             time from Settings inside the app.
