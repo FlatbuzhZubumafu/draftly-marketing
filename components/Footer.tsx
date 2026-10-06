@@ -22,6 +22,15 @@ export async function Footer() {
                   Stay Top of Mind
                 </em>
               </h2>
+              <div className="mt-8">
+                <a
+                  href={registerUrl}
+                  className="inline-flex items-center gap-2 font-semibold text-white px-8 py-3 rounded-lg transition-all hover:opacity-90 hover:-translate-y-0.5"
+                  style={{ background: "var(--color-accent)", boxShadow: "var(--shadow-accent)" }}
+                >
+                  {s.heroCtaText}
+                </a>
+              </div>
             </div>
 
             {/* Connect column */}
@@ -82,18 +91,9 @@ export async function Footer() {
             </div>
           </div>
 
-          {/* Row 2: signup button + copyright */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center mt-16 pt-8" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-            <div className="md:col-span-8">
-              <a
-                href={registerUrl}
-                className="inline-flex items-center gap-2 font-semibold text-white px-8 py-3 rounded-lg transition-all hover:opacity-90 hover:-translate-y-0.5"
-                style={{ background: "var(--color-accent)", boxShadow: "var(--shadow-accent)" }}
-              >
-                {s.heroCtaText}
-              </a>
-            </div>
-            <div className="md:col-span-4 md:text-right">
+          {/* Row 2: copyright */}
+          <div className="mt-12 pt-8 md:text-right" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+            <div>
               <p className="text-sm" style={{ color: "#666" }}>
                 © {s.footerText} {year}.
               </p>
