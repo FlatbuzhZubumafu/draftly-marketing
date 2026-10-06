@@ -54,6 +54,7 @@ const PLANS: Plan[] = [
       "Outlines and topic refreshes use no credits",
       "MCP connector for Claude, ChatGPT and Cursor, with your Search Console and GA4 data (coming soon)",
       "Import your own keyword lists and brand docs (coming soon)",
+      "Keyword data: search volume, difficulty, intent and related keywords, 40 lookups a month (coming soon)",
     ],
   },
   {
@@ -63,7 +64,11 @@ const PLANS: Plan[] = [
     posts: "About 140 posts a month",
     pitch: "For teams and agencies publishing most days of the week.",
     includesFrom: "Solopreneur",
-    features: ["AI-generated images inside your posts", "Email notifications when posts are ready"],
+    features: [
+      "AI-generated images inside your posts",
+      "Email notifications when posts are ready",
+      "Live top 10 results, People Also Ask and domain data for your site and competitors, 150 data calls a month (coming soon)",
+    ],
     highlight: "Lowest cost per post",
   },
   {
@@ -77,7 +82,7 @@ const PLANS: Plan[] = [
       "Posting schedules: Draftly picks topics, writes and publishes on your cadence",
       "Automatic publishing to WordPress and Shopify",
       "Weekly digest email of everything it published",
-      "Live SEO data: search volume, keyword difficulty, top 10 results and People Also Ask (coming soon)",
+      "Every SEO dataset, including keyword gaps against competitors and backlinks, 300 data calls a month (coming soon)",
     ],
   },
 ];
@@ -210,8 +215,9 @@ export default async function PricingPage() {
 
           <p className="mt-6 text-sm text-center max-w-2xl mx-auto" style={{ color: "var(--color-text-muted)" }}>
             Post counts assume the default model, Claude Sonnet 4.6. Haiku, GPT 5.4 Mini, Gemini 3 Flash and
-            DeepSeek cost 40% fewer credits per post, so your plan stretches further on them. Start free and upgrade
-            any time from Settings inside the app.
+            DeepSeek cost 40% fewer credits per post, so your plan stretches further on them. SEO data calls come
+            from a separate monthly allowance, with data packs of 100 extra calls for $10. Start free and upgrade any
+            time from Settings inside the app.
           </p>
         </section>
 
@@ -251,7 +257,10 @@ export default async function PricingPage() {
               writes it with you.
             </p>
             <p>Draftly picks the best model for each step, or your own assistant does the writing. Your call.</p>
-            <p>On Autopilot it also pulls live search volume, keyword difficulty and the current top 10 for any topic.</p>
+            <p>
+              Every paid plan includes keyword data. Growth adds the live top 10 and domain data, and Autopilot opens
+              every dataset, including keyword gaps and backlinks. Need more lookups? Add a data pack any time.
+            </p>
             <p className="font-semibold text-white">Included with every paid plan when it launches.</p>
           </div>
         </section>
