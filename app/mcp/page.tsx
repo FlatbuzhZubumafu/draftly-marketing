@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: "SEO MCP Connector for Claude, ChatGPT and Cursor",
   description: DESCRIPTION,
   alternates: { canonical: "/mcp" },
-  openGraph: { title: TITLE, description: DESCRIPTION, type: "article", url: "https://draftly.blog/mcp" },
+  openGraph: { title: TITLE, description: DESCRIPTION, type: "article", url: "https://www.draftly.blog/mcp" },
 };
 
 type Plan = "Solopreneur" | "Growth" | "Autopilot";
@@ -125,11 +125,11 @@ export default async function McpPage() {
         "@type": "TechArticle",
         headline: TITLE,
         description: DESCRIPTION,
-        url: "https://draftly.blog/mcp",
+        url: "https://www.draftly.blog/mcp",
         datePublished: "2026-10-06",
         dateModified: "2026-10-06",
         author: { "@type": "Person", name: "Preston Vawdrey", url: "https://prestonvawdrey.com" },
-        publisher: { "@type": "Organization", name: "Draftly", url: "https://draftly.blog" },
+        publisher: { "@type": "Organization", name: "Draftly", url: "https://www.draftly.blog" },
       },
       {
         "@type": "FAQPage",

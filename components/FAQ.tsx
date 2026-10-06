@@ -10,8 +10,19 @@ export function FAQ({ faqs }: { faqs: WPFaq[] }) {
 
   if (!faqs || faqs.length === 0) return null;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.title,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  };
+
   return (
     <section id="faq" className="py-24 px-4" style={{ background: "var(--color-bg-primary)" }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <div className="container-draftly max-w-2xl">
         <div className="reveal text-center mb-12">
           <h2 className="text-3xl font-medium" style={{ letterSpacing: "-0.03em" }}>
@@ -35,6 +46,8 @@ export function FAQ({ faqs }: { faqs: WPFaq[] }) {
               <button
                 onClick={() => setOpenFaq(openFaq === i ? null : i)}
                 className="w-full flex items-center justify-between px-5 py-4 text-left"
+                aria-expanded={openFaq === i}
+                aria-controls={`faq-answer-${i}`}
               >
                 <span className="font-semibold text-sm">{faq.title}</span>
                 {openFaq === i ? (
@@ -43,11 +56,10 @@ export function FAQ({ faqs }: { faqs: WPFaq[] }) {
                   <ChevronDown className="w-4 h-4 flex-shrink-0" style={{ color: "var(--color-text-muted)" }} />
                 )}
               </button>
-              {openFaq === i && (
-                <div className="px-5 pb-5">
-                  <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>{faq.answer}</p>
-                </div>
-              )}
+              {/* Always in the DOM so crawlers that don't run JS can read every answer. */}
+              <div id={`faq-answer-${i}`} className="px-5 pb-5" hidden={openFaq !== i}>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>{faq.answer}</p>
+              </div>
             </div>
           ))}
         </div>

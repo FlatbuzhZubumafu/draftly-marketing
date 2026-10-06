@@ -13,6 +13,13 @@ export const metadata: Metadata = {
   description:
     "Your first Draftly post is free. Paid plans run $29, $69 and $100 a month for about 66, 233 and 333 blog posts written in your brand's voice.",
   alternates: { canonical: "/pricing" },
+  openGraph: {
+    title: "Draftly Pricing: Free, $29, $69 and $100 Plans",
+    description:
+      "Your first Draftly post is free. Paid plans run $29, $69 and $100 a month for about 66, 233 and 333 blog posts written in your brand's voice.",
+    type: "website",
+    url: "/pricing",
+  },
 };
 
 

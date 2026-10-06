@@ -81,6 +81,7 @@ export interface WPPost {
   slug: string;
   title: string;
   date: string;
+  modified: string;
   excerpt: string;
   content: string;
   featuredImage?: { node: { sourceUrl: string; altText: string } };
@@ -153,6 +154,7 @@ const POSTS_QUERY = `
         slug
         title
         date
+        modified
         excerpt
         featuredImage { node { sourceUrl altText } }
         author { node { name } }
@@ -173,6 +175,8 @@ const POST_QUERY = `
       slug
       title
       date
+      modified
+      excerpt
       content
       featuredImage { node { sourceUrl altText } }
       author { node { name } }

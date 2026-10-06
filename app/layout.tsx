@@ -12,6 +12,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.draftly.blog"),
   title: {
     default: "Draftly: Blog Posts in Your Brand's Voice, Ready to Publish",
     template: "%s | Draftly",
@@ -23,11 +24,6 @@ export const metadata: Metadata = {
     description:
       "Draftly reads your website, picks timely topics from your industry's news, and writes full blog posts in your voice.",
     type: "website",
-    url: "https://draftly.blog",
-  },
-  icons: {
-    icon: "https://wp.draftly.blog/wp-content/uploads/2025/10/cropped-Draftly.blog_.png",
-    apple: "https://wp.draftly.blog/wp-content/uploads/2025/10/cropped-Draftly.blog_.png",
   },
 };
 
