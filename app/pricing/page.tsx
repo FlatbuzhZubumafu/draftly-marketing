@@ -11,7 +11,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "Your first Draftly post is free. Paid plans run $29, $69 and $100 a month for about 40, 140 and 200 blog posts written in your brand's voice.",
+    "Your first Draftly post is free. Paid plans run $29, $69 and $100 a month for about 66, 233 and 333 blog posts written in your brand's voice.",
   alternates: { canonical: "/pricing" },
 };
 
@@ -44,14 +44,14 @@ const EVERY_PLAN = [
 ];
 
 const CREDIT_COSTS = [
-  { action: "Blog post", credits: "250" },
+  { action: "Blog post", credits: "150 (250 on Sonnet 4.6 and GPT 5.4)" },
   { action: "Thumbnail image", credits: "50" },
   { action: "Outline", credits: "15 (free on paid plans)" },
   { action: "Topic refresh", credits: "10 (free on paid plans)" },
   { action: "Rewrite", credits: "0" },
 ];
 
-const MODELS = ["Claude Sonnet 4.6", "Claude Haiku 4.5", "GPT 5.4", "GPT 5.4 Mini", "Gemini 3 Flash", "DeepSeek V3.2"];
+const MODELS = ["GPT 5.4 Mini (default)", "Claude Sonnet 4.6", "Claude Haiku 4.5", "GPT 5.4", "Gemini 3 Flash", "DeepSeek V3.2"];
 
 export default async function PricingPage() {
   const { marketingSettings: s } = await getHomepageData();
@@ -79,8 +79,12 @@ export default async function PricingPage() {
           <PricingPlans registerUrl={registerUrl} freeCtaText={s.heroCtaText} cardHeading="h2" />
 
           <p className="mt-6 text-sm text-center max-w-2xl mx-auto" style={{ color: "var(--color-text-muted)" }}>
-            Post counts assume the default model, Claude Sonnet 4.6. Haiku, GPT 5.4 Mini, Gemini 3 Flash and
-            DeepSeek cost 40% fewer credits per post, so your plan stretches further on them. SEO data calls come
+            Post counts assume the default model, GPT 5.4 Mini, which led our{" "}
+            <a href="/best-ai-models-for-blogging" style={{ color: "var(--color-accent)" }}>
+              blogging benchmark
+            </a>{" "}
+            on value. Claude Sonnet 4.6 and GPT 5.4 use about 1.7x the credits per post, so a plan covers fewer posts
+            on them. SEO data calls come
             from a separate monthly allowance, with data packs of 100 extra calls for $10. Start free and upgrade any
             time from Settings inside the app.
           </p>
@@ -136,7 +140,7 @@ export default async function PricingPage() {
               How Credits Work
             </h2>
             <p className="text-sm leading-relaxed mb-5" style={{ color: "var(--color-text-secondary)" }}>
-              Each plan comes with a monthly credit balance. Actions spend credits at these rates on the default model.
+              Each plan comes with a monthly credit balance. Actions spend credits at these rates.
             </p>
             <table className="w-full text-sm">
               <thead>
@@ -164,7 +168,7 @@ export default async function PricingPage() {
               The Models You Can Pick
             </h2>
             <p className="text-sm leading-relaxed mb-5" style={{ color: "var(--color-text-secondary)" }}>
-              Free accounts write with Claude Sonnet 4.6. Paid plans choose per post from the full list.
+              Free accounts write with GPT 5.4 Mini. Paid plans choose per post from the full list.
             </p>
             <ul className="space-y-2 text-sm">
               {MODELS.map((m) => (
