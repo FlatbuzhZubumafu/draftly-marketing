@@ -101,8 +101,36 @@ export async function Footer() {
             </div>
           </div>
 
-          {/* Row 2: copyright */}
-          <div className="mt-12 pt-8 md:text-right" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+          {/* Row 2: payment and infrastructure trust marks */}
+          <div
+            className="mt-12 pt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-5"
+            style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
+          >
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
+              <span className="inline-flex items-center gap-2 text-sm" style={{ color: "#888" }}>
+                <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                  <rect x="4" y="10" width="16" height="11" rx="2" />
+                  <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+                </svg>
+                Secure checkout by <span className="font-semibold" style={{ color: "#bbb" }}>Stripe</span>
+              </span>
+              <span className="flex items-center gap-3" aria-label="Accepted payment methods">
+                {[
+                  ["visa", "Visa"],
+                  ["mastercard", "Mastercard"],
+                  ["applepay", "Apple Pay"],
+                ].map(([file, name]) => (
+                  <img key={file} src={`/brand/${file}.svg`} alt={name} title={name} className="h-6 w-auto" style={{ filter: "invert(1)", opacity: 0.6 }} />
+                ))}
+              </span>
+            </div>
+            <p className="text-sm max-w-sm" style={{ color: "#666" }}>
+              Runs on SOC 2 Type II certified infrastructure from Supabase, Vercel and Stripe.
+            </p>
+          </div>
+
+          {/* Row 3: copyright */}
+          <div className="mt-8 md:text-right">
             <div>
               <p className="text-sm" style={{ color: "#666" }}>
                 © {s.footerText} {year}.
