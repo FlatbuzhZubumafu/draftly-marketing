@@ -6,7 +6,10 @@ const MOBILE_SCREENSHOT_URL = "https://wp.draftly.blog/wp-content/uploads/2025/1
 export async function NotForEveryone() {
   const { marketingSettings: s } = await getHomepageData();
   const registerUrl = `${s.appName}/register`;
-  const points = s.notForEveryoneBody.split("\n\n").filter((p) => p.trim());
+  const points = s.notForEveryoneBody
+    .split("\n")
+    .map((p) => p.trim())
+    .filter((p) => p && !p.endsWith(":"));
 
   return (
     <section className="py-24 px-4" style={{ background: "var(--color-bg-surface)" }}>
@@ -16,9 +19,9 @@ export async function NotForEveryone() {
           <div className="order-2 lg:order-1">
             <div className="reveal mb-8">
               <h2 className="text-3xl sm:text-4xl font-medium" style={{ letterSpacing: "-0.03em" }}>
-                This Isn't For{" "}
+                Who Draftly Is{" "}
                 <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ff6b3d">
-                  Everyone...
+                  Built For
                 </AccentText>
               </h2>
             </div>
@@ -27,7 +30,7 @@ export async function NotForEveryone() {
               <div className="space-y-3 mb-6">
                 {points.map((point, i) => (
                   <div key={i} className="flex items-start gap-2 text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-                    <span className="font-bold flex-shrink-0" style={{ color: "var(--color-accent)" }}>—</span>
+                    <span className="mt-[11px] h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: "var(--color-accent)" }} aria-hidden="true" />
                     <span>{point}</span>
                   </div>
                 ))}

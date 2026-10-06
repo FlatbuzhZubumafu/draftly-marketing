@@ -65,7 +65,7 @@
   --radius-xl:   16px;
   --radius-2xl:  24px;
 
-  /* Shadows — layered for depth */
+  /* Shadows: layered for depth */
   --shadow-sm:          0 1px 3px rgba(0, 0, 0, 0.04);
   --shadow-card:        0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.03);
   --shadow-card-hover:  0 20px 40px rgba(0, 0, 0, 0.08), 0 8px 16px rgba(0, 0, 0, 0.04);
@@ -146,7 +146,7 @@ a:hover { color: var(--color-text-primary); }
   outline-offset: 3px;
 }
 
-/* Page heading — Rockwell, hero element only */
+/* Page heading: Rockwell, hero element only */
 .page-heading {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 7vw, 80px);
@@ -314,3 +314,19 @@ a:hover { color: var(--color-text-primary); }
   .reveal { opacity: 1; transform: none; }
   .squiggle-path { stroke-dashoffset: 0; }
 }
+
+/* Legal pages: WordPress/Termly HTML with its inline styles stripped */
+.legal-content { color: var(--color-text-secondary); font-size: 16px; line-height: 1.7; }
+.legal-content h1, .legal-content h2, .legal-content h3, .legal-content h4 {
+  color: var(--color-text-primary);
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 2rem 0 0.75rem;
+}
+.legal-content h1 { font-size: 1.5rem; }
+.legal-content h2 { font-size: 1.25rem; }
+.legal-content h3, .legal-content h4 { font-size: 1.05rem; }
+.legal-content p, .legal-content div { margin-bottom: 0.75rem; }
+.legal-content ul, .legal-content ol { margin: 0 0 1rem 1.25rem; list-style: disc; }
+.legal-content li { margin-bottom: 0.35rem; }
+.legal-content a { word-break: break-word; }

@@ -19,7 +19,6 @@ export async function VideoSection() {
 
       <div className="container-draftly relative z-10 flex flex-col items-center text-center">
         <div className="reveal mb-6">
-          <p className="eyebrow mb-3">See it in action</p>
           <h2 className="text-3xl sm:text-4xl font-medium max-w-2xl" style={{ letterSpacing: "-0.03em" }}>
             Watch how Draftly goes from{" "}
             <AccentText squiggle="squiggle" color="var(--color-accent)" squiggleColor="#2f8ccc">

@@ -26,7 +26,7 @@ export async function Footer() {
 
             {/* Connect column */}
             <div className="md:col-span-2">
-              <h5 className="text-white font-semibold mb-4 text-base">Connect</h5>
+              <h5 className="text-white font-semibold mb-4 text-base">Draftly</h5>
               <ul className="space-y-3">
                 <li>
                   <a href="/#testimonials" className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
@@ -34,13 +34,23 @@ export async function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href="/#video" className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
+                  <a href="/#features" className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
                     Features
+                  </a>
+                </li>
+                <li>
+                  <a href="/pricing" className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
+                    Pricing
                   </a>
                 </li>
                 <li>
                   <a href="/privacy-policy" className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
                     Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="/terms-and-conditions" className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
+                    Terms
                   </a>
                 </li>
               </ul>
@@ -72,7 +82,7 @@ export async function Footer() {
             </div>
           </div>
 
-          {/* Row 2: Waitlist button + copyright */}
+          {/* Row 2: signup button + copyright */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center mt-16 pt-8" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
             <div className="md:col-span-8">
               <a
@@ -80,7 +90,7 @@ export async function Footer() {
                 className="inline-flex items-center gap-2 font-semibold text-white px-8 py-3 rounded-lg transition-all hover:opacity-90 hover:-translate-y-0.5"
                 style={{ background: "var(--color-accent)", boxShadow: "var(--shadow-accent)" }}
               >
-                Join the Beta
+                {s.heroCtaText}
               </a>
             </div>
             <div className="md:col-span-4 md:text-right">

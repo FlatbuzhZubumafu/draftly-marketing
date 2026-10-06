@@ -23,7 +23,6 @@ export function TestimonialSlider({ testimonials }: { testimonials: WPTestimonia
     <section id="testimonials" className="py-24 px-4" style={{ background: "var(--color-bg-surface)" }}>
       <div className="container-draftly max-w-5xl">
         <div className="reveal text-center mb-14">
-          <p className="eyebrow mb-3">What people say</p>
           <h2 className="text-3xl font-medium" style={{ letterSpacing: "-0.03em" }}>
             Early users are already seeing{" "}
             <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">
