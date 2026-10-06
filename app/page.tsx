@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getHomepageData } from "@/lib/graphql";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -13,6 +14,17 @@ import { ScrollingBands } from "@/components/ScrollingBands";
 import { FAQ } from "@/components/FAQ";
 import { HomePricing } from "@/components/HomePricing";
 import { CtaBand } from "@/components/CtaBand";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "Draftly: Blog Posts in Your Brand's Voice, Ready to Publish",
+    description:
+      "Draftly reads your website, picks timely topics from your industry's news, and writes full blog posts in your voice.",
+    type: "website",
+    url: "/",
+  },
+};
 
 export default async function HomePage() {
   const data = await getHomepageData();

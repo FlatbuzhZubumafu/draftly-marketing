@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getPost, getPosts } from "@/lib/graphql";
 import { sanitizeHtml } from "@/lib/sanitize";
 import { Header } from "@/components/Header";
@@ -11,6 +12,45 @@ export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
 }
 
+function plainExcerpt(html: string | undefined, max = 160): string {
+  const text = (html ?? "")
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&nbsp;|&#160;/g, " ")
+    .replace(/&#8217;|&rsquo;/g, "'")
+    .replace(/&#8220;|&#8221;|&ldquo;|&rdquo;/g, '"')
+    .replace(/&amp;/g, "&")
+    .replace(/\[(?:&hellip;|&#8230;|…)\]|&hellip;|&#8230;/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max - 1);
+  return cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:.\s]+$/, "") + "…";
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPost(slug);
+  if (!post) return {};
+
+  const description = plainExcerpt(post.excerpt);
+  const image = post.featuredImage?.node?.sourceUrl;
+  return {
+    title: post.title,
+    description,
+    alternates: { canonical: `/blog/${slug}` },
+    openGraph: {
+      title: post.title,
+      description,
+      type: "article",
+      url: `/blog/${slug}`,
+      publishedTime: post.date,
+      modifiedTime: post.modified,
+      authors: post.author?.node?.name ? [post.author.node.name] : undefined,
+      images: image ? [image] : undefined,
+    },
+  };
+}
+
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = await getPost(slug);
@@ -19,9 +59,37 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     notFound();
   }
 
+  const url = `https://www.draftly.blog/blog/${slug}`;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        headline: post.title,
+        description: plainExcerpt(post.excerpt),
+        url,
+        mainEntityOfPage: url,
+        datePublished: post.date,
+        dateModified: post.modified || post.date,
+        image: post.featuredImage?.node?.sourceUrl,
+        author: post.author?.node?.name ? { "@type": "Person", name: post.author.node.name } : undefined,
+        publisher: { "@type": "Organization", name: "Draftly", url: "https://www.draftly.blog" },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: "https://www.draftly.blog" },
+          { "@type": "ListItem", position: 2, name: "Blog", item: "https://www.draftly.blog/blog" },
+          { "@type": "ListItem", position: 3, name: post.title, item: url },
+        ],
+      },
+    ],
+  };
+
   return (
     <>
       <Header />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <main className="pt-16 min-h-screen bg-white">
         <article className="max-w-2xl mx-auto px-4 py-20">
           <a href="/blog" className="text-sm text-gray-400 hover:text-gray-600 transition-colors mb-8 inline-block">

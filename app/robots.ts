@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://draftly.blog/sitemap.xml",
+    sitemap: "https://www.draftly.blog/sitemap.xml",
   };
 }

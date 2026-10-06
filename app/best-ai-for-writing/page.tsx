@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESCRIPTION,
   alternates: { canonical: "/best-ai-for-writing" },
-  openGraph: { title: TITLE, description: DESCRIPTION, type: "article", url: "https://draftly.blog/best-ai-for-writing" },
+  openGraph: { title: TITLE, description: DESCRIPTION, type: "article", url: "https://www.draftly.blog/best-ai-for-writing" },
 };
 
 const PICKS = [
@@ -179,7 +179,7 @@ export default async function BenchmarkPage() {
         datePublished: BENCHMARK_ISO,
         dateModified: BENCHMARK_ISO,
         author: { "@type": "Person", name: "Preston Vawdrey", url: "https://prestonvawdrey.com" },
-        publisher: { "@type": "Organization", name: "Draftly", url: "https://draftly.blog" },
+        publisher: { "@type": "Organization", name: "Draftly", url: "https://www.draftly.blog" },
       },
       {
         "@type": "FAQPage",

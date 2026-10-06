@@ -1,8 +1,19 @@
+import type { Metadata } from "next";
 import { getPosts } from "@/lib/graphql";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
 export const revalidate = 60;
+
+const DESCRIPTION =
+  "Notes from building Draftly on AI writing, SEO and AEO, and getting content cited by AI search.";
+
+export const metadata: Metadata = {
+  title: { absolute: "The Draftly Blog: AI Content and SEO Notes" },
+  description: DESCRIPTION,
+  alternates: { canonical: "/blog" },
+  openGraph: { title: "The Draftly Blog", description: DESCRIPTION, type: "website", url: "/blog" },
+};
 
 export default async function BlogPage() {
   const posts = await getPosts();
