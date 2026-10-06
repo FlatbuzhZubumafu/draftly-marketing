@@ -30,16 +30,6 @@ const nextConfig: NextConfig = {
         destination: "/#faq",
         permanent: true,
       },
-      {
-        source: "/privacy-policy",
-        destination: "/",
-        permanent: false,
-      },
-      {
-        source: "/terms-and-conditions",
-        destination: "/",
-        permanent: false,
-      },
     ];
   },
 };

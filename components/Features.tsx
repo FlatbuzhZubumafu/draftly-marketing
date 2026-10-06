@@ -1,9 +1,9 @@
 import { getHomepageData } from "@/lib/graphql";
 import type { LucideIcon } from "lucide-react";
-import { Target, PenTool, Zap, Globe, Clock, TrendingUp } from "lucide-react";
+import { Target, PenTool, Zap, Globe, Clock, TrendingUp, Cpu, Gauge, RefreshCw } from "lucide-react";
 import { AccentText } from "./AccentText";
 
-const ICON_MAP: Record<string, LucideIcon> = { Target, PenTool, Zap, Globe, Clock, TrendingUp };
+const ICON_MAP: Record<string, LucideIcon> = { Target, PenTool, Zap, Globe, Clock, TrendingUp, Cpu, Gauge, RefreshCw };
 
 export async function Features() {
   const { features } = await getHomepageData();
@@ -12,11 +12,10 @@ export async function Features() {
     <section id="features" className="py-24 px-4" style={{ background: "var(--color-bg-surface)" }}>
       <div className="container-draftly max-w-5xl">
         <div className="reveal text-center mb-14">
-          <p className="eyebrow mb-3">Features</p>
           <h2 className="text-3xl font-medium" style={{ letterSpacing: "-0.03em" }}>
-            Everything a growing blog needs,{" "}
+            Everything Between a Blank Page and a{" "}
             <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">
-              nothing it doesn't.
+              Published Post
             </AccentText>
           </h2>
         </div>

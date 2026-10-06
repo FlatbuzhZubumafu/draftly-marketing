@@ -184,3 +184,18 @@ export async function getPost(slug: string) {
   const data = await fetchGQL<{ post: WPPost | null }>(POST_QUERY, { slug });
   return data.post;
 }
+
+const PAGE_QUERY = `
+  query Page($slug: ID!) {
+    page(id: $slug, idType: URI) {
+      title
+      modified
+      content
+    }
+  }
+`;
+
+export async function getPage(slug: string) {
+  const data = await fetchGQL<{ page: { title: string; modified: string; content: string } | null }>(PAGE_QUERY, { slug });
+  return data.page;
+}

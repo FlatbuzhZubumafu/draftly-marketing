@@ -14,7 +14,6 @@ export function FAQ({ faqs }: { faqs: WPFaq[] }) {
     <section id="faq" className="py-24 px-4" style={{ background: "var(--color-bg-primary)" }}>
       <div className="container-draftly max-w-2xl">
         <div className="reveal text-center mb-12">
-          <p className="eyebrow mb-3">FAQ</p>
           <h2 className="text-3xl font-medium" style={{ letterSpacing: "-0.03em" }}>
             Common{" "}
             <AccentText squiggle="squiggle" color="var(--color-accent)" squiggleColor="#2f8ccc">

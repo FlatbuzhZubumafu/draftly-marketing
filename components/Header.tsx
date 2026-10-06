@@ -35,6 +35,7 @@ export async function Header() {
             <a href="/#how-it-works" className="text-[15px] font-medium text-text-secondary hover:text-text-primary transition-colors">How it works</a>
             <a href="/#features" className="text-[15px] font-medium text-text-secondary hover:text-text-primary transition-colors">Features</a>
             <a href="/#testimonials" className="text-[15px] font-medium text-text-secondary hover:text-text-primary transition-colors">Reviews</a>
+            <a href="/pricing" className="text-[15px] font-medium text-text-secondary hover:text-text-primary transition-colors">Pricing</a>
             <a href="/blog" className="text-[15px] font-medium text-text-secondary hover:text-text-primary transition-colors">Blog</a>
             <a href="/#faq" className="text-[15px] font-medium text-text-secondary hover:text-text-primary transition-colors">FAQ</a>
           </nav>
@@ -69,6 +70,7 @@ export async function Header() {
           <a href="/#how-it-works" className="block text-[15px] font-medium text-text-secondary">How it works</a>
           <a href="/#features" className="block text-[15px] font-medium text-text-secondary">Features</a>
           <a href="/#testimonials" className="block text-[15px] font-medium text-text-secondary">Reviews</a>
+          <a href="/pricing" className="block text-[15px] font-medium text-text-secondary">Pricing</a>
           <a href="/blog" className="block text-[15px] font-medium text-text-secondary">Blog</a>
           <a href="/#faq" className="block text-[15px] font-medium text-text-secondary">FAQ</a>
           <a href={loginUrl} className="block text-[15px] font-medium text-text-secondary">Log in</a>

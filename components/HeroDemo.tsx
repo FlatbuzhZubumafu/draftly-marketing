@@ -38,11 +38,12 @@ export function HeroDemo({ settings }: { settings: MarketingSettings }) {
 
       <div className="container-draftly relative z-10 max-w-4xl text-center">
         <div className="reveal">
-          <h1 className="page-heading mb-2">Stop Writing for Algorithms…</h1>
           <h1 className="page-heading mb-8">
-            Start Writing for{" "}
+            Your Next Blog Post,
+            <br />
+            Already{" "}
             <span className="relative inline-block">
-              <em className="italic" style={{ color: "var(--color-accent)" }}>Humans</em>
+              <em className="italic" style={{ color: "var(--color-accent)" }}>Written</em>
               <SquiggleUnderline variant="basic" color="#ffce59" />
             </span>
             .

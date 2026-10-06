@@ -12,13 +12,16 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Draftly — Stop Writing for Algorithms. Start Writing for Humans.",
+  title: {
+    default: "Draftly: Blog Posts in Your Brand's Voice, Ready to Publish",
+    template: "%s | Draftly",
+  },
   description:
-    "AI-powered content that curates timely topics and writes brand-aligned first drafts in one click. No blank pages. No guessing.",
+    "Draftly reads your website, picks timely topics from your industry's news, and writes full blog posts in your voice. Publish to WordPress, Shopify, Ghost, Webflow, HubSpot or Squarespace in one click.",
   openGraph: {
-    title: "Draftly — Stop Writing for Algorithms. Start Writing for Humans.",
+    title: "Draftly: Blog Posts in Your Brand's Voice, Ready to Publish",
     description:
-      "AI-powered content that curates timely topics and writes brand-aligned first drafts in one click.",
+      "Draftly reads your website, picks timely topics from your industry's news, and writes full blog posts in your voice.",
     type: "website",
     url: "https://draftly.blog",
   },
