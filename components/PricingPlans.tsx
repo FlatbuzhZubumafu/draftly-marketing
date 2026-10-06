@@ -36,11 +36,11 @@ export const PLANS: Plan[] = [
     pitch: "For one person running one blog who wants to publish every week.",
     includesFrom: "Free",
     features: [
-      "Pick from 6 AI models, including Claude, GPT, Gemini and DeepSeek",
+      "Pick from 7 AI models, including Claude, GPT, Gemini and DeepSeek",
       "Outlines and topic refreshes use no credits",
-      "MCP connector for Claude, ChatGPT and Cursor, with your Search Console and GA4 data (coming soon)",
+      "Draftly connector for Claude, ChatGPT and Cursor: your brand voice, posts and topic ideas inside your own AI",
       "Import your own keyword lists and brand docs (coming soon)",
-      "Keyword data: search volume, difficulty, intent and related keywords, 40 lookups a month (coming soon)",
+      "Keyword data through the connector: search volume, difficulty, intent and related keywords, 40 lookups a month",
     ],
   },
   {
@@ -53,7 +53,7 @@ export const PLANS: Plan[] = [
     features: [
       "AI-generated images inside your posts",
       "Email notifications when posts are ready",
-      "Live top 10 results, People Also Ask and domain data for your site and competitors, 150 data calls a month (coming soon)",
+      "Live Google results, People Also Ask and domain data for your site and competitors, 150 data calls a month",
     ],
     highlight: "Lowest cost per post",
   },
@@ -68,7 +68,7 @@ export const PLANS: Plan[] = [
       "Posting schedules: Draftly picks topics, writes and publishes on your cadence",
       "Automatic publishing to WordPress and Shopify",
       "Weekly digest email of everything it published",
-      "Every SEO dataset, including keyword gaps against competitors and backlinks, 300 data calls a month (coming soon)",
+      "Every SEO dataset, including keyword gaps against competitors and backlinks, 300 data calls a month",
     ],
   },
 ];

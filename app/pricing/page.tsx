@@ -34,8 +34,8 @@ const EVERY_PLAN = [
     body: "Slug, meta title, meta description and target keywords are written with the post.",
   },
   {
-    title: "Rewrites Without Credits",
-    body: "Tell Draftly what to change and it rewrites the post. Rewrites never touch your balance.",
+    title: "Rewrites on Request",
+    body: "Tell Draftly what to change and it rewrites the post on the model that wrote it. Your free post includes 2 rewrites.",
   },
   {
     title: "One-Click Publishing",
@@ -48,7 +48,7 @@ const CREDIT_COSTS = [
   { action: "Thumbnail image", credits: "50" },
   { action: "Outline", credits: "15 (free on paid plans)" },
   { action: "Topic refresh", credits: "10 (free on paid plans)" },
-  { action: "Rewrite", credits: "0" },
+  { action: "Rewrite", credits: "30 (50 on premium models). 2 free on your first post" },
 ];
 
 const MODELS = ["GPT 5.4 Mini (default, best value)", "Claude Sonnet 5.5 (recommended premium)", "Claude Sonnet 4.6", "Claude Haiku 4.5", "GPT 5.4", "Gemini 3 Flash", "DeepSeek V3.2"];
@@ -114,23 +114,26 @@ export default async function PricingPage() {
           style={{ background: "#111", color: "var(--color-text-inverted)" }}
         >
           <h2 className="text-3xl font-medium mb-4" style={{ letterSpacing: "-0.03em" }}>
-            Coming Soon: Draftly Inside{" "}
+            Draftly Inside{" "}
             <em className="italic" style={{ color: "#ffce59" }}>
-              Claude and ChatGPT
+              Claude, ChatGPT and Cursor
             </em>
           </h2>
           <div className="max-w-2xl space-y-4 text-base leading-relaxed" style={{ color: "#bbb" }}>
             <p>
-              Connect Draftly to Claude, ChatGPT or Cursor through MCP. Your assistant gets your brand memory, your
-              Search Console and GA4 numbers, and Draftly&apos;s editing checks, then helps you decide what to write and
-              writes it with you.
+              Connect Draftly to Claude, ChatGPT or Cursor with one URL. Your assistant reads your brand voice, your
+              posts and your topic ideas, and pulls live SEO data while it plans and writes with you.
             </p>
-            <p>Draftly picks the best model for each step, or your own assistant does the writing. Your call.</p>
             <p>
               Every paid plan includes keyword data. Growth adds the live top 10 and domain data, and Autopilot opens
               every dataset, including keyword gaps and backlinks. Need more lookups? Add a data pack any time.
             </p>
-            <p className="font-semibold text-white">Included with every paid plan when it launches.</p>
+            <p className="font-semibold text-white">
+              Included with every paid plan.{" "}
+              <a href="/mcp" className="underline" style={{ color: "#ffce59" }}>
+                Read the setup guide
+              </a>
+            </p>
           </div>
         </section>
 

@@ -53,6 +53,11 @@ export async function Footer() {
                   </a>
                 </li>
                 <li>
+                  <a href="/mcp" className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
+                    MCP Connector
+                  </a>
+                </li>
+                <li>
                   <a href="/best-ai-for-writing" className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
                     AI Model Benchmark
                   </a>
