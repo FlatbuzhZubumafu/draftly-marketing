@@ -259,7 +259,7 @@ a:hover { color: var(--color-text-primary); }
 /* Marquee */
 .marquee-wrapper {
   overflow: hidden;
-  padding-block: 1.5rem;
+  padding-block: 2rem;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
 }
@@ -276,6 +276,10 @@ a:hover { color: var(--color-text-primary); }
   letter-spacing: var(--tracking-wide);
   padding-inline: 2rem;
   white-space: nowrap;
+  /* All-caps text: trim the line box to cap height so the words sit centred in the band
+     instead of riding high over unused descender space. */
+  line-height: 1;
+  text-box: trim-both cap alphabetic;
 }
 .marquee-item.outline {
   color: transparent;

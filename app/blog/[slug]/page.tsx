@@ -5,6 +5,7 @@ import { sanitizeHtml, tidyPostHtml } from "@/lib/sanitize";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { notFound } from "next/navigation";
+import { OnThisPage } from "@/components/OnThisPage";
 
 export const revalidate = 60;
 
@@ -107,7 +108,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <Header />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <main className="pt-16 min-h-screen bg-white">
-        <article className="max-w-2xl mx-auto px-4 py-20">
+        <div className="mx-auto px-4 py-20 max-w-2xl lg:max-w-[61.5rem] lg:grid lg:grid-cols-[minmax(0,42rem)_14rem] lg:gap-14">
+        <article data-toc-root className="min-w-0">
           <a href="/blog" className="text-sm text-gray-400 hover:text-gray-600 transition-colors mb-8 inline-block">
             ← Back to blog
           </a>
@@ -133,6 +135,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             dangerouslySetInnerHTML={{ __html: tidyPostHtml(sanitizeHtml(post.content), post.title) }}
           />
         </article>
+        <OnThisPage />
+        </div>
       </main>
       <Footer />
     </>
