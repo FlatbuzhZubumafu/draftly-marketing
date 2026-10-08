@@ -152,9 +152,9 @@ export default async function PricingPage() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/mcp-connections.png"
-            alt="Claude, ChatGPT, Grok, Cursor, OpenClaw and Hermes Agent connect to Draftly, which publishes to WordPress, Shopify, Wix and Webflow"
-            width={979}
-            height={551}
+            alt="Claude, ChatGPT, Grok, Cursor, OpenClaw and Hermes Agent connect to Draftly, which publishes to WordPress, Shopify, Webflow, Ghost, Squarespace and HubSpot"
+            width={1200}
+            height={782}
             loading="lazy"
             className="w-full h-auto"
           />

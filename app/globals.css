@@ -154,6 +154,12 @@ a:hover { color: var(--color-text-primary); }
   line-height: 1.05;
   letter-spacing: -0.02em;
 }
+/* Homepage hero: keep each headline line whole on phones (no orphaned period). */
+@media (max-width: 639px) {
+  .hero-heading {
+    font-size: clamp(1.75rem, 8vw, 2.5rem);
+  }
+}
 .page-heading em {
   font-style: italic;
   color: var(--color-accent);

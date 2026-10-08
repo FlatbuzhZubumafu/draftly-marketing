@@ -51,18 +51,20 @@ export function HeroDemo({ settings, startingPrice }: { settings: MarketingSetti
 
       <div className="container-draftly relative z-10 max-w-4xl text-center">
         <div className="reveal">
-          <h1 className="page-heading mb-8">
+          <h1 className="page-heading hero-heading mb-8">
             <span className="eyebrow font-sans block mb-5" style={{ lineHeight: 1.4 }}>
               AI blog writer for small businesses
             </span>{" "}
-            Your Next Blog Post,
+            <span className="whitespace-nowrap">Your Next Blog Post,</span>
             <br />
-            Already{" "}
-            <span className="relative inline-block">
-              <em className="italic" style={{ color: "var(--color-accent)" }}>Written</em>
-              <SquiggleUnderline variant="basic" color="#ffce59" />
+            <span className="whitespace-nowrap">
+              Already{" "}
+              <span className="relative inline-block">
+                <em className="italic" style={{ color: "var(--color-accent)" }}>Written</em>
+                <SquiggleUnderline variant="basic" color="#ffce59" />
+              </span>
+              .
             </span>
-            .
           </h1>
         </div>
 
