@@ -56,7 +56,7 @@ const EVERY_PLAN = [
 ];
 
 const CREDIT_COSTS = [
-  { action: "Blog post", credits: "150 on Claude Sonnet 5.5, the default (13 on GPT 6 Luna, 250 on premium models such as GPT 5.4)" },
+  { action: "Blog post", credits: "150 on Claude Sonnet 5.5, the default (50 on GPT 6 Luna, 250 on premium models such as GPT 5.4)" },
   { action: "Thumbnail image", credits: "55 (free with your first post)" },
   { action: "Image inside a post (Solopreneur and up)", credits: "53" },
   { action: "Outline", credits: "15 (free on paid plans)" },
