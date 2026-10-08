@@ -19,6 +19,7 @@ import { CtaBand } from "@/components/CtaBand";
 import { PAID_PLANS } from "@/lib/pricing";
 import { jsonLdHtml, softwareApplicationJsonLd } from "@/lib/schema";
 import { HOME_DESCRIPTION, HOME_TITLE } from "@/lib/site";
+import { HomeGuides } from "@/components/HomeGuides";
 
 export const metadata: Metadata = {
   title: { absolute: HOME_TITLE },
@@ -63,6 +64,7 @@ export default async function HomePage() {
           secondary={{ href: "/best-ai-for-writing", label: "See Which AI Model Writes Best" }}
         />
         <NotForEveryone />
+        <HomeGuides />
         <ScrollingBands />
         <HomePricing />
         <FAQ faqs={data.faqs.nodes} />

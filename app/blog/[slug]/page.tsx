@@ -6,6 +6,9 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { notFound } from "next/navigation";
 import { OnThisPage } from "@/components/OnThisPage";
+import { NOINDEX_POST_SLUGS, relatedPillars } from "@/lib/related";
+import { RelatedLinks } from "@/components/RelatedLinks";
+import { authorRef } from "@/lib/schema";
 
 export const revalidate = 60;
 
@@ -55,6 +58,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: seoTitle(post.title),
     description,
     alternates: { canonical: `/blog/${slug}` },
+    ...(NOINDEX_POST_SLUGS.has(slug) ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
       title: post.title,
       description,
@@ -89,7 +93,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         datePublished: post.date,
         dateModified: post.modified || post.date,
         image: post.featuredImage?.node?.sourceUrl,
-        author: post.author?.node?.name ? { "@type": "Person", name: post.author.node.name } : undefined,
+        author: /preston/i.test(post.author?.node?.name ?? "") ? authorRef : post.author?.node?.name ? { "@type": "Person", name: post.author.node.name } : undefined,
         publisher: { "@type": "Organization", name: "Draftly", url: "https://www.draftly.blog" },
       },
       {
@@ -134,6 +138,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             className="prose prose-lg max-w-none text-gray-700 leading-relaxed"
             dangerouslySetInnerHTML={{ __html: tidyPostHtml(sanitizeHtml(post.content), post.title) }}
           />
+          <RelatedLinks items={relatedPillars(`${post.title} ${post.content.replace(/<[^>]*>/g, " ")}`)} />
         </article>
         <OnThisPage />
         </div>

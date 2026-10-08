@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import { DEFAULT_OG_IMAGE } from "@/lib/site";
+import { DEFAULT_OG_IMAGE, SITE_URL } from "@/lib/site";
 import { getPosts } from "@/lib/graphql";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { NOINDEX_POST_SLUGS, PILLARS } from "@/lib/related";
+import { RelatedLinks } from "@/components/RelatedLinks";
+import { jsonLdHtml } from "@/lib/schema";
 
 export const revalidate = 60;
 
@@ -18,10 +21,32 @@ export const metadata: Metadata = {
 
 export default async function BlogPage() {
   const posts = await getPosts();
+  const indexed = posts.filter((p) => !NOINDEX_POST_SLUGS.has(p.slug));
+  const blogJsonLd = {
+    "@type": "Blog",
+    "@id": `${SITE_URL}/blog#blog`,
+    name: "The Draftly Blog",
+    url: `${SITE_URL}/blog`,
+    description: DESCRIPTION,
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    blogPost: indexed.map((p) => ({
+      "@type": "BlogPosting",
+      headline: p.title,
+      url: `${SITE_URL}/blog/${p.slug}`,
+      datePublished: p.date,
+      dateModified: p.modified || p.date,
+    })),
+  };
+  const listJsonLd = {
+    "@type": "ItemList",
+    name: "Draftly blog posts",
+    itemListElement: indexed.map((p, i) => ({ "@type": "ListItem", position: i + 1, url: `${SITE_URL}/blog/${p.slug}` })),
+  };
 
   return (
     <>
       <Header />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdHtml(blogJsonLd, listJsonLd) }} />
       <main className="pt-16 min-h-screen bg-white">
         <div className="max-w-3xl mx-auto px-4 py-20">
           <h1 className="text-4xl font-extrabold text-gray-900 mb-12">Blog</h1>
@@ -56,6 +81,7 @@ export default async function BlogPage() {
               </article>
             ))}
           </div>
+          <RelatedLinks items={PILLARS.slice(0, 4)} heading="Guides from the Draftly team" />
         </div>
       </main>
       <Footer />

@@ -6,8 +6,10 @@ import { Footer } from "@/components/Footer";
 import { A, B, Bullets, Byline, DarkCta, FaqList, Section, faqJsonLd, type Faq } from "@/components/ArticleParts";
 import { PAID_PLANS, paidPriceList } from "@/lib/pricing";
 import { RULE_CHECK_TEST as T } from "@/lib/ruleCheck";
-import { jsonLdHtml } from "@/lib/schema";
+import { jsonLdHtml, authorRef } from "@/lib/schema";
 import { TocLayout } from "@/components/OnThisPage";
+import { PILLARS } from "@/lib/related";
+import { RelatedLinks } from "@/components/RelatedLinks";
 
 export const revalidate = 3600;
 
@@ -68,7 +70,7 @@ export default async function AgencyVsToolPage() {
       url: `${SITE_URL}${PATH}`,
       datePublished: PUBLISHED.iso,
       dateModified: PUBLISHED.iso,
-      author: { "@type": "Person", name: "Preston Vawdrey", url: "https://prestonvawdrey.com" },
+      author: authorRef,
       publisher: { "@type": "Organization", name: "Draftly", url: SITE_URL },
     },
     faqJsonLd(FAQS),
@@ -138,9 +140,11 @@ export default async function AgencyVsToolPage() {
                   post in it.
                 </>,
                 <>
-                  <B>Rule checks on every post.</B> Each post is checked against your writing rules and gets one automatic
+                  <B>Rule checks on every post.</B> Each post is checked against your{" "}
+                  <A href="/seo-copywriting">SEO copywriting rules</A> and gets one automatic
                   fix pass if it breaks any. In a {T.briefs}-brief test, {T.model} posts passed every hard rule{" "}
-                  {T.passAfterFix}% of the time after that pass.
+                  {T.passAfterFix}% of the time after that pass. Our <A href="/best-ai-for-writing">14-model writing test</A>{" "}
+                  shows how other models handle the same rules.
                 </>,
                 <>
                   <B>Publishing.</B> One click to WordPress, Shopify, Ghost, Webflow, HubSpot or Squarespace.
@@ -164,7 +168,8 @@ export default async function AgencyVsToolPage() {
               month and how results are reported.
             </p>
             <p>
-              A tool costs a flat subscription. Draftly starts at ${PAID_PLANS[0].price} a month after one free post.
+              A tool costs a flat subscription. Draftly starts at ${PAID_PLANS[0].price} a month after one free post (see{" "}
+              <A href="/pricing">every plan and what it includes</A>).
               The trade is that you, or someone on your team, still decides what to write about and reviews each post
               before it goes live.
             </p>
@@ -239,6 +244,9 @@ export default async function AgencyVsToolPage() {
             </ol>
           </Section>
 
+          <div className="max-w-3xl">
+            <RelatedLinks items={PILLARS.filter((p) => p.href !== "/ai-seo-agency-vs-tool").slice(0, 4)} />
+          </div>
           <FaqList faqs={FAQS} />
 
           <DarkCta

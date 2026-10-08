@@ -7,6 +7,8 @@ import { Footer } from "@/components/Footer";
 import { CopyUrl } from "@/components/CopyUrl";
 import { MCP_URL, TOOLS, toolPlans } from "@/lib/mcp";
 import { TocLayout } from "@/components/OnThisPage";
+import { PILLARS } from "@/lib/related";
+import { RelatedLinks } from "@/components/RelatedLinks";
 
 export const revalidate = 3600;
 
@@ -238,7 +240,11 @@ export default async function McpPage() {
                 loaded, Claude or ChatGPT can draft a blog post, a landing page or an email that sounds like your brand.
               </p>
               <p>
-                Posts written in Draftly follow the same rules we used in our{" "}
+                Posts written in Draftly follow the same{" "}
+                <a href="/seo-copywriting" style={{ color: "var(--color-accent)" }}>
+                  SEO copywriting rules
+                </a>{" "}
+                we used in our{" "}
                 <a href="/best-ai-for-writing" style={{ color: "var(--color-accent)" }}>
                   test of which AI model writes best
                 </a>
@@ -316,6 +322,9 @@ export default async function McpPage() {
             </div>
           </section>
 
+          <div className="max-w-3xl">
+            <RelatedLinks items={PILLARS.filter((p) => p.href !== "/mcp").slice(0, 4)} />
+          </div>
           <section data-toc-skip className="mt-24 text-center">
             <h2 className="text-3xl font-medium mb-4" style={{ letterSpacing: "-0.03em" }}>
               Start With One Free Post
