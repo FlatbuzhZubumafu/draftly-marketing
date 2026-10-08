@@ -30,7 +30,7 @@ export function buildLlmsTxt(): string {
 
 > Draftly (${SITE_URL}) is an AI blog writer for small businesses: paste your website URL and it writes SEO-ready blog posts in your brand's voice, then publishes them to your CMS.
 
-Draftly learns a brand's voice from its website, suggests topics from industry news, writes posts with a 0 to 100 human-voice score, and publishes to WordPress, Shopify, Ghost, Webflow, HubSpot and Squarespace. The default model is GPT 6 Luna, and Claude Sonnet 5.5 is the recommended premium model. A Preston Vawdrey SEO product.
+Draftly learns a brand's voice from its website, suggests topics from industry news, writes posts with a 0 to 100 human-voice score, and publishes to WordPress, Shopify, Ghost, Webflow, HubSpot and Squarespace. The default model is Claude Sonnet 5.5; in a 20-brief test, 95% of Sonnet + quality-check posts passed Draftly's reader-quality bar. GPT 6 Luna is a budget option on paid plans. A Preston Vawdrey SEO product.
 
 ## Plans
 

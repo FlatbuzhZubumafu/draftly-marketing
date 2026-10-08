@@ -5,7 +5,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { A, B, DarkCta, FaqList, Section, faqJsonLd, type Faq } from "@/components/ArticleParts";
 import { PAID_PLANS, PLANS } from "@/lib/pricing";
-import { RULE_CHECK_TEST as T, SAMPLE_POST } from "@/lib/ruleCheck";
+import { DEFAULT_WRITER as D, READER_QUALITY_EVIDENCE, SAMPLE_POST } from "@/lib/ruleCheck";
 import { jsonLdHtml } from "@/lib/schema";
 import { TocLayout } from "@/components/OnThisPage";
 import { PILLARS } from "@/lib/related";
@@ -46,7 +46,7 @@ const STEPS = [
   },
   {
     title: "The post is written and checked",
-    body: `${T.model} writes the post, then Draftly checks it against your writing rules. A post that breaks any rule gets one automatic fix pass.`,
+    body: `${D.model} writes the post, then Draftly checks it against your writing rules and for how it reads. A post that falls short gets an automatic fix pass.`,
   },
   {
     title: "Publish to your CMS",
@@ -61,7 +61,7 @@ const FAQS: Faq[] = [
   },
   {
     q: "Which AI model does Draftly use?",
-    a: `${T.model} is the default writer. Paid plans can choose from 8 AI models for each post, including Claude, GPT, Gemini and DeepSeek models.`,
+    a: `${D.model} is the default writer, on every plan including the free post. Paid plans can choose from 8 AI models for each post, including Claude, GPT, Gemini and DeepSeek models.`,
   },
   {
     q: "Will the posts sound like AI wrote them?",
@@ -129,10 +129,11 @@ export default async function AiCopywriterPage() {
           <Section id="different" title="What makes the copy different">
             <p>
               <B>Each post is checked against rules, and fixed when it fails.</B> The check covers headings, keyword
-              placement, meta title and description length, filler words and contrast phrasing. In a {T.briefs}-brief
-              test against Draftly&apos;s production rules, {T.model} posts passed every hard rule {T.passAfterFix}% of the
-              time after the fix pass. The previous default, {T.previousModel}, passed {T.previousPassAfterFix}% of the
-              time.
+              placement, meta title and description length, filler words and contrast phrasing. A second check reads
+              the post the way a customer would and sends it back for a fix if it doesn&apos;t make sense or help. In a{" "}
+              {D.briefs}-brief test against Draftly&apos;s production rules, {D.model} posts passed every hard rule{" "}
+              {D.rulePass}% of the time after the fix pass. {READER_QUALITY_EVIDENCE} The previous default,{" "}
+              {D.previousModel}, cleared that bar {D.previousReaderPass}% of the time with the same check.
             </p>
             <ProductFigure shot={GUIDE_SHOTS.genericVsDraftly} className="mt-2" />
             <p>
@@ -153,8 +154,8 @@ export default async function AiCopywriterPage() {
 
           <Section id="sample" title="A sample from our benchmark">
             <p>
-              This is the opening of a post {T.model} wrote in Draftly&apos;s benchmark run on {T.date}, after its fix
-              pass. The business is {SAMPLE_POST.business}.
+              This is the opening of a post {D.model} wrote in Draftly&apos;s benchmark run on {D.date}. It passed the
+              rule check and the reader check on the first try. The business is {SAMPLE_POST.business}.
             </p>
           </Section>
           <figure className="mt-6 max-w-3xl p-6 sm:p-8 rounded-xl card-depth" style={{ background: "var(--color-bg-surface)", border: "1px solid var(--color-border)" }} data-lint-skip="">

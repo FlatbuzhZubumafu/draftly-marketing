@@ -49,13 +49,13 @@ const PICKS = [
     label: "Most human-sounding",
     model: "Claude Sonnet 5.5",
     stat: "Top voice score: 95 out of 100",
-    body: "Both judges rated it among the most natural writers of the 14, and its average voice score was the highest, at about $0.05 a post. It is Draftly's recommended premium model.",
+    body: "Both judges rated it among the most natural writers of the 14, and its average voice score was the highest, at about $0.05 a post. It is Draftly's default writer.",
   },
   {
     label: "Best value",
     model: "GPT 5.4 Mini",
     stat: "90.2 overall for under a cent a post",
-    body: "Fifth overall, the fastest model in the test at 13 seconds a post, and about a tenth of the cost of the top three. Draftly now writes with GPT 6 Luna by default, which followed our writing rules more reliably in a later test.",
+    body: "Fifth overall, the fastest model in the test at 13 seconds a post, and about a tenth of the cost of the top three. Draftly now writes with Claude Sonnet 5.5 by default: in a later 20-brief test, 95% of its posts with Draftly's quality check passed our reader-quality bar.",
   },
   {
     label: "Best for copywriting",
@@ -256,7 +256,7 @@ export default async function BenchmarkPage() {
             </p>
             <p>
               Draftly is built around that pairing. It finds timely topics from your industry&apos;s news, writes in your
-              brand voice with GPT 6 Luna by default or Claude Sonnet 5.5 as the premium option, scores each draft for
+              brand voice with Claude Sonnet 5.5 by default (GPT 6 Luna on paid plans as a budget option), scores each draft for
               machine-sounding phrasing and publishes to WordPress, Shopify, Ghost, Webflow, HubSpot or Squarespace. Here
               is{" "}
               <a href="/ai-copywriter" style={{ color: "var(--color-accent)" }}>
@@ -438,8 +438,8 @@ export default async function BenchmarkPage() {
               Start Writing With the Best Models and Draftly&apos;s SEO-Optimized Copywriting Tools Today
             </h2>
             <p className="max-w-2xl mb-8 leading-relaxed" style={{ color: "#bbb" }}>
-              Draftly writes with GPT 6 Luna by default, offers Claude Sonnet 5.5 as its recommended premium model, and
-              applies these same writing rules to every post. Your first post is free.
+              Draftly writes with Claude Sonnet 5.5 by default, offers GPT 6 Luna as a budget option on paid plans, and
+              applies these same writing rules to every post. Your first post, written by Sonnet, is free.
             </p>
             <a href={registerUrl} className="btn btn-primary">
               {s.heroCtaText}

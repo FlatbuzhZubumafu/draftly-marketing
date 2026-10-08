@@ -4,7 +4,7 @@ import { getHomepageData } from "@/lib/graphql";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { A, B, Bullets, Byline, DarkCta, FaqList, Section, faqJsonLd, type Faq } from "@/components/ArticleParts";
-import { BANNED_SAMPLE, EXAMPLES, RULE_CHECK_TEST as T } from "@/lib/ruleCheck";
+import { BANNED_SAMPLE, DEFAULT_WRITER as D, EXAMPLES, READER_QUALITY_EVIDENCE, RULE_CHECK_TEST as T } from "@/lib/ruleCheck";
 import { BENCHMARK } from "@/lib/benchmark";
 import { jsonLdHtml, authorRef } from "@/lib/schema";
 import { TocLayout } from "@/components/OnThisPage";
@@ -52,7 +52,7 @@ const FAQS: Faq[] = [
   },
   {
     q: "Can AI write good SEO copy?",
-    a: `It can when the output is checked. In a ${T.briefs}-brief test, ${T.model} posts passed every hard rule ${T.passAfterFix}% of the time after one automatic fix pass, against ${T.previousPassAfterFix}% for ${T.previousModel}.`,
+    a: `It can when the output is checked. In a ${D.briefs}-brief test, ${D.model} posts passed every hard rule ${D.rulePass}% of the time after one automatic fix pass. ${READER_QUALITY_EVIDENCE}`,
   },
 ];
 
@@ -201,7 +201,7 @@ export default async function SeoCopywritingPage() {
 
           <Section id="examples" title="SEO copywriting examples: three fixes from our tests">
             <p>
-              These excerpts come from Draftly&apos;s benchmark run on {T.date}, where {T.model} wrote posts for{" "}
+              These excerpts come from Draftly&apos;s benchmark run on {T.date}, where {T.model} (then the default) wrote posts for{" "}
               {T.briefs} made-up small businesses. Each draft broke at least one rule, the automatic fix pass rewrote it, and the
               rewrite passed the check.
             </p>
@@ -247,9 +247,10 @@ export default async function SeoCopywritingPage() {
             </p>
             <ProductFigure shot={GUIDE_SHOTS.genericVsDraftly} className="mt-2" />
             <p>
-              {T.model} is Draftly&apos;s default writer. In a {T.briefs}-brief test against Draftly&apos;s production
-              rules, its posts passed every hard rule <B>{T.passAfterFix}% of the time</B> after the fix pass. The
-              previous default, {T.previousModel}, passed {T.previousPassAfterFix}% of the time.
+              {D.model} is Draftly&apos;s default writer. In a {D.briefs}-brief test against Draftly&apos;s production
+              rules, its posts passed every hard rule <B>{D.rulePass}% of the time</B> after the fix pass.{" "}
+              {READER_QUALITY_EVIDENCE} The previous default, {D.previousModel}, cleared that bar{" "}
+              {D.previousReaderPass}% of the time with the same check.
             </p>
             <p>
               You can switch most rules on or off for each website, so a brand that likes em dashes can keep them. To see
