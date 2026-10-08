@@ -1,13 +1,21 @@
-import DOMPurify from "isomorphic-dompurify";
+import sanitize from "sanitize-html";
+
+// sanitize-html parses with htmlparser2, so it runs in Vercel functions.
+// isomorphic-dompurify pulled in jsdom, which failed to load there
+// (ERR_REQUIRE_ESM), so any post rendered at request time returned 500.
+const ALLOWED_TAGS = [
+  "p", "br", "strong", "em", "b", "i", "a", "ul", "ol", "li",
+  "h1", "h2", "h3", "h4", "h5", "h6", "blockquote", "img",
+  "figure", "figcaption", "hr", "span", "div", "pre", "code",
+];
+const ALLOWED_ATTR = ["href", "src", "alt", "title", "class", "target", "rel", "width", "height"];
 
 export function sanitizeHtml(dirty: string): string {
-  return DOMPurify.sanitize(dirty, {
-    ALLOWED_TAGS: [
-      "p", "br", "strong", "em", "b", "i", "a", "ul", "ol", "li",
-      "h1", "h2", "h3", "h4", "h5", "h6", "blockquote", "img",
-      "figure", "figcaption", "hr", "span", "div", "pre", "code",
-    ],
-    ALLOWED_ATTR: ["href", "src", "alt", "title", "class", "target", "rel", "width", "height"],
+  return sanitize(dirty, {
+    allowedTags: ALLOWED_TAGS,
+    allowedAttributes: { "*": ALLOWED_ATTR },
+    allowedSchemes: ["http", "https", "mailto"],
+    allowProtocolRelative: false,
   });
 }
 
