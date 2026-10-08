@@ -10,6 +10,8 @@ import { jsonLdHtml } from "@/lib/schema";
 import { TocLayout } from "@/components/OnThisPage";
 import { PILLARS } from "@/lib/related";
 import { RelatedLinks } from "@/components/RelatedLinks";
+import { ProductFigure } from "@/components/ProductFigure";
+import { GUIDE_SHOTS } from "@/lib/product-shots";
 
 export const revalidate = 3600;
 
@@ -121,6 +123,7 @@ export default async function AiCopywriterPage() {
                 </li>
               ))}
             </ol>
+            <ProductFigure shot={GUIDE_SHOTS.urlToPost} className="mt-8 max-w-3xl" />
           </section>
 
           <Section id="different" title="What makes the copy different">
@@ -131,10 +134,12 @@ export default async function AiCopywriterPage() {
               time after the fix pass. The previous default, {T.previousModel}, passed {T.previousPassAfterFix}% of the
               time.
             </p>
+            <ProductFigure shot={GUIDE_SHOTS.genericVsDraftly} className="mt-2" />
             <p>
               <B>The voice comes from your site.</B> Draftly builds your brand voice from your own pages and learns from
               the feedback you give on each post.
             </p>
+            <ProductFigure shot={GUIDE_SHOTS.brandVoice} className="mt-2" />
             <p>
               <B>No invented numbers.</B>{" "}
               Draftly&apos;s rules forbid made-up statistics, quotes and testimonials. If a

@@ -10,6 +10,8 @@ import { jsonLdHtml, authorRef } from "@/lib/schema";
 import { TocLayout } from "@/components/OnThisPage";
 import { PILLARS } from "@/lib/related";
 import { RelatedLinks } from "@/components/RelatedLinks";
+import { ProductFigure } from "@/components/ProductFigure";
+import { GUIDE_SHOTS, imageObjectJsonLd } from "@/lib/product-shots";
 
 export const revalidate = 3600;
 
@@ -68,6 +70,7 @@ export default async function SeoCopywritingPage() {
       dateModified: T.iso,
       author: authorRef,
       publisher: { "@type": "Organization", name: "Draftly", url: SITE_URL },
+      image: [GUIDE_SHOTS.seoMeta, GUIDE_SHOTS.genericVsDraftly].map(imageObjectJsonLd),
     },
     faqJsonLd(FAQS),
   );
@@ -127,6 +130,7 @@ export default async function SeoCopywritingPage() {
                 </>,
               ]}
             />
+            <ProductFigure shot={GUIDE_SHOTS.seoMeta} className="mt-2" />
           </Section>
 
           <Section id="trust" title="Readers trust copy that sounds like a person wrote it">
@@ -241,6 +245,7 @@ export default async function SeoCopywritingPage() {
               any, Draftly sends it back to the model once with every violation listed, and keeps the rewrite when it has
               fewer problems.
             </p>
+            <ProductFigure shot={GUIDE_SHOTS.genericVsDraftly} className="mt-2" />
             <p>
               {T.model} is Draftly&apos;s default writer. In a {T.briefs}-brief test against Draftly&apos;s production
               rules, its posts passed every hard rule <B>{T.passAfterFix}% of the time</B> after the fix pass. The
