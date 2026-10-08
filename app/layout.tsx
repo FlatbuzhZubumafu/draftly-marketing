@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { GlobalAnimations } from "@/components/GlobalAnimations";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { jsonLdHtml, organizationJsonLd, personJsonLd, websiteJsonLd } from "@/lib/schema";
 import { HOME_DESCRIPTION, HOME_TITLE, SITE_URL } from "@/lib/site";
 
@@ -39,6 +40,7 @@ export default function RootLayout({
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdHtml(organizationJsonLd, personJsonLd, websiteJsonLd) }} />
         {children}
         <GlobalAnimations />
+        <GoogleAnalytics />
       </body>
     </html>
   );
