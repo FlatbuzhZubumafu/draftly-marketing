@@ -15,5 +15,5 @@ export const DEFAULT_OG_IMAGE = {
   url: "/opengraph-image",
   width: 1200,
   height: 630,
-  alt: "Draftly: AI blog writer for small businesses. Your next blog post, already written.",
+  alt: "Draftly: the AI copywriter that hates AI copy. An AI blog writer for small businesses.",
 };
