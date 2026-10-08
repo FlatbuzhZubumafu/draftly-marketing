@@ -37,7 +37,7 @@ export const PILLARS: Pillar[] = [
 ];
 
 /** Live but thin or off-strategy posts: kept for readers, marked noindex, left out of the sitemap. */
-export const NOINDEX_POST_SLUGS = new Set(["draftly-blog-shifts-from-agency-to-customer-focus"]);
+export const NOINDEX_POST_SLUGS = new Set<string>([]);
 
 /** The `count` pillars most related to `text` (keyword hits), never `exclude`; ties keep PILLARS order. */
 export function relatedPillars(text: string, exclude?: string, count = 3): Pillar[] {
