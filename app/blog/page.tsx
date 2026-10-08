@@ -33,7 +33,7 @@ export default async function BlogPage() {
                     <img
                       src={post.featuredImage.node.sourceUrl}
                       alt={post.featuredImage.node.altText || post.title}
-                      className="w-full h-56 object-cover rounded-xl mb-4"
+                      className="w-full h-auto aspect-video object-cover rounded-xl mb-4"
                     />
                   </a>
                 )}

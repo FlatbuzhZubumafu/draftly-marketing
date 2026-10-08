@@ -125,7 +125,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <img
               src={post.featuredImage.node.sourceUrl}
               alt={post.featuredImage.node.altText || post.title}
-              className="w-full h-72 object-cover rounded-xl mb-8"
+              className="w-full h-auto aspect-video object-cover rounded-xl mb-8"
             />
           )}
           <div

@@ -6,7 +6,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { AccentText } from "@/components/AccentText";
 import { PricingPlans } from "@/components/PricingPlans";
-import { paidPostCounts, paidPriceList } from "@/lib/pricing";
+import { PAID_PLANS, paidPostCounts, paidPriceList } from "@/lib/pricing";
 import { jsonLdHtml, softwareApplicationJsonLd } from "@/lib/schema";
 
 export const revalidate = 3600;
@@ -76,10 +76,10 @@ export default async function PricingPage() {
         <section className="container-draftly max-w-6xl">
           <div className="text-center max-w-2xl mx-auto mb-14">
             <h1 className="page-heading mb-6" style={{ fontSize: "clamp(2.25rem, 5.5vw, 64px)" }}>
-              Pay for the Posts
+              Better AI Blogs
               <br />
               <em className="italic" style={{ color: "var(--color-accent)" }}>
-                You Publish
+                Starting at ${Math.min(...PAID_PLANS.map((p) => p.price))}/mo
               </em>
             </h1>
             <p className="text-lg" style={{ color: "var(--color-text-secondary)" }}>
@@ -122,9 +122,10 @@ export default async function PricingPage() {
         </section>
 
         <section
-          className="container-draftly max-w-5xl mt-24 rounded-2xl p-8 sm:p-12"
+          className="container-draftly max-w-5xl mt-24 rounded-2xl p-8 sm:p-12 grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-8 items-center"
           style={{ background: "#111", color: "var(--color-text-inverted)" }}
         >
+          <div className="min-w-0">
           <h2 className="text-3xl font-medium mb-4" style={{ letterSpacing: "-0.03em" }}>
             Draftly Inside{" "}
             <em className="italic" style={{ color: "#ffce59" }}>
@@ -147,6 +148,16 @@ export default async function PricingPage() {
               </a>
             </p>
           </div>
+          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/mcp-connections.png"
+            alt="Claude, ChatGPT, Grok, Cursor, OpenClaw and Hermes Agent connect to Draftly, which publishes to WordPress, Shopify, Wix and Webflow"
+            width={979}
+            height={551}
+            loading="lazy"
+            className="w-full h-auto"
+          />
         </section>
 
         <section className="container-draftly max-w-5xl mt-24 grid grid-cols-1 md:grid-cols-2 gap-10">
