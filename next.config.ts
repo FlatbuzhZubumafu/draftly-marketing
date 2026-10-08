@@ -8,6 +8,15 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "secure.gravatar.com" },
     ],
   },
+  // MCP Registry domain proof for the blog.draftly/* namespace (public key only).
+  async headers() {
+    return [
+      {
+        source: "/.well-known/mcp-registry-auth",
+        headers: [{ key: "Content-Type", value: "text/plain; charset=utf-8" }],
+      },
+    ];
+  },
   async redirects() {
     return [
       {
