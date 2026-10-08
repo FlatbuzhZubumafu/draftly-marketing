@@ -55,6 +55,25 @@ export const INTEGRATIONS_SHOT = shot(
   "One draft, six places it can go.",
 );
 
+/** 16:9 graphics for the long-form guide pages (/ai-copywriter, /seo-copywriting, /ai-seo-agency-vs-tool). */
+export const GUIDE_SHOTS = {
+  urlToPost: shot("guide-url-to-post.webp", 1600, 900,
+    "Draftly's setup screen with a website URL entered, and the finished post it produced: featured image, 1,296 words, SEO score 75/100 and the opening of the article",
+    "A real first run: a URL in, a 1,296-word draft with SEO meta out."),
+  genericVsDraftly: shot("guide-generic-vs-draftly-copy.webp", 1600, 900,
+    "A generic AI paragraph with flagged phrases highlighted (banned_vocabulary, contrast_phrasing, hedging, mechanical_openers) beside the opening of a real Draftly post that triggers none of them",
+    "Draftly's checker flags four rules in the generic paragraph and none in the Draftly draft."),
+  brandVoice: shot("guide-brand-voice-sliders.webp", 1600, 900,
+    "Draftly's Voice and Tone sliders: Friendly 75, Authoritative 80, Formal 40, Technical 55 and Empathetic 85",
+    "Brand voice sliders, set from your site and adjustable any time."),
+  seoMeta: shot("guide-seo-meta-fields.webp", 1600, 900,
+    "SEO fields Draftly wrote for a post: URL slug, meta title and meta description",
+    "Slug, meta title and meta description come with every draft."),
+  modelPicker: shot("guide-model-picker.webp", 1600, 900,
+    "Draftly's Create Blog Post screen with a model picker listing GPT, Claude, Gemini and DeepSeek models and their credit cost",
+    "Pick the model per post. Paid plans unlock Claude, Gemini and DeepSeek."),
+} satisfies Record<string, ProductShot>;
+
 export const ALL_PRODUCT_SHOTS = [SHOWCASE_WIDE, ...STEP_SHOTS, ...FEATURE_SHOTS, INTEGRATIONS_SHOT];
 
 export function imageObjectJsonLd(s: ProductShot) {

@@ -10,6 +10,8 @@ import { jsonLdHtml, authorRef } from "@/lib/schema";
 import { TocLayout } from "@/components/OnThisPage";
 import { PILLARS } from "@/lib/related";
 import { RelatedLinks } from "@/components/RelatedLinks";
+import { ProductFigure } from "@/components/ProductFigure";
+import { GUIDE_SHOTS, imageObjectJsonLd } from "@/lib/product-shots";
 
 export const revalidate = 3600;
 
@@ -72,6 +74,7 @@ export default async function AgencyVsToolPage() {
       dateModified: PUBLISHED.iso,
       author: authorRef,
       publisher: { "@type": "Organization", name: "Draftly", url: SITE_URL },
+      image: [GUIDE_SHOTS.urlToPost, GUIDE_SHOTS.modelPicker].map(imageObjectJsonLd),
     },
     faqJsonLd(FAQS),
   );
@@ -154,9 +157,10 @@ export default async function AgencyVsToolPage() {
                 </>,
               ]}
             />
+            <ProductFigure shot={GUIDE_SHOTS.urlToPost} className="mt-2" />
             <p>
-              Draftly also shows Google Analytics and Search Console reports and, on paid plans, keyword data through its
-              connector. It does not build links or change your site&apos;s code. The <A href="/ai-copywriter">Draftly AI
+              Draftly also shows your Google Analytics and Search Console reports on every plan, and paid plans add
+              keyword data through its connector. It does not build links or change your site&apos;s code. The <A href="/ai-copywriter">Draftly AI
               copywriter page</A> covers how a post gets made.
             </p>
           </Section>
@@ -173,6 +177,7 @@ export default async function AgencyVsToolPage() {
               The trade is that you, or someone on your team, still decides what to write about and reviews each post
               before it goes live.
             </p>
+            <ProductFigure shot={GUIDE_SHOTS.modelPicker} className="mt-2" />
           </Section>
 
           <section id="decision" className="mt-20">
