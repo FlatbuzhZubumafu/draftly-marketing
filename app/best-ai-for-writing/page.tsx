@@ -13,6 +13,7 @@ import {
   SEO_TABLE,
   type BenchmarkTable,
 } from "@/lib/benchmarkTables";
+import { TocLayout } from "@/components/OnThisPage";
 
 export const revalidate = 3600;
 
@@ -183,7 +184,7 @@ export default async function BenchmarkPage() {
       <main className="pt-28 pb-24 px-4" style={{ background: "var(--color-bg-primary)" }}>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-        <article className="container-draftly max-w-4xl">
+        <TocLayout>
           <header className="max-w-3xl">
             <h1 className="page-heading mb-6" style={{ fontSize: "clamp(2.1rem, 5vw, 56px)" }}>
               The Best AI for Writing in 2026, Tested
@@ -410,7 +411,7 @@ export default async function BenchmarkPage() {
             </div>
           </section>
 
-          <section className="mt-20 rounded-2xl p-8 sm:p-12" style={{ background: "#111", color: "var(--color-text-inverted)" }}>
+          <section data-toc-skip className="mt-20 rounded-2xl p-8 sm:p-12" style={{ background: "#111", color: "var(--color-text-inverted)" }}>
             <h2 className="text-3xl font-medium mb-4" style={{ letterSpacing: "-0.03em" }}>
               Start Writing With the Best Models and Draftly&apos;s SEO-Optimized Copywriting Tools Today
             </h2>
@@ -422,7 +423,7 @@ export default async function BenchmarkPage() {
               {s.heroCtaText}
             </a>
           </section>
-        </article>
+        </TocLayout>
       </main>
       <Footer />
     </>

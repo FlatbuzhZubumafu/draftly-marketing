@@ -7,6 +7,7 @@ import { A, B, DarkCta, FaqList, Section, faqJsonLd, type Faq } from "@/componen
 import { PAID_PLANS, PLANS } from "@/lib/pricing";
 import { RULE_CHECK_TEST as T, SAMPLE_POST } from "@/lib/ruleCheck";
 import { jsonLdHtml } from "@/lib/schema";
+import { TocLayout } from "@/components/OnThisPage";
 
 export const revalidate = 3600;
 
@@ -78,7 +79,7 @@ export default async function AiCopywriterPage() {
       <main className="pt-28 pb-24 px-4" style={{ background: "var(--color-bg-primary)" }}>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdHtml(faqJsonLd(FAQS)) }} />
 
-        <article className="container-draftly max-w-4xl">
+        <TocLayout>
           <header className="max-w-3xl">
             <h1 className="page-heading mb-6" style={{ fontSize: "clamp(2.1rem, 5vw, 56px)" }}>
               The AI copywriter{" "}
@@ -207,7 +208,7 @@ export default async function AiCopywriterPage() {
             label={s.heroCtaText}
             secondary={{ href: "/pricing", label: "See pricing" }}
           />
-        </article>
+        </TocLayout>
       </main>
       <Footer />
     </>

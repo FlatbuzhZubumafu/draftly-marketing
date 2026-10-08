@@ -81,7 +81,7 @@ export function faqJsonLd(faqs: Faq[]) {
 
 export function DarkCta({ title, body, href, label, secondary }: { title: string; body: string; href: string; label: string; secondary?: { href: string; label: string } }) {
   return (
-    <section className="mt-20 rounded-2xl p-8 sm:p-12" style={{ background: "#111", color: "var(--color-text-inverted)" }}>
+    <section data-toc-skip className="mt-20 rounded-2xl p-8 sm:p-12" style={{ background: "#111", color: "var(--color-text-inverted)" }}>
       <h2 className="text-3xl font-medium mb-4" style={{ letterSpacing: "-0.03em" }}>
         {title}
       </h2>

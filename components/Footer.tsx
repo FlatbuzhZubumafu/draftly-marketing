@@ -10,9 +10,9 @@ export async function Footer() {
       <section style={{ background: "#000" }} className="px-4">
         {/* Extra bottom padding below md keeps the sticky mobile CTA off the copyright line */}
         <div className="container-draftly py-20 pb-32 md:pb-20">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+          <div className="grid grid-cols-2 md:grid-cols-12 gap-8 items-start">
             {/* Heading */}
-            <div className="md:col-span-8">
+            <div className="col-span-2 md:col-span-6">
               <h2
                 className="font-medium text-white"
                 style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", lineHeight: "1.1", letterSpacing: "-0.03em" }}
@@ -33,90 +33,39 @@ export async function Footer() {
               </div>
             </div>
 
-            {/* Connect column */}
-            <div className="md:col-span-2">
-              <h5 className="text-white font-semibold mb-4 text-base">Draftly</h5>
-              <ul className="space-y-3">
-                <li>
-                  <a href="/#testimonials" className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
-                    Testimonials
-                  </a>
-                </li>
-                <li>
-                  <a href="/#features" className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
-                    Features
-                  </a>
-                </li>
-                <li>
-                  <a href="/pricing" className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
-                    Pricing
-                  </a>
-                </li>
-                <li>
-                  <a href="/mcp" className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
-                    MCP Connector
-                  </a>
-                </li>
-                <li>
-                  <a href="/best-ai-for-writing" className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
-                    AI Model Benchmark
-                  </a>
-                </li>
-                <li>
-                  <a href="/ai-copywriter" className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
-                    AI Copywriter
-                  </a>
-                </li>
-                <li>
-                  <a href="/seo-copywriting" className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
-                    SEO Copywriting Rules
-                  </a>
-                </li>
-                <li>
-                  <a href="/ai-seo-agency-vs-tool" className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
-                    AI SEO Agency vs Tool
-                  </a>
-                </li>
-                <li>
-                  <a href="/privacy-policy" className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
-                    Privacy Policy
-                  </a>
-                </li>
-                <li>
-                  <a href="/terms-and-conditions" className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
-                    Terms
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Contact Us column */}
-            <div className="md:col-span-2">
-              <h5 className="text-white font-semibold mb-4 text-base">Contact Us</h5>
-              <ul className="space-y-3">
-                <li>
-                  <a
-                    href="sms:+13857224497?&body=Hi%2C%20I%20am%20interested%20in%20learning%20more%20about%20Draftly."
-                    className="text-sm transition-colors hover:text-white"
-                    style={{ color: "#888" }}
-                  >
-                    385-722-4497
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="mailto:preston@draftly.blog"
-                    className="text-sm transition-colors hover:text-white"
-                    style={{ color: "#888" }}
-                  >
-                    preston@draftly.blog
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <FooterColumn
+              title="Draftly"
+              links={[
+                ["/#how-it-works", "How It Works"],
+                ["/#features", "Features"],
+                ["/#testimonials", "Testimonials"],
+                ["/pricing", "Pricing"],
+                ["/mcp", "MCP Connector"],
+                ["/blog", "Blog"],
+                ["/#faq", "FAQ"],
+              ]}
+            />
+            <FooterColumn
+              title="SEO"
+              links={[
+                ["/ai-copywriter", "AI Copywriting"],
+                ["/seo-copywriting", "SEO Copywriting Rules"],
+                ["/ai-seo-agency-vs-tool", "AI SEO Agency vs Tool"],
+                ["/best-ai-for-writing", "AI Model Benchmark"],
+              ]}
+            />
+            <FooterColumn
+              title="About Us"
+              links={[
+                ["sms:+13857224497?&body=Hi%2C%20I%20am%20interested%20in%20learning%20more%20about%20Draftly.", "385-722-4497"],
+                ["mailto:preston@draftly.blog", "preston@draftly.blog"],
+                ["/privacy-policy", "Privacy Policy"],
+                ["/terms-and-conditions", "Terms"],
+              ]}
+            />
           </div>
 
-          {/* Row 2: payment and infrastructure trust marks */}
+          {/* Row 2: payment and infrastructure trust marks, then copyright */}
           <div
             className="mt-12 pt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-5"
             style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
@@ -138,15 +87,13 @@ export async function Footer() {
                   <img key={file} src={`/brand/${file}.svg`} alt={name} title={name} className="h-6 w-auto" style={{ filter: "invert(1)", opacity: 0.6 }} />
                 ))}
               </span>
+              <p className="basis-full text-xs" style={{ color: "#666" }}>
+                Runs on SOC 2 Type II certified infrastructure from Supabase, Vercel and Stripe.
+              </p>
             </div>
-            <p className="text-sm max-w-sm" style={{ color: "#666" }}>
-              Runs on SOC 2 Type II certified infrastructure from Supabase, Vercel and Stripe.
-            </p>
-          </div>
 
-          {/* Row 3: copyright */}
-          <div className="mt-8 md:text-right">
-            <div>
+            {/* Copyright */}
+            <div className="md:text-right">
               <p className="text-sm" style={{ color: "#666" }}>
                 © {s.footerText} {year}.
               </p>
@@ -166,5 +113,22 @@ export async function Footer() {
         </div>
       </section>
     </>
+  );
+}
+
+function FooterColumn({ title, links }: { title: string; links: [string, string][] }) {
+  return (
+    <div className="md:col-span-2">
+      <h5 className="text-white font-semibold mb-4 text-base">{title}</h5>
+      <ul className="space-y-3">
+        {links.map(([href, label]) => (
+          <li key={href}>
+            <a href={href} className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
