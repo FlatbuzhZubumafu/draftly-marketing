@@ -55,12 +55,12 @@ export function HeroDemo({ settings, startingPrice }: { settings: MarketingSetti
             <span className="eyebrow font-sans block mb-5" style={{ lineHeight: 1.4 }}>
               AI blog writer for small businesses
             </span>{" "}
-            <span className="whitespace-nowrap">Your Next Blog Post,</span>
+            <span className="whitespace-nowrap">The AI Copywriter</span>
             <br />
             <span className="whitespace-nowrap">
-              Already{" "}
+              that{" "}
               <span className="relative inline-block">
-                <em className="italic" style={{ color: "var(--color-accent)" }}>Written</em>
+                <em className="italic" style={{ color: "var(--color-accent)" }}>Hates AI Copy</em>
                 <SquiggleUnderline variant="basic" color="#ffce59" />
               </span>
               .

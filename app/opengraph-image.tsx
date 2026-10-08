@@ -37,11 +37,11 @@ export default async function OpengraphImage() {
             AI blog writer for small businesses
           </div>
           <div style={{ display: "flex", flexDirection: "column", marginTop: 28, fontSize: 92, lineHeight: 1.05 }}>
-            <span>Your Next Blog Post,</span>
+            <span>The AI Copywriter</span>
             <div style={{ display: "flex" }}>
-              <span>Already&nbsp;</span>
+              <span>that&nbsp;</span>
               <span style={{ display: "flex", flexDirection: "column", color: ACCENT }}>
-                Written
+                Hates AI Copy
                 <span style={{ height: 10, marginTop: -6, borderRadius: 6, background: YELLOW }} />
               </span>
               <span>.</span>
