@@ -31,7 +31,7 @@ const videoJsonLd = {
     "A narrated walkthrough of Draftly: it learns your brand voice from your website, finds topics that fit, writes and checks each post for common AI phrases, adds SEO and GEO optimizations, and publishes to your CMS.",
   thumbnailUrl: `${SITE_URL}${VIDEO.poster}`,
   uploadDate: "2026-10-08",
-  duration: "PT2M0S",
+  duration: "PT1M57S",
   contentUrl: `${SITE_URL}${VIDEO.narrated.mp4}`,
   transcript: TRANSCRIPT,
   inLanguage: "en",
