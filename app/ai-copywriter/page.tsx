@@ -8,6 +8,8 @@ import { PAID_PLANS, PLANS } from "@/lib/pricing";
 import { RULE_CHECK_TEST as T, SAMPLE_POST } from "@/lib/ruleCheck";
 import { jsonLdHtml } from "@/lib/schema";
 import { TocLayout } from "@/components/OnThisPage";
+import { PILLARS } from "@/lib/related";
+import { RelatedLinks } from "@/components/RelatedLinks";
 
 export const revalidate = 3600;
 
@@ -199,6 +201,9 @@ export default async function AiCopywriterPage() {
             </p>
           </Section>
 
+          <div className="max-w-3xl">
+            <RelatedLinks items={PILLARS.filter((p) => p.href !== "/ai-copywriter").slice(0, 4)} />
+          </div>
           <FaqList faqs={FAQS} />
 
           <DarkCta

@@ -6,8 +6,10 @@ import { Footer } from "@/components/Footer";
 import { A, B, Bullets, Byline, DarkCta, FaqList, Section, faqJsonLd, type Faq } from "@/components/ArticleParts";
 import { BANNED_SAMPLE, EXAMPLES, RULE_CHECK_TEST as T } from "@/lib/ruleCheck";
 import { BENCHMARK } from "@/lib/benchmark";
-import { jsonLdHtml } from "@/lib/schema";
+import { jsonLdHtml, authorRef } from "@/lib/schema";
 import { TocLayout } from "@/components/OnThisPage";
+import { PILLARS } from "@/lib/related";
+import { RelatedLinks } from "@/components/RelatedLinks";
 
 export const revalidate = 3600;
 
@@ -64,7 +66,7 @@ export default async function SeoCopywritingPage() {
       url: `${SITE_URL}${PATH}`,
       datePublished: T.iso,
       dateModified: T.iso,
-      author: { "@type": "Person", name: "Preston Vawdrey", url: "https://prestonvawdrey.com" },
+      author: authorRef,
       publisher: { "@type": "Organization", name: "Draftly", url: SITE_URL },
     },
     faqJsonLd(FAQS),
@@ -234,7 +236,8 @@ export default async function SeoCopywritingPage() {
 
           <Section id="how-draftly-enforces" title="How Draftly enforces these rules automatically">
             <p>
-              Draftly checks each post against your website&apos;s writing rules before you see it. If the post breaks
+              <A href="/ai-copywriter">Draftly&apos;s AI copywriter</A> checks each post against your website&apos;s
+              writing rules before you see it. If the post breaks
               any, Draftly sends it back to the model once with every violation listed, and keeps the rewrite when it has
               fewer problems.
             </p>
@@ -247,10 +250,14 @@ export default async function SeoCopywritingPage() {
               You can switch most rules on or off for each website, so a brand that likes em dashes can keep them. To see
               how {BENCHMARK.length} AI models handled the same rules, read our{" "}
               <A href="/best-ai-for-writing">test of which AI writes best</A>. Plans and credit costs are on the{" "}
-              <A href="/pricing">Draftly pricing page</A>.
+              <A href="/pricing">Draftly pricing page</A>. If you write in Claude or ChatGPT, the{" "}
+              <A href="/mcp">Draftly SEO MCP server</A> gives your assistant the same brand voice and live keyword data.
             </p>
           </Section>
 
+          <div className="max-w-3xl">
+            <RelatedLinks items={PILLARS.filter((p) => p.href !== "/seo-copywriting").slice(0, 4)} />
+          </div>
           <FaqList faqs={FAQS} skipLint={[BANNED_FAQ]} />
 
           <DarkCta

@@ -14,6 +14,9 @@ import {
   type BenchmarkTable,
 } from "@/lib/benchmarkTables";
 import { TocLayout } from "@/components/OnThisPage";
+import { PILLARS } from "@/lib/related";
+import { RelatedLinks } from "@/components/RelatedLinks";
+import { authorRef } from "@/lib/schema";
 
 export const revalidate = 3600;
 
@@ -168,7 +171,7 @@ export default async function BenchmarkPage() {
         description: DESCRIPTION,
         datePublished: BENCHMARK_ISO,
         dateModified: BENCHMARK_ISO,
-        author: { "@type": "Person", name: "Preston Vawdrey", url: "https://prestonvawdrey.com" },
+        author: authorRef,
         publisher: { "@type": "Organization", name: "Draftly", url: "https://www.draftly.blog" },
       },
       {
@@ -254,7 +257,12 @@ export default async function BenchmarkPage() {
             <p>
               Draftly is built around that pairing. It finds timely topics from your industry&apos;s news, writes in your
               brand voice with GPT 6 Luna by default or Claude Sonnet 5.5 as the premium option, scores each draft for
-              machine-sounding phrasing and publishes to WordPress, Shopify, Ghost, Webflow, HubSpot or Squarespace.
+              machine-sounding phrasing and publishes to WordPress, Shopify, Ghost, Webflow, HubSpot or Squarespace. Here
+              is{" "}
+              <a href="/ai-copywriter" style={{ color: "var(--color-accent)" }}>
+                how Draftly works as an AI copywriter
+              </a>
+              , from your URL to a published post.
             </p>
           </Section>
           <div className="max-w-4xl">
@@ -327,6 +335,13 @@ export default async function BenchmarkPage() {
               not X, it&apos;s Y&quot;) and, in GPT 5.5&apos;s case, length.
             </p>
             <p>So the smallest OpenAI model wrote the best blog posts of the three, at the lowest cost.</p>
+            <p>
+              If you already write in ChatGPT or Claude, the{" "}
+              <a href="/mcp" style={{ color: "var(--color-accent)" }}>
+                Draftly SEO MCP server
+              </a>{" "}
+              brings your brand voice, past posts and live keyword data into the chat.
+            </p>
           </Section>
           <div className="max-w-4xl">
             <QueryTable<BenchmarkRow> {...CHATGPT_TABLE} />
@@ -362,7 +377,11 @@ export default async function BenchmarkPage() {
                 pack per business, with a brand voice, facts it could use and a call to action.
               </p>
               <p>
-                All 14 models got the same system prompt: the writing rules Draftly uses in production. We called each one
+                All 14 models got the same system prompt: the{" "}
+                <a href="/seo-copywriting" style={{ color: "var(--color-accent)" }}>
+                  writing rules Draftly uses in production
+                </a>
+                . We called each one
                 through the Vercel AI Gateway, so the cost columns are what we were actually billed.
               </p>
               <p>
@@ -395,6 +414,9 @@ export default async function BenchmarkPage() {
             </p>
           </Section>
 
+          <div className="max-w-3xl">
+            <RelatedLinks items={PILLARS.filter((p) => p.href !== "/best-ai-for-writing").slice(0, 4)} />
+          </div>
           <section id="faq" className="mt-20 max-w-3xl">
             <h2 className="text-3xl font-medium mb-6" style={{ letterSpacing: "-0.03em" }}>
               Frequently Asked Questions

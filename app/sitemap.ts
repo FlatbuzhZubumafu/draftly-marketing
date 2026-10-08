@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getPosts } from "@/lib/graphql";
+import { NOINDEX_POST_SLUGS } from "@/lib/related";
 
 export const revalidate = 3600;
 
@@ -20,7 +21,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/terms-and-conditions`, lastModified: new Date("2026-10-06"), changeFrequency: "yearly", priority: 0.2 },
   ];
 
-  const postRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
+  const postRoutes: MetadataRoute.Sitemap = posts.filter((post) => !NOINDEX_POST_SLUGS.has(post.slug)).map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.modified || post.date),
     changeFrequency: "monthly" as const,

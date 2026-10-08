@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { GlobalAnimations } from "@/components/GlobalAnimations";
-import { jsonLdHtml, organizationJsonLd, websiteJsonLd } from "@/lib/schema";
+import { jsonLdHtml, organizationJsonLd, personJsonLd, websiteJsonLd } from "@/lib/schema";
 import { HOME_DESCRIPTION, HOME_TITLE, SITE_URL } from "@/lib/site";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -36,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={plusJakartaSans.variable}>
       <body className="font-sans">
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdHtml(organizationJsonLd, websiteJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdHtml(organizationJsonLd, personJsonLd, websiteJsonLd) }} />
         {children}
         <GlobalAnimations />
       </body>

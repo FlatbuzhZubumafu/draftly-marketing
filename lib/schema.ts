@@ -6,6 +6,7 @@ import { APP_URL, LOGO_URL, SITE_URL } from "@/lib/site";
 
 const ORG_ID = `${SITE_URL}/#organization`;
 const SITE_ID = `${SITE_URL}/#website`;
+const PERSON_ID = `${SITE_URL}/#preston-vawdrey`;
 
 export const organizationJsonLd = {
   "@type": "Organization",
@@ -14,10 +15,24 @@ export const organizationJsonLd = {
   url: SITE_URL,
   logo: LOGO_URL,
   email: "preston@draftly.blog",
-  founder: { "@type": "Person", name: "Preston Vawdrey", url: "https://prestonvawdrey.com" },
-  // Only profiles the site links to. Add social profiles here once they exist.
+  founder: { "@id": PERSON_ID },
+  // Only verified Draftly profiles. Add LinkedIn, X and directory listings here once they exist.
   sameAs: [APP_URL],
 };
+
+/** Preston Vawdrey, founder and author. sameAs lists the profiles his own site links to. */
+export const personJsonLd = {
+  "@type": "Person",
+  "@id": PERSON_ID,
+  name: "Preston Vawdrey",
+  url: "https://prestonvawdrey.com",
+  jobTitle: "Founder",
+  worksFor: { "@id": ORG_ID },
+  sameAs: ["https://prestonvawdrey.com", "https://www.linkedin.com/in/preston-vawdrey/", "https://www.youtube.com/@Preston-V8"],
+};
+
+/** Author reference for Article/BlogPosting nodes; resolves to personJsonLd in the layout graph. */
+export const authorRef = { "@type": "Person", "@id": PERSON_ID, name: "Preston Vawdrey", url: "https://prestonvawdrey.com" };
 
 export const websiteJsonLd = {
   "@type": "WebSite",
