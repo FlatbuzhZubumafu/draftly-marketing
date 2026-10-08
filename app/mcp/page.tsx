@@ -1,38 +1,24 @@
 import type { Metadata } from "next";
+import { DEFAULT_OG_IMAGE } from "@/lib/site";
 import { Check } from "lucide-react";
 import { getHomepageData } from "@/lib/graphql";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CopyUrl } from "@/components/CopyUrl";
+import { MCP_URL, TOOLS, toolPlans } from "@/lib/mcp";
 
 export const revalidate = 3600;
 
-const MCP_URL = "https://app.draftly.blog/mcp";
-const TITLE = "Draftly MCP Connector for Claude, ChatGPT and Cursor";
+const TITLE = "SEO MCP Server for Claude and ChatGPT | Draftly";
 const DESCRIPTION =
-  "Connect Draftly to Claude, ChatGPT or Cursor with one URL. Your AI gets your brand voice, posts, topic ideas and live SEO data from DataForSEO. Included on every paid plan.";
+  "Draftly's SEO MCP server connects Claude, ChatGPT or Cursor to live keyword, SERP and People Also Ask data plus your brand voice. Included on every paid plan.";
 
 export const metadata: Metadata = {
-  title: "SEO MCP Connector for Claude, ChatGPT and Cursor",
+  title: { absolute: TITLE },
   description: DESCRIPTION,
   alternates: { canonical: "/mcp" },
-  openGraph: { title: TITLE, description: DESCRIPTION, type: "article", url: "https://www.draftly.blog/mcp" },
+  openGraph: { title: TITLE, description: DESCRIPTION, type: "article", url: "https://www.draftly.blog/mcp", images: [DEFAULT_OG_IMAGE] },
 };
-
-type Plan = "Solopreneur" | "Growth" | "Autopilot";
-
-const TOOLS: { name: string; does: string; plan: Plan; data?: boolean }[] = [
-  { name: "get_brand_context", does: "Your brand voice, tone sliders, audience, vocabulary and writing samples for each website.", plan: "Solopreneur" },
-  { name: "list_posts", does: "Your recent Draftly posts with status, word count, SEO score and human-voice score.", plan: "Solopreneur" },
-  { name: "get_post", does: "One post in full: body, meta title, meta description, slug and keywords.", plan: "Solopreneur" },
-  { name: "find_topics", does: "Your topic pipeline, suggested topics and newsroom articles ranked by brand relevance.", plan: "Solopreneur" },
-  { name: "research_keyword", does: "Search volume, difficulty, intent, cost per click, 12-month trend and related keywords.", plan: "Solopreneur", data: true },
-  { name: "get_serp", does: "Google's live first page for a query, People Also Ask questions, related searches and SERP features.", plan: "Growth", data: true },
-  { name: "get_domain_overview", does: "Organic keyword counts by ranking position and estimated traffic for any domain.", plan: "Growth", data: true },
-  { name: "get_competitors", does: "The domains competing with a site for the same keywords.", plan: "Growth", data: true },
-  { name: "get_keyword_gap", does: "Keywords a competitor ranks for that your site does not.", plan: "Autopilot", data: true },
-  { name: "get_backlinks_summary", does: "Backlinks, referring domains, domain rank and spam score for any domain.", plan: "Autopilot", data: true },
-];
 
 const ALLOWANCES = [
   { plan: "Solopreneur", price: "$29/month", calls: "40 a month", data: "Keyword data" },
@@ -127,7 +113,7 @@ export default async function McpPage() {
         description: DESCRIPTION,
         url: "https://www.draftly.blog/mcp",
         datePublished: "2026-10-06",
-        dateModified: "2026-10-06",
+        dateModified: "2026-10-08",
         author: { "@type": "Person", name: "Preston Vawdrey", url: "https://prestonvawdrey.com" },
         publisher: { "@type": "Organization", name: "Draftly", url: "https://www.draftly.blog" },
       },
@@ -160,6 +146,24 @@ export default async function McpPage() {
             <p className="text-sm font-semibold mb-2">Connector URL</p>
             <CopyUrl url={MCP_URL} />
           </header>
+
+          <section id="what-is-an-seo-mcp" className="mt-20 max-w-3xl">
+            <h2 className="text-3xl font-medium mb-6" style={{ letterSpacing: "-0.03em" }}>
+              What Is an SEO MCP?
+            </h2>
+            <div className="space-y-5 leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+              <p>
+                An SEO MCP is a connector that lets an AI assistant like Claude or ChatGPT pull live SEO data, such as
+                keyword volumes, SERPs and People Also Ask questions, while it writes. MCP stands for Model Context
+                Protocol, the open standard these assistants use to call outside tools.
+              </p>
+              <p>
+                Draftly&apos;s SEO MCP server adds your own context to that data: your brand voice, your published posts and
+                your topic ideas. Your assistant can check what people search for, see what already ranks and plan a post
+                around both, all in one chat.
+              </p>
+            </div>
+          </section>
 
           <section className="mt-20">
             <h2 className="text-3xl font-medium mb-8" style={{ letterSpacing: "-0.03em" }}>
@@ -210,7 +214,7 @@ export default async function McpPage() {
                       <td className="py-3 pr-4 align-top font-mono text-xs whitespace-nowrap">{t.name}</td>
                       <td className="py-3 pr-4 align-top" style={{ color: "var(--color-text-secondary)" }}>{t.does}</td>
                       <td className="py-3 pr-4 align-top whitespace-nowrap" style={{ color: "var(--color-text-secondary)" }}>
-                        {t.plan === "Solopreneur" ? "Every paid plan" : t.plan === "Growth" ? "Growth, Autopilot" : "Autopilot"}
+                        {toolPlans(t.plan)}
                       </td>
                       <td className="py-3 align-top">
                         {t.data ? <Check className="w-4 h-4" style={{ color: "var(--color-accent)" }} aria-label="Uses a data call" /> : null}
@@ -219,6 +223,28 @@ export default async function McpPage() {
                   ))}
                 </tbody>
               </table>
+            </div>
+          </section>
+
+          <section id="mcp-for-copywriting" className="mt-20 max-w-3xl">
+            <h2 className="text-3xl font-medium mb-6" style={{ letterSpacing: "-0.03em" }}>
+              MCP for Copywriting
+            </h2>
+            <div className="space-y-5 leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+              <p>
+                Draftly&apos;s connector also covers the writing side. The get_brand_context tool hands your assistant the
+                tone sliders, vocabulary, audience notes and writing samples Draftly built from your website. With that
+                loaded, Claude or ChatGPT can draft a blog post, a landing page or an email that sounds like your brand.
+              </p>
+              <p>
+                Posts written in Draftly follow the same rules we used in our{" "}
+                <a href="/best-ai-for-writing" style={{ color: "var(--color-accent)" }}>
+                  test of which AI model writes best
+                </a>
+                , and each one gets a 0 to 100 human-voice score from a 13-point check for phrasing that reads as
+                machine-written. The list_posts and get_post tools bring those posts and scores into your chat, so your
+                assistant can match what already works on your site.
+              </p>
             </div>
           </section>
 

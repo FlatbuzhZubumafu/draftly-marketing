@@ -8,7 +8,7 @@ import { normalizeSiteUrl } from "@/lib/siteUrl";
 
 const HERO_URL_ERROR_ID = "hero-url-error";
 
-export function HeroDemo({ settings }: { settings: MarketingSettings }) {
+export function HeroDemo({ settings, startingPrice }: { settings: MarketingSettings; startingPrice: number }) {
   const s = settings;
   const [url, setUrl] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -52,6 +52,9 @@ export function HeroDemo({ settings }: { settings: MarketingSettings }) {
       <div className="container-draftly relative z-10 max-w-4xl text-center">
         <div className="reveal">
           <h1 className="page-heading mb-8">
+            <span className="eyebrow font-sans block mb-5" style={{ lineHeight: 1.4 }}>
+              AI blog writer for small businesses
+            </span>{" "}
             Your Next Blog Post,
             <br />
             Already{" "}
@@ -112,6 +115,10 @@ export function HeroDemo({ settings }: { settings: MarketingSettings }) {
           )}
 
           <p className="text-sm mt-4" style={{ color: "var(--color-text-muted)" }}>{s.heroNote}</p>
+          <p className="text-sm mt-1" style={{ color: "var(--color-text-muted)" }}>
+            Draftly is an AI blog writer for SEO-ready posts in your brand&apos;s voice. Plans start free, then{" "}
+            {`$${startingPrice}`} a month.
+          </p>
         </div>
       </div>
     </section>

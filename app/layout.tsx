@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { GlobalAnimations } from "@/components/GlobalAnimations";
+import { jsonLdHtml, organizationJsonLd, websiteJsonLd } from "@/lib/schema";
+import { HOME_DESCRIPTION, HOME_TITLE, SITE_URL } from "@/lib/site";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -12,19 +14,20 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.draftly.blog"),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Draftly: Blog Posts in Your Brand's Voice, Ready to Publish",
+    default: HOME_TITLE,
     template: "%s | Draftly",
   },
-  description:
-    "Draftly reads your website, picks timely topics from your industry's news, and writes full blog posts in your voice. Publish to WordPress, Shopify, Ghost, Webflow, HubSpot or Squarespace in one click.",
+  description: HOME_DESCRIPTION,
   openGraph: {
-    title: "Draftly: Blog Posts in Your Brand's Voice, Ready to Publish",
-    description:
-      "Draftly reads your website, picks timely topics from your industry's news, and writes full blog posts in your voice.",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    siteName: "Draftly",
     type: "website",
   },
+  // Title and description fall back to each page's Open Graph tags.
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({
@@ -33,6 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={plusJakartaSans.variable}>
       <body className="font-sans">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdHtml(organizationJsonLd, websiteJsonLd) }} />
         {children}
         <GlobalAnimations />
       </body>

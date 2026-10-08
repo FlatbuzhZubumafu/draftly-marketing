@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { DEFAULT_OG_IMAGE } from "@/lib/site";
 import { getPost, getPosts } from "@/lib/graphql";
-import { sanitizeHtml } from "@/lib/sanitize";
+import { sanitizeHtml, tidyPostHtml } from "@/lib/sanitize";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { notFound } from "next/navigation";
@@ -27,6 +28,21 @@ function plainExcerpt(html: string | undefined, max = 160): string {
   return cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:.\s]+$/, "") + "…";
 }
 
+const TITLE_SUFFIX = " | Draftly";
+const MAX_TITLE = 60;
+
+/**
+ * Keeps the <title> within 60 characters: "Post Title | Draftly" when it fits, the
+ * bare post title when only that fits, and otherwise the title cut at a word.
+ */
+function seoTitle(rawTitle: string): Metadata["title"] {
+  const title = plainExcerpt(rawTitle, 1000).replace(/\.$/, "");
+  if (title.length + TITLE_SUFFIX.length <= MAX_TITLE) return title;
+  if (title.length <= MAX_TITLE) return { absolute: title };
+  const cut = title.slice(0, MAX_TITLE + 1);
+  return { absolute: cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:.\s]+$/, "") };
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPost(slug);
@@ -35,7 +51,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const description = plainExcerpt(post.excerpt);
   const image = post.featuredImage?.node?.sourceUrl;
   return {
-    title: post.title,
+    title: seoTitle(post.title),
     description,
     alternates: { canonical: `/blog/${slug}` },
     openGraph: {
@@ -46,7 +62,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       publishedTime: post.date,
       modifiedTime: post.modified,
       authors: post.author?.node?.name ? [post.author.node.name] : undefined,
-      images: image ? [image] : undefined,
+      images: image ? [image] : [DEFAULT_OG_IMAGE],
     },
   };
 }
@@ -114,7 +130,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           )}
           <div
             className="prose prose-lg max-w-none text-gray-700 leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.content) }}
+            dangerouslySetInnerHTML={{ __html: tidyPostHtml(sanitizeHtml(post.content), post.title) }}
           />
         </article>
       </main>

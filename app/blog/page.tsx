@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { DEFAULT_OG_IMAGE } from "@/lib/site";
 import { getPosts } from "@/lib/graphql";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -6,13 +7,13 @@ import { Footer } from "@/components/Footer";
 export const revalidate = 60;
 
 const DESCRIPTION =
-  "Notes from building Draftly on AI writing, SEO and AEO, and getting content cited by AI search.";
+  "Notes from building Draftly, an AI blog writer for small businesses: AI writing, SEO and AEO, and how to get your content cited by AI search.";
 
 export const metadata: Metadata = {
   title: { absolute: "The Draftly Blog: AI Content and SEO Notes" },
   description: DESCRIPTION,
   alternates: { canonical: "/blog" },
-  openGraph: { title: "The Draftly Blog", description: DESCRIPTION, type: "website", url: "/blog" },
+  openGraph: { title: "The Draftly Blog", description: DESCRIPTION, type: "website", url: "/blog", images: [DEFAULT_OG_IMAGE] },
 };
 
 export default async function BlogPage() {
