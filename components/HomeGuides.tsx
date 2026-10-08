@@ -1,5 +1,6 @@
 import { PILLARS } from "@/lib/related";
 import { PAID_PLANS } from "@/lib/pricing";
+import { GUIDE_THUMBS } from "@/lib/product-shots";
 
 /** Homepage links to the pillar pages, in body content so search engines see them as more than footer links. */
 export function HomeGuides() {
@@ -25,14 +26,29 @@ export function HomeGuides() {
             <li key={c.href}>
               <a
                 href={c.href}
-                className="block h-full rounded-xl p-5 transition-colors"
+                className="guide-card block h-full rounded-xl overflow-hidden transition-shadow"
                 style={{ background: "var(--color-bg-surface)", border: "1px solid var(--color-border)" }}
               >
-                <span className="block font-semibold" style={{ color: "var(--color-text-primary)" }}>
-                  {c.title}
-                </span>
-                <span className="block mt-1 text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-                  {c.blurb}
+                {GUIDE_THUMBS[c.href] ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={GUIDE_THUMBS[c.href].src}
+                    alt={GUIDE_THUMBS[c.href].alt}
+                    width={GUIDE_THUMBS[c.href].width}
+                    height={GUIDE_THUMBS[c.href].height}
+                    loading="lazy"
+                    decoding="async"
+                    className="block w-full h-auto"
+                    style={{ aspectRatio: "16 / 10", borderBottom: "1px solid var(--color-border)" }}
+                  />
+                ) : null}
+                <span className="block p-5">
+                  <span className="block font-semibold" style={{ color: "var(--color-text-primary)" }}>
+                    {c.title}
+                  </span>
+                  <span className="block mt-1 text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+                    {c.blurb}
+                  </span>
                 </span>
               </a>
             </li>

@@ -18,9 +18,6 @@ export function ProductShowcase() {
               className="w-full h-auto block"
             />
           </picture>
-          <figcaption className="text-sm text-center mt-4 max-w-xl mx-auto leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-            {SHOWCASE_WIDE.caption}
-          </figcaption>
         </figure>
       </div>
     </section>

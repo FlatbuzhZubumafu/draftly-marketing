@@ -1,11 +1,7 @@
 import { getHomepageData } from "@/lib/graphql";
-import type { LucideIcon } from "lucide-react";
-import { Target, Rss, PenTool } from "lucide-react";
 import { AccentText } from "./AccentText";
 import { ProductFigure } from "./ProductFigure";
 import { STEP_SHOTS } from "@/lib/product-shots";
-
-const ICON_MAP: Record<string, LucideIcon> = { Target, Rss, PenTool };
 
 export async function HowItWorks() {
   const { steps, marketingSettings: s } = await getHomepageData();
@@ -26,7 +22,6 @@ export async function HowItWorks() {
         {/* Steps */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {steps.nodes.map((step, index) => {
-            const Icon = ICON_MAP[step.iconName] || Target;
             const shot = STEP_SHOTS[index];
             return (
               <div
@@ -34,11 +29,7 @@ export async function HowItWorks() {
                 className="reveal p-6 card-depth min-w-0"
                 style={{ transitionDelay: `${index * 0.08}s` }}
               >
-                {shot ? <ProductFigure shot={shot} aspect="3 / 2" className="mb-6" /> : null}
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4"
-                     style={{ background: "var(--color-accent-muted)" }}>
-                  <Icon className="w-5 h-5" style={{ color: "var(--color-accent)" }} />
-                </div>
+                {shot ? <ProductFigure shot={shot} aspect="3 / 2" className="mb-6" showCaption={false} /> : null}
                 <h3 className="font-semibold mb-2">{step.title}</h3>
                 <p className="text-sm leading-relaxed whitespace-pre-line" style={{ color: "var(--color-text-secondary)" }}>
                   {step.stepDescription}
