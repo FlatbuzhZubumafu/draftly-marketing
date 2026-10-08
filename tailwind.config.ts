@@ -1,3 +1,4 @@
+import typography from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -7,6 +8,33 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // Blog and legal pages render WordPress HTML inside `prose`. Without this
+      // plugin `prose` did nothing: no paragraph spacing, list bullets or heading
+      // margins.
+      typography: {
+        DEFAULT: {
+          css: {
+            "--tw-prose-body": "#333333",
+            "--tw-prose-headings": "var(--color-text-primary)",
+            "--tw-prose-links": "var(--color-accent-hover)",
+            "--tw-prose-bold": "var(--color-text-primary)",
+            "--tw-prose-bullets": "var(--color-accent)",
+            "--tw-prose-counters": "var(--color-text-secondary)",
+            "--tw-prose-quotes": "var(--color-text-primary)",
+            "--tw-prose-quote-borders": "var(--color-accent)",
+            "--tw-prose-code": "var(--color-text-primary)",
+            "--tw-prose-hr": "rgba(0, 0, 0, 0.08)",
+            lineHeight: "1.75",
+            "h2, h3, h4": { letterSpacing: "-0.01em", lineHeight: "1.25" },
+            a: { textDecorationThickness: "1px", textUnderlineOffset: "3px" },
+            "code::before": { content: "none" },
+            "code::after": { content: "none" },
+            code: { backgroundColor: "rgba(0, 0, 0, 0.05)", padding: "0.15em 0.35em", borderRadius: "4px", fontWeight: "500" },
+            img: { borderRadius: "12px" },
+            figcaption: { textAlign: "center" },
+          },
+        },
+      },
       colors: {
         accent: "var(--color-accent)",
         "accent-hover": "var(--color-accent-hover)",
@@ -73,7 +101,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [typography],
 };
 
 export default config;
