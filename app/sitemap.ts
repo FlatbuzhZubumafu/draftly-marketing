@@ -8,10 +8,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://www.draftly.blog";
 
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: baseUrl, lastModified: new Date("2026-10-06"), changeFrequency: "weekly", priority: 1 },
-    { url: `${baseUrl}/pricing`, lastModified: new Date("2026-10-06"), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${baseUrl}/mcp`, lastModified: new Date("2026-10-06"), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/best-ai-for-writing`, lastModified: new Date("2026-10-06"), changeFrequency: "monthly", priority: 0.8 },
+    { url: baseUrl, lastModified: new Date("2026-10-08"), changeFrequency: "weekly", priority: 1 },
+    { url: `${baseUrl}/pricing`, lastModified: new Date("2026-10-08"), changeFrequency: "monthly", priority: 0.9 },
+    { url: `${baseUrl}/mcp`, lastModified: new Date("2026-10-08"), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/best-ai-for-writing`, lastModified: new Date("2026-10-08"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/blog`, lastModified: posts[0] ? new Date(posts[0].modified || posts[0].date) : new Date("2026-10-06"), changeFrequency: "weekly", priority: 0.8 },
     { url: `${baseUrl}/privacy-policy`, lastModified: new Date("2026-10-06"), changeFrequency: "yearly", priority: 0.2 },
     { url: `${baseUrl}/terms-and-conditions`, lastModified: new Date("2026-10-06"), changeFrequency: "yearly", priority: 0.2 },

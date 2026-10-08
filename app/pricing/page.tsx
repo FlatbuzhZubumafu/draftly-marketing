@@ -1,27 +1,31 @@
 import type { Metadata } from "next";
+import { DEFAULT_OG_IMAGE } from "@/lib/site";
 import { Check } from "lucide-react";
 import { getHomepageData } from "@/lib/graphql";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { AccentText } from "@/components/AccentText";
 import { PricingPlans } from "@/components/PricingPlans";
+import { paidPostCounts, paidPriceList } from "@/lib/pricing";
+import { jsonLdHtml, softwareApplicationJsonLd } from "@/lib/schema";
 
 export const revalidate = 3600;
 
+const TITLE = `Draftly Pricing: Free, ${paidPriceList()} Plans`;
+const DESCRIPTION = `Your first Draftly post is free. Paid plans run ${paidPriceList()} a month for about ${paidPostCounts()} blog posts written in your brand's voice.`;
+
 export const metadata: Metadata = {
-  title: "Pricing",
-  description:
-    "Your first Draftly post is free. Paid plans run $29, $69 and $100 a month for about 66, 233 and 333 blog posts written in your brand's voice.",
+  title: { absolute: TITLE },
+  description: DESCRIPTION,
   alternates: { canonical: "/pricing" },
   openGraph: {
-    title: "Draftly Pricing: Free, $29, $69 and $100 Plans",
-    description:
-      "Your first Draftly post is free. Paid plans run $29, $69 and $100 a month for about 66, 233 and 333 blog posts written in your brand's voice.",
+    title: TITLE,
+    description: DESCRIPTION,
     type: "website",
     url: "/pricing",
+    images: [DEFAULT_OG_IMAGE],
   },
 };
-
 
 const EVERY_PLAN = [
   {
@@ -68,6 +72,7 @@ export default async function PricingPage() {
     <>
       <Header />
       <main className="pt-28 pb-24 px-4" style={{ background: "var(--color-bg-primary)" }}>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdHtml(softwareApplicationJsonLd) }} />
         <section className="container-draftly max-w-6xl">
           <div className="text-center max-w-2xl mx-auto mb-14">
             <h1 className="page-heading mb-6" style={{ fontSize: "clamp(2.25rem, 5.5vw, 64px)" }}>

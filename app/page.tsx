@@ -14,16 +14,22 @@ import { ScrollingBands } from "@/components/ScrollingBands";
 import { FAQ } from "@/components/FAQ";
 import { HomePricing } from "@/components/HomePricing";
 import { CtaBand } from "@/components/CtaBand";
+import { PAID_PLANS } from "@/lib/pricing";
+import { jsonLdHtml, softwareApplicationJsonLd } from "@/lib/schema";
+import { HOME_DESCRIPTION, HOME_TITLE } from "@/lib/site";
 
 export const metadata: Metadata = {
+  title: { absolute: HOME_TITLE },
+  description: HOME_DESCRIPTION,
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Draftly: Blog Posts in Your Brand's Voice, Ready to Publish",
-    description:
-      "Draftly reads your website, picks timely topics from your industry's news, and writes full blog posts in your voice.",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    siteName: "Draftly",
     type: "website",
     url: "/",
   },
+  twitter: { card: "summary_large_image", title: HOME_TITLE, description: HOME_DESCRIPTION },
 };
 
 export default async function HomePage() {
@@ -33,7 +39,8 @@ export default async function HomePage() {
     <>
       <Header />
       <main>
-        <HeroDemo settings={data.marketingSettings} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdHtml(softwareApplicationJsonLd) }} />
+        <HeroDemo settings={data.marketingSettings} startingPrice={PAID_PLANS[0].price} />
         <VideoSection />
         <PersonalStory />
         <TestimonialSlider testimonials={data.testimonials.nodes} />
@@ -49,7 +56,7 @@ export default async function HomePage() {
           tone="accent"
           heading="Publish Your First Post Today"
           body="Draftly writes it, scores it and sends it to WordPress, Shopify, Ghost, Webflow, HubSpot or Squarespace."
-          secondary={{ href: "/best-ai-for-writing", label: "See the AI Benchmark" }}
+          secondary={{ href: "/best-ai-for-writing", label: "See Which AI Model Writes Best" }}
         />
         <NotForEveryone />
         <ScrollingBands />
@@ -57,8 +64,8 @@ export default async function HomePage() {
         <FAQ faqs={data.faqs.nodes} />
         <CtaBand
           heading={<>Your First Post <em className="italic" style={{ color: "var(--color-accent)" }}>Is on Us</em></>}
-          body="Paste your URL, read the draft, then decide. Paid plans start at $29 a month when you want more."
-          secondary={{ href: "/mcp", label: "Use Draftly in Claude or ChatGPT" }}
+          body={`Paste your URL, read the draft, then decide. Paid plans start at $${PAID_PLANS[0].price} a month when you want more.`}
+          secondary={{ href: "/mcp", label: "SEO MCP for Claude and ChatGPT" }}
         />
       </main>
       <Footer />

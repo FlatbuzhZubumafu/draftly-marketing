@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
+import { DEFAULT_OG_IMAGE } from "@/lib/site";
 import { getHomepageData } from "@/lib/graphql";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { BENCHMARK_DATE, BENCHMARK_ISO, type BenchmarkRow, type CopyRow } from "@/lib/benchmark";
 import {
-  BENCHMARK,
-  BENCHMARK_DATE,
-  BENCHMARK_ISO,
-  COPY_BENCHMARK,
-  seoScore,
-  type BenchmarkRow,
-  type CopyRow,
-} from "@/lib/benchmark";
+  BLOG_TABLE,
+  CHATGPT_TABLE,
+  CONTENT_TABLE,
+  COPY_TABLE,
+  LEADERBOARD_TABLE,
+  SEO_TABLE,
+  type BenchmarkTable,
+} from "@/lib/benchmarkTables";
 
 export const revalidate = 3600;
 
@@ -21,15 +23,15 @@ export const revalidate = 3600;
 // copywriting" (250), "is chatgpt still the best ai". Each one has a section that answers
 // it in its first sentence, with a table ranked on what that question cares about.
 // Every number below comes from lib/benchmark.ts (generated from the run files).
-const TITLE = "Best AI for Writing in 2026: We Tested 14 Models on Blog Posts and Copy";
+const TITLE = "Best AI for Writing in 2026: We Tested 14 Models";
 const DESCRIPTION =
-  "Which AI is best for writing? We had 14 AI models write the same blog posts and marketing copy under one set of rules, then scored every draft. Claude Sonnet 5.5 sounds the most human; GPT 5.4 Mini is the best value.";
+  "Which is the best AI for writing? We tested 14 AI models on the same blog posts and copy to find the best LLM for writing, for SEO, for copywriting and value.";
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESCRIPTION,
   alternates: { canonical: "/best-ai-for-writing" },
-  openGraph: { title: TITLE, description: DESCRIPTION, type: "article", url: "https://www.draftly.blog/best-ai-for-writing" },
+  openGraph: { title: TITLE, description: DESCRIPTION, type: "article", url: "https://www.draftly.blog/best-ai-for-writing", images: [DEFAULT_OG_IMAGE] },
 };
 
 const PICKS = [
@@ -101,8 +103,6 @@ const FAQS = [
   },
 ];
 
-const money = (n: number) => (n < 0.01 ? `$${n.toFixed(4)}` : `$${n.toFixed(3)}`);
-
 function Section({ id, title, children }: { id?: string; title: string; children: React.ReactNode }) {
   return (
     <section id={id} className="mt-20 max-w-3xl">
@@ -116,10 +116,9 @@ function Section({ id, title, children }: { id?: string; title: string; children
   );
 }
 
-type Column<T> = { label: string; value: (r: T) => string | number; strong?: boolean };
 
 /** A leaderboard ranked for one question, with only the columns that question cares about. */
-function QueryTable<T extends { model: string }>({ caption, rows, columns, rank }: { caption: string; rows: T[]; columns: Column<T>[]; rank?: boolean }) {
+function QueryTable<T extends { model: string }>({ caption, rows, columns, rank }: BenchmarkTable<T>) {
   return (
     <div className="mt-8 overflow-x-auto rounded-xl" style={{ border: "1px solid var(--color-border)" }}>
       <table className="w-full text-sm min-w-[640px]">
@@ -150,16 +149,6 @@ function QueryTable<T extends { model: string }>({ caption, rows, columns, rank 
     </div>
   );
 }
-
-const by = <T,>(...keys: ((r: T) => number)[]) => (a: T, b: T) => {
-  for (const k of keys) { const d = k(a) - k(b); if (d) return d; }
-  return 0;
-};
-
-const CONTENT_ROWS = [...BENCHMARK].sort(by<BenchmarkRow>((r) => -(r.faq + r.cta), (r) => r.contrast + r.aiWords + r.openers, (r) => r.cost));
-const SEO_ROWS = [...BENCHMARK].sort(by<BenchmarkRow>((r) => -seoScore(r), (r) => r.cost));
-const BLOG_ROWS = [...BENCHMARK].sort(by<BenchmarkRow>((r) => r.wordsOff, (r) => r.longParas));
-const OPENAI_ROWS = BENCHMARK.filter((r) => r.provider === "OpenAI" || r === BENCHMARK[0]);
 
 const B = ({ children }: { children: React.ReactNode }) => (
   <strong style={{ color: "var(--color-text-primary)" }}>{children}</strong>
@@ -247,19 +236,7 @@ export default async function BenchmarkPage() {
               rules. Voice is how human the writing sounds, judged by two AI models from different companies. Cost is what
               we were billed per post.
             </p>
-            <QueryTable<BenchmarkRow>
-              caption="Blog writing: three posts per model"
-              rank
-              rows={BENCHMARK}
-              columns={[
-                { label: "Overall", value: (r) => r.overall, strong: true },
-                { label: "Formatting", value: (r) => r.format },
-                { label: "Voice", value: (r) => r.voice },
-                { label: "Cost per post", value: (r) => money(r.cost) },
-                { label: "Seconds", value: (r) => r.seconds },
-                { label: "Avg words", value: (r) => r.words.toLocaleString() },
-              ]}
-            />
+            <QueryTable<BenchmarkRow> {...LEADERBOARD_TABLE} />
           </section>
 
           <Section id="content-writing" title="Best AI for Content Writing">
@@ -280,17 +257,7 @@ export default async function BenchmarkPage() {
             </p>
           </Section>
           <div className="max-w-4xl">
-            <QueryTable<BenchmarkRow>
-              caption="Content writing: structure kept and AI habits avoided (three posts per model, fewer tells is better)"
-              rows={CONTENT_ROWS}
-              columns={[
-                { label: "FAQ included", value: (r) => `${r.faq} of 3`, strong: true },
-                { label: "Ended on CTA", value: (r) => `${r.cta} of 3`, strong: true },
-                { label: "Contrast phrases", value: (r) => r.contrast },
-                { label: "AI vocabulary", value: (r) => r.aiWords },
-                { label: "Mechanical openers", value: (r) => r.openers },
-              ]}
-            />
+            <QueryTable<BenchmarkRow> {...CONTENT_TABLE} />
           </div>
 
           <Section id="copywriting" title="Best AI for Copywriting">
@@ -311,19 +278,7 @@ export default async function BenchmarkPage() {
             </p>
           </Section>
           <div className="max-w-4xl">
-            <QueryTable<CopyRow>
-              caption="Copywriting: three copy packs per model (judge criteria out of 10)"
-              rank
-              rows={COPY_BENCHMARK}
-              columns={[
-                { label: "Overall", value: (r) => r.overall, strong: true },
-                { label: "Clarity", value: (r) => r.clarity },
-                { label: "Persuasion", value: (r) => r.persuasion },
-                { label: "Specificity", value: (r) => r.specificity },
-                { label: "Ad limits met", value: (r) => `${r.adLimits} of 15` },
-                { label: "Cost per pack", value: (r) => money(r.cost) },
-              ]}
-            />
+            <QueryTable<CopyRow> {...COPY_TABLE} />
           </div>
 
           <Section id="seo-writing" title="Best AI for SEO Writing">
@@ -339,18 +294,7 @@ export default async function BenchmarkPage() {
             </p>
           </Section>
           <div className="max-w-4xl">
-            <QueryTable<BenchmarkRow>
-              caption="SEO writing: on-page SEO checks passed across three posts"
-              rows={SEO_ROWS}
-              columns={[
-                { label: "SEO checks (of 18)", value: (r) => seoScore(r), strong: true },
-                { label: "Keyword placed (of 9)", value: (r) => r.keyword },
-                { label: "Meta title (of 3)", value: (r) => r.metaTitle },
-                { label: "Meta description (of 3)", value: (r) => r.metaDesc },
-                { label: "FAQ (of 3)", value: (r) => r.faq },
-                { label: "Cost per post", value: (r) => money(r.cost) },
-              ]}
-            />
+            <QueryTable<BenchmarkRow> {...SEO_TABLE} />
           </div>
 
           <Section id="blog-writing" title="Best AI for Blog Writing">
@@ -365,17 +309,7 @@ export default async function BenchmarkPage() {
             </p>
           </Section>
           <div className="max-w-4xl">
-            <QueryTable<BenchmarkRow>
-              caption="Blog writing: length discipline and consistency against a 1,000 to 1,200 word brief"
-              rows={BLOG_ROWS}
-              columns={[
-                { label: "Avg words", value: (r) => r.words.toLocaleString() },
-                { label: "Words off target", value: (r) => r.wordsOff, strong: true },
-                { label: "Posts in range", value: (r) => `${r.inRange} of 3` },
-                { label: "Paragraphs over 120 words", value: (r) => r.longParas },
-                { label: "Formatting range", value: (r) => `${r.low} to ${r.high}` },
-              ]}
-            />
+            <QueryTable<BenchmarkRow> {...BLOG_TABLE} />
           </div>
 
           <Section id="chatgpt" title="Is ChatGPT Still the Best AI for Writing?">
@@ -387,17 +321,7 @@ export default async function BenchmarkPage() {
             <p>So the smallest OpenAI model wrote the best blog posts of the three, at the lowest cost.</p>
           </Section>
           <div className="max-w-4xl">
-            <QueryTable<BenchmarkRow>
-              caption="ChatGPT's GPT models against the top scorer"
-              rows={OPENAI_ROWS}
-              columns={[
-                { label: "Overall", value: (r) => r.overall, strong: true },
-                { label: "Voice", value: (r) => r.voice },
-                { label: "Cost per post", value: (r) => money(r.cost) },
-                { label: "Avg words", value: (r) => r.words.toLocaleString() },
-                { label: "Contrast phrases", value: (r) => r.contrast },
-              ]}
-            />
+            <QueryTable<BenchmarkRow> {...CHATGPT_TABLE} />
           </div>
 
           <Section title="What the Results Show">
