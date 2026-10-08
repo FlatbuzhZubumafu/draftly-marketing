@@ -34,7 +34,7 @@ Draftly learns a brand's voice from its website, suggests topics from industry n
 
 ## Plans
 
-The first post is free. Paid plans add volume, a choice of 8 AI models and the MCP connector.
+The first post is free and comes with a thumbnail. Paid plans add volume, a choice of 8 AI models, AI images inside each post and the MCP connector.
 
 ${plansTable()}
 

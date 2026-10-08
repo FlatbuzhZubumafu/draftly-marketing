@@ -57,6 +57,7 @@ const EVERY_PLAN = [
 const CREDIT_COSTS = [
   { action: "Blog post", credits: "150 (250 on premium models such as Claude Sonnet 5.5)" },
   { action: "Thumbnail image", credits: "50" },
+  { action: "Image inside a post (Solopreneur and up)", credits: "50" },
   { action: "Outline", credits: "15 (free on paid plans)" },
   { action: "Topic refresh", credits: "10 (free on paid plans)" },
   { action: "Rewrite", credits: "30 (50 on premium models). 2 free on your first post" },
@@ -84,7 +85,7 @@ export default async function PricingPage() {
             </h1>
             <p className="text-lg" style={{ color: "var(--color-text-secondary)" }}>
               Every plan writes in your brand&apos;s voice and publishes straight to your CMS. Paid plans add volume,
-              your choice of AI model and, on Autopilot, a blog that runs on a schedule.
+              your choice of AI model, AI images inside your posts and, on Autopilot, a blog that runs on a schedule.
             </p>
           </div>
 

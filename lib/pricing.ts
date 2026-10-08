@@ -22,7 +22,7 @@ export const PLANS: Plan[] = [
       "Your first full blog post, free",
       "Brand voice built from your website",
       "Publish to all 6 CMS integrations",
-      "Outlines, topic ideas and thumbnails from your monthly credits",
+      "Outlines, topic ideas and a thumbnail for each post from your monthly credits",
       "Google Analytics and Search Console reports",
     ],
   },
@@ -36,6 +36,7 @@ export const PLANS: Plan[] = [
     features: [
       "Pick from 8 AI models, including Claude, GPT, Gemini and DeepSeek",
       "Outlines and topic refreshes use no credits",
+      "AI images inside your posts, from a suggested visual for each section (50 credits an image)",
       "Draftly connector for Claude, ChatGPT and Cursor: your brand voice, posts and topic ideas inside your own AI",
       "Import your own keyword lists and brand docs (coming soon)",
       "Keyword data through the connector: search volume, difficulty, intent and related keywords, 40 lookups a month",
@@ -49,7 +50,6 @@ export const PLANS: Plan[] = [
     pitch: "For teams and agencies publishing most days of the week.",
     includesFrom: "Solopreneur",
     features: [
-      "AI-generated images inside your posts",
       "Email notifications when posts are ready",
       "Live Google results, People Also Ask and domain data for your site and competitors, 150 data calls a month",
     ],
