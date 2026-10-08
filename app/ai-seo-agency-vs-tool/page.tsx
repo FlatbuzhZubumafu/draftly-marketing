@@ -159,8 +159,8 @@ export default async function AgencyVsToolPage() {
             />
             <ProductFigure shot={GUIDE_SHOTS.urlToPost} className="mt-2" />
             <p>
-              Draftly also shows Google Analytics and Search Console reports and, on paid plans, keyword data through its
-              connector. It does not build links or change your site&apos;s code. The <A href="/ai-copywriter">Draftly AI
+              Draftly also shows your Google Analytics and Search Console reports on every plan, and paid plans add
+              keyword data through its connector. It does not build links or change your site&apos;s code. The <A href="/ai-copywriter">Draftly AI
               copywriter page</A> covers how a post gets made.
             </p>
           </Section>
