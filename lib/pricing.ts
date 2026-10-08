@@ -34,7 +34,7 @@ export const PLANS: Plan[] = [
     pitch: "For one person running one blog who wants to publish every week.",
     includesFrom: "Free",
     features: [
-      "Pick from 7 AI models, including Claude, GPT, Gemini and DeepSeek",
+      "Pick from 8 AI models, including Claude, GPT, Gemini and DeepSeek",
       "Outlines and topic refreshes use no credits",
       "Draftly connector for Claude, ChatGPT and Cursor: your brand voice, posts and topic ideas inside your own AI",
       "Import your own keyword lists and brand docs (coming soon)",

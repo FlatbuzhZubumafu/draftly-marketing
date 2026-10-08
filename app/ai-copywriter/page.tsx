@@ -56,7 +56,7 @@ const FAQS: Faq[] = [
   },
   {
     q: "Which AI model does Draftly use?",
-    a: `${T.model} is the default writer. Paid plans can choose from 7 AI models for each post, including Claude, GPT, Gemini and DeepSeek models.`,
+    a: `${T.model} is the default writer. Paid plans can choose from 8 AI models for each post, including Claude, GPT, Gemini and DeepSeek models.`,
   },
   {
     q: "Will the posts sound like AI wrote them?",
