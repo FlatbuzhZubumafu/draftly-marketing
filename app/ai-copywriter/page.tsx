@@ -176,8 +176,8 @@ export default async function AiCopywriterPage() {
               What the AI copywriting tool costs
             </h2>
             <p className="mb-8 max-w-3xl leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-              Start free with one post. Paid plans add volume, your choice of model and the connector for Claude, ChatGPT
-              and Cursor. Your first subscription gets {FIRST_MONTH_OFFER}, on any plan.
+              Start free with one post and its thumbnail. Paid plans add volume, your choice of model, AI images inside
+              each post and the connector for Claude, ChatGPT and Cursor. Your first subscription gets {FIRST_MONTH_OFFER}, on any plan.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {PLANS.map((p) => (
