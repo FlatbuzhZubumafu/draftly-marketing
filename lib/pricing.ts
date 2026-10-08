@@ -36,7 +36,7 @@ export const PLANS: Plan[] = [
     features: [
       "Pick from 8 AI models, including Claude, GPT, Gemini and DeepSeek",
       "Outlines and topic refreshes use no credits",
-      "AI images inside your posts, from a suggested visual for each section (1,759 credits an image)",
+      "AI images inside your posts, from a suggested visual for each section (53 credits an image)",
       "Draftly connector for Claude, ChatGPT and Cursor: your brand voice, posts and topic ideas inside your own AI",
       "Import your own keyword lists and brand docs (coming soon)",
       "Keyword data through the connector: search volume, difficulty, intent and related keywords, 40 lookups a month",
