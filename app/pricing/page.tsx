@@ -62,7 +62,7 @@ const CREDIT_COSTS = [
   { action: "Rewrite", credits: "30 (50 on premium models). 2 free on your first post" },
 ];
 
-const MODELS = ["GPT 5.4 Mini (default, best value)", "Claude Sonnet 5.5 (recommended premium)", "Claude Sonnet 4.6", "Claude Haiku 4.5", "GPT 5.4", "Gemini 3 Flash", "DeepSeek V3.2"];
+const MODELS = ["GPT 6 Luna (default, best value)", "Claude Sonnet 5.5 (recommended premium)", "GPT 5.4 Mini", "Claude Sonnet 4.6", "Claude Haiku 4.5", "GPT 5.4", "Gemini 3 Flash", "DeepSeek V3.2"];
 
 export default async function PricingPage() {
   const { marketingSettings: s } = await getHomepageData();
@@ -91,11 +91,11 @@ export default async function PricingPage() {
           <PricingPlans registerUrl={registerUrl} freeCtaText={s.heroCtaText} cardHeading="h2" />
 
           <p className="mt-6 text-sm text-center max-w-2xl mx-auto" style={{ color: "var(--color-text-muted)" }}>
-            Post counts assume the default model, GPT 5.4 Mini, which led our{" "}
-            <a href="/best-ai-for-writing" style={{ color: "var(--color-accent)" }}>
-              blogging benchmark
+            Post counts assume the default model, GPT 6 Luna, which passed 19 of 20 test posts against{" "}
+            <a href="/seo-copywriting" style={{ color: "var(--color-accent)" }}>
+              our writing rules
             </a>{" "}
-            on value. Premium models such as Claude Sonnet 5.5 use about 1.7x the credits per post, so a plan covers fewer posts
+            after one fix pass. Premium models such as Claude Sonnet 5.5 use about 1.7x the credits per post, so a plan covers fewer posts
             on them. SEO data calls come
             from a separate monthly allowance, with data packs of 100 extra calls for $10. Start free and upgrade any
             time from Settings inside the app.
@@ -194,7 +194,7 @@ export default async function PricingPage() {
               The Models You Can Pick
             </h2>
             <p className="text-sm leading-relaxed mb-5" style={{ color: "var(--color-text-secondary)" }}>
-              Free accounts write with GPT 5.4 Mini. Paid plans choose per post from the full list.
+              Free accounts write with GPT 6 Luna. Paid plans choose per post from the full list.
             </p>
             <ul className="space-y-2 text-sm">
               {MODELS.map((m) => (

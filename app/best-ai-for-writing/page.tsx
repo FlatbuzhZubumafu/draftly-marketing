@@ -51,7 +51,7 @@ const PICKS = [
     label: "Best value",
     model: "GPT 5.4 Mini",
     stat: "90.2 overall for under a cent a post",
-    body: "Fifth overall, the fastest model in the test at 13 seconds a post, and about a tenth of the cost of the top three. It is Draftly's default model.",
+    body: "Fifth overall, the fastest model in the test at 13 seconds a post, and about a tenth of the cost of the top three. Draftly now writes with GPT 6 Luna by default, which followed our writing rules more reliably in a later test.",
   },
   {
     label: "Best for copywriting",
@@ -252,7 +252,7 @@ export default async function BenchmarkPage() {
             </p>
             <p>
               Draftly is built around that pairing. It finds timely topics from your industry&apos;s news, writes in your
-              brand voice with GPT 5.4 Mini by default or Claude Sonnet 5.5 as the premium option, scores each draft for
+              brand voice with GPT 6 Luna by default or Claude Sonnet 5.5 as the premium option, scores each draft for
               machine-sounding phrasing and publishes to WordPress, Shopify, Ghost, Webflow, HubSpot or Squarespace.
             </p>
           </Section>
@@ -415,7 +415,7 @@ export default async function BenchmarkPage() {
               Start Writing With the Best Models and Draftly&apos;s SEO-Optimized Copywriting Tools Today
             </h2>
             <p className="max-w-2xl mb-8 leading-relaxed" style={{ color: "#bbb" }}>
-              Draftly writes with GPT 5.4 Mini by default, offers Claude Sonnet 5.5 as its recommended premium model, and
+              Draftly writes with GPT 6 Luna by default, offers Claude Sonnet 5.5 as its recommended premium model, and
               applies these same writing rules to every post. Your first post is free.
             </p>
             <a href={registerUrl} className="btn btn-primary">
