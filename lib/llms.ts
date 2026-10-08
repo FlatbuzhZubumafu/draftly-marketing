@@ -49,6 +49,9 @@ ${toolsTable()}
 ## Pages
 
 - [Best AI for Writing (2026 Benchmark)](${SITE_URL}/best-ai-for-writing): ${BENCHMARK.length} AI models tested on blog writing and copywriting under the same rules, scored on formatting, human voice, SEO checks and cost per post.
+- [AI Copywriter](${SITE_URL}/ai-copywriter): How Draftly writes a blog post from your URL, checks it against writing rules and publishes it, with a sample post and plan prices.
+- [SEO Copywriting Rules](${SITE_URL}/seo-copywriting): The structure, voice and call-to-action rules Draftly checks on every post, with before and after examples from its benchmark.
+- [AI SEO Agency or AI SEO Tool](${SITE_URL}/ai-seo-agency-vs-tool): What an agency does that a tool does not, what a tool like Draftly covers, and a table for choosing between them.
 - [SEO MCP Server](${SITE_URL}/mcp): What an SEO MCP is, setup steps for each AI app, the tool list and data allowances by plan.
 - [How to Use an SEO MCP Server With Claude and ChatGPT](${SITE_URL}/blog/seo-mcp-server): What an SEO MCP server does, Draftly's 10 read-only tools by plan, example requests and setup for Claude, ChatGPT, Claude Code and Cursor.
 - [Pricing](${SITE_URL}/pricing): Plans, credit costs and the AI models on each plan.
