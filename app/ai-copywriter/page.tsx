@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: { title: TITLE, description: DESCRIPTION, type: "website", url: `${SITE_URL}${PATH}`, images: [DEFAULT_OG_IMAGE] },
 };
 
-const FIRST_MONTH_OFFER = "50% off your first month on your first subscription";
+const FIRST_MONTH_OFFER = "50% off the first month";
 
 const STEPS = [
   { title: "Paste your website URL", body: "Draftly reads your site to learn what you sell and who you sell to." },
@@ -169,7 +169,7 @@ export default async function AiCopywriterPage() {
             </h2>
             <p className="mb-8 max-w-3xl leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
               Start free with one post. Paid plans add volume, your choice of model and the connector for Claude, ChatGPT
-              and Cursor.
+              and Cursor. Your first subscription gets {FIRST_MONTH_OFFER}, on any plan.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {PLANS.map((p) => (
@@ -178,11 +178,6 @@ export default async function AiCopywriterPage() {
                   <p className="mt-1 text-2xl font-semibold" style={{ letterSpacing: "-0.02em" }}>
                     {`$${p.price}/mo`}
                   </p>
-                  {p.name === "Solopreneur" ? (
-                    <p className="mt-1 text-sm font-medium" style={{ color: "var(--color-accent)" }}>
-                      {FIRST_MONTH_OFFER}
-                    </p>
-                  ) : null}
                   <p className="mt-3 text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
                     {p.pitch}
                   </p>
