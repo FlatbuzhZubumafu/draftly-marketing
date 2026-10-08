@@ -92,7 +92,7 @@ export const INTEGRATIONS_SHOT = shot(
 /** 16:9 graphics for the long-form guide pages (/ai-copywriter, /seo-copywriting, /ai-seo-agency-vs-tool). */
 export const GUIDE_SHOTS = {
   urlToPost: shot("guide-url-to-post.webp", 1600, 900,
-    "Draftly's setup screen with a website URL entered, and the finished post it produced: featured image, 1,296 words, SEO score 75/100 and the opening of the article",
+    "Draftly's setup screen with a website URL entered, and the finished post it produced: 1,296 words, SEO score 75/100, Draft status and the opening of the article",
     "A real first run: a URL in, a 1,296-word draft with SEO meta out."),
   genericVsDraftly: shot("guide-generic-vs-draftly-copy.webp", 1600, 900,
     "A generic AI paragraph with flagged phrases highlighted (banned_vocabulary, contrast_phrasing, hedging, mechanical_openers) beside the opening of a real Draftly post that triggers none of them",

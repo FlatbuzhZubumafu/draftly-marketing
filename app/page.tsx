@@ -45,7 +45,7 @@ export default async function HomePage() {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdHtml(softwareApplicationJsonLd) }} />
         <HeroDemo settings={data.marketingSettings} startingPrice={PAID_PLANS[0].price} />
         <ProductShowcase />
-        <VideoSection />
+        <BeforeAfter />
         <PersonalStory />
         <TestimonialSlider testimonials={data.testimonials.nodes} />
         <CtaBand
@@ -55,7 +55,6 @@ export default async function HomePage() {
         />
         <HowItWorks />
         <Features />
-        <BeforeAfter />
         <Integrations />
         <CtaBand
           tone="accent"
@@ -66,6 +65,7 @@ export default async function HomePage() {
         <NotForEveryone />
         <HomeGuides />
         <ScrollingBands />
+        <VideoSection />
         <HomePricing />
         <FAQ faqs={data.faqs.nodes} />
         <CtaBand
