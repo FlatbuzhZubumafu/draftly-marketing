@@ -292,6 +292,13 @@ export default async function BenchmarkPage() {
               missed one keyword placement, one meta title length and one meta description length. All three are quick fixes
               in review.
             </p>
+            <p>
+              Each of those checks is explained, with before and after examples, in our list of{" "}
+              <a href="/seo-copywriting" style={{ color: "var(--color-accent)" }}>
+                SEO copywriting rules Draftly checks on every post
+              </a>
+              .
+            </p>
           </Section>
           <div className="max-w-4xl">
             <QueryTable<BenchmarkRow> {...SEO_TABLE} />

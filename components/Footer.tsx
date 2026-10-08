@@ -63,6 +63,21 @@ export async function Footer() {
                   </a>
                 </li>
                 <li>
+                  <a href="/ai-copywriter" className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
+                    AI Copywriter
+                  </a>
+                </li>
+                <li>
+                  <a href="/seo-copywriting" className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
+                    SEO Copywriting Rules
+                  </a>
+                </li>
+                <li>
+                  <a href="/ai-seo-agency-vs-tool" className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
+                    AI SEO Agency vs Tool
+                  </a>
+                </li>
+                <li>
                   <a href="/privacy-policy" className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
                     Privacy Policy
                   </a>

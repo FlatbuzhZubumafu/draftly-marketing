@@ -245,6 +245,13 @@ export default async function McpPage() {
                 machine-written. The list_posts and get_post tools bring those posts and scores into your chat, so your
                 assistant can match what already works on your site.
               </p>
+              <p>
+                If you would rather have Draftly write and publish the posts itself, see{" "}
+                <a href="/ai-copywriter" style={{ color: "var(--color-accent)" }}>
+                  how Draftly works as an AI copywriter
+                </a>
+                .
+              </p>
             </div>
           </section>
 
