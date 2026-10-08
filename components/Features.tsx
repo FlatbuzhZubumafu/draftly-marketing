@@ -2,6 +2,8 @@ import { getHomepageData } from "@/lib/graphql";
 import type { LucideIcon } from "lucide-react";
 import { Target, PenTool, Zap, Globe, Clock, TrendingUp, Cpu, Gauge, RefreshCw } from "lucide-react";
 import { AccentText } from "./AccentText";
+import { ProductFigure } from "./ProductFigure";
+import { FEATURE_SHOTS } from "@/lib/product-shots";
 
 const ICON_MAP: Record<string, LucideIcon> = { Target, PenTool, Zap, Globe, Clock, TrendingUp, Cpu, Gauge, RefreshCw };
 
@@ -18,6 +20,12 @@ export async function Features() {
               Published Post
             </AccentText>
           </h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          {FEATURE_SHOTS.slice(0, 2).map((shot) => (
+            <ProductFigure key={shot.src} shot={shot} aspect="900 / 728" fit="contain" className="reveal min-w-0" />
+          ))}
+          <ProductFigure shot={FEATURE_SHOTS[2]} className="reveal min-w-0 md:col-span-2 md:max-w-3xl md:mx-auto md:w-full" />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.nodes.map((feature, index) => {

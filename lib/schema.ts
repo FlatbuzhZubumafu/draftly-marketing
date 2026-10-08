@@ -1,5 +1,6 @@
 import { PLANS } from "@/lib/pricing";
 import { APP_URL, LOGO_URL, SITE_URL } from "@/lib/site";
+import { ALL_PRODUCT_SHOTS, imageObjectJsonLd } from "@/lib/product-shots";
 
 // Structured data shared across pages. Organization and WebSite render once in
 // the root layout; SoftwareApplication renders on the homepage and /pricing.
@@ -36,6 +37,7 @@ export const softwareApplicationJsonLd = {
   description:
     "AI blog writer for small businesses. Draftly learns your brand's voice from your website and writes SEO-ready blog posts that publish to your CMS.",
   publisher: { "@id": ORG_ID },
+  screenshot: ALL_PRODUCT_SHOTS.map(imageObjectJsonLd),
   offers: PLANS.map((plan) => ({
     "@type": "Offer",
     name: plan.name,

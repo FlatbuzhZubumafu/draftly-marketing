@@ -2,10 +2,10 @@ import { getHomepageData } from "@/lib/graphql";
 import type { LucideIcon } from "lucide-react";
 import { Target, Rss, PenTool } from "lucide-react";
 import { AccentText } from "./AccentText";
+import { ProductFigure } from "./ProductFigure";
+import { STEP_SHOTS } from "@/lib/product-shots";
 
 const ICON_MAP: Record<string, LucideIcon> = { Target, Rss, PenTool };
-
-const SCREENSHOT_URL = "https://wp.draftly.blog/wp-content/uploads/2025/10/Screenshot-2025-10-15-at-11.26.01-AM.png";
 
 export async function HowItWorks() {
   const { steps, marketingSettings: s } = await getHomepageData();
@@ -23,31 +23,18 @@ export async function HowItWorks() {
           </h2>
         </div>
 
-        {/* Product screenshot */}
-        <div className="reveal mb-14 max-w-3xl mx-auto" style={{ transitionDelay: "0.1s" }}>
-          <div
-            className="rounded-2xl overflow-hidden"
-            style={{ boxShadow: "var(--shadow-deep)" }}
-          >
-            <img
-              src={SCREENSHOT_URL}
-              alt="Draftly topic discovery interface"
-              className="w-full h-auto"
-              loading="lazy"
-            />
-          </div>
-        </div>
-
         {/* Steps */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {steps.nodes.map((step, index) => {
             const Icon = ICON_MAP[step.iconName] || Target;
+            const shot = STEP_SHOTS[index];
             return (
               <div
                 key={step.stepNumber}
-                className="reveal p-6 card-depth"
+                className="reveal p-6 card-depth min-w-0"
                 style={{ transitionDelay: `${index * 0.08}s` }}
               >
+                {shot ? <ProductFigure shot={shot} aspect="3 / 2" className="mb-6" /> : null}
                 <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4"
                      style={{ background: "var(--color-accent-muted)" }}>
                   <Icon className="w-5 h-5" style={{ color: "var(--color-accent)" }} />

@@ -3,6 +3,8 @@ import { getHomepageData } from "@/lib/graphql";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { HeroDemo } from "@/components/HeroDemo";
+import { ProductShowcase } from "@/components/ProductShowcase";
+import { BeforeAfter } from "@/components/BeforeAfter";
 import { VideoSection } from "@/components/VideoSection";
 import { PersonalStory } from "@/components/PersonalStory";
 import { TestimonialSlider } from "@/components/TestimonialSlider";
@@ -41,6 +43,7 @@ export default async function HomePage() {
       <main>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdHtml(softwareApplicationJsonLd) }} />
         <HeroDemo settings={data.marketingSettings} startingPrice={PAID_PLANS[0].price} />
+        <ProductShowcase />
         <VideoSection />
         <PersonalStory />
         <TestimonialSlider testimonials={data.testimonials.nodes} />
@@ -51,6 +54,7 @@ export default async function HomePage() {
         />
         <HowItWorks />
         <Features />
+        <BeforeAfter />
         <Integrations />
         <CtaBand
           tone="accent"
