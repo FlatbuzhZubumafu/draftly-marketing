@@ -336,3 +336,5 @@ a:hover { color: var(--color-text-primary); }
 .legal-content ul, .legal-content ol { margin: 0 0 1rem 1.25rem; list-style: disc; }
 .legal-content li { margin-bottom: 0.35rem; }
 .legal-content a { word-break: break-word; }
+/* Clear the fixed header when jumping to a section. */
+.legal-content [id] { scroll-margin-top: 6rem; }

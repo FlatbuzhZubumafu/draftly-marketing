@@ -8,7 +8,8 @@ const ALLOWED_TAGS = [
   "h1", "h2", "h3", "h4", "h5", "h6", "blockquote", "img",
   "figure", "figcaption", "hr", "span", "div", "pre", "code",
 ];
-const ALLOWED_ATTR = ["href", "src", "alt", "title", "class", "target", "rel", "width", "height"];
+// `id` keeps in-page anchors working (legal pages' table of contents, post jump links).
+const ALLOWED_ATTR = ["id", "href", "src", "alt", "title", "class", "target", "rel", "width", "height"];
 
 export function sanitizeHtml(dirty: string): string {
   return sanitize(dirty, {
@@ -50,4 +51,17 @@ export function ensureH1(html: string): string {
     done = true;
     return `<h1${attrs ?? ""}>${inner}</h1>`;
   });
+}
+
+// Termly links to a few targets its export never defines. Point those at the
+// section that holds the text, and give the table of contents its own target.
+const LEGAL_ANCHOR_ALIASES: Record<string, string> = { personalinfo: "infocollect", othersources: "infocollect" };
+
+/** Repairs in-page links in the Termly legal copy so every `#anchor` lands somewhere. */
+export function fixLegalAnchors(html: string): string {
+  let out = html.replace(/href="#([^"]+)"/g, (match, id: string) =>
+    LEGAL_ANCHOR_ALIASES[id] ? `href="#${LEGAL_ANCHOR_ALIASES[id]}"` : match,
+  );
+  if (!/\bid="toc"/.test(out)) out = out.replace(/TABLE OF CONTENTS/, '<span id="toc"></span>TABLE OF CONTENTS');
+  return out;
 }

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getPage } from "@/lib/graphql";
-import { ensureH1, sanitizeHtml } from "@/lib/sanitize";
+import { ensureH1, fixLegalAnchors, sanitizeHtml } from "@/lib/sanitize";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
@@ -16,7 +16,7 @@ export async function LegalPage({ slug }: { slug: string }) {
       <Header />
       <main className="pt-16 min-h-screen bg-white">
         <article className="max-w-3xl mx-auto px-4 py-20">
-          <div className="legal-content" dangerouslySetInnerHTML={{ __html: ensureH1(sanitizeHtml(page.content)) }} />
+          <div className="legal-content" dangerouslySetInnerHTML={{ __html: fixLegalAnchors(ensureH1(sanitizeHtml(page.content))) }} />
         </article>
       </main>
       <Footer />
