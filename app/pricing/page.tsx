@@ -145,7 +145,7 @@ export default async function PricingPage() {
               every dataset, including keyword gaps and backlinks. Need more lookups? Add a data pack any time.
             </p>
             <p className="font-semibold text-white">
-              Included with every paid plan.{" "}
+              Free accounts can connect and write one post with their own AI.{" "}
               <a href="/mcp" className="underline" style={{ color: "#ffce59" }}>
                 Read the setup guide
               </a>

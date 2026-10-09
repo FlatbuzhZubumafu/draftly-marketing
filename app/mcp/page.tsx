@@ -5,7 +5,7 @@ import { getHomepageData } from "@/lib/graphql";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CopyUrl } from "@/components/CopyUrl";
-import { BYO_AI_LINE, MCP_URL, READ_ONLY_TOOL_COUNT, TOOLS, toolPlans } from "@/lib/mcp";
+import { BYO_AI_LINE, FREE_PLAN_LINE, MCP_URL, READ_ONLY_TOOL_COUNT, TOOLS, toolPlans } from "@/lib/mcp";
 import { TocLayout } from "@/components/OnThisPage";
 import { PILLARS } from "@/lib/related";
 import { RelatedLinks } from "@/components/RelatedLinks";
@@ -14,7 +14,7 @@ export const revalidate = 3600;
 
 const TITLE = "SEO MCP Server for Claude and ChatGPT | Draftly";
 const DESCRIPTION =
-  "Draftly's SEO MCP server connects Claude, ChatGPT or Cursor to live keyword, SERP and People Also Ask data plus your brand voice. Included on every paid plan.";
+  "Draftly's SEO MCP server connects Claude, ChatGPT or Cursor to live keyword, SERP and People Also Ask data plus your brand voice. Free to connect; live SEO data on paid plans.";
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -83,7 +83,7 @@ const FAQS = [
   },
   {
     q: "Which plans include it?",
-    a: "Every paid plan: Solopreneur, Growth and Autopilot. Free accounts can start the connection, and the sign-in screen offers an upgrade before anything connects.",
+    a: "Every plan can connect, Free included. On Free, your assistant can read your brand voice, posts and topic ideas, write one post with your own AI, and run check_draft, check_copy and edit_copy on your free monthly credits. The live SEO data tools (keyword research, Google results, domain overviews, competitors, keyword gaps and backlinks) come with Solopreneur, Growth and Autopilot.",
   },
   {
     q: "Where does the SEO data come from?",
@@ -144,7 +144,7 @@ export default async function McpPage() {
             <p className="text-lg mb-8" style={{ color: "var(--color-text-secondary)" }}>
               Paste one URL into Claude, ChatGPT or Cursor. Your assistant gets your brand voice, your posts and your
               topic ideas, plus live keyword, Google and backlink data, so it plans and writes like someone who knows your
-              business. Included on every paid plan.
+              business. Free accounts can connect and write one post with their own AI. Live SEO data comes with a paid plan.
             </p>
             <p className="text-sm font-semibold mb-2">Connector URL</p>
             <CopyUrl url={MCP_URL} />
@@ -203,8 +203,11 @@ export default async function McpPage() {
               check, edit or save drafts, and none of them publishes. Tools marked with a data call use your monthly SEO data
               allowance.
             </p>
-            <p className="mb-8" style={{ color: "var(--color-text-secondary)" }}>
+            <p className="mb-4" style={{ color: "var(--color-text-secondary)" }}>
               {BYO_AI_LINE}
+            </p>
+            <p className="mb-8" style={{ color: "var(--color-text-secondary)" }}>
+              {FREE_PLAN_LINE}
             </p>
             <div className="overflow-x-auto">
               <table className="w-full text-sm min-w-[560px]">
@@ -335,7 +338,7 @@ export default async function McpPage() {
               Start With One Free Post
             </h2>
             <p className="mb-8" style={{ color: "var(--color-text-secondary)" }}>
-              Paste your URL and Draftly writes your first post. Upgrade to connect your AI.
+              Paste your URL and Draftly writes your first post. Then connect your AI and write one more with it, free.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <a href={registerUrl} className="btn btn-primary">{s.heroCtaText}</a>
