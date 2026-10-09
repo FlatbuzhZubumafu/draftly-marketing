@@ -24,6 +24,7 @@ export const PLANS: Plan[] = [
       "Publish to all 6 CMS integrations",
       "Your free post comes with its thumbnail; outlines and topic ideas use your monthly credits",
       "Google Analytics and Search Console reports",
+      "Connect Claude, ChatGPT or Cursor and write one more post with your own AI",
     ],
   },
   {
@@ -37,7 +38,7 @@ export const PLANS: Plan[] = [
       "Pick from 8 AI models, including Claude, GPT, Gemini and DeepSeek",
       "Outlines and topic refreshes use no credits",
       "AI images inside your posts, from a suggested visual for each section (53 credits an image)",
-      "Draftly connector for Claude, ChatGPT and Cursor: your brand voice, posts and topic ideas inside your own AI",
+      "Keep writing posts with your own AI through the Draftly connector for Claude, ChatGPT and Cursor",
       "Import your own keyword lists and brand docs (coming soon)",
       "Keyword data through the connector: search volume, difficulty, intent and related keywords, 40 lookups a month",
     ],

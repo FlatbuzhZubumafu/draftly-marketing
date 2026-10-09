@@ -8,7 +8,7 @@ import {
   SEO_TABLE,
   tableToMarkdown,
 } from "@/lib/benchmarkTables";
-import { BYO_AI_LINE, MCP_URL, READ_ONLY_TOOL_COUNT, TOOLS, toolPlans } from "@/lib/mcp";
+import { BYO_AI_LINE, FREE_PLAN_LINE, MCP_URL, READ_ONLY_TOOL_COUNT, TOOLS, toolPlans } from "@/lib/mcp";
 import { PLANS } from "@/lib/pricing";
 import { APP_URL, SITE_URL } from "@/lib/site";
 import { WP_COMPARE_NOTES, WP_COMPARE_ROWS, WP_COMPARE_TOOLS, WP_COMPARED_ON, type Cell } from "@/lib/wordpress-compare";
@@ -67,7 +67,7 @@ Draftly learns a brand's voice from its website, suggests topics from industry n
 
 ## Plans
 
-The first post is free and comes with a thumbnail. Paid plans add volume, a choice of 8 AI models, AI images inside each post and the MCP connector. Draftly is available to businesses in the United States only.
+The first post is free and comes with a thumbnail. Paid plans add volume, a choice of 8 AI models, AI images inside each post and live SEO data in the MCP connector. Draftly is available to businesses in the United States only.
 
 ${plansTable()}
 
@@ -75,9 +75,11 @@ ${plansTable()}
 
 Connector URL: ${MCP_URL}
 
-Connect Draftly to Claude, ChatGPT, Cursor or Claude Code with this URL. Sign-in uses OAuth, and the connector is included on every paid plan. It has ${TOOLS.length} tools: ${READ_ONLY_TOOL_COUNT} only read data, and ${TOOLS.length - READ_ONLY_TOOL_COUNT} brief, check, edit or save drafts. No tool publishes. SEO data comes from DataForSEO.
+Connect Draftly to Claude, ChatGPT, Cursor or Claude Code with this URL. Sign-in uses OAuth, and every plan can connect, Free included. It has ${TOOLS.length} tools: ${READ_ONLY_TOOL_COUNT} only read data, and ${TOOLS.length - READ_ONLY_TOOL_COUNT} brief, check, edit or save drafts. No tool publishes. SEO data comes from DataForSEO.
 
 ${BYO_AI_LINE}
+
+${FREE_PLAN_LINE}
 
 ${toolsTable()}
 
