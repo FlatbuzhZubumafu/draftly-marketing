@@ -19,8 +19,8 @@ const shot = (file: string, width: number, height: number, alt: string, caption:
 
 export const SHOWCASE_WIDE = shot(
   "showcase-wide.webp", 1600, 574,
-  "Draftly's setup screen with draftly.blog entered as the website URL, and the finished blog post it produced one to two minutes later: 1,296 words, an SEO score of 75 out of 100, and the opening section of the article",
-  "A website URL in, a 1,296-word draft with an SEO score out, in one to two minutes.",
+  "Draftly's setup screen with harborandpineplumbing.com entered as the website URL, beside an example draft Claude Sonnet 5.5 wrote for Harbor & Pine Plumbing, a made-up plumber: How Often to Flush a Water Heater: A Homeowner's Guide, 1,118 words, an SEO score of 60 out of 100, and the opening section of the article",
+  "A website URL in, a 1,118-word draft with an SEO score out, in one to two minutes.",
 );
 export const SHOWCASE_TALL = shot("showcase-tall.webp", 800, 1125, SHOWCASE_WIDE.alt, SHOWCASE_WIDE.caption);
 
@@ -33,8 +33,8 @@ export const STEP_SHOTS: ProductShot[] = [
     "Draftly's Blog Inspiration panel listing trending industry articles from Search Engine Journal, each with an Add Your Take button",
     "Trending articles from your industry, each one a click away from a post."),
   shot("how-3-post.webp", 900, 614,
-    "A Draftly draft titled Google ranking without an index: what it means for your SEO, with question-style subheadings and a linked source",
-    "The draft: question-style headings, a cited source and plain sentences."),
+    "A Draftly draft titled How Often to Flush a Water Heater: A Homeowner's Guide, opening with question-style subheadings such as How often should you flush your water heater? and Why does a water heater need a flush?",
+    "The draft: question-style headings, the answer first and plain sentences."),
 ];
 
 /** The homepage feature carousel: number, title and description sit above each equal-size (4:3) image. */
@@ -53,16 +53,16 @@ export const FEATURE_SLIDES: FeatureSlide[] = [
   },
   {
     title: "Your topic, your model",
-    description: "Type any topic and pick the model that writes it. GPT 6 Luna is the default, and paid plans unlock Claude, Gemini and DeepSeek.",
+    description: "Type any topic and pick the model that writes it. Claude Sonnet 5.5 is the default, and paid plans unlock the rest, including GPT 6 Luna, Gemini and DeepSeek.",
     shot: shot("feature-slide-models.webp", 1600, 1200,
-      "Draftly's Write Your Own Topic screen with a topic box and a model picker: GPT 6 Luna (default), GPT 5.4 Mini, Claude Sonnet 5.5, Claude Haiku 4.5, Claude Sonnet 4.6, GPT 5.4, Gemini 3 Flash and DeepSeek V3.2",
-      "Pick the model per post. Paid plans unlock Claude, Gemini and DeepSeek."),
+      "Draftly's Write Your Own Topic screen on the Free plan with a topic box and a model picker: Claude Sonnet 5.5 (default, Best quality, 150 credits) selected, GPT 5.4 Mini at 150 credits, and GPT 6 Luna (Budget), Claude Haiku 4.5, Claude Sonnet 4.6, GPT 5.4, Gemini 3 Flash and DeepSeek V3.2 locked",
+      "Pick the model per post. Paid plans unlock the rest, including GPT 6 Luna, Gemini and DeepSeek."),
   },
   {
     title: "SEO meta, drafted every time",
     description: "Every draft comes with a URL slug, a meta title and a meta description, sized for how they show in Google.",
     shot: shot("feature-slide-meta.webp", 1600, 1200,
-      "SEO fields Draftly wrote for a post (URL slug, meta title and meta description) and a preview of how that title and description can appear in a Google result",
+      "SEO fields Draftly wrote for an example water heater post (URL slug how-often-to-flush-water-heater, meta title and meta description) and a preview of how that title and description can appear in a Google result for a made-up plumber, Harbor & Pine Plumbing",
       "Slug, meta title and meta description come with every draft."),
   },
 ];
@@ -70,7 +70,7 @@ export const FEATURE_SLIDES: FeatureSlide[] = [
 /** Equal 16:10 thumbnails for the homepage guide cards, keyed by destination. */
 export const GUIDE_THUMBS: Record<string, ProductShot> = {
   "/ai-copywriter": shot("guide-thumb-ai-copywriter.webp", 1280, 800,
-    "Preview of the AI copywriter page: a website URL going into Draftly and a finished 1,296-word draft coming out", ""),
+    "Preview of the AI copywriter page: a website URL going into Draftly and a finished 1,118-word draft about flushing a water heater coming out", ""),
   "/seo-copywriting": shot("guide-thumb-seo-copywriting.webp", 1280, 800,
     "Preview of the SEO copywriting rules page: a generic AI paragraph with four flagged rules beside a Draftly draft with none", ""),
   "/best-ai-for-writing": shot("guide-thumb-best-ai.webp", 1280, 800,
@@ -92,8 +92,8 @@ export const INTEGRATIONS_SHOT = shot(
 /** 16:9 graphics for the long-form guide pages (/ai-copywriter, /seo-copywriting, /ai-seo-agency-vs-tool). */
 export const GUIDE_SHOTS = {
   urlToPost: shot("guide-url-to-post.webp", 1600, 900,
-    "Draftly's setup screen with a website URL entered, and the finished post it produced: 1,296 words, SEO score 75/100, Draft status and the opening of the article",
-    "A real first run: a URL in, a 1,296-word draft with SEO meta out."),
+    "Draftly's setup screen with harborandpineplumbing.com entered, beside an example draft Claude Sonnet 5.5 wrote for that made-up plumber: How Often to Flush a Water Heater: A Homeowner's Guide, 1,118 words, SEO score 60/100, Draft status and the opening of the article",
+    "A URL in, a 1,118-word draft with SEO meta out. The example plumber is made up."),
   genericVsDraftly: shot("guide-generic-vs-draftly-copy.webp", 1600, 900,
     "A generic AI paragraph with flagged phrases highlighted (banned_vocabulary, contrast_phrasing, hedging, mechanical_openers) beside the opening of an example Draftly post about flushing a water heater, written by Claude Sonnet 5.5 for a made-up plumber, that triggers none of them",
     "Draftly's checker flags four rules in the generic paragraph and none in the example Draftly draft."),
@@ -101,11 +101,11 @@ export const GUIDE_SHOTS = {
     "Draftly's Voice and Tone sliders: Friendly 75, Authoritative 80, Formal 40, Technical 55 and Empathetic 85",
     "Brand voice sliders, set from your site and adjustable any time."),
   seoMeta: shot("guide-seo-meta-fields.webp", 1600, 900,
-    "SEO fields Draftly wrote for a post: URL slug, meta title and meta description",
+    "SEO fields Draftly wrote for an example water heater post: URL slug how-often-to-flush-water-heater, meta title How Often to Flush a Water Heater: A Homeowner's Guide, and meta description",
     "Slug, meta title and meta description come with every draft."),
   modelPicker: shot("guide-model-picker.webp", 1600, 900,
-    "Draftly's Create Blog Post screen with a model picker listing GPT, Claude, Gemini and DeepSeek models and their credit cost",
-    "Pick the model per post. Paid plans unlock Claude, Gemini and DeepSeek."),
+    "Draftly's Write Your Own Topic screen with a model picker: Claude Sonnet 5.5 selected as the default (Best quality, 150 credits), GPT 5.4 Mini at 150 credits, and GPT 6 Luna (Budget), Claude, GPT, Gemini and DeepSeek models locked on the Free plan",
+    "Pick the model per post. Paid plans unlock the rest, including GPT 6 Luna, Gemini and DeepSeek."),
 } satisfies Record<string, ProductShot>;
 
 export const ALL_PRODUCT_SHOTS = [SHOWCASE_WIDE, ...STEP_SHOTS, ...FEATURE_SLIDES.map((f) => f.shot), INTEGRATIONS_SHOT];
