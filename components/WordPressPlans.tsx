@@ -102,7 +102,7 @@ export function WordPressPlans() {
                 className={`btn mt-6 justify-center text-sm ${plan.highlight ? "btn-primary" : ""}`}
                 style={plan.highlight ? undefined : { border: "1px solid var(--color-border-strong)", color: "var(--color-text-primary)" }}
               >
-                {plan.tier ? `Start ${plan.name}` : "Get it free"}
+                {plan.tier ? `Start ${plan.name}` : "Download for Free"}
               </a>
             </div>
           );

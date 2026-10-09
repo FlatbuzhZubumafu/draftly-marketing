@@ -18,7 +18,7 @@ export const WP_SIGNUP_URL = `${APP_URL}/register?origin=wordpress`;
  * visitor straight to Stripe Checkout for this plan and billing period.
  */
 export function wpPlanCheckoutUrl(plan: WpPlan, annual: boolean): string {
-  if (!plan.tier) return WP_SIGNUP_URL;
+  if (!plan.tier) return WP_PLUGIN_DOWNLOAD_PATH;
   return `${WP_SIGNUP_URL}&plan=${plan.tier}&interval=${annual ? "year" : "month"}`;
 }
 
