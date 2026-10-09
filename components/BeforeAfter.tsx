@@ -1,8 +1,10 @@
 import { AccentText } from "./AccentText";
 
 // The flags below are what Draftly's post checker (supabase/functions/_shared/post-checks.ts
-// in the app repo) reports for the left paragraph. The right paragraph is the opening of a
-// real Draftly draft, and the checker reports none of these four rules on it.
+// in the app repo) reports for the left paragraph. The right paragraph is the opening of an
+// example post Claude Sonnet 5.5 wrote with Draftly's writer prompt for a fictional plumber
+// (evals/content-quality pipeline, 2026-10-09). The checker reports none of these four rules on it,
+// and the whole post passed every rule.
 const RULES = [
   { id: "banned_vocabulary", label: "Overused AI words", bg: "#ffe1d6" },
   { id: "contrast_phrasing", label: "\"Not just X\" framing", bg: "#efe2ff" },
@@ -57,13 +59,13 @@ export function BeforeAfter() {
               <span className="w-2.5 h-2.5 rounded-full" style={{ background: "#1a9c6b" }} aria-hidden /> Draftly draft
             </figcaption>
             <blockquote className="leading-relaxed">
-              Google ranking without an index describes a possible shift in how search systems find and rank information, not confirmation
-              that Google has stopped indexing the web. For businesses, the practical response is to publish useful, clearly structured
-              content and keep adapting as search changes.
+              Many homeowners flush a tank water heater about once a year, but the right interval depends on your model and your
+              water. Start with the maintenance section of your manual, because it overrides any rule of thumb you read online.
             </blockquote>
             <p className="mt-5 text-sm font-semibold" style={{ color: "#13805a" }}>None of these four rules flagged</p>
             <p className="mt-2 text-sm" style={{ color: "var(--color-text-secondary)" }}>
-              The opening of a real Draftly post, unedited.
+              Example: the opening of a post Claude Sonnet 5.5, Draftly&apos;s default writer, wrote for Harbor &amp; Pine
+              Plumbing, a made-up local business. No human edits.
             </p>
           </figure>
         </div>

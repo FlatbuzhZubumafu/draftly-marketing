@@ -5,7 +5,7 @@ import { getHomepageData } from "@/lib/graphql";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CopyUrl } from "@/components/CopyUrl";
-import { MCP_URL, TOOLS, toolPlans } from "@/lib/mcp";
+import { BYO_AI_LINE, MCP_URL, READ_ONLY_TOOL_COUNT, TOOLS, toolPlans } from "@/lib/mcp";
 import { TocLayout } from "@/components/OnThisPage";
 import { PILLARS } from "@/lib/related";
 import { RelatedLinks } from "@/components/RelatedLinks";
@@ -79,7 +79,7 @@ const PROMPTS = [
 const FAQS = [
   {
     q: "What is the Draftly MCP connector?",
-    a: "It is a Model Context Protocol server at app.draftly.blog/mcp. Once you connect it, Claude, ChatGPT or Cursor can read your Draftly brand voice, posts and topic ideas, and look up live SEO data while you plan and write.",
+    a: "It is a Model Context Protocol server at app.draftly.blog/mcp. Once you connect it, Claude, ChatGPT or Cursor can read your Draftly brand voice, posts and topic ideas, look up live SEO data, and have Draftly check and save the drafts it writes.",
   },
   {
     q: "Which plans include it?",
@@ -95,7 +95,7 @@ const FAQS = [
   },
   {
     q: "Can the connector see my CMS passwords or API keys?",
-    a: "No. The connector reads brand settings, posts, topics and SEO data. Your WordPress, Shopify and other publishing credentials stay on Draftly's servers.",
+    a: "No. The connector reads brand settings, posts, topics and SEO data, and can save drafts to your Draftly account. Your WordPress, Shopify and other publishing credentials stay on Draftly's servers.",
   },
   {
     q: "How do I disconnect?",
@@ -198,8 +198,13 @@ export default async function McpPage() {
             <h2 className="text-3xl font-medium mb-3" style={{ letterSpacing: "-0.03em" }}>
               What Your Assistant Can Do
             </h2>
+            <p className="mb-4" style={{ color: "var(--color-text-secondary)" }}>
+              {TOOLS.length} tools. {READ_ONLY_TOOL_COUNT} only read your data; the other {TOOLS.length - READ_ONLY_TOOL_COUNT} brief,
+              check, edit or save drafts, and none of them publishes. Tools marked with a data call use your monthly SEO data
+              allowance.
+            </p>
             <p className="mb-8" style={{ color: "var(--color-text-secondary)" }}>
-              Ten tools, all read-only. Tools marked with a data call use your monthly SEO data allowance.
+              {BYO_AI_LINE}
             </p>
             <div className="overflow-x-auto">
               <table className="w-full text-sm min-w-[560px]">

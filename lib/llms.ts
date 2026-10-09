@@ -8,7 +8,7 @@ import {
   SEO_TABLE,
   tableToMarkdown,
 } from "@/lib/benchmarkTables";
-import { MCP_URL, TOOLS, toolPlans } from "@/lib/mcp";
+import { BYO_AI_LINE, MCP_URL, READ_ONLY_TOOL_COUNT, TOOLS, toolPlans } from "@/lib/mcp";
 import { PLANS } from "@/lib/pricing";
 import { APP_URL, SITE_URL } from "@/lib/site";
 
@@ -42,7 +42,9 @@ ${plansTable()}
 
 Connector URL: ${MCP_URL}
 
-Connect Draftly to Claude, ChatGPT, Cursor or Claude Code with this URL. Sign-in uses OAuth, and the connector is included on every paid plan. All ${TOOLS.length} tools are read-only. SEO data comes from DataForSEO.
+Connect Draftly to Claude, ChatGPT, Cursor or Claude Code with this URL. Sign-in uses OAuth, and the connector is included on every paid plan. It has ${TOOLS.length} tools: ${READ_ONLY_TOOL_COUNT} only read data, and ${TOOLS.length - READ_ONLY_TOOL_COUNT} brief, check, edit or save drafts. No tool publishes. SEO data comes from DataForSEO.
+
+${BYO_AI_LINE}
 
 ${toolsTable()}
 
