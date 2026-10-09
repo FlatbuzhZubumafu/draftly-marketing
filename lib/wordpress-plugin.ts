@@ -10,9 +10,17 @@ import type { ProductShot } from "@/lib/product-shots";
 // integrations/wordpress-plugin/draftly (readme.txt is where the data-sent copy comes from).
 // Change those first, then this.
 
-/** Where every CTA on the page goes. The app's signup route is /register; `origin` is a tag for analytics. */
-// TODO: once the WordPress plan prices exist in Stripe, point the paid plan CTAs at checkout links.
+/** Free signup. The app's signup route is /register; `origin=wordpress` tags the account as a plugin signup. */
 export const WP_SIGNUP_URL = `${APP_URL}/register?origin=wordpress`;
+
+/**
+ * A paid plan's button: signup (or sign-in) on the app, which then sends the
+ * visitor straight to Stripe Checkout for this plan and billing period.
+ */
+export function wpPlanCheckoutUrl(plan: WpPlan, annual: boolean): string {
+  if (!plan.tier) return WP_SIGNUP_URL;
+  return `${WP_SIGNUP_URL}&plan=${plan.tier}&interval=${annual ? "year" : "month"}`;
+}
 
 export const WP_PLUGIN_PATH = "/wordpress-ai-plugin";
 
@@ -23,6 +31,8 @@ export type WpFeature = { label: string; status: FeatureStatus };
 
 export type WpPlan = {
   id: "free" | "optimize" | "deai" | "grow";
+  /** The app's subscription_plans name, for checkout. Null for Free. */
+  tier: "mkt_optimize" | "mkt_deai" | "mkt_grow" | null;
   name: string;
   monthly: number;
   /** Price billed once a year. */
@@ -44,6 +54,7 @@ export const WP_FEATURES: WpFeature[] = [
 export const WP_PLANS: WpPlan[] = [
   {
     id: "free",
+    tier: null,
     name: "Free",
     monthly: 0,
     yearly: 0,
@@ -52,6 +63,7 @@ export const WP_PLANS: WpPlan[] = [
   },
   {
     id: "optimize",
+    tier: "mkt_optimize",
     name: "Optimize",
     monthly: 5,
     yearly: 48,
@@ -60,6 +72,7 @@ export const WP_PLANS: WpPlan[] = [
   },
   {
     id: "deai",
+    tier: "mkt_deai",
     name: "De-AI",
     monthly: 10,
     yearly: 96,
@@ -68,6 +81,7 @@ export const WP_PLANS: WpPlan[] = [
   },
   {
     id: "grow",
+    tier: "mkt_grow",
     name: "Grow",
     monthly: 15,
     yearly: 144,
