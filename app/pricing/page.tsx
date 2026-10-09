@@ -101,7 +101,7 @@ export default async function PricingPage() {
             . Premium models such as GPT 5.4 use about 1.7x the credits per post, so a plan covers fewer posts
             on them. SEO data calls come
             from a separate monthly allowance, with data packs of 100 extra calls for $10. Start free and upgrade any
-            time from Settings inside the app.
+            time from Settings inside the app. Available to businesses in the United States only.
           </p>
         </section>
 
