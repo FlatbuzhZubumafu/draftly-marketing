@@ -126,7 +126,7 @@ const COMPETITORS = [
 const FAQS: Faq[] = [
   {
     q: "Does it publish without asking?",
-    a: "No. Optimize only suggests edits, and nothing on your site changes until you approve them. Each approval is saved as a WordPress revision you can revert. A post reaches your site from Draftly only when you send it from the Draftly app yourself, or when you turn on scheduled publishing on Draftly's Autopilot plan.",
+    a: "No. By default Optimize only suggests edits, and nothing on your site changes until you approve them. On a paid plan you can turn on auto mode, which applies edits to your posts by itself at the level you choose: Safe (writing-rule fixes, AI-sounding phrases, headings, missing SEO titles and descriptions) or Full (everything Optimize suggests). It works only on posts, never pages, and stays within your plan's monthly allowance. Every change, approved or automatic, is saved as a WordPress revision you can revert. A post reaches your site from Draftly only when you send it from the Draftly app yourself, or when you turn on scheduled publishing on Draftly's Autopilot plan.",
   },
   {
     q: "Will it change my SEO plugin settings?",
@@ -212,8 +212,8 @@ export default function WordPressAiPluginPage() {
             </p>
             <p className="leading-relaxed mb-8" style={{ color: "var(--color-text-secondary)" }}>
               Check any post on your site, review each suggested edit side by side and approve the ones
-              you want. They&apos;re saved as a WordPress revision, so Revert is always one click away. Nothing goes live
-              without your approval.
+              you want. They&apos;re saved as a WordPress revision, so Revert is always one click away. Nothing changes
+              without your approval, unless you turn on auto mode.
             </p>
             <div className="flex flex-wrap gap-3">
               <a href={WP_SIGNUP_URL} className="btn btn-primary">
