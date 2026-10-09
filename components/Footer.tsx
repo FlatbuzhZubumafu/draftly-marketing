@@ -41,6 +41,7 @@ export async function Footer() {
                 ["/#testimonials", "Testimonials"],
                 ["/pricing", "Pricing"],
                 ["/mcp", "MCP Connector"],
+                ["/wordpress-ai-plugin", "WordPress Plugin"],
                 ["/blog", "Blog"],
                 ["/#faq", "FAQ"],
               ]}
