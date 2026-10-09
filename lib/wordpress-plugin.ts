@@ -24,6 +24,17 @@ export function wpPlanCheckoutUrl(plan: WpPlan, annual: boolean): string {
 
 export const WP_PLUGIN_PATH = "/wordpress-ai-plugin";
 
+/** Product name shown on the page (the plugin's name in WordPress is "Draftly – AI Post Optimizer"). */
+export const WP_PRODUCT_NAME = "Draftly AI Post Optimizer";
+
+/**
+ * Latest plugin release. To publish a new version: copy the release zip to
+ * public/downloads/draftly-wordpress-plugin.zip (the stable link) and to
+ * public/downloads/draftly-wordpress-plugin-<version>.zip, then bump this.
+ */
+export const WP_PLUGIN_VERSION = "1.0.3";
+export const WP_PLUGIN_DOWNLOAD_PATH = "/downloads/draftly-wordpress-plugin.zip";
+
 /** "live" ships in plugin 1.0.0 today. "soon" is in the plan entitlements but not built into the plugin yet. */
 export type FeatureStatus = "live" | "soon";
 
