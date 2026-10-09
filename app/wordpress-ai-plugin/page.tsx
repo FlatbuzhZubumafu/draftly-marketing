@@ -206,7 +206,7 @@ export default function WordPressAiPluginPage() {
               </em>
             </h1>
             <p className="text-lg leading-relaxed mb-4" style={{ color: "var(--color-text-secondary)" }}>
-              Rank Math and Yoast tell you what&apos;s wrong. Draftly fixes it in your voice.
+              Your SEO plugin scores your posts. Draftly rewrites the weak sentences in your voice, and you approve every change.
             </p>
             <p className="leading-relaxed mb-8" style={{ color: "var(--color-text-secondary)" }}>
               Check any post on your site, review each suggested edit side by side and approve the ones
