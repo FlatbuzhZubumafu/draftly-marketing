@@ -55,10 +55,10 @@ export type WpPlan = {
 };
 
 export const WP_FEATURES: WpFeature[] = [
-  { label: "Post optimizations (preview, approve, revert)", status: "live" },
+  { label: "Post optimizations", status: "live" },
   { label: "Bulk meta titles and descriptions", status: "soon" },
   { label: "Internal-link suggestions from your own pages", status: "soon" },
-  { label: "De-AI your own writing (Claude Sonnet 5.5)", status: "soon" },
+  { label: "De-AI your own writing", status: "soon" },
   { label: "Alt text for images", status: "soon" },
 ];
 
@@ -97,7 +97,7 @@ export const WP_PLANS: WpPlan[] = [
     monthly: 15,
     yearly: 144,
     pitch: "The whole site: more optimizations, all your meta and image alt text.",
-    values: ["60 a month", "Whole site (up to 1,000 a month)", "Included", "100,000 words a month", "300 images a month"],
+    values: ["60 a month", "Whole site, up to 1,000 a month", "Included", "100,000 words a month", "300 images a month"],
   },
 ];
 
