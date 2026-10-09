@@ -185,7 +185,7 @@ export default function WordPressAiPluginPage() {
               plugin scores your posts. Draftly rewrites the weak sentences in your voice, and you approve every change.
             </p>
             <div className="mt-8">
-              <a href={WP_PLUGIN_DOWNLOAD_PATH} className="btn btn-primary" download>
+              <a href={WP_PLUGIN_DOWNLOAD_PATH} className="btn btn-primary" download data-download-location="hero" data-plugin-version={WP_PLUGIN_VERSION}>
                 Download for Free
               </a>
             </div>
