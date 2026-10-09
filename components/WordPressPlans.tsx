@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Check } from "lucide-react";
-import { WP_FEATURES, WP_PLANS, WP_SIGNUP_URL } from "@/lib/wordpress-plugin";
+import { WP_FEATURES, WP_PLANS, wpPlanCheckoutUrl } from "@/lib/wordpress-plugin";
 
 /** Plan cards for the WordPress plugin, with a monthly/annual switch that starts on annual. */
 export function WordPressPlans() {
@@ -97,13 +97,12 @@ export function WordPressPlans() {
                 })}
               </ul>
 
-              {/* TODO: paid plans go to Stripe checkout once the WordPress price IDs exist. Until then every plan starts with a free account. */}
               <a
-                href={WP_SIGNUP_URL}
+                href={wpPlanCheckoutUrl(plan, annual)}
                 className={`btn mt-6 justify-center text-sm ${plan.highlight ? "btn-primary" : ""}`}
                 style={plan.highlight ? undefined : { border: "1px solid var(--color-border-strong)", color: "var(--color-text-primary)" }}
               >
-                {plan.monthly === 0 ? "Get it free" : `Join the beta`}
+                {plan.tier ? `Start ${plan.name}` : "Get it free"}
               </a>
             </div>
           );
