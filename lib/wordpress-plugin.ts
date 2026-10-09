@@ -70,7 +70,7 @@ export const WP_PLANS: WpPlan[] = [
     monthly: 0,
     yearly: 0,
     pitch: "Try every part of the plugin on your own posts.",
-    values: ["1", "3", null, "500-word sample", null],
+    values: ["5 posts", "3", null, "500-word sample", null],
   },
   {
     id: "optimize",
