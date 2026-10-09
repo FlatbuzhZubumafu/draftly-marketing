@@ -115,6 +115,10 @@ const FAQS: Faq[] = [
     a: "Not yet. The plugin is in beta and coming to the WordPress plugin directory. Create a free Draftly account to join the beta.",
   },
   {
+    q: "Can I use it outside the United States?",
+    a: "Not yet. Draftly is available to businesses in the United States only, so new accounts and new plugin connections have to be set up from the US. If you're elsewhere, the sign-up page lets you leave your email and we'll tell you when Draftly opens in your country.",
+  },
+  {
     q: "How do I undo a change?",
     a: "Click Revert next to the post on Draftly > Optimize posts. It restores the version from just before Draftly's last change. The change is also in the post's normal revision history.",
   },
@@ -191,6 +195,9 @@ export default function WordPressAiPluginPage() {
             </div>
             <p className="mt-4 text-sm" style={{ color: "var(--color-text-muted)" }}>
               Version {WP_PLUGIN_VERSION}. Works with Yoast SEO, Rank Math and All in One SEO.
+            </p>
+            <p className="mt-1 text-sm" style={{ color: "var(--color-text-muted)" }}>
+              Available to businesses in the United States only.
             </p>
           </div>
           <ProductFigure shot={WP_SHOTS.review} className="min-w-0" />
@@ -304,6 +311,7 @@ export default function WordPressAiPluginPage() {
 
           <div className="mt-8 max-w-3xl mx-auto space-y-3 text-sm leading-relaxed text-center" style={{ color: "var(--color-text-muted)" }}>
             <p>{WP_TOP_UPS}</p>
+            <p>Available to businesses in the United States only.</p>
             <p>
               <B>Coming soon</B>{" "}marks features in your plan that aren&apos;t in the plugin yet. Version {WP_PLUGIN_VERSION}{" "}
               does Check, Optimize with review and approval, Revert, auto mode, and SEO titles and descriptions in Yoast

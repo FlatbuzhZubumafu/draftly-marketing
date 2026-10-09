@@ -67,7 +67,7 @@ Draftly learns a brand's voice from its website, suggests topics from industry n
 
 ## Plans
 
-The first post is free and comes with a thumbnail. Paid plans add volume, a choice of 8 AI models, AI images inside each post and the MCP connector.
+The first post is free and comes with a thumbnail. Paid plans add volume, a choice of 8 AI models, AI images inside each post and the MCP connector. Draftly is available to businesses in the United States only.
 
 ${plansTable()}
 
@@ -83,7 +83,7 @@ ${toolsTable()}
 
 ## WordPress Plugin
 
-Draftly's AI plugin for WordPress (version ${WP_PLUGIN_VERSION}, in beta, coming to the WordPress plugin directory) checks existing posts for human voice and readability, suggests sentence-level edits in the site's brand voice, and saves the edits a user approves as a WordPress revision that Revert can undo. By default nothing changes without approval. On paid plans an administrator can turn on auto mode, which applies edits to published posts by itself at Safe or Full level, each as a revision that can be reverted. Auto mode also fills a missing SEO title or description in Yoast SEO, Rank Math or All in One SEO. The plugin shows no SEO score. Free accounts can check and optimize up to 5 posts. Its plans are billed by Draftly and listed only at ${SITE_URL}/wordpress-ai-plugin. Features marked "coming soon" are in the plan but not in the plugin yet; De-AI already runs in the Draftly web editor.
+Draftly's AI plugin for WordPress (version ${WP_PLUGIN_VERSION}, in beta, coming to the WordPress plugin directory) checks existing posts for human voice and readability, suggests sentence-level edits in the site's brand voice, and saves the edits a user approves as a WordPress revision that Revert can undo. By default nothing changes without approval. On paid plans an administrator can turn on auto mode, which applies edits to published posts by itself at Safe or Full level, each as a revision that can be reverted. Auto mode also fills a missing SEO title or description in Yoast SEO, Rank Math or All in One SEO. The plugin shows no SEO score. Free accounts can check and optimize up to 5 posts. Its plans are billed by Draftly and listed only at ${SITE_URL}/wordpress-ai-plugin. Available to businesses in the United States only. Features marked "coming soon" are in the plan but not in the plugin yet; De-AI already runs in the Draftly web editor.
 
 ${wpPlansTable()}
 
