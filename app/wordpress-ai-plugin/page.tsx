@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Check } from "lucide-react";
 import { SITE_URL } from "@/lib/site";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { A, B, DarkCta, FaqList, faqJsonLd, type Faq } from "@/components/ArticleParts";
 import { ProductFigure } from "@/components/ProductFigure";
 import { RelatedLinks } from "@/components/RelatedLinks";
+import { WordPressCompare } from "@/components/WordPressCompare";
 import { WordPressPlans } from "@/components/WordPressPlans";
 import { PILLARS } from "@/lib/related";
 import { PAID_PLANS } from "@/lib/pricing";
 import { imageObjectJsonLd } from "@/lib/product-shots";
 import { jsonLdHtml } from "@/lib/schema";
-import { WP_COMPARED_ON, WP_PLANS, WP_PLUGIN_DOWNLOAD_PATH, WP_PLUGIN_PATH, WP_PLUGIN_VERSION, WP_SHOTS, WP_TOP_UPS } from "@/lib/wordpress-plugin";
+import { WP_PLANS, WP_PLUGIN_DOWNLOAD_PATH, WP_PLUGIN_PATH, WP_PLUGIN_VERSION, WP_SHOTS, WP_TOP_UPS } from "@/lib/wordpress-plugin";
 
 export const revalidate = 3600;
 
@@ -40,7 +40,7 @@ const STEPS = [
   },
   {
     title: "Check a post, then review each edit",
-    body: "Check scores a post for human voice, SEO and readability. Optimize suggests edits in your brand voice, each one shown as the sentence before and after. Untick anything you don't like.",
+    body: "Check scores a post for human voice and readability. Optimize suggests edits in your brand voice, each one shown as the sentence before and after. Untick anything you don't like.",
     shots: [WP_SHOTS.review],
   },
   {
@@ -60,12 +60,12 @@ const FIXES: { title: string; body: string; soon?: boolean }[] = [
     body: "The readability score flags hard-to-read passages, and Optimize suggests plainer versions. You see the new score after you approve.",
   },
   {
-    title: "Weak on-page SEO",
-    body: "The SEO score points at what's missing, and Optimize suggests the fixes alongside the writing edits.",
+    title: "Old posts nobody has time for",
+    body: "Turn on auto mode and Draftly works through your published posts a few at a time, at Safe or Full. Every change is a revision you can revert.",
   },
   {
-    title: "Meta titles and descriptions",
-    body: "Written straight into Yoast SEO, Rank Math or All in One SEO, so they show up where you already edit them.",
+    title: "Missing meta titles and descriptions",
+    body: "Auto mode fills them in Yoast SEO, Rank Math or All in One SEO, so they show up where you already edit them.",
   },
   {
     title: "Bulk meta for the whole site",
@@ -96,32 +96,6 @@ const SEO_PLUGINS = [
   { name: "No SEO plugin", where: "The post excerpt is used as the description" },
 ];
 
-const COMPETITORS = [
-  {
-    name: "Draftly",
-    price: "Free plan. Paid from $4 a month billed yearly ($48), or $5 monthly",
-    ai: "Scores existing posts for human voice, SEO and readability, suggests sentence-level edits in your brand voice, saves approved edits as a revision with one-click revert. Works alongside Yoast SEO, Rank Math or AIOSEO.",
-    source: null,
-  },
-  {
-    name: "Rank Math Content AI",
-    price: "€5.99, €10.99 or €16.99 a month, billed yearly. The Starter tier includes 15 articles, 500 AI fixes and 100 bulk meta",
-    ai: "AI writing and SEO suggestions inside Rank Math, including bulk-generated SEO titles and descriptions.",
-    source: { href: "https://rankmath.com/content-ai/", label: "rankmath.com/content-ai" },
-  },
-  {
-    name: "Yoast SEO Premium",
-    price: "$118.80 a year",
-    ai: "AI Generate for titles and meta descriptions, AI Optimize suggestions for selected SEO checks that you apply, dismiss or edit, AI Summarize and an AI bulk editor.",
-    source: { href: "https://yoast.com/ai-features/", label: "yoast.com/ai-features" },
-  },
-  {
-    name: "GetGenie",
-    price: "Starter at $9.99 a month, or $5.50 a month billed yearly, for 20,000 AI words a month",
-    ai: "An AI writing assistant for WordPress, with plans sold by the number of AI words.",
-    source: { href: "https://getgenie.ai/pricing/", label: "getgenie.ai/pricing" },
-  },
-];
 
 const FAQS: Faq[] = [
   {
@@ -331,9 +305,9 @@ export default function WordPressAiPluginPage() {
           <div className="mt-8 max-w-3xl mx-auto space-y-3 text-sm leading-relaxed text-center" style={{ color: "var(--color-text-muted)" }}>
             <p>{WP_TOP_UPS}</p>
             <p>
-              <B>Coming soon</B>{" "}marks features in your plan that aren&apos;t in the plugin yet. Version 1.0.0 does
-              Check, Optimize with review and approval, Revert, and meta titles and descriptions for Yoast SEO, Rank
-              Math and All in One SEO. De-AI already runs in the Draftly web editor.
+              <B>Coming soon</B>{" "}marks features in your plan that aren&apos;t in the plugin yet. Version {WP_PLUGIN_VERSION}{" "}
+              does Check, Optimize with review and approval, Revert, auto mode, and SEO titles and descriptions in Yoast
+              SEO, Rank Math and All in One SEO. De-AI already runs in the Draftly web editor.
             </p>
             <p>
               Want Draftly to write new posts as well? Topic ideas from your industry&apos;s news, AI images and
@@ -343,56 +317,24 @@ export default function WordPressAiPluginPage() {
           </div>
         </section>
 
-        <section id="compare" className="container-draftly max-w-5xl mt-24">
-          <h2 className="text-3xl font-medium mb-3" style={{ letterSpacing: "-0.03em" }}>
-            How it compares to other AI plugins for WordPress
+        <section id="compare" className="container-draftly max-w-6xl mt-24">
+          <h2 className="text-3xl font-medium mb-4" style={{ letterSpacing: "-0.03em" }}>
+            Draftly vs. Rank Math, Yoast, AIOSEO and GetGenie
           </h2>
-          <p className="mb-8 max-w-3xl leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-            Prices and features as each vendor listed them in {WP_COMPARED_ON}. Check their pages for current terms.
-            If you mainly want a WordPress AI writer for brand-new posts, GetGenie or Rank Math&apos;s Content AI may suit
-            you better.
-          </p>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm min-w-[680px]">
-              <thead>
-                <tr style={{ borderBottom: "1px solid var(--color-border-strong)" }}>
-                  <th className="text-left py-2 pr-4 font-semibold">Tool</th>
-                  <th className="text-left py-2 pr-4 font-semibold">Price</th>
-                  <th className="text-left py-2 pr-4 font-semibold">What the AI does</th>
-                  <th className="text-left py-2 font-semibold">Source</th>
-                </tr>
-              </thead>
-              <tbody>
-                {COMPETITORS.map((c) => (
-                  <tr key={c.name} style={{ borderBottom: "1px solid var(--color-border)" }}>
-                    <td className="py-3 pr-4 align-top font-semibold whitespace-nowrap">
-                      {c.name === "Draftly" ? (
-                        <span className="inline-flex items-center gap-1.5">
-                          <Check className="w-4 h-4" style={{ color: "var(--color-accent)" }} aria-hidden="true" />
-                          {c.name}
-                        </span>
-                      ) : (
-                        c.name
-                      )}
-                    </td>
-                    <td className="py-3 pr-4 align-top" style={{ color: "var(--color-text-secondary)" }}>{c.price}</td>
-                    <td className="py-3 pr-4 align-top" style={{ color: "var(--color-text-secondary)" }}>{c.ai}</td>
-                    <td className="py-3 align-top whitespace-nowrap">
-                      {c.source ? (
-                        <a href={c.source.href} rel="nofollow noopener" target="_blank" style={{ color: "var(--color-accent)" }}>
-                          {c.source.label}
-                        </a>
-                      ) : (
-                        <a href="#pricing" style={{ color: "var(--color-accent)" }}>
-                          Plans above
-                        </a>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="mb-8 max-w-3xl space-y-3 leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+            <p>
+              If you want one plugin that runs your whole SEO setup, with AI meta in bulk, get Rank Math or Yoast. If
+              you mostly want AI to write new posts, GetGenie and AIOSEO&apos;s AI credits are built for that.
+            </p>
+            <p>
+              Pick Draftly when the posts you already have need fixing. It edits them sentence by sentence in your
+              voice, shows every edit before and after, and saves it as a revision you can revert. It runs next to the
+              SEO plugin you have, and ${WP_PLANS.find((p) => p.yearly > 0)?.yearly} a year is the lowest entry price
+              here. The SEO plugins do a lot more than AI
+              for that money, though.
+            </p>
           </div>
+          <WordPressCompare />
         </section>
 
         <div className="container-draftly max-w-5xl">

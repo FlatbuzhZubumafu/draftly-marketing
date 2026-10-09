@@ -127,5 +127,3 @@ export const WP_SHOTS = {
     "Revert puts the post back the way it was before Draftly touched it. Example test site."),
 } satisfies Record<string, ProductShot>;
 
-/** Competitor facts, checked on each vendor's site in October 2026. */
-export const WP_COMPARED_ON = "October 2026";

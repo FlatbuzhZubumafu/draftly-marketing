@@ -11,7 +11,8 @@ import {
 import { BYO_AI_LINE, MCP_URL, READ_ONLY_TOOL_COUNT, TOOLS, toolPlans } from "@/lib/mcp";
 import { PLANS } from "@/lib/pricing";
 import { APP_URL, SITE_URL } from "@/lib/site";
-import { WP_FEATURES, WP_PLANS, WP_TOP_UPS } from "@/lib/wordpress-plugin";
+import { WP_COMPARE_NOTES, WP_COMPARE_ROWS, WP_COMPARE_TOOLS, WP_COMPARED_ON, type Cell } from "@/lib/wordpress-compare";
+import { WP_FEATURES, WP_PLANS, WP_PLUGIN_VERSION, WP_TOP_UPS } from "@/lib/wordpress-plugin";
 
 // Builds /llms.txt and /llms-full.txt from the same data the pages render, so
 // prices, tools and benchmark numbers match the site.
@@ -33,6 +34,28 @@ function wpPlansTable(): string {
     return `| ${p.name} | ${price} | ${p.values.map((v) => v ?? "Not included").join(" | ")} |`;
   });
   return [header, `| ${Array(WP_FEATURES.length + 2).fill("---").join(" | ")} |`, ...rows].join("\n");
+}
+
+function compareCell(cell: Cell): string {
+  const words: Record<string, string> = { yes: "Yes", no: "No", partial: "Partial", notListed: "Not listed", soon: "Coming soon", isSeoPlugin: "Is the SEO plugin" };
+  const lines = Array.isArray(cell) ? cell : [cell];
+  return lines
+    .map((l) => {
+      const mark = l.mark ? words[l.mark] : "";
+      const text = l.mark === "soon" || l.mark === "notListed" ? [l.text, mark] : [mark, l.text];
+      return text.filter(Boolean).join(l.mark === "soon" || l.mark === "notListed" ? " " : ": ") + (l.note ? ` [${l.note}]` : "");
+    })
+    .join("; ");
+}
+
+/** The /wordpress-ai-plugin comparison as markdown, with its notes and sources. */
+function wpCompareTable(): string {
+  const header = `| Feature | ${WP_COMPARE_TOOLS.map((t) => `${t.name} (${t.product})`).join(" | ")} |`;
+  const sep = `| ${Array(WP_COMPARE_TOOLS.length + 1).fill("---").join(" | ")} |`;
+  const rows = WP_COMPARE_ROWS.map((r) => `| ${r.label} | ${WP_COMPARE_TOOLS.map((t) => compareCell(r.cells[t.id])).join(" | ")} |`);
+  const notes = WP_COMPARE_NOTES.map((n, i) => `[${i + 1}] ${n}`);
+  const sources = WP_COMPARE_TOOLS.filter((t) => t.sources.length).map((t) => `${t.name}: ${t.sources.map((s) => s.href).join(", ")}`);
+  return [header, sep, ...rows, "", ...notes, "", `Sources: ${sources.join("; ")}.`].join("\n");
 }
 
 export function buildLlmsTxt(): string {
@@ -60,11 +83,15 @@ ${toolsTable()}
 
 ## WordPress Plugin
 
-Draftly's AI plugin for WordPress (version 1.0.0, in beta, coming to the WordPress plugin directory) checks existing posts for human voice, SEO and readability, suggests edits in the site's brand voice, and saves the edits a user approves as a WordPress revision that Revert can undo. Nothing is published or changed without approval. It writes meta titles and descriptions into Yoast SEO, Rank Math or All in One SEO. Its plans are billed by Draftly and listed only at ${SITE_URL}/wordpress-ai-plugin. Features marked "coming soon" are in the plan but not in the plugin yet; De-AI already runs in the Draftly web editor.
+Draftly's AI plugin for WordPress (version ${WP_PLUGIN_VERSION}, in beta, coming to the WordPress plugin directory) checks existing posts for human voice and readability, suggests sentence-level edits in the site's brand voice, and saves the edits a user approves as a WordPress revision that Revert can undo. By default nothing changes without approval. On paid plans an administrator can turn on auto mode, which applies edits to published posts by itself at Safe or Full level, each as a revision that can be reverted. Auto mode also fills a missing SEO title or description in Yoast SEO, Rank Math or All in One SEO. The plugin shows no SEO score. Free accounts can check and optimize up to 5 posts. Its plans are billed by Draftly and listed only at ${SITE_URL}/wordpress-ai-plugin. Features marked "coming soon" are in the plan but not in the plugin yet; De-AI already runs in the Draftly web editor.
 
 ${wpPlansTable()}
 
 ${WP_TOP_UPS} Writing new posts, topic ideas, AI images and autopilot are on the main plans above.
+
+### Compared with other WordPress AI plugins (checked ${WP_COMPARED_ON})
+
+${wpCompareTable()}
 
 ## Pages
 
@@ -75,7 +102,7 @@ ${WP_TOP_UPS} Writing new posts, topic ideas, AI images and autopilot are on the
 - [SEO MCP Server](${SITE_URL}/mcp): What an SEO MCP is, setup steps for each AI app, the tool list and data allowances by plan.
 - [How to Use an SEO MCP Server With Claude and ChatGPT](${SITE_URL}/blog/seo-mcp-server): What an SEO MCP server does, Draftly's ${TOOLS.length} tools by plan (${READ_ONLY_TOOL_COUNT} read-only, plus tools that brief, check, edit and save drafts; none publishes), example requests and setup for Claude, ChatGPT, Claude Code and Cursor.
 - [AEO and GEO for Small Business Blogs in 2026](${SITE_URL}/blog/the-death-of-keyword-how-aeo-aio-is-leaving-keywords-behind): How to get a small business blog cited by ChatGPT, Claude and Google AI Overviews, based on Google's guidance, the GEO research paper and Pew's 2025 click data.
-- [WordPress AI Plugin](${SITE_URL}/wordpress-ai-plugin): The Draftly plugin for WordPress: check, optimize, approve as a revision and revert existing posts, meta for Yoast SEO, Rank Math and AIOSEO, plugin plans and a comparison with Rank Math Content AI, Yoast SEO Premium and GetGenie.
+- [WordPress AI Plugin](${SITE_URL}/wordpress-ai-plugin): The Draftly plugin for WordPress: check, optimize, approve as a revision and revert existing posts, meta for Yoast SEO, Rank Math and AIOSEO, plugin plans and a feature and price comparison with Rank Math Content AI, Yoast SEO Premium, All in One SEO and GetGenie.
 - [Pricing](${SITE_URL}/pricing): Plans, credit costs and the AI models on each plan.
 - [Blog](${SITE_URL}/blog): Notes on AI writing, SEO and AEO for small businesses.
 - [App](${APP_URL}): Sign up and write the first post free.
