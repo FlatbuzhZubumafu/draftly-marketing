@@ -5,7 +5,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { A, B, Bullets, Byline, DarkCta, FaqList, Section, faqJsonLd, type Faq } from "@/components/ArticleParts";
 import { PAID_PLANS, paidPriceList } from "@/lib/pricing";
-import { RULE_CHECK_TEST as T } from "@/lib/ruleCheck";
+import { DEFAULT_WRITER as D } from "@/lib/ruleCheck";
 import { jsonLdHtml, authorRef } from "@/lib/schema";
 import { TocLayout } from "@/components/OnThisPage";
 import { PILLARS } from "@/lib/related";
@@ -145,8 +145,8 @@ export default async function AgencyVsToolPage() {
                 <>
                   <B>Rule checks on every post.</B> Each post is checked against your{" "}
                   <A href="/seo-copywriting">SEO copywriting rules</A> and gets one automatic
-                  fix pass if it breaks any. In a {T.briefs}-brief test, {T.model} posts passed every hard rule{" "}
-                  {T.passAfterFix}% of the time after that pass. Our <A href="/best-ai-for-writing">14-model writing test</A>{" "}
+                  fix pass if it breaks any. In a {D.briefs}-brief test, {D.model} posts, Draftly&apos;s default, passed every hard
+                  rule {D.rulePass}% of the time after that pass. Our <A href="/best-ai-for-writing">14-model writing test</A>{" "}
                   shows how other models handle the same rules.
                 </>,
                 <>

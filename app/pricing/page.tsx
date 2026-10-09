@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { READER_QUALITY_EVIDENCE } from "@/lib/ruleCheck";
 import { DEFAULT_OG_IMAGE } from "@/lib/site";
 import { Check } from "lucide-react";
 import { getHomepageData } from "@/lib/graphql";
@@ -55,7 +56,7 @@ const EVERY_PLAN = [
 ];
 
 const CREDIT_COSTS = [
-  { action: "Blog post", credits: "150 (250 on premium models such as Claude Sonnet 5.5)" },
+  { action: "Blog post", credits: "150 on Claude Sonnet 5.5, the default (50 on GPT 6 Luna, 250 on premium models such as GPT 5.4)" },
   { action: "Thumbnail image", credits: "55 (free with your first post)" },
   { action: "Image inside a post (Solopreneur and up)", credits: "53" },
   { action: "Outline", credits: "15 (free on paid plans)" },
@@ -63,7 +64,7 @@ const CREDIT_COSTS = [
   { action: "Rewrite", credits: "30 (50 on premium models). 2 free on your first post" },
 ];
 
-const MODELS = ["GPT 6 Luna (default, best value)", "Claude Sonnet 5.5 (recommended premium)", "GPT 5.4 Mini", "Claude Sonnet 4.6", "Claude Haiku 4.5", "GPT 5.4", "Gemini 3 Flash", "DeepSeek V3.2"];
+const MODELS = ["Claude Sonnet 5.5 (default, best quality)", "GPT 6 Luna (budget)", "GPT 5.4 Mini", "Claude Sonnet 4.6", "Claude Haiku 4.5", "GPT 5.4", "Gemini 3 Flash", "DeepSeek V3.2"];
 
 export default async function PricingPage() {
   const { marketingSettings: s } = await getHomepageData();
@@ -92,11 +93,12 @@ export default async function PricingPage() {
           <PricingPlans registerUrl={registerUrl} freeCtaText={s.heroCtaText} cardHeading="h2" />
 
           <p className="mt-6 text-sm text-center max-w-2xl mx-auto" style={{ color: "var(--color-text-muted)" }}>
-            Post counts assume the default model, GPT 6 Luna, which passed 19 of 20 test posts against{" "}
+            Post counts assume the default model, Claude Sonnet 5.5. {READER_QUALITY_EVIDENCE} Every post is also checked
+            against{" "}
             <a href="/seo-copywriting" style={{ color: "var(--color-accent)" }}>
               our writing rules
-            </a>{" "}
-            after one fix pass. Premium models such as Claude Sonnet 5.5 use about 1.7x the credits per post, so a plan covers fewer posts
+            </a>
+            . Premium models such as GPT 5.4 use about 1.7x the credits per post, so a plan covers fewer posts
             on them. SEO data calls come
             from a separate monthly allowance, with data packs of 100 extra calls for $10. Start free and upgrade any
             time from Settings inside the app.
@@ -195,7 +197,7 @@ export default async function PricingPage() {
               The Models You Can Pick
             </h2>
             <p className="text-sm leading-relaxed mb-5" style={{ color: "var(--color-text-secondary)" }}>
-              Free accounts write with GPT 6 Luna. Paid plans choose per post from the full list.
+              Free accounts write with Claude Sonnet 5.5. Paid plans choose per post from the full list.
             </p>
             <ul className="space-y-2 text-sm">
               {MODELS.map((m) => (

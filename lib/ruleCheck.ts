@@ -6,18 +6,37 @@
 // placement, the CTA link) come from supabase/functions/_shared/post-checks.ts in
 // the draftly.blog repo. Change those first, then this.
 //
-// RULE_CHECK_TEST and the excerpts below come from the 20-brief run of
-// 2026-10-08 (benchmark-runs/cheap-2026-10-08: summary.md, out/draft and
-// out/repair-self). The businesses in that run are made up. Excerpts are verbatim.
+// DEFAULT_WRITER and SAMPLE_POST come from the 20-brief model comparison of
+// 2026-10-08 (benchmark-runs/quality-2026-10-08: model-comparison.md and
+// gated@sonnet/posts/62.json). RULE_CHECK_TEST and the before/after EXAMPLES
+// come from the earlier 20-brief run the same day, written by GPT 6 Luna
+// (benchmark-runs/cheap-2026-10-08: summary.md, out/draft and out/repair-self).
+// The businesses in both runs are made up. Excerpts are verbatim.
 
+/** The default writer (model_catalog.is_default in the app) and its test results. */
+export const DEFAULT_WRITER = {
+  date: "October 8, 2026",
+  iso: "2026-10-08",
+  briefs: 20,
+  model: "Claude Sonnet 5.5",
+  /** Posts that passed every hard writing rule after the fix pass. */
+  rulePass: 95,
+  /** Posts that passed the reader-quality bar, with the quality check. */
+  readerPass: 95,
+  previousModel: "GPT 6 Luna",
+  /** The previous default's reader-quality pass rate, with the same check. */
+  previousReaderPass: 30,
+} as const;
+
+export const READER_QUALITY_EVIDENCE =
+  "In our 20-brief test, 95% of Sonnet + quality-check posts passed our reader-quality bar.";
+
+/** The run the before/after rule EXAMPLES come from. */
 export const RULE_CHECK_TEST = {
   date: "October 8, 2026",
   iso: "2026-10-08",
   briefs: 20,
   model: "GPT 6 Luna",
-  passAfterFix: 95,
-  previousModel: "GPT 5.4 Mini",
-  previousPassAfterFix: 0,
 } as const;
 
 /** A sample of AI_VOCABULARY, the terms Draftly's default rules ban. */
@@ -70,13 +89,13 @@ export const EXAMPLES: RuleExample[] = [
   },
 ];
 
-/** The opening of a GPT 6 Luna post from the same run, after its fix pass. */
+/** The opening of a Claude Sonnet 5.5 post from the model comparison, as shipped (it passed the rules and the reader check first time). */
 export const SAMPLE_POST = {
-  business: "Summit Ridge Roofing, a made-up roofer in Boise",
-  title: "Roof replacement timeline: How long the job takes",
+  business: "Spoke & Sprocket Cycleworks, a made-up bike shop in Minneapolis",
+  title: "How Often Should You Get a Bike Tune-Up?",
   intro:
-    "The roof replacement timeline for most single-family asphalt tear-offs on Summit Ridge Roofing crews is one to two working days. Roof shape, the condition of the wood beneath the shingles, and weather all affect the schedule. Boise-area homeowners can use that range to plan around the work, with a few details to confirm before installation begins.",
-  h2: "How long does a roof replacement take?",
+    "Most riders do well with one tune-up a year. If you commute through the Twin Cities winter, plan on two. Salt, slush, and daily miles wear a bike faster than weekend rides on dry paths.",
+  h2: "What does your riding schedule call for?",
   h2Body:
-    "A typical single-family asphalt roof replacement on Summit Ridge Roofing crews takes one to two working days. That range includes removing the old shingles, preparing the roof, installing the new roofing, and cleanup. A steep or complex roof, or rotted decking that needs repair, adds time to the job.",
+    "Your calendar matters less than how much and where you ride. These are typical starting points, and a mechanic can adjust them once they see your bike.",
 };
