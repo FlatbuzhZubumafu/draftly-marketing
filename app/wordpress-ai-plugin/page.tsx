@@ -11,7 +11,7 @@ import { PILLARS } from "@/lib/related";
 import { PAID_PLANS } from "@/lib/pricing";
 import { imageObjectJsonLd } from "@/lib/product-shots";
 import { jsonLdHtml } from "@/lib/schema";
-import { WP_COMPARED_ON, WP_PLANS, WP_PLUGIN_DOWNLOAD_PATH, WP_PLUGIN_PATH, WP_PLUGIN_VERSION, WP_SHOTS, WP_SIGNUP_URL, WP_TOP_UPS } from "@/lib/wordpress-plugin";
+import { WP_COMPARED_ON, WP_PLANS, WP_PLUGIN_DOWNLOAD_PATH, WP_PLUGIN_PATH, WP_PLUGIN_VERSION, WP_SHOTS, WP_TOP_UPS } from "@/lib/wordpress-plugin";
 
 export const revalidate = 3600;
 
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 const STEPS = [
   {
     title: "Connect your site",
-    body: "Install the plugin, open Draftly > Connection and click Connect to Draftly. Approve the site in your Draftly account and you're done. No WordPress password or application password changes hands.",
+    body: "In WordPress, go to Plugins, Add New, Upload Plugin and choose the zip you downloaded, then Activate. Open Draftly > Connection, click Connect to Draftly and approve the site in your free Draftly account. No WordPress password or application password changes hands.",
     shots: [WP_SHOTS.connect],
   },
   {
@@ -210,26 +210,13 @@ export default function WordPressAiPluginPage() {
               Draftly AI Post Optimizer is the AI plugin for WordPress that fixes the posts you already have. Your SEO
               plugin scores your posts. Draftly rewrites the weak sentences in your voice, and you approve every change.
             </p>
-            <p className="leading-relaxed mb-8" style={{ color: "var(--color-text-secondary)" }}>
-              Check any post on your site, review each suggested edit side by side and approve the ones
-              you want. They&apos;re saved as a WordPress revision, so Revert is always one click away. Nothing changes
-              without your approval, unless you turn on auto mode.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <a href={WP_SIGNUP_URL} className="btn btn-primary">
-                Join the beta, get it free
-              </a>
-              <a href={WP_PLUGIN_DOWNLOAD_PATH} className="btn btn-secondary" download>
-                Download the plugin (v{WP_PLUGIN_VERSION})
-              </a>
-              <a href="#pricing" className="btn btn-secondary">
-                See plans
+            <div className="mt-8">
+              <a href={WP_PLUGIN_DOWNLOAD_PATH} className="btn btn-primary" download>
+                Download for Free
               </a>
             </div>
             <p className="mt-4 text-sm" style={{ color: "var(--color-text-muted)" }}>
-              To install: in WordPress go to Plugins, Add New, Upload Plugin, choose the zip, then Activate and click
-              Connect to Draftly. Coming to the WordPress plugin directory. Works with Yoast SEO, Rank Math and All in
-              One SEO.
+              Version {WP_PLUGIN_VERSION}. Works with Yoast SEO, Rank Math and All in One SEO.
             </p>
           </div>
           <ProductFigure shot={WP_SHOTS.review} className="min-w-0" />
@@ -420,11 +407,10 @@ export default function WordPressAiPluginPage() {
           </div>
 
           <DarkCta
-            title="Fix one post free"
-            body="Create a free Draftly account to join the beta. Your first post optimization is free, with no credit card."
-            href={WP_SIGNUP_URL}
-            label="Join the beta, get it free"
-            secondary={{ href: "#pricing", label: "See plans" }}
+            title="Try it on up to 5 posts free"
+            body="Download the plugin, connect it to a free Draftly account and optimize up to 5 posts. No credit card."
+            href={WP_PLUGIN_DOWNLOAD_PATH}
+            label="Download for Free"
           />
         </div>
       </main>
