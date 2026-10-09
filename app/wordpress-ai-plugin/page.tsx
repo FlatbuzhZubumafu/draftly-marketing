@@ -11,7 +11,7 @@ import { PILLARS } from "@/lib/related";
 import { PAID_PLANS } from "@/lib/pricing";
 import { imageObjectJsonLd } from "@/lib/product-shots";
 import { jsonLdHtml } from "@/lib/schema";
-import { WP_COMPARED_ON, WP_PLANS, WP_PLUGIN_PATH, WP_SHOTS, WP_SIGNUP_URL, WP_TOP_UPS } from "@/lib/wordpress-plugin";
+import { WP_COMPARED_ON, WP_PLANS, WP_PLUGIN_DOWNLOAD_PATH, WP_PLUGIN_PATH, WP_PLUGIN_VERSION, WP_SHOTS, WP_SIGNUP_URL, WP_TOP_UPS } from "@/lib/wordpress-plugin";
 
 export const revalidate = 3600;
 
@@ -21,7 +21,7 @@ export const revalidate = 3600;
 // "humanize ai content" and "wordpress ai writer" (marketplace-plans/analysis.md).
 // The plugin's Plans link and readme point here. The WordPress plans live on this
 // page only. The share image is ./opengraph-image.tsx.
-const TITLE = "WordPress AI Plugin That Fixes and Humanizes Your Posts | Draftly";
+const TITLE = "AI Post Optimizer: The WordPress AI Plugin | Draftly";
 const DESCRIPTION =
   "Draftly is an AI plugin for WordPress that checks your posts, suggests edits in your voice and saves the ones you approve as revisions you can revert.";
 
@@ -166,7 +166,8 @@ export default function WordPressAiPluginPage() {
     applicationCategory: "BusinessApplication",
     applicationSubCategory: "WordPress plugin",
     operatingSystem: "WordPress 6.2 or later",
-    softwareVersion: "1.0.0",
+    softwareVersion: WP_PLUGIN_VERSION,
+    downloadUrl: `${SITE_URL}${WP_PLUGIN_DOWNLOAD_PATH}`,
     description: DESCRIPTION,
     publisher: { "@id": `${SITE_URL}/#organization` },
     screenshot: Object.values(WP_SHOTS).map(imageObjectJsonLd),
@@ -197,16 +198,17 @@ export default function WordPressAiPluginPage() {
         <section className="container-draftly max-w-6xl grid grid-cols-1 lg:grid-cols-[1fr_1.05fr] gap-10 lg:gap-14 items-center">
           <div className="min-w-0">
             <p className="text-sm font-semibold uppercase mb-4" style={{ color: "var(--color-accent)", letterSpacing: "0.08em" }}>
-              Draftly for WordPress, in beta
+              Draftly AI Post Optimizer for WordPress, in beta
             </p>
             <h1 className="page-heading mb-6" style={{ fontSize: "clamp(2.1rem, 5vw, 56px)" }}>
-              The AI plugin for WordPress{" "}
+              The AI post optimizer{" "}
               <em className="italic" style={{ color: "var(--color-accent)" }}>
-                that fixes your posts
+                for WordPress
               </em>
             </h1>
             <p className="text-lg leading-relaxed mb-4" style={{ color: "var(--color-text-secondary)" }}>
-              Your SEO plugin scores your posts. Draftly rewrites the weak sentences in your voice, and you approve every change.
+              Draftly AI Post Optimizer is the AI plugin for WordPress that fixes the posts you already have. Your SEO
+              plugin scores your posts. Draftly rewrites the weak sentences in your voice, and you approve every change.
             </p>
             <p className="leading-relaxed mb-8" style={{ color: "var(--color-text-secondary)" }}>
               Check any post on your site, review each suggested edit side by side and approve the ones
@@ -217,12 +219,17 @@ export default function WordPressAiPluginPage() {
               <a href={WP_SIGNUP_URL} className="btn btn-primary">
                 Join the beta, get it free
               </a>
+              <a href={WP_PLUGIN_DOWNLOAD_PATH} className="btn btn-secondary" download>
+                Download the plugin (v{WP_PLUGIN_VERSION})
+              </a>
               <a href="#pricing" className="btn btn-secondary">
                 See plans
               </a>
             </div>
             <p className="mt-4 text-sm" style={{ color: "var(--color-text-muted)" }}>
-              Coming to the WordPress plugin directory. Works with Yoast SEO, Rank Math and All in One SEO.
+              To install: in WordPress go to Plugins, Add New, Upload Plugin, choose the zip, then Activate and click
+              Connect to Draftly. Coming to the WordPress plugin directory. Works with Yoast SEO, Rank Math and All in
+              One SEO.
             </p>
           </div>
           <ProductFigure shot={WP_SHOTS.review} className="min-w-0" />
