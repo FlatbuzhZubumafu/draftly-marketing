@@ -22,7 +22,23 @@ function gtag(){dataLayer.push(arguments);}
 var ads = ${ADS_ENABLED ? "!(navigator.globalPrivacyControl === true)" : "false"} ? 'granted' : 'denied';
 gtag('consent', 'default', { ad_storage: ads, ad_user_data: ads, ad_personalization: ads, analytics_storage: 'granted' });
 gtag('js', new Date());
-gtag('config', '${GA_ID}', { allow_google_signals: false, allow_ad_personalization_signals: ${ADS_ENABLED} });`}
+gtag('config', '${GA_ID}', { allow_google_signals: false, allow_ad_personalization_signals: ${ADS_ENABLED} });
+// WordPress plugin downloads: one plugin_download event per click on any link to the plugin zip.
+document.addEventListener('click', function (e) {
+  var a = e.target && e.target.closest ? e.target.closest('a[href*="/downloads/draftly-wordpress-plugin"]') : null;
+  if (!a) return;
+  var href = a.getAttribute('href') || '';
+  var m = href.match(/draftly-wordpress-plugin-?([0-9.]+)?\\.zip/);
+  var location = a.getAttribute('data-download-location')
+    || (a.closest('#pricing') ? 'pricing_free_plan' : (a.closest('[data-toc-skip]') ? 'closing_cta' : 'other'));
+  gtag('event', 'plugin_download', {
+    plugin_name: 'draftly_wordpress',
+    plugin_version: a.getAttribute('data-plugin-version') || (m && m[1]) || ((document.querySelector('[data-plugin-version]') || { getAttribute: function () { return null; } }).getAttribute('data-plugin-version')) || 'latest',
+    link_location: location,
+    link_url: href,
+    transport_type: 'beacon'
+  });
+}, true);`}
       </Script>
     </>
   );
