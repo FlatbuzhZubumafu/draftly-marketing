@@ -105,8 +105,8 @@ export default async function JasperAlternativesPage() {
               </em>
             </h1>
             <p className="text-lg leading-relaxed mb-4" style={{ color: "var(--color-text-secondary)" }}>
-              The complaints that come up most about Jasper and other AI copywriting tools are price, trials that need a
-              card, drafts that read like AI, made-up facts and copying posts into WordPress by hand. Draftly was built
+              The complaints that come up most about Jasper and other AI copywriting tools are price, trials that turn into
+              surprise charges, drafts that read like AI, made-up facts and copying posts into WordPress by hand. Draftly was built
               around those complaints for small-business blogs. Jasper is still the better pick for a marketing team
               writing across many channels.
             </p>
