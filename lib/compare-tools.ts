@@ -3,7 +3,9 @@
 //
 // Every competitor claim carries the public source it came from. Sources were
 // gathered by web search on 2026-10-11 (docs/competitive-research-2026.md in
-// the draftly.blog repo); vendor pages could not be opened directly, so check
+// the draftly.blog repo), re-checked by web search the same day; vendor pages
+// could not be opened directly. Jasper's card-for-trial policy could not be
+// confirmed either way, so the page makes no claim about it. Check
 // each price and plan limit on the vendor's own site before publishing, and
 // again whenever CHECKED changes. Draftly's side must stay true to
 // lib/pricing.ts and the app: if a Draftly claim stops being true, delete it.
@@ -43,11 +45,11 @@ export const COMPLAINTS: Complaint[] = [
   },
   {
     id: "billing",
-    complaint: "The free trial wanted my card, then charged me",
+    complaint: "The free trial turned into a charge I didn't expect",
     about: [
       {
         tool: "Jasper",
-        detail: "The 7-day trial asks for a card, and Trustpilot reviewers describe being charged when it ended and finding cancellation hard.",
+        detail: "Trustpilot reviewers describe being charged when the 7-day trial ended and finding cancellation hard.",
         sources: [
           { label: "Jasper help: free trial", href: "https://help.jasper.ai/hc/en-us/articles/18618674196891-Free-Trial" },
           { label: "Jasper on Trustpilot", href: "https://jasper.ai/trustpilot" },
@@ -237,12 +239,12 @@ export const TABLE_ROWS: { label: string; cells: Record<(typeof TABLE_TOOLS)[num
     },
   },
   {
-    label: "Try it without a credit card",
+    label: "Free way to try it",
     cells: {
-      Draftly: { text: "Yes, first post free", good: true },
-      Jasper: { text: "No, card for the 7-day trial" },
+      Draftly: { text: "First post free, no card", good: true },
+      Jasper: { text: "7-day trial of Pro" },
       Surfer: { text: "Not listed" },
-      Koala: { text: "Not listed" },
+      Koala: { text: "Free trial", good: true },
       "Copy.ai": { text: "Not listed" },
     },
   },
