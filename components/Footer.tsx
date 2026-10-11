@@ -52,6 +52,7 @@ export async function Footer() {
                 ["/ai-copywriter", "AI Copywriting"],
                 ["/seo-copywriting", "SEO Copywriting Rules"],
                 ["/ai-seo-agency-vs-tool", "AI SEO Agency vs Tool"],
+                ["/jasper-alternatives", "Jasper Alternatives"],
                 ["/best-ai-for-writing", "AI Model Benchmark"],
               ]}
             />

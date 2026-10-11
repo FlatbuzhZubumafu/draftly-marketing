@@ -257,6 +257,63 @@ a:hover { color: var(--color-text-primary); }
   stroke-dashoffset: 0;
 }
 
+/* === Homepage hero: the bloated headline Draftly edits down (components/HeroHeadline.tsx) ===
+   The cut phrases are CSS generated content, so they never reach the DOM text. They show only
+   while the h1 has .hero-verbose and the visitor allows motion; otherwise the clean headline
+   paints first. */
+.hero-cut { display: none; }
+.hero-line { white-space: nowrap; }
+.hero-keep { display: inline-block; }
+.hero-late { transition: opacity 0.3s ease; }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-verbose .hero-cut { display: inline; position: relative; }
+  .hero-verbose .hero-line { white-space: normal; }
+  /* The final period stays hidden behind the "!!!" until the cut. */
+  .hero-verbose .hero-late { opacity: 0; }
+  /* The underline draws once the edit is done, as the payoff. */
+  .hero-verbose .squiggle-path.in-view { stroke-dashoffset: 1; }
+}
+.hero-cut::before {
+  content: attr(data-text);
+  color: var(--color-text-primary);
+  background-image: linear-gradient(var(--color-accent), var(--color-accent));
+  background-repeat: no-repeat;
+  background-position: 0 60%;
+  background-size: 0% 0.07em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition: background-size 0.35s ease, color 0.35s ease, opacity 0.25s ease;
+}
+.hero-cut.is-struck::before {
+  background-size: 100% 0.07em;
+  color: var(--color-text-muted);
+}
+.hero-cut::after {
+  content: attr(data-label);
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #fff;
+  background: var(--color-accent);
+  border-radius: 999px;
+  padding: 4px 8px;
+  opacity: 0;
+  transform: translate(-50%, 4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+.hero-cut.is-struck::after { opacity: 1; transform: translate(-50%, 0); }
+.hero-cut.is-fading::before,
+.hero-cut.is-fading::after { opacity: 0; }
+
 /* Marquee */
 .marquee-wrapper {
   overflow: hidden;
