@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { MarketingSettings } from "@/lib/graphql";
 import { Globe, Loader2, ArrowRight } from "lucide-react";
-import { SquiggleUnderline } from "./SquiggleUnderline";
+import { HeroHeadline, HeroHeadlineNoScript, useHeadlineEdit } from "./HeroHeadline";
 import { normalizeSiteUrl } from "@/lib/siteUrl";
 
 const HERO_URL_ERROR_ID = "hero-url-error";
@@ -13,6 +13,8 @@ export function HeroDemo({ settings, startingPrice }: { settings: MarketingSetti
   const [url, setUrl] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const sectionRef = useRef<HTMLElement>(null);
+  const edit = useHeadlineEdit(sectionRef);
 
   const handleGenerate = (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,6 +35,7 @@ export function HeroDemo({ settings, startingPrice }: { settings: MarketingSetti
 
   return (
     <section
+      ref={sectionRef}
       id="hero"
       className="relative flex items-center overflow-hidden pt-24 pb-16 px-4"
       style={{ background: "var(--color-bg-primary)", minHeight: "90vh" }}
@@ -49,26 +52,13 @@ export function HeroDemo({ settings, startingPrice }: { settings: MarketingSetti
         }}
       />
 
-      <div className="container-draftly relative z-10 max-w-4xl text-center">
+      <div className="container-draftly relative z-10 max-w-4xl text-center" data-flip-root>
         <div className="reveal">
-          <h1 className="page-heading hero-heading mb-8">
-            <span className="eyebrow font-sans block mb-5" style={{ lineHeight: 1.4 }}>
-              AI blog writer for small businesses
-            </span>{" "}
-            <span className="whitespace-nowrap">The AI Copywriter</span>
-            <br />
-            <span className="whitespace-nowrap">
-              that{" "}
-              <span className="relative inline-block">
-                <em className="italic" style={{ color: "var(--color-accent)" }}>Hates AI Copy</em>
-                <SquiggleUnderline variant="basic" color="#ffce59" />
-              </span>
-              .
-            </span>
-          </h1>
+          <HeroHeadline phase={edit.phase} struck={edit.struck} />
+          <HeroHeadlineNoScript />
         </div>
 
-        <div className="reveal" style={{ transitionDelay: "0.1s" }}>
+        <div className="reveal" style={{ transitionDelay: "0.1s" }} data-flip>
           <p className="text-lg leading-relaxed mb-8 max-w-xl mx-auto" style={{ color: "var(--color-text-secondary)" }}>
             {s.heroSubhead}
           </p>

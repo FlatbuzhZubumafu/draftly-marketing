@@ -34,6 +34,12 @@ export const PILLARS: Pillar[] = [
     blurb: "What each one does, what it costs, and when a small business needs both.",
     keywords: ["agency", "seo agency", "hire", "cost", "outsourc", "strategy"],
   },
+  {
+    href: "/jasper-alternatives",
+    title: "Jasper alternatives, judged by user complaints",
+    blurb: "What users complain about in AI copywriting tools, and how Draftly answers each one.",
+    keywords: ["jasper", "alternative", "copy.ai", "surfer", "koala", "compare", "versus", " vs "],
+  },
 ];
 
 /** Live but thin or off-strategy posts: kept for readers, marked noindex, left out of the sitemap. */
