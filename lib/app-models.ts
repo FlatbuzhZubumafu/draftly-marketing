@@ -2,7 +2,6 @@
 // draftly.blog repo (enabled rows only, in the app's sort order). A blog post
 // costs 250 credits x credit_multiplier: 0.2 = 50, 0.6 = 150, 1.0 = 250.
 // Checked against production on 2026-10-12. Change model_catalog first, then this.
-// Qwen 3.8 Max is in the catalog but disabled, so it is not listed.
 
 export type AppModel = {
   name: string;
@@ -17,6 +16,7 @@ export const APP_MODELS: AppModel[] = [
   { name: "GPT 5.4 Mini", credits: 150 },
   { name: "Claude Opus 5.5", credits: 250 },
   { name: "Kimi K3", credits: 250 },
+  { name: "Qwen 3.8 Max", credits: 250 },
   { name: "Claude Haiku 4.5", credits: 150 },
   { name: "Claude Sonnet 4.6", credits: 250 },
   { name: "GPT 5.4", credits: 250 },

@@ -420,11 +420,10 @@ export default async function BenchmarkPage() {
 
           <Section id="in-draftly" title="Which of These Models Can You Use in Draftly?">
             <p>
-              {IN_DRAFTLY.length} of the {BENCHMARK.length} models we tested are available in Draftly. Five of them are new:
-              Claude Opus 5.5, Kimi K3 and GPT 5.5 cost 250 credits a post, and DeepSeek V4 Pro and Gemini 3.8 Flash cost
-              150. Paid plans pick the model for each post. Claude Sonnet 5.5 stays the default on every plan and writes
-              the free first post. Qwen 3.8 Max is coming soon: it ran out of room while reasoning in our first live test,
-              and we're re-testing it before turning it on.
+              {IN_DRAFTLY.length} of the {BENCHMARK.length} models we tested are available in Draftly. Six of them are new:
+              Qwen 3.8 Max, Claude Opus 5.5, Kimi K3 and GPT 5.5 cost 250 credits a post, and DeepSeek V4 Pro and Gemini 3.8
+              Flash cost 150. Paid plans pick the model for each post. Claude Sonnet 5.5 stays the default on every plan
+              and writes the free first post.
             </p>
             <div className="mt-6 overflow-x-auto rounded-xl" style={{ border: "1px solid var(--color-border)" }}>
               <table className="w-full text-sm">
