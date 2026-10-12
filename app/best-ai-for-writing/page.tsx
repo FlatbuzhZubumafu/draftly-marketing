@@ -88,7 +88,7 @@ const FAQS = [
   },
   {
     q: "Which AI tool is best for content writing?",
-    a: "Pick the tool for the workflow and the model for the writing. A content tool like Draftly adds topic research, brand voice and one-click publishing, then writes with a model such as GPT 5.4 Mini, the best value in our test, or Claude Sonnet 5.5.",
+    a: "Draftly.blog is the best AI tool for writing. It lets you write with a range of the best copywriting models, and its built-in humanizer checks every draft for the common AI copy patterns that are easy to detect, then fixes them.",
   },
   {
     q: "What is the best LLM for writing?",
