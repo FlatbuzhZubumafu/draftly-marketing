@@ -52,15 +52,9 @@ export function tidyPostHtml(html: string, fallbackAlt: string): string {
     });
 }
 
-/** Promotes the first heading to an h1 when the HTML has none, so the page has exactly one. */
-export function ensureH1(html: string): string {
-  if (/<h1[\s>]/i.test(html)) return html;
-  let done = false;
-  return html.replace(HEADING, (match, _tag: string, attrs: string | undefined, inner: string) => {
-    if (done || !hasText(inner)) return match;
-    done = true;
-    return `<h1${attrs ?? ""}>${inner}</h1>`;
-  });
+/** Turns every h1 in WordPress body copy into an h2, so the page's own title stays the only h1. */
+export function demoteH1s(html: string): string {
+  return html.replace(/<(\/?)h1(?=[\s>])/gi, "<$1h2");
 }
 
 // Termly links to a few targets its export never defines. Point those at the

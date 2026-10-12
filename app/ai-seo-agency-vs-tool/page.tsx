@@ -10,6 +10,7 @@ import { jsonLdHtml, authorRef } from "@/lib/schema";
 import { TocLayout } from "@/components/OnThisPage";
 import { PILLARS } from "@/lib/related";
 import { RelatedLinks } from "@/components/RelatedLinks";
+import { RelatedPosts } from "@/components/RelatedPosts";
 import { ProductFigure } from "@/components/ProductFigure";
 import { GUIDE_SHOTS, imageObjectJsonLd } from "@/lib/product-shots";
 
@@ -251,6 +252,7 @@ export default async function AgencyVsToolPage() {
 
           <div className="max-w-3xl">
             <RelatedLinks items={PILLARS.filter((p) => p.href !== "/ai-seo-agency-vs-tool").slice(0, 4)} />
+            <RelatedPosts topic="SEO agency or self-serve tool when search traffic drops" />
           </div>
           <FaqList faqs={FAQS} />
 

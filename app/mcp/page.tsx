@@ -9,6 +9,7 @@ import { BYO_AI_LINE, FREE_PLAN_LINE, MCP_URL, READ_ONLY_TOOL_COUNT, TOOLS, tool
 import { TocLayout } from "@/components/OnThisPage";
 import { PILLARS } from "@/lib/related";
 import { RelatedLinks } from "@/components/RelatedLinks";
+import { RelatedPosts } from "@/components/RelatedPosts";
 
 export const revalidate = 3600;
 
@@ -332,6 +333,7 @@ export default async function McpPage() {
 
           <div className="max-w-3xl">
             <RelatedLinks items={PILLARS.filter((p) => p.href !== "/mcp").slice(0, 4)} />
+            <RelatedPosts topic="SEO MCP server for Claude and ChatGPT with live keyword data" />
           </div>
           <section data-toc-skip className="mt-24 text-center">
             <h2 className="text-3xl font-medium mb-4" style={{ letterSpacing: "-0.03em" }}>

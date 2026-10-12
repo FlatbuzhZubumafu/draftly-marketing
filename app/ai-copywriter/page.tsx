@@ -10,6 +10,7 @@ import { jsonLdHtml } from "@/lib/schema";
 import { TocLayout } from "@/components/OnThisPage";
 import { PILLARS } from "@/lib/related";
 import { RelatedLinks } from "@/components/RelatedLinks";
+import { RelatedPosts } from "@/components/RelatedPosts";
 import { ProductFigure } from "@/components/ProductFigure";
 import { GUIDE_SHOTS } from "@/lib/product-shots";
 
@@ -209,6 +210,7 @@ export default async function AiCopywriterPage() {
 
           <div className="max-w-3xl">
             <RelatedLinks items={PILLARS.filter((p) => p.href !== "/ai-copywriter").slice(0, 4)} />
+            <RelatedPosts topic="How an AI blog writer for small business got built, and how it scales your blog" />
           </div>
           <FaqList faqs={FAQS} />
 

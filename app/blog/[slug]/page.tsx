@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import { DEFAULT_OG_IMAGE } from "@/lib/site";
+import { DEFAULT_OG_IMAGE, LOGO_URL, SITE_URL } from "@/lib/site";
+import { plainExcerpt } from "@/lib/text";
 import { getPost, getPosts } from "@/lib/graphql";
 import { sanitizeHtml, tidyPostHtml } from "@/lib/sanitize";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { notFound } from "next/navigation";
+import { RelatedPosts } from "@/components/RelatedPosts";
 import { OnThisPage } from "@/components/OnThisPage";
 import { NOINDEX_POST_SLUGS, relatedPillars } from "@/lib/related";
 import { RelatedLinks } from "@/components/RelatedLinks";
@@ -16,21 +18,6 @@ export const revalidate = 60;
 export async function generateStaticParams() {
   const posts = await getPosts();
   return posts.map((post) => ({ slug: post.slug }));
-}
-
-function plainExcerpt(html: string | undefined, max = 160): string {
-  const text = (html ?? "")
-    .replace(/<[^>]*>/g, " ")
-    .replace(/&nbsp;|&#160;/g, " ")
-    .replace(/&#8217;|&rsquo;/g, "'")
-    .replace(/&#8220;|&#8221;|&ldquo;|&rdquo;/g, '"')
-    .replace(/&amp;/g, "&")
-    .replace(/\[(?:&hellip;|&#8230;|…)\]|&hellip;|&#8230;/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
-  if (text.length <= max) return text;
-  const cut = text.slice(0, max - 1);
-  return cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:.\s]+$/, "") + "…";
 }
 
 const TITLE_SUFFIX = " | Draftly";
@@ -87,15 +74,17 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     "@graph": [
       {
         "@type": "BlogPosting",
-        headline: post.title,
+        headline: plainExcerpt(post.title, 110),
         description: plainExcerpt(post.excerpt),
         url,
         mainEntityOfPage: url,
         datePublished: post.date,
         dateModified: post.modified || post.date,
-        image: post.featuredImage?.node?.sourceUrl,
+        image: post.featuredImage?.node?.sourceUrl ?? `${SITE_URL}${DEFAULT_OG_IMAGE.url}`,
         author: /preston/i.test(post.author?.node?.name ?? "") ? authorRef : post.author?.node?.name ? { "@type": "Person", name: post.author.node.name } : undefined,
-        publisher: { "@type": "Organization", name: "Draftly", url: "https://www.draftly.blog" },
+        // Resolves to the Organization node (with logo) that the root layout renders.
+        publisher: { "@type": "Organization", "@id": `${SITE_URL}/#organization`, name: "Draftly", url: SITE_URL, logo: LOGO_URL },
+        isPartOf: { "@type": "Blog", "@id": `${SITE_URL}/blog#blog` },
       },
       {
         "@type": "BreadcrumbList",
@@ -141,6 +130,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           />
           <NewsletterSignup location="blog_post" className="mt-16" />
           <RelatedLinks items={relatedPillars(`${post.title} ${post.content.replace(/<[^>]*>/g, " ")}`)} />
+          <RelatedPosts topic={`${post.title} ${post.excerpt}`} exclude={post.slug} count={3} heading="More from the blog" />
         </article>
         <OnThisPage />
         </div>

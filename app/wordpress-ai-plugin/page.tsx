@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer";
 import { A, B, DarkCta, FaqList, faqJsonLd, type Faq } from "@/components/ArticleParts";
 import { ProductFigure } from "@/components/ProductFigure";
 import { RelatedLinks } from "@/components/RelatedLinks";
+import { RelatedPosts } from "@/components/RelatedPosts";
 import { WordPressCompare } from "@/components/WordPressCompare";
 import { WordPressPlans } from "@/components/WordPressPlans";
 import { PILLARS } from "@/lib/related";
@@ -348,6 +349,7 @@ export default function WordPressAiPluginPage() {
 
           <div className="max-w-3xl">
             <RelatedLinks items={PILLARS.filter((p) => ["/seo-copywriting", "/ai-copywriter", "/mcp", "/best-ai-for-writing"].includes(p.href))} />
+            <RelatedPosts topic="WordPress SEO blog posts for small business" />
           </div>
 
           <DarkCta
