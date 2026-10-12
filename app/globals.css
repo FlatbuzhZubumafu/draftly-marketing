@@ -278,7 +278,7 @@ a:hover { color: var(--color-text-primary); }
   color: var(--color-text-primary);
   background-image: linear-gradient(var(--color-accent), var(--color-accent));
   background-repeat: no-repeat;
-  background-position: 0 60%;
+  background-position: 0 46%; /* middle of the lowercase letters in the hero serif */
   background-size: 0% 0.07em;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
