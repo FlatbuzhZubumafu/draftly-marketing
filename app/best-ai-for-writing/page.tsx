@@ -18,6 +18,17 @@ import {
 import { TocLayout } from "@/components/OnThisPage";
 import { KeepReading } from "@/components/KeepReading";
 import { ModelName } from "@/components/ProviderLogo";
+import { CriterionExamples } from "@/components/CriterionExamples";
+import {
+  AUDIT_POINTS,
+  AUDIT_READS,
+  BLOG_CRITERIA,
+  CHECK_GROUPS,
+  CONTENT_CRITERIA,
+  COPY_CRITERIA,
+  JUDGE_CRITERIA,
+  SEO_CRITERIA,
+} from "@/lib/benchmarkExamples";
 import { authorRef } from "@/lib/schema";
 
 export const revalidate = 3600;
@@ -73,22 +84,7 @@ const IN_DRAFTLY = BENCHMARK.flatMap((r) => {
   return credits === undefined ? [] : [{ ...r, credits }];
 }).sort((a, b) => b.overall - a.overall);
 
-const NEW_IN_DRAFTLY = ["Claude Opus 5.5", "Kimi K3", "GPT 5.5", "DeepSeek V4 Pro", "Gemini 3.8 Flash"];
-
-const CHECKS = [
-  "Length between 950 and 1,500 words",
-  "Em dashes kept to about one per 300 words",
-  "No AI vocabulary such as seamless, leverage, delve or landscape",
-  "No \"it's not X, it's Y\" contrast phrasing",
-  "No mechanical openers such as Additionally or Furthermore",
-  "One H1, at least three H2s, and no section titled Introduction or Conclusion",
-  "No paragraph over 120 words",
-  "An FAQ section answering the brief's questions",
-  "Target keyword in the title, the first 100 words and an H2",
-  "Meta title and meta description at the right length",
-  "The post ends on the call to action from the brief",
-  "No emoji",
-];
+const NEW_IN_DRAFTLY = ["Qwen 3.8 Max", "Claude Opus 5.5", "Kimi K3", "GPT 5.5", "DeepSeek V4 Pro", "Gemini 3.8 Flash"];
 
 const FAQS = [
   {
@@ -284,6 +280,11 @@ export default async function BenchmarkPage() {
           <div className="max-w-4xl">
             <QueryTable<BenchmarkRow> {...CONTENT_TABLE} />
           </div>
+          <CriterionExamples
+            items={CONTENT_CRITERIA}
+            source="Blog post"
+            intro="Each column above is a check the script ran on every post. Here is what each one looks for, with real lines from the test."
+          />
 
           <Section id="copywriting" title="Best AI for Copywriting">
             <p>
@@ -305,6 +306,24 @@ export default async function BenchmarkPage() {
           <div className="max-w-4xl">
             <QueryTable<CopyRow> {...COPY_TABLE} />
           </div>
+          <CriterionExamples
+            items={COPY_CRITERIA}
+            source="Copy pack"
+            intro="Code scored each pack on hard limits and the facts it used, and two judges scored the writing. Here is each part, with real lines from the packs."
+          >
+            {{
+              "judge-criteria": (
+                <dl className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-sm leading-relaxed">
+                  {JUDGE_CRITERIA.map((j) => (
+                    <div key={j.name}>
+                      <dt className="font-semibold" style={{ color: "var(--color-text-primary)" }}>{j.name}</dt>
+                      <dd style={{ color: "var(--color-text-secondary)" }}>{j.def}</dd>
+                    </div>
+                  ))}
+                </dl>
+              ),
+            }}
+          </CriterionExamples>
 
           <Section id="seo-writing" title="Best AI for SEO Writing">
             <p>
@@ -328,6 +347,11 @@ export default async function BenchmarkPage() {
           <div className="max-w-4xl">
             <QueryTable<BenchmarkRow> {...SEO_TABLE} />
           </div>
+          <CriterionExamples
+            items={SEO_CRITERIA}
+            source="Blog post"
+            intro="The 18 SEO checks are six checks run on three posts. Here is each one, with a real pass and miss."
+          />
 
           <Section id="blog-writing" title="Best AI for Blog Writing">
             <p>
@@ -343,6 +367,11 @@ export default async function BenchmarkPage() {
           <div className="max-w-4xl">
             <QueryTable<BenchmarkRow> {...BLOG_TABLE} />
           </div>
+          <CriterionExamples
+            items={BLOG_CRITERIA}
+            source="Blog post"
+            intro="These checks show whether a model can carry a whole post. Here is each one, with real examples from the test."
+          />
 
           <Section id="chatgpt" title="Is ChatGPT Still the Best AI for Writing?">
             <p>
@@ -406,16 +435,69 @@ export default async function BenchmarkPage() {
                 other judge did (Gemini 3 Flash 80 versus 88, GPT 5.4 77 versus 81), and averaging two judges from different
                 companies limits any one family&apos;s bias.
               </p>
-              <p>For formatting, a script scored every blog post against 12 checks, with points taken off for each miss:</p>
+              <p>
+                For formatting, a script scored every blog post against 12 checks, with points taken off for each miss.
+                We grouped them by what they catch and linked each one to its example above, which keeps this part a
+                quick reference.
+              </p>
             </div>
-            <ul className="mt-4 space-y-2 text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-              {CHECKS.map((c) => (
-                <li key={c} className="flex gap-3">
-                  <span className="mt-[9px] h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: "var(--color-accent)" }} aria-hidden="true" />
-                  <span>{c}</span>
-                </li>
-              ))}
-            </ul>
+            {CHECK_GROUPS.map((g) => (
+              <div key={g.id} id={g.id} className="mt-10 scroll-mt-28">
+                <h3 className="text-xl font-medium mb-4" style={{ letterSpacing: "-0.02em" }}>
+                  {g.title}
+                </h3>
+                <dl className="rounded-xl overflow-hidden text-sm" style={{ border: "1px solid var(--color-border)" }}>
+                  {g.checks.map((c, i) => (
+                    <div
+                      key={c.rule}
+                      className="px-4 py-3 sm:grid sm:grid-cols-[minmax(0,1fr)_minmax(0,14rem)] sm:gap-6"
+                      style={{ borderTop: i ? "1px solid var(--color-border)" : undefined, background: i % 2 ? undefined : "var(--color-bg-surface)" }}
+                    >
+                      <dt>
+                        <span className="font-semibold" style={{ color: "var(--color-text-primary)" }}>{c.rule}</span>
+                        <span className="block text-xs mt-0.5" style={{ color: "var(--color-text-muted)" }}>Costs {c.cost}</span>
+                      </dt>
+                      <dd className="mt-1.5 sm:mt-0 leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+                        {c.result}{" "}
+                        {c.href ? (
+                          <a href={c.href} className="whitespace-nowrap" style={{ color: "var(--color-accent)" }}>
+                            See the example
+                          </a>
+                        ) : null}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            ))}
+
+            <div id="human-voice-audit" className="mt-10 scroll-mt-28">
+              <h3 className="text-xl font-medium mb-3" style={{ letterSpacing: "-0.02em" }}>
+                The 13-Point Human-Voice Audit
+              </h3>
+              <p className="leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+                Each judge started every post at 100 and took off 12 points for a serious problem on any point below, or 5
+                for a minor one. The list runs from the most flagged to the least, counted across {AUDIT_READS} judge reads
+                (42 posts, two judges each). We kept it as one list so it reads as the single checklist the judges used.
+              </p>
+              <dl className="mt-5 rounded-xl overflow-hidden text-sm" style={{ border: "1px solid var(--color-border)" }} data-lint-skip="">
+                {AUDIT_POINTS.map((a, i) => (
+                  <div
+                    key={a.name}
+                    className="px-4 py-3 grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 sm:grid-cols-[11rem_minmax(0,1fr)_auto]"
+                    style={{ borderTop: i ? "1px solid var(--color-border)" : undefined, background: i % 2 ? undefined : "var(--color-bg-surface)" }}
+                  >
+                    <dt className="font-semibold" style={{ color: "var(--color-text-primary)" }}>{a.name}</dt>
+                    <dd className="col-span-2 row-start-2 sm:col-span-1 sm:row-start-1 sm:col-start-2 mt-0.5 sm:mt-0 leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+                      {a.def}
+                    </dd>
+                    <dd className="col-start-2 row-start-1 sm:col-start-3 text-right tabular-nums whitespace-nowrap" style={{ color: "var(--color-text-muted)" }}>
+                      <span className="font-semibold" style={{ color: "var(--color-text-primary)" }}>{a.flagged}</span> of {AUDIT_READS}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
           </section>
 
           <Section id="in-draftly" title="Which of These Models Can You Use in Draftly?">
