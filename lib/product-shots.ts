@@ -80,7 +80,7 @@ export const GUIDE_THUMBS: Record<string, ProductShot> = {
   "/ai-seo-agency-vs-tool": shot("guide-thumb-agency-vs-tool.webp", 1280, 800,
     "Preview of the AI SEO agency vs tool page: a table matching business situations to an agency, a tool or both", ""),
   "/jasper-vs-draftly": shot("guide-thumb-jasper-vs-draftly.webp", 1280, 800,
-    "Preview of the Jasper vs Draftly page: a side-by-side table comparing price, free trial, brand voice, writing checks and publishing", ""),
+    "Preview of the Jasper vs Draftly page: bake-off scorecard across four real businesses, average Human voice 80 for Jasper and 99 for Draftly, Reads as AI 30 and 22, own-site links 0 and 10", ""),
   "/pricing": shot("guide-thumb-pricing.webp", 1280, 800,
     "Preview of the pricing page: Free, Solopreneur at $29, Growth at $69 and Autopilot at $100 a month", ""),
   "/wordpress-ai-plugin": shot("guide-thumb-wordpress-plugin.webp", 1280, 800,
