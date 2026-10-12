@@ -9,6 +9,8 @@ type Props = {
   location: NewsletterLocation;
   /** "dark" sits on the black footer. */
   tone?: "light" | "dark";
+  /** One heading line and the form, no subhead: for the footer. */
+  compact?: boolean;
   className?: string;
 };
 
@@ -36,7 +38,7 @@ function currentUtm(): Record<string, string> {
  * The consent line below the field is stored with the signup (consent_version),
  * so change NEWSLETTER_CONSENT_VERSION and the server text together.
  */
-export function NewsletterSignup({ location, tone = "light", className = "" }: Props) {
+export function NewsletterSignup({ location, tone = "light", compact = false, className = "" }: Props) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
@@ -92,7 +94,7 @@ export function NewsletterSignup({ location, tone = "light", className = "" }: P
         id={headingId}
         className="font-medium"
         style={{
-          fontSize: dark ? "1.375rem" : "1.5rem",
+          fontSize: compact ? "1rem" : dark ? "1.375rem" : "1.5rem",
           lineHeight: 1.2,
           letterSpacing: "-0.02em",
           color: dark ? "#fff" : "var(--color-text-primary)",
@@ -100,16 +102,18 @@ export function NewsletterSignup({ location, tone = "light", className = "" }: P
       >
         One practical SEO-writing tip, every other week
       </h2>
-      <p className="mt-2 text-base" style={{ color: muted }}>
-        Short, useful, no fluff. Unsubscribe anytime.
-      </p>
+      {compact ? null : (
+        <p className="mt-2 text-base" style={{ color: muted }}>
+          Short, useful, no fluff. Unsubscribe anytime.
+        </p>
+      )}
 
       {status === "success" ? (
-        <p role="status" className="mt-5 rounded-lg px-4 py-3 text-base font-medium" style={{ background: dark ? "rgba(255,255,255,0.06)" : "var(--color-accent-muted)", color: dark ? "#fff" : "var(--color-text-primary)" }}>
+        <p role="status" className={`${compact ? "mt-3" : "mt-5"} rounded-lg px-4 py-3 text-base font-medium`} style={{ background: dark ? "rgba(255,255,255,0.06)" : "var(--color-accent-muted)", color: dark ? "#fff" : "var(--color-text-primary)" }}>
           Check your inbox to confirm. The link is in an email from hello@draftly.blog.
         </p>
       ) : (
-        <form onSubmit={onSubmit} noValidate={false} className="mt-5">
+        <form onSubmit={onSubmit} noValidate={false} className={compact ? "mt-3" : "mt-5"}>
           <div className="flex flex-col sm:flex-row gap-3">
             <label htmlFor={`newsletter-email-${location}`} className="sr-only">
               Email address
@@ -127,7 +131,7 @@ export function NewsletterSignup({ location, tone = "light", className = "" }: P
               disabled={status === "submitting"}
               aria-invalid={status === "error" ? true : undefined}
               aria-describedby={status === "error" ? `newsletter-error-${location}` : undefined}
-              className="w-full sm:flex-1 min-w-0 rounded-lg px-4 py-3 text-base outline-none transition-colors focus:ring-2"
+              className={`w-full sm:flex-1 min-w-0 rounded-lg px-4 ${compact ? "py-2.5" : "py-3"} text-base outline-none transition-colors focus:ring-2`}
               style={{
                 background: dark ? "#111" : "var(--color-bg-primary)",
                 color: dark ? "#fff" : "var(--color-text-primary)",
@@ -141,7 +145,7 @@ export function NewsletterSignup({ location, tone = "light", className = "" }: P
               <label htmlFor={`newsletter-website-${location}`}>Website</label>
               <input id={`newsletter-website-${location}`} type="text" name="website" tabIndex={-1} autoComplete="off" defaultValue="" />
             </div>
-            <button type="submit" className="btn btn-primary justify-center" disabled={status === "submitting"} style={status === "submitting" ? { opacity: 0.7, cursor: "wait" } : undefined}>
+            <button type="submit" className="btn btn-primary justify-center" disabled={status === "submitting"} style={{ ...(compact ? { paddingTop: 10, paddingBottom: 10, fontSize: 15 } : {}), ...(status === "submitting" ? { opacity: 0.7, cursor: "wait" } : {}) }}>
               {status === "submitting" ? "Subscribing…" : "Subscribe"}
             </button>
           </div>

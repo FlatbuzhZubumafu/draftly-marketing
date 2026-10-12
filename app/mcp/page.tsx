@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DEFAULT_OG_IMAGE } from "@/lib/site";
+import { pageImages } from "@/lib/og";
 import { Check } from "lucide-react";
 import { getHomepageData } from "@/lib/graphql";
 import { Header } from "@/components/Header";
@@ -7,9 +7,8 @@ import { Footer } from "@/components/Footer";
 import { CopyUrl } from "@/components/CopyUrl";
 import { BYO_AI_LINE, FREE_PLAN_LINE, MCP_URL, READ_ONLY_TOOL_COUNT, TOOLS, toolPlans } from "@/lib/mcp";
 import { TocLayout } from "@/components/OnThisPage";
-import { PILLARS } from "@/lib/related";
-import { RelatedLinks } from "@/components/RelatedLinks";
-import { RelatedPosts } from "@/components/RelatedPosts";
+import { KeepReading } from "@/components/KeepReading";
+import { ModelName } from "@/components/ProviderLogo";
 
 export const revalidate = 3600;
 
@@ -21,7 +20,7 @@ export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESCRIPTION,
   alternates: { canonical: "/mcp" },
-  openGraph: { title: TITLE, description: DESCRIPTION, type: "article", url: "https://www.draftly.blog/mcp", images: [DEFAULT_OG_IMAGE] },
+  ...pageImages("/mcp", { title: TITLE, description: DESCRIPTION, type: "article", url: "https://www.draftly.blog/mcp" }),
 };
 
 const ALLOWANCES = [
@@ -176,7 +175,9 @@ export default async function McpPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {CLIENTS.map((c) => (
                 <div key={c.name} className="p-6 card-depth" style={{ background: "var(--color-bg-surface)" }}>
-                  <h3 className="font-semibold mb-4">{c.name}</h3>
+                  <h3 className="font-semibold mb-4">
+                    <ModelName model={c.name} size={22} />
+                  </h3>
                   <ol className="space-y-3 text-sm leading-relaxed list-decimal pl-5" style={{ color: "var(--color-text-secondary)" }}>
                     {c.steps.map((step, i) =>
                       typeof step === "object" && step !== null && "type" in step && step.type === "pre" ? (
@@ -332,8 +333,7 @@ export default async function McpPage() {
           </section>
 
           <div className="max-w-3xl">
-            <RelatedLinks items={PILLARS.filter((p) => p.href !== "/mcp").slice(0, 4)} />
-            <RelatedPosts topic="SEO MCP server for Claude and ChatGPT with live keyword data" />
+            <KeepReading exclude="/mcp" guides={["/best-ai-for-writing", "/seo-copywriting"]} topic="SEO MCP server for Claude and ChatGPT with live keyword data" />
           </div>
           <section data-toc-skip className="mt-24 text-center">
             <h2 className="text-3xl font-medium mb-4" style={{ letterSpacing: "-0.03em" }}>

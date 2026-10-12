@@ -1,154 +1,113 @@
 import { getHomepageData } from "@/lib/graphql";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
+import { CopyEmail } from "@/components/CopyEmail";
 
-import { latestPosts } from "@/components/RelatedPosts";
-import { plainExcerpt } from "@/lib/text";
+const MUTED = "#8a8a8a";
+const FAINT = "#666";
+
+const PRODUCT: [string, string][] = [
+  ["/#how-it-works", "How it works"],
+  ["/pricing", "Pricing"],
+  ["/wordpress-ai-plugin", "WordPress plugin"],
+  ["/mcp", "MCP connector"],
+];
+
+// /blog is the hub: every guide and every post is one click from it.
+const RESOURCES: [string, string][] = [
+  ["/blog", "Blog"],
+  ["/blog#guides", "Guides"],
+  ["/best-ai-for-writing", "Best AI for writing"],
+  ["/jasper-vs-draftly", "Jasper vs Draftly"],
+  ["/#faq", "FAQ"],
+];
 
 export async function Footer() {
-  const [{ marketingSettings: s }, recent] = await Promise.all([getHomepageData(), latestPosts(3)]);
-  const registerUrl = `${s.appName}/register`;
+  const { marketingSettings: s } = await getHomepageData();
   const year = new Date().getFullYear();
 
   return (
-    <>
-      <section style={{ background: "#000" }} className="px-4">
-        {/* Extra bottom padding below md keeps the sticky mobile CTA off the copyright line */}
-        <div className="container-draftly py-20 pb-32 md:pb-20">
-          <div className="grid grid-cols-2 md:grid-cols-12 gap-8 items-start">
-            {/* Heading */}
-            <div className="col-span-2 md:col-span-6">
-              <h2
-                className="font-medium text-white"
-                style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", lineHeight: "1.1", letterSpacing: "-0.03em" }}
-              >
-                Write Better Drafts,<br />
-                <em className="italic" style={{ color: "#ffce59" }}>
-                  Stay Top of Mind
-                </em>
-              </h2>
-              <div className="mt-8">
-                <a
-                  href={registerUrl}
-                  className="inline-flex items-center gap-2 font-semibold text-white px-8 py-3 rounded-lg transition-all hover:opacity-90 hover:-translate-y-0.5"
-                  style={{ background: "var(--color-accent)", boxShadow: "var(--shadow-accent)" }}
-                >
-                  {s.heroCtaText}
+    <footer style={{ background: "#000" }} className="px-4">
+      {/* Extra bottom padding below md keeps the sticky mobile CTA off the copyright line */}
+      <div className="container-draftly pt-16 pb-28 md:pb-10">
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-x-8 gap-y-10">
+          <div className="col-span-2 md:col-span-5">
+            <a href="/" className="inline-flex items-center gap-2.5">
+              {s.logoUrl && <img src={s.logoUrl} alt="" className="h-7 w-auto" />}
+              <span className="text-[22px] font-bold lowercase text-white" style={{ letterSpacing: "var(--tracking-logo)" }}>
+                {s.companyName.toLowerCase()}
+              </span>
+            </a>
+            <p className="mt-3 text-sm leading-relaxed max-w-sm" style={{ color: MUTED }}>
+              The AI blog writer for small businesses. SEO-ready posts in your brand&apos;s voice, published to your site.
+            </p>
+            <NewsletterSignup location="footer" tone="dark" compact className="mt-8 max-w-md" />
+          </div>
+
+          <FooterColumn title="Product" links={PRODUCT} className="md:col-start-7" />
+          <FooterColumn title="Resources" links={RESOURCES} />
+          <div className="col-span-2 sm:col-span-1 md:col-span-2">
+            <h2 className="text-white font-semibold mb-4 text-sm">Company</h2>
+            <ul className="space-y-3 text-sm">
+              <li>
+                <CopyEmail email="preston@draftly.blog" color={MUTED} />
+              </li>
+              <li>
+                <a href="/privacy-policy" className="transition-colors hover:text-white" style={{ color: MUTED }}>
+                  Privacy policy
                 </a>
-              </div>
-              {recent.length > 0 && (
-                <div className="mt-10 max-w-md">
-                  <h5 className="text-white font-semibold mb-4 text-base">Latest from the blog</h5>
-                  <ul className="space-y-3">
-                    {recent.map((p) => (
-                      <li key={p.slug}>
-                        <a href={`/blog/${p.slug}`} className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
-                          {plainExcerpt(p.title, 1000)}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-
-            <FooterColumn
-              title="Draftly"
-              links={[
-                ["/#how-it-works", "How It Works"],
-                ["/#features", "Features"],
-                ["/#testimonials", "Testimonials"],
-                ["/pricing", "Pricing"],
-                ["/mcp", "MCP Connector"],
-                ["/wordpress-ai-plugin", "WordPress Plugin"],
-                ["/blog", "Blog"],
-                ["/#faq", "FAQ"],
-              ]}
-            />
-            <FooterColumn
-              title="Resources"
-              links={[
-                ["/ai-copywriter", "AI Copywriter"],
-                ["/seo-copywriting", "SEO Copywriting Rules"],
-                ["/best-ai-for-writing", "Best AI for Writing"],
-                ["/ai-seo-agency-vs-tool", "AI SEO Agency vs Tool"],
-                ["/jasper-vs-draftly", "Jasper vs Draftly"],
-              ]}
-            />
-            <FooterColumn
-              title="About Us"
-              links={[
-                ["sms:+13857224497?&body=Hi%2C%20I%20am%20interested%20in%20learning%20more%20about%20Draftly.", "385-722-4497"],
-                ["mailto:preston@draftly.blog", "preston@draftly.blog"],
-                ["/privacy-policy", "Privacy Policy"],
-                ["/terms-and-conditions", "Terms"],
-              ]}
-            />
-          </div>
-
-          {/* Newsletter signup */}
-          <div className="mt-12 pt-10 max-w-xl" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-            <NewsletterSignup location="footer" tone="dark" />
-          </div>
-
-          {/* Row 2: payment and infrastructure trust marks, then copyright */}
-          <div
-            className="mt-12 pt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-5"
-            style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
-          >
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
-              <span className="inline-flex items-center gap-2 text-sm" style={{ color: "#888" }}>
-                <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                  <rect x="4" y="10" width="16" height="11" rx="2" />
-                  <path d="M8 10V7a4 4 0 0 1 8 0v3" />
-                </svg>
-                Secure checkout by <span className="font-semibold" style={{ color: "#bbb" }}>Stripe</span>
-              </span>
-              <span className="flex items-center gap-3" aria-label="Accepted payment methods">
-                {[
-                  ["visa", "Visa"],
-                  ["mastercard", "Mastercard"],
-                  ["applepay", "Apple Pay"],
-                ].map(([file, name]) => (
-                  <img key={file} src={`/brand/${file}.svg`} alt={name} title={name} className="h-6 w-auto" style={{ filter: "invert(1)", opacity: 0.6 }} />
-                ))}
-              </span>
-              <p className="basis-full text-xs" style={{ color: "#666" }}>
-                Runs on SOC 2 Type II certified infrastructure from Supabase, Vercel and Stripe.
-              </p>
-            </div>
-
-            {/* Copyright */}
-            <div className="md:text-right">
-              <p className="text-sm" style={{ color: "#666" }}>
-                © {s.footerText} {year}.
-              </p>
-              <p className="text-sm mt-1" style={{ color: "#666" }}>
-                A{" "}
+              </li>
+              <li>
+                <a href="/terms-and-conditions" className="transition-colors hover:text-white" style={{ color: MUTED }}>
+                  Terms
+                </a>
+              </li>
+              <li>
                 <a
-                  href="https://prestonvawdrey.com"
-                  className="underline underline-offset-2 transition-colors hover:text-white"
-                  style={{ color: "#888" }}
+                  href="sms:+13857224497?&body=Hi%2C%20I%20am%20interested%20in%20learning%20more%20about%20Draftly."
+                  className="text-xs transition-colors hover:text-white"
+                  style={{ color: FAINT }}
                 >
-                  Preston Vawdrey
-                </a>{" "}
-                SEO product
-              </p>
-            </div>
+                  Text 385-722-4497
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
-      </section>
-    </>
+
+        <div
+          className="mt-14 pt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-xs"
+          style={{ borderTop: "1px solid rgba(255,255,255,0.08)", color: FAINT }}
+        >
+          <p>
+            &copy; {year} Meta-Marketing LLC. A{" "}
+            <a href="https://prestonvawdrey.com" className="underline underline-offset-2 transition-colors hover:text-white" style={{ color: MUTED }}>
+              Preston Vawdrey
+            </a>{" "}
+            SEO product.
+          </p>
+          <p className="inline-flex flex-wrap items-center gap-x-3 gap-y-2">
+            <span className="inline-flex items-center gap-1.5">
+              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <rect x="4" y="10" width="16" height="11" rx="2" />
+                <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+              </svg>
+              Secure checkout by Stripe. SOC 2 Type II infrastructure from Supabase, Vercel and Stripe.
+            </span>
+          </p>
+        </div>
+      </div>
+    </footer>
   );
 }
 
-function FooterColumn({ title, links }: { title: string; links: [string, string][] }) {
+function FooterColumn({ title, links, className = "" }: { title: string; links: [string, string][]; className?: string }) {
   return (
-    <div className="md:col-span-2">
-      <h5 className="text-white font-semibold mb-4 text-base">{title}</h5>
+    <div className={`md:col-span-2 ${className}`}>
+      <h2 className="text-white font-semibold mb-4 text-sm">{title}</h2>
       <ul className="space-y-3">
         {links.map(([href, label]) => (
           <li key={href}>
-            <a href={href} className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
+            <a href={href} className="text-sm transition-colors hover:text-white" style={{ color: MUTED }}>
               {label}
             </a>
           </li>
