@@ -40,6 +40,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/jasper-alternatives",
+        destination: "/jasper-vs-draftly",
+        permanent: true,
+      },
+      {
         source: "/faq",
         destination: "/#faq",
         permanent: true,

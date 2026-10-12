@@ -79,6 +79,8 @@ export const GUIDE_THUMBS: Record<string, ProductShot> = {
     "Preview of the SEO MCP page: Claude, ChatGPT, Grok, Cursor, OpenClaw and Hermes Agent connecting to Draftly, which publishes to six CMSs", ""),
   "/ai-seo-agency-vs-tool": shot("guide-thumb-agency-vs-tool.webp", 1280, 800,
     "Preview of the AI SEO agency vs tool page: a table matching business situations to an agency, a tool or both", ""),
+  "/jasper-vs-draftly": shot("guide-thumb-jasper-vs-draftly.webp", 1280, 800,
+    "Preview of the Jasper vs Draftly page: a side-by-side table comparing price, free trial, brand voice, writing checks and publishing", ""),
   "/pricing": shot("guide-thumb-pricing.webp", 1280, 800,
     "Preview of the pricing page: Free, Solopreneur at $29, Growth at $69 and Autopilot at $100 a month", ""),
 };
