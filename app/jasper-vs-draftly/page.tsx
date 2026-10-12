@@ -3,7 +3,7 @@ import { APP_URL, SITE_URL } from "@/lib/site";
 import { getHomepageData } from "@/lib/graphql";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { A, B, Bullets, Byline, DarkCta, FaqList, Section, faqJsonLd, type Faq } from "@/components/ArticleParts";
+import { A, B, Bullets, DarkCta, FaqList, Section, faqJsonLd, type Faq } from "@/components/ArticleParts";
 import { ProductFigure } from "@/components/ProductFigure";
 import { PAID_PLANS, PLANS } from "@/lib/pricing";
 import { jsonLdHtml, authorRef } from "@/lib/schema";
@@ -210,13 +210,6 @@ export default async function JasperVsDraftlyPage() {
             </div>
           </div>
           <InlineCta href={registerUrl} label={ctaLabel} note="Paste your URL. No credit card." />
-          <div className="mt-6 max-w-3xl">
-            <Byline verb="Checked" date={CHECKED.label} />
-            <p className="mt-2 text-sm" style={{ color: "var(--color-text-muted)" }}>
-              We make Draftly, so weigh our view with that in mind. Every Jasper fact comes from Jasper&apos;s own pages and links to
-              them.
-            </p>
-          </div>
 
           <section id="verdict" className="mt-20 max-w-3xl">
             <h2 className="text-3xl font-medium mb-6" style={{ letterSpacing: "-0.03em" }}>
