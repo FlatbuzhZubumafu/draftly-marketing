@@ -79,7 +79,7 @@ ${plansTable()}
 
 ## AI Models
 
-Free accounts write with Claude Sonnet 5.5. Paid plans pick the model for each post from this list.
+Claude Sonnet 5.5 is the default writer, including for the free first post. Paid plans pick the model for each post from this list.
 
 ${modelsTable()}
 
