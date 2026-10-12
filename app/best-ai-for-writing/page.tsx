@@ -16,6 +16,7 @@ import {
 import { TocLayout } from "@/components/OnThisPage";
 import { PILLARS } from "@/lib/related";
 import { RelatedLinks } from "@/components/RelatedLinks";
+import { RelatedPosts } from "@/components/RelatedPosts";
 import { authorRef } from "@/lib/schema";
 
 export const revalidate = 3600;
@@ -416,6 +417,7 @@ export default async function BenchmarkPage() {
 
           <div className="max-w-3xl">
             <RelatedLinks items={PILLARS.filter((p) => p.href !== "/best-ai-for-writing").slice(0, 4)} />
+            <RelatedPosts topic="AI models Claude ChatGPT writing blog posts" />
           </div>
           <section id="faq" className="mt-20 max-w-3xl">
             <h2 className="text-3xl font-medium mb-6" style={{ letterSpacing: "-0.03em" }}>

@@ -8,12 +8,19 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "secure.gravatar.com" },
     ],
   },
-  // MCP Registry domain proof for the blog.draftly/* namespace (public key only).
   async headers() {
     return [
+      // MCP Registry domain proof for the blog.draftly/* namespace (public key only).
       {
         source: "/.well-known/mcp-registry-auth",
         headers: [{ key: "Content-Type", value: "text/plain; charset=utf-8" }],
+      },
+      // Only www.draftly.blog should be indexed. Vercel aliases such as
+      // draftly-marketing.vercel.app serve the same pages, so keep them out of search.
+      {
+        source: "/:path*",
+        missing: [{ type: "host", value: "www\\.draftly\\.blog" }],
+        headers: [{ key: "X-Robots-Tag", value: "noindex" }],
       },
     ];
   },
@@ -44,6 +51,16 @@ const nextConfig: NextConfig = {
         destination: "/#faq",
         permanent: true,
       },
+      // wp.draftly.blog 301s every path to the same path here, so WordPress's own
+      // archive and sitemap URLs land on this site. Send them somewhere real.
+      // (Root-level post slugs are handled by app/[slug]/page.tsx.)
+      { source: "/category/:path*", destination: "/blog", permanent: true },
+      { source: "/tag/:path*", destination: "/blog", permanent: true },
+      { source: "/author/:path*", destination: "/blog", permanent: true },
+      { source: "/:year(\\d{4})/:path*", destination: "/blog", permanent: true },
+      { source: "/feed", destination: "/feed.xml", permanent: true },
+      { source: "/wp-sitemap:rest(.*)", destination: "/sitemap.xml", permanent: true },
+      { source: "/sitemap_index.xml", destination: "/sitemap.xml", permanent: true },
     ];
   },
 };

@@ -15,7 +15,7 @@ const DESCRIPTION =
 export const metadata: Metadata = {
   title: { absolute: "The Draftly Blog: AI Content and SEO Notes" },
   description: DESCRIPTION,
-  alternates: { canonical: "/blog" },
+  alternates: { canonical: "/blog", types: { "application/rss+xml": "/feed.xml" } },
   openGraph: { title: "The Draftly Blog", description: DESCRIPTION, type: "website", url: "/blog", images: [DEFAULT_OG_IMAGE] },
 };
 

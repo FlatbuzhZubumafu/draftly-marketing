@@ -10,6 +10,7 @@ import { jsonLdHtml, authorRef } from "@/lib/schema";
 import { TocLayout } from "@/components/OnThisPage";
 import { PILLARS } from "@/lib/related";
 import { RelatedLinks } from "@/components/RelatedLinks";
+import { RelatedPosts } from "@/components/RelatedPosts";
 import { ProductFigure } from "@/components/ProductFigure";
 import { GUIDE_SHOTS, imageObjectJsonLd } from "@/lib/product-shots";
 
@@ -263,6 +264,7 @@ export default async function SeoCopywritingPage() {
 
           <div className="max-w-3xl">
             <RelatedLinks items={PILLARS.filter((p) => p.href !== "/seo-copywriting").slice(0, 4)} />
+            <RelatedPosts topic="SEO keywords Google search ranking AEO GEO cited by AI" />
           </div>
           <FaqList faqs={FAQS} skipLint={[BANNED_FAQ]} />
 

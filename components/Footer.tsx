@@ -1,7 +1,10 @@
 import { getHomepageData } from "@/lib/graphql";
 
+import { latestPosts } from "@/components/RelatedPosts";
+import { plainExcerpt } from "@/lib/text";
+
 export async function Footer() {
-  const { marketingSettings: s } = await getHomepageData();
+  const [{ marketingSettings: s }, recent] = await Promise.all([getHomepageData(), latestPosts(3)]);
   const registerUrl = `${s.appName}/register`;
   const year = new Date().getFullYear();
 
@@ -31,6 +34,20 @@ export async function Footer() {
                   {s.heroCtaText}
                 </a>
               </div>
+              {recent.length > 0 && (
+                <div className="mt-10 max-w-md">
+                  <h5 className="text-white font-semibold mb-4 text-base">Latest from the blog</h5>
+                  <ul className="space-y-3">
+                    {recent.map((p) => (
+                      <li key={p.slug}>
+                        <a href={`/blog/${p.slug}`} className="text-sm transition-colors hover:text-white" style={{ color: "#888" }}>
+                          {plainExcerpt(p.title, 1000)}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
 
             <FooterColumn
