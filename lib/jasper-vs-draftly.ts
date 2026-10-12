@@ -4,6 +4,10 @@
 // If a Jasper fact can't be re-confirmed on Jasper's site, delete it rather than
 // guess. Draftly's side must match lib/pricing.ts and the app.
 
+import { PAID_PLANS } from "./pricing";
+
+const [SOLO, GROWTH] = PAID_PLANS;
+
 export const CHECKED = { iso: "2026-10-12", label: "October 12, 2026", month: "October 2026" };
 
 export type Source = { label: string; href: string };
@@ -151,7 +155,8 @@ export type TableRow = { label: string; draftly: Cell; jasper: Cell; draftlyNote
 export const TABLE: TableRow[] = [
   { label: "Built for", draftly: "Small-business blogs", jasper: "Marketing teams" },
   { label: "Starting price", draftly: "$29 a month", jasper: `$${JASPER_PRO.monthly} per seat a month` },
-  { label: "One price, not per seat", draftly: true, jasper: false },
+  { label: "One price, not per seat", draftly: true, draftlyNote: `${GROWTH.seats} people on Growth for $${GROWTH.price} a month`, jasper: false, jasperNote: `${GROWTH.seats} seats on Pro: $${JASPER_PRO.monthly * (GROWTH.seats ?? 1)} a month` },
+  { label: "Team members included", draftly: `${SOLO.seats} on Solopreneur, ${GROWTH.seats} on Growth, unlimited on Autopilot`, jasper: `Billed per seat, $${JASPER_PRO.monthly} a month each` },
   { label: "Free first post, no credit card", draftly: true, jasper: false, jasperNote: "7-day trial of Pro" },
   { label: "Brand voice on every plan", draftly: true, draftlyNote: "Built from your website", jasper: "2 voices on Pro, unlimited on Business" },
   { label: "Every draft checked for AI-sounding writing", draftly: true, jasper: false, jasperNote: "Style Guide on Business" },
@@ -162,5 +167,5 @@ export const TABLE: TableRow[] = [
   { label: "Claude and ChatGPT connector (MCP)", draftly: true, draftlyNote: "Every plan", jasper: true, jasperNote: "Business plan only" },
   { label: "Ads, emails and social posts", draftly: false, draftlyNote: "Blog posts only", jasper: true, jasperNote: "100+ agents" },
   { label: "Languages other than English", draftly: false, draftlyNote: "US businesses only", jasper: true, jasperNote: "30+ languages" },
-  { label: "SSO and team roles", draftly: false, jasper: true, jasperNote: "Business plan" },
+  { label: "Single sign-on (SSO)", draftly: false, jasper: true, jasperNote: "Business plan" },
 ];

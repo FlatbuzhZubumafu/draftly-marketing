@@ -9,7 +9,7 @@ import {
   tableToMarkdown,
 } from "@/lib/benchmarkTables";
 import { BYO_AI_LINE, FREE_PLAN_LINE, MCP_URL, READ_ONLY_TOOL_COUNT, TOOLS, toolPlans } from "@/lib/mcp";
-import { PLANS } from "@/lib/pricing";
+import { PLANS, TEAM_NOTE } from "@/lib/pricing";
 import { APP_MODELS, APP_MODEL_COUNT } from "@/lib/app-models";
 import { APP_URL, SITE_URL } from "@/lib/site";
 import { WP_COMPARE_NOTES, WP_COMPARE_ROWS, WP_COMPARE_TOOLS, WP_COMPARED_ON, type Cell } from "@/lib/wordpress-compare";
@@ -19,8 +19,8 @@ import { WP_FEATURES, WP_PLANS, WP_PLUGIN_VERSION, WP_TOP_UPS } from "@/lib/word
 // prices, tools and benchmark numbers match the site.
 
 function plansTable(): string {
-  const rows = PLANS.map((p) => `| ${p.name} | $${p.price}/month | ${p.posts} | ${p.credits} |`);
-  return ["| Plan | Price | Posts | Credits |", "| --- | --- | --- | --- |", ...rows].join("\n");
+  const rows = PLANS.map((p) => `| ${p.name} | $${p.price}/month | ${p.posts} | ${p.credits} | ${p.seats ?? "Unlimited"} |`);
+  return ["| Plan | Price | Posts | Credits | Team members |", "| --- | --- | --- | --- | --- |", ...rows, "", TEAM_NOTE].join("\n");
 }
 
 function modelsTable(): string {

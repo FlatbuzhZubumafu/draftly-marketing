@@ -1,5 +1,5 @@
 import { Check } from "lucide-react";
-import { CANCEL_NOTE, FIRST_MONTH_OFFER, PAID_PLANS, PLANS, valueAnchor } from "@/lib/pricing";
+import { CANCEL_NOTE, FIRST_MONTH_OFFER, PAID_PLANS, PLANS, teamMembersLabel, valueAnchor } from "@/lib/pricing";
 
 /**
  * The four plan cards. Shared by /pricing and the homepage so the two can never
@@ -59,6 +59,9 @@ export function PricingPlans({
             </p>
             <p className="text-xs" style={{ color: "var(--color-text-muted)" }}>
               {plan.credits}
+            </p>
+            <p className="text-xs" style={{ color: "var(--color-text-muted)" }}>
+              {teamMembersLabel(plan)}
             </p>
             {plan === cheapestPaid && (
               <p className="mt-2 text-xs leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
