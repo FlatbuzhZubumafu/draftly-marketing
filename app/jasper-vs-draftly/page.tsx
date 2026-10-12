@@ -3,16 +3,27 @@ import { APP_URL, SITE_URL } from "@/lib/site";
 import { getHomepageData } from "@/lib/graphql";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { A, B, Bullets, DarkCta, FaqList, Section, faqJsonLd, type Faq } from "@/components/ArticleParts";
+import { A, B, Bullets, DarkCta, FaqList, faqJsonLd, type Faq } from "@/components/ArticleParts";
 import { ProductFigure } from "@/components/ProductFigure";
-import { PAID_PLANS, PLANS } from "@/lib/pricing";
+import { PAID_PLANS } from "@/lib/pricing";
 import { jsonLdHtml, authorRef } from "@/lib/schema";
-import { TocLayout } from "@/components/OnThisPage";
-import { PILLARS } from "@/lib/related";
-import { RelatedLinks } from "@/components/RelatedLinks";
-import { RelatedPosts } from "@/components/RelatedPosts";
-import { GUIDE_SHOTS, INTEGRATIONS_SHOT, imageObjectJsonLd } from "@/lib/product-shots";
-import { CHECKED, JASPER_PRO, OG_IMAGE, JASPER_SOURCES as SRC, ROWS, type Edge, type Source } from "@/lib/jasper-vs-draftly";
+import { KeepReading } from "@/components/KeepReading";
+import { GUIDE_SHOTS, INTEGRATIONS_SHOT, STEP_SHOTS, imageObjectJsonLd, type ProductShot } from "@/lib/product-shots";
+import {
+  BAKEOFF,
+  BAKEOFF_METHOD,
+  BAKEOFF_TOTALS,
+  CALLOUTS,
+  CHECKED,
+  JASPER_PRO,
+  OG_IMAGE,
+  JASPER_SOURCES as SRC,
+  TABLE,
+  type Cell,
+  type Excerpt,
+  type Score,
+  type Source,
+} from "@/lib/jasper-vs-draftly";
 
 export const revalidate = 3600;
 
@@ -20,12 +31,12 @@ export const revalidate = 3600;
 // jasper alternative 150, jasper ai free alternative 150, jasper ai alternatives 100, alternative to
 // jasper ai 90, jasper ai alternative 40 (KD 0 to 6). Pricing: jasper ai pricing 2026 700, jasper ai
 // pricing 500, jasper pricing 300, jasper ai cost 100. Also is jasper ai worth it 150, jasper ai seo 150,
-// jasper ai free trial 150, jasper vs 100, brand voice 4,100. Each H2 targets one of these.
-// Jasper facts and their sources live in lib/jasper-vs-draftly.ts.
+// jasper ai free trial 150, jasper vs 100, brand voice 4,100. The short keyword sections keep one H2 each.
+// Jasper facts and the bake-off results live in lib/jasper-vs-draftly.ts.
 const PATH = "/jasper-vs-draftly";
 const TITLE = "Jasper vs Draftly: Jasper AI Alternative for SEO Blogs";
 const DESCRIPTION =
-  "Jasper vs Draftly compared on pricing, brand voice, SEO blog posts and WordPress publishing. Where each one wins, with sources. Your first Draftly post is free.";
+  "Jasper vs Draftly, tested on the same topics for four real businesses. Scores, pricing, brand voice and WordPress publishing compared. Your first Draftly post is free.";
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -35,50 +46,56 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION, images: [OG_IMAGE.url] },
 };
 
-const [SOLO, GROWTH, AUTOPILOT] = PAID_PLANS;
+const [SOLO, , AUTOPILOT] = PAID_PLANS;
+const T = BAKEOFF_TOTALS;
 
 const FAQS: Faq[] = [
   {
     q: "Is Draftly a good Jasper alternative?",
-    a: "If your main job is blog posts for a small business, yes. Draftly writes them in your brand voice, checks each one for AI-sounding writing and publishes to your CMS. If you also need ads, emails and social posts, Jasper covers more of that work.",
+    a: "For small-business blog posts, yes. Draftly writes in your brand voice, checks each post for AI-sounding writing and publishes to your CMS. For ads, emails and social posts, Jasper covers more.",
+  },
+  {
+    q: "How did you test Jasper against Draftly?",
+    a: `On ${BAKEOFF_METHOD.date} both tools got the same topic for four real businesses. ${BAKEOFF_METHOD.jasper}. ${BAKEOFF_METHOD.draftly}. Every post was scored with Draftly's own checker.`,
   },
   {
     q: "Is there a free alternative to Jasper AI?",
-    a: "Draftly writes your first full blog post free, with no credit card, and the Free plan stays free. Jasper offers a 7-day free trial of its Pro plan.",
+    a: "Draftly writes your first full blog post free, with no credit card. Jasper offers a 7-day free trial of Pro.",
   },
   {
     q: "How much does Jasper AI cost?",
-    a: `As listed on jasper.ai in ${CHECKED.month}, Jasper Pro is $${JASPER_PRO.monthly} per seat a month billed monthly, or $${JASPER_PRO.yearly} per seat a month billed yearly. Business has custom pricing with a 12-month minimum. Check Jasper's pricing page for current prices.`,
+    a: `As listed on jasper.ai in ${CHECKED.month}, Jasper Pro is $${JASPER_PRO.monthly} per seat a month, or $${JASPER_PRO.yearly} billed yearly. Business has custom pricing with a 12-month minimum.`,
   },
   {
     q: "How much does Draftly cost?",
-    a: `Your first post is free. Solopreneur is $${SOLO.price} a month, Growth is $${GROWTH.price} a month and Autopilot is $${AUTOPILOT.price} a month, billed monthly with no annual contract.`,
+    a: `Your first post is free. Paid plans start at $${SOLO.price} a month, billed monthly with no annual contract.`,
   },
   {
     q: "Does Jasper publish to WordPress?",
-    a: "WordPress isn't on Jasper's integrations page. It lists a Webflow app, a Chrome extension, Google Docs, Microsoft Word, and Zapier and Make for connecting other apps. Draftly publishes to WordPress in one click, and its Autopilot plan publishes on a schedule.",
-  },
-  {
-    q: "Is Jasper AI worth it for a small business?",
-    a: "It can be if you have a marketing team writing for many channels and want shared brand settings, agents and admin controls. If you mainly need a steady blog, you'd pay per seat for a lot you won't use, and you'd still copy posts into your CMS.",
-  },
-  {
-    q: "Can I use Draftly inside Claude or ChatGPT?",
-    a: "Yes, on every plan. Connect the Draftly connector and your assistant can read your brand voice and writing rules, check drafts and save posts to Draftly. Jasper's MCP server is for Business plans only and needs API access.",
-  },
-  {
-    q: "Does Draftly write ads, emails or social posts?",
-    a: "No. Draftly writes blog posts only. A team that uses Jasper for ads and email would still need a tool for those.",
+    a: "WordPress isn't on Jasper's integrations page. Draftly publishes to WordPress in one click, and its Autopilot plan publishes on a schedule.",
   },
   {
     q: "Does Draftly work outside the United States?",
-    a: "Not yet. Draftly is available to businesses in the United States only.",
+    a: "Not yet. Draftly is available to US businesses only, and it writes blog posts only.",
   },
 ];
 
-function Sources({ items }: { items: Source[] }) {
+const SHOTS: Record<string, ProductShot> = {
+  pricing: GUIDE_SHOTS.urlToPost,
+  free: STEP_SHOTS[0],
+  seo: GUIDE_SHOTS.seoMeta,
+  voice: GUIDE_SHOTS.brandVoice,
+  wordpress: INTEGRATIONS_SHOT,
+};
+
+const card = { background: "var(--color-bg-surface)", border: "1px solid var(--color-border)" };
+const accentCard = { background: "var(--color-accent-muted)", border: "1px solid var(--color-border-accent)" };
+const muted = { color: "var(--color-text-muted)" };
+const secondary = { color: "var(--color-text-secondary)" };
+
+function SourceLinks({ items }: { items: Source[] }) {
   return (
-    <span className="text-sm" style={{ color: "var(--color-text-muted)" }}>
+    <span className="text-sm" style={muted}>
       {" "}
       (
       {items.map((s, i) => (
@@ -89,52 +106,171 @@ function Sources({ items }: { items: Source[] }) {
           </a>
         </span>
       ))}
-      )
+      ){" "}
     </span>
   );
 }
 
-const EDGE_LABEL: Record<Edge, string> = { draftly: "Draftly", jasper: "Jasper", tie: "Depends" };
-
-function EdgeChip({ edge }: { edge: Edge }) {
-  const draftly = edge === "draftly";
+function H2({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <span
-      className="inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold whitespace-nowrap"
-      style={{
-        background: draftly ? "var(--color-accent-muted)" : "var(--color-bg-elevated)",
-        color: draftly ? "var(--color-accent)" : "var(--color-text-secondary)",
-      }}
-    >
-      {EDGE_LABEL[edge]}
-    </span>
+    <h2 className={`text-3xl sm:text-4xl font-medium ${className}`} style={{ letterSpacing: "-0.03em" }}>
+      {children}
+    </h2>
   );
 }
 
-function Verdict({ who, children }: { who: "Draftly" | "Jasper"; children: React.ReactNode }) {
-  const draftly = who === "Draftly";
+function Cta({ href, label, note, center = false }: { href: string; label: string; note: string; center?: boolean }) {
   return (
-    <div className="p-6 rounded-xl h-full" style={{ background: draftly ? "var(--color-accent-muted)" : "var(--color-bg-surface)", border: `1px solid ${draftly ? "var(--color-border-accent)" : "var(--color-border)"}` }}>
-      <p className="font-semibold mb-3" style={{ color: draftly ? "var(--color-accent)" : "var(--color-text-primary)" }}>
-        Pick {who} if
-      </p>
-      <div className="text-sm" style={{ color: "var(--color-text-secondary)" }}>
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function InlineCta({ href, label, note }: { href: string; label: string; note: string }) {
-  return (
-    <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2" data-toc-skip>
+    <div className={`mt-10 flex flex-wrap items-center gap-x-4 gap-y-2 ${center ? "justify-center text-center" : ""}`}>
       <a href={href} className="btn btn-primary">
         {label}
       </a>
-      <span className="text-sm" style={{ color: "var(--color-text-muted)" }}>
+      <span className="text-sm" style={muted}>
         {note}
       </span>
     </div>
+  );
+}
+
+/** Winner of one metric. Within one point counts as a tie. */
+function winner(s: Score, lowerWins = false): "jasper" | "draftly" | "tie" {
+  if (Math.abs(s.jasper - s.draftly) <= 1) return "tie";
+  return (lowerWins ? s.draftly < s.jasper : s.draftly > s.jasper) ? "draftly" : "jasper";
+}
+
+function MetricRow({ label, score, lowerWins = false }: { label: string; score: Score; lowerWins?: boolean }) {
+  const w = winner(score, lowerWins);
+  const num = (who: "jasper" | "draftly") => (
+    <span
+      className="tabular-nums text-lg font-semibold text-right"
+      style={{ color: w === who && who === "draftly" ? "var(--color-accent)" : w === who ? "var(--color-text-primary)" : "var(--color-text-muted)" }}
+    >
+      {score[who]}
+    </span>
+  );
+  return (
+    <div className="grid grid-cols-[1fr_3.5rem_3.5rem] items-center gap-2 py-2.5" style={{ borderTop: "1px solid var(--color-border)" }}>
+      <div>
+        <p className="text-sm font-medium flex items-center gap-2">
+          {label}
+          {w === "tie" ? (
+            <span className="rounded-full px-2 py-0.5 text-[11px] font-semibold" style={{ background: "var(--color-bg-elevated)", color: "var(--color-text-secondary)" }}>
+              Tie
+            </span>
+          ) : null}
+        </p>
+      </div>
+      {num("jasper")}
+      {num("draftly")}
+    </div>
+  );
+}
+
+function ColumnHeads() {
+  return (
+    <div className="grid grid-cols-[1fr_3.5rem_3.5rem] gap-2 text-xs font-semibold pb-1" aria-hidden="true">
+      <span />
+      <span className="text-right" style={secondary}>
+        Jasper
+      </span>
+      <span className="text-right" style={{ color: "var(--color-accent)" }}>
+        Draftly
+      </span>
+    </div>
+  );
+}
+
+function BigStat({ label, hint, score, lowerWins = false, total = false }: { label: string; hint: string; score: Score; lowerWins?: boolean; total?: boolean }) {
+  const w = winner(score, lowerWins);
+  return (
+    <div className="rounded-2xl p-5 sm:p-6" style={card}>
+      <p className="font-semibold">{label}</p>
+      <p className="text-xs mt-0.5" style={muted}>
+        {hint}
+      </p>
+      <div className="mt-4 flex items-end gap-6">
+        <div>
+          <p className="text-xs font-semibold" style={secondary}>
+            Jasper
+          </p>
+          <p className="text-4xl font-medium tabular-nums" style={{ color: w === "jasper" ? "var(--color-text-primary)" : "var(--color-text-muted)" }}>
+            {score.jasper}
+          </p>
+        </div>
+        <div>
+          <p className="text-xs font-semibold" style={{ color: "var(--color-accent)" }}>
+            Draftly
+          </p>
+          <p className="text-5xl font-medium tabular-nums" style={{ color: w === "draftly" ? "var(--color-accent)" : "var(--color-text-primary)" }}>
+            {score.draftly}
+          </p>
+        </div>
+      </div>
+      <p className="text-xs mt-3" style={muted}>
+        {total ? "Total across 4 posts" : "Average of 4 posts"}
+      </p>
+    </div>
+  );
+}
+
+/** Renders an excerpt, marking the highlighted phrase (Jasper) or the phrase that was a link (Draftly). */
+function Quote({ ex, tone }: { ex: Excerpt; tone: "jasper" | "draftly" }) {
+  const phrase = ex.hl ?? ex.link;
+  if (!phrase || !ex.text.includes(phrase)) return <>&ldquo;{ex.text}&rdquo;</>;
+  const [before, after] = ex.text.split(phrase);
+  const mark =
+    tone === "jasper" ? (
+      <mark className="rounded px-0.5" style={{ background: "rgba(220, 38, 38, 0.14)", color: "inherit", boxShadow: "inset 0 -2px 0 rgba(220, 38, 38, 0.55)" }}>
+        {phrase}
+      </mark>
+    ) : (
+      <mark className="rounded px-0.5 underline underline-offset-2" style={{ background: "var(--color-accent-muted)", color: "var(--color-accent)", textDecorationColor: "var(--color-accent)" }}>
+        {phrase}
+      </mark>
+    );
+  return (
+    <>
+      &ldquo;{before}
+      {mark}
+      {after}&rdquo;
+    </>
+  );
+}
+
+function CheckCell({ value, note, draftly }: { value: Cell; note?: string; draftly?: boolean }) {
+  const icon =
+    value === true ? (
+      <span className="inline-flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold" style={{ background: draftly ? "var(--color-accent)" : "#111", color: "#fff" }}>
+        <span aria-hidden="true">✓</span>
+        <span className="sr-only">Yes</span>
+      </span>
+    ) : value === false ? (
+      <span className="inline-flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold" style={{ background: "var(--color-bg-elevated)", color: "var(--color-text-muted)" }}>
+        <span aria-hidden="true">✗</span>
+        <span className="sr-only">No</span>
+      </span>
+    ) : null;
+  return (
+    <div className="flex items-center gap-2 text-sm">
+      {icon}
+      {typeof value === "string" ? <span className="font-medium">{value}</span> : null}
+      {note ? <span style={muted}>{note}</span> : null}
+    </div>
+  );
+}
+
+function KeywordSection({ id, title, shot, children, cta }: { id: string; title: string; shot: ProductShot; children: React.ReactNode; cta?: React.ReactNode }) {
+  return (
+    <section id={id} className="mt-24 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+      <div>
+        <H2 className="mb-5">{title}</H2>
+        <div className="space-y-4 leading-relaxed" style={secondary}>
+          {children}
+        </div>
+        {cta}
+      </div>
+      <ProductFigure shot={shot} />
+    </section>
   );
 }
 
@@ -153,7 +289,7 @@ export default async function JasperVsDraftlyPage() {
       dateModified: CHECKED.iso,
       author: authorRef,
       publisher: { "@type": "Organization", name: "Draftly", url: SITE_URL },
-      image: [imageObjectJsonLd(GUIDE_SHOTS.brandVoice), imageObjectJsonLd(GUIDE_SHOTS.genericVsDraftly), imageObjectJsonLd(INTEGRATIONS_SHOT)],
+      image: Object.values(SHOTS).map(imageObjectJsonLd),
     },
     faqJsonLd(FAQS),
   );
@@ -161,344 +297,278 @@ export default async function JasperVsDraftlyPage() {
   return (
     <>
       <Header />
-      <main className="pt-28 pb-24 px-4" style={{ background: "var(--color-bg-primary)" }}>
+      <main className="pt-28 pb-24" style={{ background: "var(--color-bg-primary)" }}>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
 
-        <TocLayout>
-          <header className="max-w-3xl">
+        <div className="container-draftly max-w-5xl">
+          {/* Hero: one line on who each is for, two price cards, one button. */}
+          <header className="text-center max-w-3xl mx-auto">
             <p className="eyebrow mb-4">Jasper AI alternative</p>
-            <h1 className="page-heading mb-6" style={{ fontSize: "clamp(2.4rem, 6vw, 64px)" }}>
+            <h1 className="page-heading mb-5" style={{ fontSize: "clamp(2.6rem, 7vw, 72px)" }}>
               Jasper vs{" "}
               <em className="italic" style={{ color: "var(--color-accent)" }}>
                 Draftly
               </em>
             </h1>
-            <p className="text-lg leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-              Jasper is an AI platform for marketing teams. Draftly is an AI blog writer for small businesses: paste your URL and
-              it writes posts in your voice, checks them for AI-sounding copy and publishes them to your site. Here is how the
-              two compare, and when each one is the better buy.
+            <p className="text-lg sm:text-xl leading-relaxed" style={secondary}>
+              Jasper is built for marketing teams. Draftly is built to grow a small business&apos;s blog.
             </p>
           </header>
 
-          {/* The two brands side by side, then the main call to action. */}
-          <div className="mt-10 max-w-3xl grid grid-cols-[1fr_auto_1fr] items-stretch gap-3 sm:gap-5" aria-label="Jasper compared with Draftly">
-            <div className="rounded-xl p-4 sm:p-6" style={{ background: "var(--color-bg-surface)", border: "1px solid var(--color-border)" }}>
-              <p className="text-xl sm:text-2xl font-semibold">Jasper</p>
-              <p className="text-xs sm:text-sm mt-1" style={{ color: "var(--color-text-muted)" }}>
-                jasper.ai
+          <div className="mt-12 grid sm:grid-cols-2 gap-4 sm:gap-6 max-w-3xl mx-auto items-stretch">
+            <div className="rounded-2xl p-6 sm:p-8 flex flex-col" style={card}>
+              <p className="text-xl font-semibold">Jasper Pro</p>
+              <p className="text-sm mt-1" style={muted}>
+                For marketing teams
               </p>
-              <p className="text-sm mt-4" style={{ color: "var(--color-text-secondary)" }}>
-                For marketing teams. From ${JASPER_PRO.monthly} per seat a month.
+              <p className="mt-6">
+                <span className="text-5xl font-medium tabular-nums">${JASPER_PRO.monthly}</span>
+                <span className="text-sm ml-1" style={muted}>
+                  per seat a month
+                </span>
+              </p>
+              <p className="text-sm mt-2" style={secondary}>
+                or ${JASPER_PRO.yearly} per seat billed yearly
+              </p>
+              <p className="text-xs mt-auto pt-6" style={muted}>
+                As listed on{" "}
+                <a href={SRC.pricing.href} rel="nofollow noopener" target="_blank" className="underline">
+                  jasper.ai
+                </a>
+                , {CHECKED.month}
               </p>
             </div>
-            <div className="self-center flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full text-sm font-semibold" style={{ background: "#111", color: "#fff" }} aria-hidden="true">
-              vs
-            </div>
-            <div className="rounded-xl p-4 sm:p-6" style={{ background: "var(--color-accent-muted)", border: "1px solid var(--color-border-accent)" }}>
-              <p className="text-xl sm:text-2xl font-semibold flex items-center gap-2">
-                {s.logoUrl ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={s.logoUrl} alt="" className="hidden sm:block h-7 w-auto" />
-                ) : null}
-                Draftly
+            <div className="relative order-first sm:order-none rounded-2xl p-6 sm:p-8 flex flex-col" style={{ ...accentCard, borderWidth: 2, borderColor: "var(--color-accent)" }}>
+              <span className="absolute -top-3 left-6 rounded-full px-3 py-1 text-xs font-semibold" style={{ background: "var(--color-accent)", color: "#fff" }}>
+                Better for small-business blogs
+              </span>
+              <p className="text-xl font-semibold">Draftly</p>
+              <p className="text-sm mt-1" style={muted}>
+                For small-business blogs
               </p>
-              <p className="text-xs sm:text-sm mt-1" style={{ color: "var(--color-text-muted)" }}>
-                draftly.blog
+              <p className="mt-6">
+                <span className="text-5xl font-medium">Free</span>
+                <span className="text-sm ml-1" style={muted}>
+                  first post
+                </span>
               </p>
-              <p className="text-sm mt-4" style={{ color: "var(--color-text-secondary)" }}>
-                For small-business blogs. First post free, then ${SOLO.price} a month.
+              <p className="text-sm mt-2" style={secondary}>
+                then ${SOLO.price} a month, not per seat
               </p>
+              <a href={registerUrl} className="btn btn-primary mt-6 self-start">
+                {ctaLabel}
+              </a>
             </div>
           </div>
-          <InlineCta href={registerUrl} label={ctaLabel} note="Paste your URL. No credit card." />
+          <p className="mt-4 text-center text-sm" style={muted}>
+            Paste your URL. No credit card.
+          </p>
 
-          <section id="verdict" className="mt-20 max-w-3xl">
-            <h2 className="text-3xl font-medium mb-6" style={{ letterSpacing: "-0.03em" }}>
-              Jasper vs Draftly: the quick verdict
-            </h2>
-            <div className="grid sm:grid-cols-2 gap-4">
-              <Verdict who="Draftly">
-                <Bullets
-                  items={[
-                    "Your blog is the main thing you need written",
-                    "You want posts in your voice without rewriting them",
-                    "You want posts to land in WordPress, Shopify or your CMS without copy and paste",
-                    `You'd rather pay $${SOLO.price} a month than pay per seat`,
-                  ]}
-                />
-              </Verdict>
-              <Verdict who="Jasper">
-                <Bullets
-                  items={[
-                    "A marketing team writes ads, emails, product copy and campaigns",
-                    "You need SSO, roles and admin controls",
-                    "You write in languages other than English",
-                    "You're outside the United States",
-                  ]}
-                />
-              </Verdict>
+          {/* The bake-off: the centerpiece. */}
+          <section id="bake-off" className="mt-28">
+            <div className="max-w-3xl">
+              <p className="eyebrow mb-3">Tested {BAKEOFF_METHOD.date}</p>
+              <H2 className="mb-4">Same topic, same business: our Jasper vs Draftly bake-off</H2>
+              <p className="text-lg leading-relaxed" style={secondary}>
+                We gave Jasper and Draftly the same blog topic for four real businesses, then scored all eight posts.
+              </p>
             </div>
+
+            <div className="mt-8 grid sm:grid-cols-3 gap-4">
+              <BigStat label="Human voice" hint="0 to 100, higher is better" score={T.humanVoice} />
+              <BigStat label="Reads as AI" hint="0 to 100, lower is better" score={T.readsAsAi} lowerWins />
+              <BigStat label="Links to the business's pages" hint="Internal links in the post" score={T.ownLinks} total />
+            </div>
+
+            <div className="mt-6 grid md:grid-cols-2 gap-4">
+              {BAKEOFF.map((r) => (
+                <div key={r.business} className="rounded-2xl p-5 sm:p-6" style={card}>
+                  <p className="font-semibold">{r.business}</p>
+                  <p className="text-sm mt-0.5 mb-3" style={secondary}>
+                    Topic: {r.topic}
+                  </p>
+                  <ColumnHeads />
+                  <MetricRow label="Human voice" score={r.humanVoice} />
+                  <MetricRow label="Reads as AI" score={r.readsAsAi} lowerWins />
+                  <MetricRow label="Own-site links" score={r.ownLinks} />
+                  {r.note ? (
+                    <p className="text-xs mt-3" style={muted}>
+                      {r.note}
+                    </p>
+                  ) : null}
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 rounded-xl p-4 sm:p-5 text-sm leading-relaxed" style={{ background: "var(--color-bg-elevated)" }}>
+              <p className="font-semibold mb-1">Scored with Draftly&apos;s own checker</p>
+              <p style={secondary}>
+                {BAKEOFF_METHOD.jasper}. {BAKEOFF_METHOD.draftly}. Tested {BAKEOFF_METHOD.date}, with the businesses&apos; permission.
+                Within one point counts as a tie.
+              </p>
+            </div>
+
+            <Cta href={registerUrl} label={ctaLabel} note="Run the same test on your own site. Your first post is free." />
           </section>
 
-          <section id="comparison" className="mt-20">
-            <h2 className="text-3xl font-medium mb-3" style={{ letterSpacing: "-0.03em" }}>
-              Jasper AI vs Draftly, feature by feature
-            </h2>
-            <p className="mb-6 max-w-3xl leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-              Jasper&apos;s side is what its own pages list as of {CHECKED.label}. &quot;Not listed&quot; means we didn&apos;t find it there.
-            </p>
-            {/* Stacked cards on phones, the full table from md up. */}
-            <div className="md:hidden space-y-3">
-              {ROWS.map((r) => (
-                <div key={r.label} className="p-4 rounded-xl" style={{ background: "var(--color-bg-surface)", border: "1px solid var(--color-border)" }}>
-                  <div className="flex items-start justify-between gap-3">
-                    <p className="font-semibold text-sm">{r.label}</p>
-                    <EdgeChip edge={r.edge} />
+          {/* Quoted differences, side by side. */}
+          <section id="what-they-wrote" className="mt-28">
+            <H2 className="mb-3 max-w-3xl">What each one wrote</H2>
+            <div className="mt-8 space-y-10">
+              {CALLOUTS.map((c) => (
+                <div key={c.title}>
+                  <p className="text-xs font-semibold uppercase tracking-wide" style={muted}>
+                    {c.business}
+                  </p>
+                  <h3 className="text-xl font-semibold mt-1 mb-4">{c.title}</h3>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <figure className="rounded-2xl p-5 sm:p-6" style={card}>
+                      <figcaption className="text-xs font-semibold mb-3" style={secondary}>
+                        Jasper wrote
+                      </figcaption>
+                      <blockquote className="text-base leading-relaxed">
+                        <Quote ex={c.jasper} tone="jasper" />
+                      </blockquote>
+                    </figure>
+                    <figure className="rounded-2xl p-5 sm:p-6" style={accentCard}>
+                      <figcaption className="text-xs font-semibold mb-3" style={{ color: "var(--color-accent)" }}>
+                        Draftly wrote
+                      </figcaption>
+                      <blockquote className="text-base leading-relaxed">
+                        <Quote ex={c.draftly} tone="draftly" />
+                      </blockquote>
+                    </figure>
                   </div>
-                  <dl className="mt-2 space-y-1.5 text-sm">
-                    <div>
-                      <dt className="inline font-semibold" style={{ color: "var(--color-accent)" }}>Draftly: </dt>
-                      <dd className="inline">{r.draftly}</dd>
-                    </div>
-                    <div>
-                      <dt className="inline font-semibold">Jasper: </dt>
-                      <dd className="inline" style={{ color: "var(--color-text-secondary)" }}>{r.jasper}</dd>
-                    </div>
-                  </dl>
+                  <p className="text-sm mt-3 max-w-3xl leading-relaxed" style={secondary}>
+                    {c.takeaway}
+                  </p>
                 </div>
               ))}
             </div>
-            <div className="hidden md:block overflow-x-auto rounded-xl" style={{ border: "1px solid var(--color-border)" }}>
-              <table className="w-full text-sm min-w-[700px]">
-                <thead style={{ background: "var(--color-bg-surface)" }}>
-                  <tr className="text-left">
-                    <th className="px-4 py-3 font-semibold" scope="col">
-                      <span className="sr-only">Feature</span>
-                    </th>
-                    <th className="px-4 py-3 font-semibold" scope="col" style={{ color: "var(--color-accent)" }}>
-                      Draftly
-                    </th>
-                    <th className="px-4 py-3 font-semibold" scope="col">
-                      Jasper
-                    </th>
-                    <th className="px-4 py-3 font-semibold" scope="col">
-                      Edge
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {ROWS.map((r) => (
-                    <tr key={r.label} style={{ borderTop: "1px solid var(--color-border)" }}>
-                      <th scope="row" className="px-4 py-3 align-top text-left font-medium">
-                        {r.label}
-                      </th>
-                      <td className="px-4 py-3 align-top" style={{ fontWeight: r.edge === "draftly" ? 600 : 400 }}>
-                        {r.draftly}
-                      </td>
-                      <td className="px-4 py-3 align-top" style={{ color: "var(--color-text-secondary)", fontWeight: r.edge === "jasper" ? 600 : 400 }}>
-                        {r.jasper}
-                      </td>
-                      <td className="px-4 py-3 align-top">
-                        <EdgeChip edge={r.edge} />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <p className="mt-3 text-sm max-w-3xl" style={{ color: "var(--color-text-muted)" }}>
-              Jasper facts are from its own pages
-              <Sources items={[SRC.pricing, SRC.trial, SRC.integrations, SRC.mcp]} />. Draftly plans are on the <A href="/pricing">pricing page</A>.
+            <p className="text-xs mt-6" style={muted}>
+              Highlighted in red: claims the business didn&apos;t give Jasper. Underlined in orange: a link to the business&apos;s own page in the original post.
             </p>
           </section>
 
-          <Section id="pricing" title="Jasper AI pricing vs Draftly pricing">
-            <p>
-              As listed on jasper.ai in {CHECKED.month}, Jasper Pro costs <B>${JASPER_PRO.monthly} per seat a month</B> billed monthly, or $
-              {JASPER_PRO.yearly} per seat billed yearly. Business has custom pricing and a 12-month minimum.
-              <Sources items={[SRC.pricing]} /> A two-person team on Pro pays ${JASPER_PRO.monthly * 2} a month.
+          {/* Checkmark table. */}
+          <section id="comparison" className="mt-28">
+            <H2 className="mb-3">Jasper AI vs Draftly, feature by feature</H2>
+            <p className="mb-8 max-w-3xl leading-relaxed" style={secondary}>
+              Jasper&apos;s side is what its own pages list as of {CHECKED.label}.
+              <SourceLinks items={[SRC.pricing, SRC.trial, SRC.integrations, SRC.mcp]} />
             </p>
-            <p>
-              Draftly prices by plan, not by seat, and bills monthly with no annual contract:
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {PLANS.map((p) => (
-                <div key={p.name} className="rounded-xl p-4" style={{ background: "var(--color-bg-surface)", border: "1px solid var(--color-border)" }}>
-                  <p className="text-sm font-semibold" style={{ color: "var(--color-text-primary)" }}>
-                    {p.name}
-                  </p>
-                  <p className="text-2xl font-medium mt-1" style={{ color: "var(--color-text-primary)" }}>
-                    ${p.price}
-                    <span className="text-sm" style={{ color: "var(--color-text-muted)" }}>
-                      {p.price ? "/mo" : ""}
-                    </span>
-                  </p>
-                  <p className="text-xs mt-1">{p.posts}</p>
-                </div>
-              ))}
+            <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid var(--color-border)" }}>
+              <div className="grid grid-cols-[1.3fr_1fr_1fr] gap-3 px-4 sm:px-6 py-3 text-sm font-semibold" style={{ background: "var(--color-bg-surface)" }}>
+                <span className="sr-only sm:not-sr-only" style={muted}>
+                  Feature
+                </span>
+                <span style={{ color: "var(--color-accent)" }}>Draftly</span>
+                <span>Jasper</span>
+              </div>
+              <dl>
+                {TABLE.map((r) => (
+                  <div key={r.label} className="grid sm:grid-cols-[1.3fr_1fr_1fr] gap-x-3 gap-y-2 px-4 sm:px-6 py-3.5" style={{ borderTop: "1px solid var(--color-border)" }}>
+                    <dt className="text-sm font-medium">{r.label}</dt>
+                    <dd className="grid grid-cols-2 sm:contents gap-3">
+                      <CheckCell value={r.draftly} note={r.draftlyNote} draftly />
+                      <CheckCell value={r.jasper} note={r.jasperNote} />
+                    </dd>
+                  </div>
+                ))}
+              </dl>
             </div>
-            <p>
-              Jasper&apos;s Pro seat buys a lot more than blog posts: chat, image generation, 100+ marketing agents and 30+ languages.
-              If you&apos;d use all of that, the per-seat price can be fair. If you mainly want a blog that keeps publishing, Draftly
-              covers that job for less. See <A href="/pricing">what each Draftly plan includes</A>.
+            <p className="mt-3 text-sm" style={muted}>
+              &ldquo;Not listed&rdquo; means we didn&apos;t find it on Jasper&apos;s site. Draftly plans are on the <A href="/pricing">pricing page</A>.
             </p>
-          </Section>
+            <Cta href={registerUrl} label={ctaLabel} note="See a finished post for your business before you pay." />
+          </section>
 
-          <Section id="free-alternative" title="Is there a free Jasper AI alternative?">
+          {/* Short keyword sections, one real screenshot each. */}
+          <KeywordSection id="pricing" title="Jasper AI pricing vs Draftly pricing" shot={SHOTS.pricing}>
             <p>
-              Jasper offers a <B>7-day free trial of Pro</B>.
-              <Sources items={[SRC.trial]} /> Draftly has a Free plan with no time limit: paste your website URL and it writes your first
-              full blog post, with its thumbnail, and no credit card. You can also connect Claude, ChatGPT or Cursor on the Free plan and
-              write one more post with your own AI.
+              Jasper Pro is <B>${JASPER_PRO.monthly} per seat a month</B>, or ${JASPER_PRO.yearly} billed yearly, so a two-person team pays $
+              {JASPER_PRO.monthly * 2} a month.
+              <SourceLinks items={[SRC.pricing]} /> Draftly starts at <B>${SOLO.price} a month</B> for the plan, not per seat, with no annual
+              contract. See <A href="/pricing">every Draftly plan</A>.
             </p>
-            <p>
-              That first post is the fairest test. You read a finished post written for your business before you decide to pay
-              anything.
-            </p>
-            <InlineCta href={registerUrl} label={ctaLabel} note="Your first post is free." />
-          </Section>
+          </KeywordSection>
 
-          <Section id="seo-blog-posts" title="Jasper alternative for SEO blog posts">
+          <KeywordSection
+            id="free-alternative"
+            title="Is there a free Jasper AI alternative?"
+            shot={SHOTS.free}
+            cta={<Cta href={registerUrl} label={ctaLabel} note="No credit card." />}
+          >
             <p>
-              Jasper has a Blog Post agent and SEO, AEO and GEO agents, and its GEO agent can read your Semrush data.
-              <Sources items={[SRC.seo]} /> Those agents are part of a wider platform built for marketing teams.
+              Jasper offers a 7-day free trial of Pro.
+              <SourceLinks items={[SRC.trial]} /> Draftly&apos;s Free plan has no time limit: paste your website URL and it writes your first
+              full blog post, thumbnail included, free.
             </p>
-            <p>
-              Draftly does one job end to end. It reads your site, suggests topics from news in your industry, writes the post with
-              question-style headings, drafts the URL slug, meta title and meta description, scores the post for SEO, and publishes it.
-              Every plan shows your Google Analytics and Search Console reports. Paid plans add keyword data through the Draftly
-              connector: volume, difficulty and intent from Solopreneur up, live Google results from Growth, and keyword gaps and
-              backlinks on Autopilot.
-            </p>
-            <ProductFigure shot={GUIDE_SHOTS.urlToPost} />
-          </Section>
+          </KeywordSection>
 
-          <Section id="brand-voice" title="Brand voice: Jasper vs Draftly">
+          <KeywordSection id="seo-blog-posts" title="Jasper alternative for SEO blog posts" shot={SHOTS.seo}>
             <p>
-              Jasper Pro includes 2 brand voices, and Business includes unlimited brand voices plus a Style Guide.
-              <Sources items={[SRC.pricing]} />
+              Jasper&apos;s Blog Post and SEO agents sit inside a platform built for many kinds of marketing.
+              <SourceLinks items={[SRC.seo]} /> Draftly does one job: it writes the post with question-style headings, links your own
+              pages, and drafts the slug, meta title and meta description every time.
             </p>
-            <p>
-              Draftly builds your brand voice from your own website on every plan, Free included, and shows it as sliders you can move.
-              It learns from the edits you make before you publish, and every change it learns is listed in Brand memory, where you can
-              undo it.
-            </p>
-            <ProductFigure shot={GUIDE_SHOTS.brandVoice} />
-          </Section>
+          </KeywordSection>
 
-          <Section id="sounds-human" title="An AI writer that sounds human">
+          <KeywordSection id="brand-voice" title="Brand voice: Jasper vs Draftly" shot={SHOTS.voice}>
             <p>
-              Most of the work with AI copy is taking the AI out of it. Draftly checks every post against writing rules for the habits
-              that make copy read as machine-made: stock AI words, &quot;not just X&quot; framing, hedging, throat-clearing openers and more. A
-              post that breaks a rule gets a fix pass before you see it, and each post gets a 0 to 100 human-voice score.
+              Jasper Pro includes 2 brand voices, and Business includes unlimited.
+              <SourceLinks items={[SRC.pricing]} /> Draftly builds your voice from your own website on every plan, Free included, and shows it
+              as sliders you can move. It also learns from the edits you make before you publish.
             </p>
-            <p>
-              In the Draftly Editor, an AI-writing detector marks sentences that read as AI and labels the draft likely human, mixed or
-              likely AI-written, so you know where to look. The <A href="/seo-copywriting">rules Draftly checks</A> are listed with before and
-              after examples.
-            </p>
-            <ProductFigure shot={GUIDE_SHOTS.genericVsDraftly} />
-            <p>
-              Jasper&apos;s equivalent is its Style Guide, which its pricing page lists on the Business plan.
-              <Sources items={[SRC.pricing]} /> Rules catch patterns, not taste, so read every post before it goes live whichever tool you
-              use.
-            </p>
-          </Section>
+          </KeywordSection>
 
-          <Section id="wordpress" title="Publish to WordPress automatically">
+          <KeywordSection
+            id="wordpress"
+            title="Publish to WordPress automatically"
+            shot={SHOTS.wordpress}
+            cta={<Cta href={registerUrl} label={ctaLabel} note="Connect your CMS after your first post." />}
+          >
             <p>
-              Jasper&apos;s integrations page lists a Webflow app, a Chrome extension, Google Docs, Microsoft Word, Slack, and Zapier and Make
-              for connecting other apps. WordPress isn&apos;t on the list.
-              <Sources items={[SRC.integrations]} />
+              WordPress isn&apos;t on Jasper&apos;s integrations page.
+              <SourceLinks items={[SRC.integrations]} /> Draftly publishes in one click to WordPress, Shopify, Webflow, Ghost, HubSpot and
+              Squarespace. On Autopilot (${AUTOPILOT.price} a month) it writes and publishes to WordPress and Shopify on a schedule you set.
             </p>
-            <p>
-              Draftly publishes in one click to <B>WordPress, Shopify, Webflow, Ghost, HubSpot and Squarespace</B>. On the Autopilot plan
-              (${AUTOPILOT.price} a month) you set a schedule once and Draftly picks topics, writes and publishes to WordPress and Shopify on
-              its own, then emails you a weekly digest of what went out. Draftly also has a <A href="/wordpress-ai-plugin">WordPress plugin</A>{" "}
-              for checking and improving posts already on your site.
-            </p>
-            <ProductFigure shot={INTEGRATIONS_SHOT} />
-            <InlineCta href={registerUrl} label={ctaLabel} note="Connect your CMS after your first post." />
-          </Section>
+          </KeywordSection>
 
-          <Section id="claude-chatgpt" title="Use your brand voice in Claude and ChatGPT">
-            <p>
-              Jasper&apos;s MCP server brings its brand context into Claude, ChatGPT and Microsoft 365 Copilot. Jasper&apos;s help center says it
-              is for Business plans only and needs API access.
-              <Sources items={[SRC.mcp]} />
-            </p>
-            <p>
-              The Draftly connector works on every plan, Free included. Your assistant reads your brand voice and writing rules, checks
-              drafts against them and saves posts to Draftly. See <A href="/mcp">how the Draftly SEO MCP server works</A>.
-            </p>
-          </Section>
-
-          <Section id="when-jasper-wins" title="Where Jasper is the better pick">
-            <Bullets
-              items={[
-                <>
-                  <B>Many channels.</B> Jasper lists 100+ marketing agents for work like ads, emails and product descriptions. Draftly writes
-                  blog posts only.
-                  <Sources items={[SRC.pricing]} />
-                </>,
-                <>
-                  <B>Larger teams.</B> Jasper Business adds SSO, SCIM, role-based permissions, admin controls and a dedicated customer
-                  success manager. Draftly has no SSO or team roles.
-                  <Sources items={[SRC.pricing]} />
-                </>,
-                <>
-                  <B>Other languages and countries.</B> Jasper lists 30+ languages. Draftly serves US businesses only.
-                  <Sources items={[SRC.pricing]} />
-                </>,
-                <>
-                  <B>Custom workflows.</B> Jasper Business includes a no-code builder for custom agents, Jasper Grid and API access.
-                  <Sources items={[SRC.pricing]} />
-                </>,
-              ]}
-            />
-          </Section>
-
-          <Section id="worth-it" title="Is Jasper AI worth it for a small-business blog?">
-            <p>
-              For a marketing team that uses everything in a Pro seat, it can be. For a small business that mainly needs a blog, these
-              are the reasons people pick Draftly instead:
-            </p>
-            <Bullets
-              items={[
-                <>
-                  <B>Lower cost for one blog.</B> ${SOLO.price} a month for the plan, against ${JASPER_PRO.monthly} per seat a month for
-                  Jasper Pro.
-                </>,
-                <>
-                  <B>Try it on your own site.</B> A finished first post, free, with no credit card.
-                </>,
-                <>
-                  <B>Less rewriting.</B> Every post is checked for AI-sounding writing and fixed before you see it.
-                </>,
-                <>
-                  <B>No copy and paste.</B> One click to six CMSs, or scheduled publishing on Autopilot.
-                </>,
-                <>
-                  <B>Works in the AI app you already use.</B> The Claude and ChatGPT connector is on every plan.
-                </>,
-              ]}
-            />
-          </Section>
+          <section id="when-jasper-wins" className="mt-28 max-w-3xl">
+            <H2 className="mb-6">When Jasper is the better choice</H2>
+            <div className="leading-relaxed" style={secondary}>
+              <Bullets
+                items={[
+                  <>
+                    <B>You write for many channels.</B> Jasper lists 100+ agents for ads, emails and product copy.
+                  </>,
+                  <>
+                    <B>You have a larger team.</B> Jasper Business adds SSO, SCIM, roles and admin controls.
+                  </>,
+                  <>
+                    <B>You work outside the US.</B> Jasper lists 30+ languages. Draftly serves US businesses only.
+                  </>,
+                ]}
+              />
+            </div>
+          </section>
 
           <div className="max-w-3xl">
-            <RelatedLinks items={PILLARS.filter((p) => p.href !== PATH).slice(0, 4)} />
-            <RelatedPosts topic="AI blog writer Jasper alternative brand voice SEO blog posts" />
+            <FaqList faqs={FAQS} />
+            <div className="mt-16">
+              <KeepReading exclude={PATH} guides={["/ai-copywriter", "/best-ai-for-writing"]} topic="AI blog writer Jasper alternative brand voice SEO blog posts" />
+            </div>
           </div>
-          <FaqList faqs={FAQS} />
 
           <DarkCta
-            title="See what Draftly writes for your site"
-            body="Paste your website URL and Draftly writes one post in your brand's voice, checked for AI-sounding writing. No credit card."
+            title="Run your own bake-off"
+            body="Paste your website URL and Draftly writes one post in your brand's voice, linked to your own pages. No credit card."
             href={registerUrl}
             label={ctaLabel}
             secondary={{ href: "/pricing", label: "Compare plans" }}
           />
-        </TocLayout>
+        </div>
       </main>
       <Footer />
     </>

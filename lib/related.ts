@@ -37,7 +37,7 @@ export const PILLARS: Pillar[] = [
   {
     href: "/jasper-vs-draftly",
     title: "Jasper vs Draftly",
-    blurb: "Pricing, brand voice, SEO blog posts and WordPress publishing compared, and where Jasper is the better pick.",
+    blurb: "Both tools tested on the same topics for four real businesses, plus pricing, brand voice and WordPress publishing.",
     keywords: ["jasper", "alternative", "compare", "versus", " vs ", "pricing"],
   },
 ];
