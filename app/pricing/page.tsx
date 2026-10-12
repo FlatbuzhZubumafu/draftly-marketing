@@ -8,7 +8,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { AccentText } from "@/components/AccentText";
 import { PricingPlans } from "@/components/PricingPlans";
-import { PAID_PLANS, paidPostCounts, paidPriceList } from "@/lib/pricing";
+import { BILLING_TERMS_HREF, CANCEL_NOTE, PAID_PLANS, paidPostCounts, paidPriceList } from "@/lib/pricing";
 import { jsonLdHtml, softwareApplicationJsonLd } from "@/lib/schema";
 
 export const revalidate = 3600;
@@ -95,7 +95,12 @@ export default async function PricingPage() {
             . Premium models such as Claude Opus 5.5 and GPT 5.5 use about 1.7x the credits per post, so a plan covers fewer posts
             on them. SEO data calls come
             from a separate monthly allowance, with data packs of 100 extra calls for $10. Start free and upgrade any
-            time from Settings inside the app. Available to businesses in the United States only.
+            time from Settings inside the app. {CANCEL_NOTE} Your plan stays active to the end of the period you paid
+            for. See the{" "}
+            <a href={BILLING_TERMS_HREF} style={{ color: "var(--color-accent)" }}>
+              billing, cancellation and refund terms
+            </a>
+            . Available to businesses in the United States only.
           </p>
         </section>
 

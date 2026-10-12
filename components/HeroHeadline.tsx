@@ -6,7 +6,9 @@ import { SquiggleUnderline } from "./SquiggleUnderline";
 
 /*
  * The homepage headline, shown first as the kind of bloated copy AI tools
- * write, then edited down by Draftly to "The AI Copywriter that Hates AI Copy."
+ * write, then edited down by Draftly to "The AI Blog Writer That Hates AI Copy."
+ * The category ("AI blog writer") is in the h1 itself so a first-time visitor
+ * learns what Draftly is without reading the eyebrow.
  *
  * - The cut phrases live in CSS generated content (data-text), never in the
  *   DOM text, and are aria-hidden: search engines and screen readers only ever
@@ -122,14 +124,14 @@ export function HeroHeadline({ phase, struck }: { phase: Phase; struck: number }
   return (
     <h1 className={`page-heading hero-heading mb-8${verbose ? " hero-verbose" : ""}`}>
       <span className="eyebrow font-sans block mb-5" style={{ lineHeight: 1.4 }} data-flip>
-        AI blog writer for small businesses
+        For small businesses
       </span>{" "}
       {cut("opener")}
-      <span className="hero-keep whitespace-nowrap" data-flip>The AI Copywriter</span>
+      <span className="hero-keep whitespace-nowrap" data-flip>The AI Blog Writer</span>
       {cut("pitch")}
       <br />
       <span className="hero-line">
-        <span className="hero-keep" data-flip>that</span>
+        <span className="hero-keep" data-flip>That</span>
         {cut("filler")}{" "}
         <span className="relative inline-block" data-flip>
           <em className="italic" style={{ color: "var(--color-accent)" }}>Hates AI Copy</em>

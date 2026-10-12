@@ -87,3 +87,29 @@ export const paidPriceList = () => joinList(PAID_PLANS.map((p) => `$${p.price}`)
 
 /** "66, 233 and 333", the approximate monthly post counts of the paid plans. */
 export const paidPostCounts = () => joinList(PAID_PLANS.map((p) => p.posts.replace(/\D+/g, "")));
+
+/**
+ * First-month offer. Checked against the app on 2026-10-12: stripe-checkout
+ * attaches STRIPE_FIRST_MONTH_COUPON (live coupon FIRSTMONTH50, 50% off,
+ * duration "once") automatically to a customer's first subscription on
+ * Solopreneur, Growth or Autopilot (_shared/first-month-offer.ts). WordPress
+ * plugin plans and credit packs never get it. If the secret is unset, remove this.
+ */
+export const FIRST_MONTH_OFFER = {
+  badge: "First month 50% off any paid plan",
+  note: "Taken off automatically at checkout on your first paid subscription.",
+};
+
+/**
+ * Cancelling: Settings > Billing > Manage subscription opens the Stripe portal,
+ * where cancellation is on and takes effect at the end of the paid period.
+ * Subscriptions are not refundable (terms section 4), so no money-back promise.
+ */
+export const CANCEL_NOTE = "Cancel any time from Settings.";
+export const BILLING_TERMS_HREF = "/terms-and-conditions#billing-cancellation-and-refunds";
+
+/** Value anchor under the cheapest paid plan (site audit D4.3). */
+export function valueAnchor(plan: Plan): string {
+  const posts = plan.posts.replace(/\D+/g, "");
+  return `About ${posts} posts for $${plan.price}. A freelance writer charges more than that for one article.`;
+}

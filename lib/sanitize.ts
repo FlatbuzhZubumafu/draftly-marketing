@@ -67,5 +67,17 @@ export function fixLegalAnchors(html: string): string {
     LEGAL_ANCHOR_ALIASES[id] ? `href="#${LEGAL_ANCHOR_ALIASES[id]}"` : match,
   );
   if (!/\bid="toc"/.test(out)) out = out.replace(/TABLE OF CONTENTS/, '<span id="toc"></span>TABLE OF CONTENTS');
+  // Section headings without an id get one from their text, minus the section
+  // number, so other pages can link to a section that keeps its name when the
+  // numbering changes ("4. Billing, cancellation and refunds" ->
+  // #billing-cancellation-and-refunds).
+  const used = new Set<string>();
+  out = out.replace(/<h2(\s[^>]*)?>([\s\S]*?)<\/h2>/gi, (match, attrs: string | undefined, inner: string) => {
+    if (/\sid="/i.test(attrs ?? "") || !hasText(inner)) return match;
+    let id = headingId(inner.replace(/<[^>]*>/g, "").replace(/^\s*\d+\.\s*/, ""));
+    while (used.has(id)) id += "-2";
+    used.add(id);
+    return `<h2 id="${id}"${attrs ?? ""}>${inner}</h2>`;
+  });
   return out;
 }

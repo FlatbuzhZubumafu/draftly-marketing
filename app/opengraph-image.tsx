@@ -34,12 +34,12 @@ export default async function OpengraphImage() {
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ display: "flex", fontSize: 26, fontWeight: 600, letterSpacing: "0.12em", color: ACCENT, textTransform: "uppercase" }}>
-            AI blog writer for small businesses
+            For small businesses
           </div>
           <div style={{ display: "flex", flexDirection: "column", marginTop: 28, fontSize: 92, lineHeight: 1.05 }}>
-            <span>The AI Copywriter</span>
+            <span>The AI Blog Writer</span>
             <div style={{ display: "flex" }}>
-              <span>that&nbsp;</span>
+              <span>That&nbsp;</span>
               <span style={{ display: "flex", flexDirection: "column", color: ACCENT }}>
                 Hates AI Copy
                 <span style={{ height: 10, marginTop: -6, borderRadius: 6, background: YELLOW }} />

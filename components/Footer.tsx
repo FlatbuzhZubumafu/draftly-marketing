@@ -1,6 +1,8 @@
 import { getHomepageData } from "@/lib/graphql";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { CopyEmail } from "@/components/CopyEmail";
+import { BILLING_TERMS_HREF } from "@/lib/pricing";
+import { ReviewProfiles } from "@/components/ReviewProfiles";
 
 const MUTED = "#8a8a8a";
 const FAINT = "#666";
@@ -62,6 +64,11 @@ export async function Footer() {
                 </a>
               </li>
               <li>
+                <a href={BILLING_TERMS_HREF} className="transition-colors hover:text-white" style={{ color: MUTED }}>
+                  Cancellation and refunds
+                </a>
+              </li>
+              <li>
                 <a
                   href="sms:+13857224497?&body=Hi%2C%20I%20am%20interested%20in%20learning%20more%20about%20Draftly."
                   className="text-xs transition-colors hover:text-white"
@@ -85,6 +92,7 @@ export async function Footer() {
             </a>{" "}
             SEO product.
           </p>
+          <ReviewProfiles tone="dark" />
           <p className="inline-flex flex-wrap items-center gap-x-3 gap-y-2">
             <span className="inline-flex items-center gap-1.5">
               <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">

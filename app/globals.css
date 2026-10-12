@@ -314,47 +314,6 @@ a:hover { color: var(--color-text-primary); }
 .hero-cut.is-fading::before,
 .hero-cut.is-fading::after { opacity: 0; }
 
-/* Marquee */
-.marquee-wrapper {
-  overflow: hidden;
-  padding-block: 2rem;
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-}
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee 30s linear infinite;
-}
-.marquee-item {
-  font-family: var(--font-display);
-  font-size: 2rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-wide);
-  padding-inline: 2rem;
-  white-space: nowrap;
-  /* All-caps text: trim the line box to cap height so the words sit centred in the band
-     instead of riding high over unused descender space. */
-  line-height: 1;
-  text-box: trim-both cap alphabetic;
-}
-.marquee-item.outline {
-  color: transparent;
-  -webkit-text-stroke: 1px var(--color-border-strong);
-}
-.marquee-item.filled {
-  color: var(--color-text-primary);
-  -webkit-text-stroke: 0;
-}
-.marquee-wrapper:hover .marquee-track {
-  animation-play-state: paused;
-}
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }

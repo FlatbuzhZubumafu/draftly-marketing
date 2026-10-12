@@ -1,5 +1,5 @@
 import { Check } from "lucide-react";
-import { PLANS } from "@/lib/pricing";
+import { CANCEL_NOTE, FIRST_MONTH_OFFER, PAID_PLANS, PLANS, valueAnchor } from "@/lib/pricing";
 
 /**
  * The four plan cards. Shared by /pricing and the homepage so the two can never
@@ -15,7 +15,18 @@ export function PricingPlans({
   cardHeading?: "h2" | "h3";
 }) {
   const CardHeading = cardHeading;
+  const cheapestPaid = PAID_PLANS[0];
   return (
+    <>
+      <p className="mb-8 text-center text-sm" style={{ color: "var(--color-text-secondary)" }}>
+        <span
+          className="block w-fit mx-auto mb-2 sm:inline-block sm:mr-2 sm:mb-0 px-3 py-1 rounded-full font-semibold"
+          style={{ background: "#ffce59", color: "var(--color-text-primary)" }}
+        >
+          {FIRST_MONTH_OFFER.badge}
+        </span>
+        {FIRST_MONTH_OFFER.note}
+      </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {PLANS.map((plan) => (
           <div
@@ -49,6 +60,11 @@ export function PricingPlans({
             <p className="text-xs" style={{ color: "var(--color-text-muted)" }}>
               {plan.credits}
             </p>
+            {plan === cheapestPaid && (
+              <p className="mt-2 text-xs leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+                {valueAnchor(plan)}
+              </p>
+            )}
             <p className="mt-4 text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
               {plan.pitch}
             </p>
@@ -78,8 +94,14 @@ export function PricingPlans({
             >
               {plan.price === 0 ? freeCtaText : `Start on ${plan.name}`}
             </a>
+            {plan.price > 0 && (
+              <p className="mt-2 text-xs text-center" style={{ color: "var(--color-text-muted)" }}>
+                {CANCEL_NOTE}
+              </p>
+            )}
           </div>
         ))}
       </div>
+    </>
   );
 }
