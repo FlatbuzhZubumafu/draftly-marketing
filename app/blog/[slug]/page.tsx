@@ -9,6 +9,7 @@ import { OnThisPage } from "@/components/OnThisPage";
 import { NOINDEX_POST_SLUGS, relatedPillars } from "@/lib/related";
 import { RelatedLinks } from "@/components/RelatedLinks";
 import { authorRef } from "@/lib/schema";
+import { NewsletterSignup } from "@/components/NewsletterSignup";
 
 export const revalidate = 60;
 
@@ -138,6 +139,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             className="prose prose-lg max-w-none text-gray-700 leading-relaxed"
             dangerouslySetInnerHTML={{ __html: tidyPostHtml(sanitizeHtml(post.content), post.title) }}
           />
+          <NewsletterSignup location="blog_post" className="mt-16" />
           <RelatedLinks items={relatedPillars(`${post.title} ${post.content.replace(/<[^>]*>/g, " ")}`)} />
         </article>
         <OnThisPage />

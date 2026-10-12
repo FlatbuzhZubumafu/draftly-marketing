@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { NOINDEX_POST_SLUGS, PILLARS } from "@/lib/related";
 import { RelatedLinks } from "@/components/RelatedLinks";
 import { jsonLdHtml } from "@/lib/schema";
+import { NewsletterSignup } from "@/components/NewsletterSignup";
 
 export const revalidate = 60;
 
@@ -49,7 +50,8 @@ export default async function BlogPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdHtml(blogJsonLd, listJsonLd) }} />
       <main className="pt-16 min-h-screen bg-white">
         <div className="max-w-3xl mx-auto px-4 py-20">
-          <h1 className="text-4xl font-extrabold text-gray-900 mb-12">Blog</h1>
+          <h1 className="text-4xl font-extrabold text-gray-900 mb-8">Blog</h1>
+          <NewsletterSignup location="blog_index" className="mb-12" />
           <div className="space-y-8">
             {posts.map((post) => (
               <article key={post.id} className="border-b border-gray-100 pb-8">

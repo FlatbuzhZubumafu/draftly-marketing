@@ -1,4 +1,5 @@
 import { getHomepageData } from "@/lib/graphql";
+import { NewsletterSignup } from "@/components/NewsletterSignup";
 
 export async function Footer() {
   const { marketingSettings: s } = await getHomepageData();
@@ -65,6 +66,11 @@ export async function Footer() {
                 ["/terms-and-conditions", "Terms"],
               ]}
             />
+          </div>
+
+          {/* Newsletter signup */}
+          <div className="mt-12 pt-10 max-w-xl" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+            <NewsletterSignup location="footer" tone="dark" />
           </div>
 
           {/* Row 2: payment and infrastructure trust marks, then copyright */}
