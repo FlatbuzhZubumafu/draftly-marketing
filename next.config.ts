@@ -26,6 +26,14 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // HeyCatch short links: single-character paths (/a-/z, /0-/9) are reserved for
+      // channel attribution. Listed first so they never fall through to app/[slug].
+      // No real single-character routes exist in app/.
+      {
+        source: "/:l([a-z0-9])",
+        destination: "/?utm_source=heycatch&utm_campaign=:l",
+        permanent: false,
+      },
       {
         source: "/draftly-blog-shifts-from-agency-to-customer-focus",
         destination: "/blog/draftly-blog-shifts-from-agency-to-customer-focus",
