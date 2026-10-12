@@ -7,9 +7,7 @@ import { A, B, Bullets, DarkCta, FaqList, faqJsonLd, type Faq } from "@/componen
 import { ProductFigure } from "@/components/ProductFigure";
 import { PAID_PLANS } from "@/lib/pricing";
 import { jsonLdHtml, authorRef } from "@/lib/schema";
-import { PILLARS } from "@/lib/related";
-import { RelatedLinks } from "@/components/RelatedLinks";
-import { RelatedPosts } from "@/components/RelatedPosts";
+import { KeepReading } from "@/components/KeepReading";
 import { GUIDE_SHOTS, INTEGRATIONS_SHOT, STEP_SHOTS, imageObjectJsonLd, type ProductShot } from "@/lib/product-shots";
 import {
   BAKEOFF,
@@ -559,8 +557,7 @@ export default async function JasperVsDraftlyPage() {
           <div className="max-w-3xl">
             <FaqList faqs={FAQS} />
             <div className="mt-16">
-              <RelatedLinks items={PILLARS.filter((p) => p.href !== PATH).slice(0, 4)} />
-              <RelatedPosts topic="AI blog writer Jasper alternative brand voice SEO blog posts" />
+              <KeepReading exclude={PATH} guides={["/ai-copywriter", "/best-ai-for-writing"]} topic="AI blog writer Jasper alternative brand voice SEO blog posts" />
             </div>
           </div>
 
