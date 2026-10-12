@@ -35,10 +35,10 @@ export const PILLARS: Pillar[] = [
     keywords: ["agency", "seo agency", "hire", "cost", "outsourc", "strategy"],
   },
   {
-    href: "/jasper-alternatives",
-    title: "Jasper alternatives, judged by user complaints",
-    blurb: "What users complain about in AI copywriting tools, and how Draftly answers each one.",
-    keywords: ["jasper", "alternative", "copy.ai", "surfer", "koala", "compare", "versus", " vs "],
+    href: "/jasper-vs-draftly",
+    title: "Jasper vs Draftly",
+    blurb: "Pricing, brand voice, SEO blog posts and WordPress publishing compared, and where Jasper is the better pick.",
+    keywords: ["jasper", "alternative", "compare", "versus", " vs ", "pricing"],
   },
 ];
 

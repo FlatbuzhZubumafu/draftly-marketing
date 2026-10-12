@@ -47,13 +47,13 @@ export async function Footer() {
               ]}
             />
             <FooterColumn
-              title="SEO"
+              title="Resources"
               links={[
-                ["/ai-copywriter", "AI Copywriting"],
+                ["/ai-copywriter", "AI Copywriter"],
                 ["/seo-copywriting", "SEO Copywriting Rules"],
+                ["/best-ai-for-writing", "Best AI for Writing"],
                 ["/ai-seo-agency-vs-tool", "AI SEO Agency vs Tool"],
-                ["/jasper-alternatives", "Jasper Alternatives"],
-                ["/best-ai-for-writing", "AI Model Benchmark"],
+                ["/jasper-vs-draftly", "Jasper vs Draftly"],
               ]}
             />
             <FooterColumn
