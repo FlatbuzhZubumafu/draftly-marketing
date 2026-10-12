@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { pageImages } from "@/lib/og";
+import { APP_MODELS, APP_MODEL_COUNT } from "@/lib/app-models";
 import { ProviderLogo } from "@/components/ProviderLogo";
 import { READER_QUALITY_EVIDENCE } from "@/lib/ruleCheck";
 import { getHomepageData } from "@/lib/graphql";
@@ -50,7 +51,7 @@ const EVERY_PLAN = [
 ];
 
 const CREDIT_COSTS = [
-  { action: "Blog post", credits: "150 on Claude Sonnet 5.5, the default (50 on GPT 6 Luna, 250 on premium models such as GPT 5.4)" },
+  { action: "Blog post", credits: "150 on Claude Sonnet 5.5, the default (50 on GPT 6 Luna, 250 on premium models such as Claude Opus 5.5 and GPT 5.5)" },
   { action: "Thumbnail image", credits: "55 (free with your first post)" },
   { action: "Image inside a post (Solopreneur and up)", credits: "53" },
   { action: "Outline", credits: "15 (free on paid plans)" },
@@ -58,7 +59,6 @@ const CREDIT_COSTS = [
   { action: "Rewrite", credits: "30 (50 on premium models). 2 free on your first post" },
 ];
 
-const MODELS = ["Claude Sonnet 5.5 (default, best quality)", "GPT 6 Luna (budget)", "GPT 5.4 Mini", "Claude Sonnet 4.6", "Claude Haiku 4.5", "GPT 5.4", "Gemini 3 Flash", "DeepSeek V3.2"];
 
 export default async function PricingPage() {
   const { marketingSettings: s } = await getHomepageData();
@@ -92,7 +92,7 @@ export default async function PricingPage() {
             <a href="/seo-copywriting" style={{ color: "var(--color-accent)" }}>
               our writing rules
             </a>
-            . Premium models such as GPT 5.4 use about 1.7x the credits per post, so a plan covers fewer posts
+            . Premium models such as Claude Opus 5.5 and GPT 5.5 use about 1.7x the credits per post, so a plan covers fewer posts
             on them. SEO data calls come
             from a separate monthly allowance, with data packs of 100 extra calls for $10. Start free and upgrade any
             time from Settings inside the app. Available to businesses in the United States only.
@@ -191,13 +191,17 @@ export default async function PricingPage() {
               The Models You Can Pick
             </h2>
             <p className="text-sm leading-relaxed mb-5" style={{ color: "var(--color-text-secondary)" }}>
-              Free accounts write with Claude Sonnet 5.5. Paid plans choose per post from the full list.
+              Free accounts write with Claude Sonnet 5.5. Paid plans choose per post from all {APP_MODEL_COUNT}. Credits are per blog post.
             </p>
             <ul className="space-y-2 text-sm">
-              {MODELS.map((m) => (
-                <li key={m} className="flex items-center gap-2.5" style={{ color: "var(--color-text-secondary)" }}>
-                  <ProviderLogo model={m} size={18} className="text-[color:var(--color-text-primary)]" />
-                  {m}
+              {APP_MODELS.map((m) => (
+                <li key={m.name} className="flex items-center gap-2.5" style={{ color: "var(--color-text-secondary)" }}>
+                  <ProviderLogo model={m.name} size={18} className="text-[color:var(--color-text-primary)]" />
+                  <span>
+                    {m.name}
+                    {m.note && ` (${m.note})`}
+                  </span>
+                  <span className="ml-auto tabular-nums">{m.credits}</span>
                 </li>
               ))}
             </ul>

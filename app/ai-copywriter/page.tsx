@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { APP_MODEL_COUNT } from "@/lib/app-models";
 import { pageImages } from "@/lib/og";
 import { APP_URL, SITE_URL } from "@/lib/site";
 import { getHomepageData } from "@/lib/graphql";
@@ -61,7 +62,7 @@ const FAQS: Faq[] = [
   },
   {
     q: "Which AI model does Draftly use?",
-    a: `${D.model} is the default writer, on every plan including the free post. Paid plans can choose from 8 AI models for each post, including Claude, GPT, Gemini and DeepSeek models.`,
+    a: `${D.model} is the default writer, on every plan including the free post. Paid plans can choose from ${APP_MODEL_COUNT} AI models for each post, including Claude Opus 5.5, GPT 5.5, Gemini 3.8 Flash, Kimi K3 and DeepSeek V4 Pro.`,
   },
   {
     q: "Will the posts sound like AI wrote them?",
