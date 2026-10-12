@@ -2,7 +2,8 @@
 // verbatim from a model's output in the edition 1 run (~/draftly-work/bakeoff/out for blog
 // posts, ~/draftly-work/bakeoff/copy-out for copy packs), and every pass or miss is what
 // the scoring script or the judges recorded for that output. [[double brackets]] mark the
-// words the check was about. Don't add an example that isn't in the run files.
+// words the check was about. Don't add an example that isn't in the run files. The
+// `example` before and after lines in each lesson are made up to show the pattern.
 
 export type Business = "Boise roofer" | "AP software" | "Phoenix dentist";
 
@@ -21,13 +22,32 @@ export type Example = {
   note?: string;
 };
 
-export type Criterion = { id: string; title: string; body: string; examples: Example[]; aside?: string };
+export type Criterion = {
+  id: string;
+  title: string;
+  /** The copy principle: what it is, what it looks like and why models write this way. */
+  lesson: string;
+  /** A short made-up before and after for the lesson. Illustrative, not from the run files. */
+  example?: { before: string; after: string };
+  /** How the benchmark scored it. */
+  body: string;
+  examples: Example[];
+  /**
+   * What Draftly does for this criterion. Every claim is checked against the app code
+   * (supabase/functions/_shared: writing-rules.ts, post-checks.ts, post-pipeline.ts,
+   * editor-engine.ts, quality-gate.ts, content-prompt.ts). Leave it out rather than overclaim.
+   */
+  draftly?: string;
+};
 
 export const CONTENT_CRITERIA: Criterion[] = [
   {
     id: "ai-vocabulary",
     title: "Overused AI Words",
+    lesson: "Some words turn up far more often in AI drafts than in human writing: leverage, seamless, delve, landscape, robust, elevate. Models learn from huge amounts of web text, and much of it is marketing copy and SEO filler where these words are everywhere, so they become the statistically likely choice. Each one sounds polished and says very little, and readers who have seen enough AI copy spot them within a line or two.",
+    example: { before: "Leverage our seamless platform to elevate your accounts payable workflow.", after: "Match each invoice to its PO and receiving slip without retyping either." },
     body: "The script searched every post for words AI models lean on, such as leverage, seamless, delve and landscape. Each one cost 4 points.",
+    draftly: "The writer’s system prompt bans a fixed list of these words and phrases and asks for the literal thing in their place. After the draft is written, a code check scans for the same list. A hit sends the draft back for one repair pass that names each word, and Draftly keeps the repaired version only if it breaks fewer rules. In the Draftly Editor, each flagged sentence is rewritten on its own and the rest of the text stays as it was.\n\nOur test script matched words literally, so it also caught literal uses: four roofing posts lost points for crews wearing safety harnesses (Claude Opus 5.5, Claude Sonnet 5.5, Gemini 3 Flash and Gemini 3.8 Flash), and GPT 5.5 lost points for telling homeowners to unlock their gates. Draftly’s check skips literal phrases like unlocking a gate, only flags harness in phrases like “harness your data”, and ignores any word that appears in your own brief or brand vocabulary.",
     examples: [
       {
         verdict: "miss",
@@ -44,13 +64,14 @@ export const CONTENT_CRITERIA: Criterion[] = [
         note: "Qwen 3.8 Max used none of the listed words in three posts.",
       },
     ],
-    aside:
-      "The list is a plain word match, so it also caught literal uses. Four roofing posts lost points for crews wearing safety harnesses (Claude Opus 5.5, Claude Sonnet 5.5, Gemini 3 Flash and Gemini 3.8 Flash), and GPT 5.5 lost points for telling homeowners to unlock their gates.",
   },
   {
     id: "contrast-phrasing",
     title: "“Not Just X” Contrast Phrasing",
+    lesson: "Contrast phrasing sets up a claim nobody made so the writer can knock it down: “it’s not X, it’s Y”, “not just X”, “more than just X”. It is a rhetorical template that sounds like insight, and models overuse it because it is so common in the persuasive writing they learned from. One in a post can work. Three in a post read like a formula, and the idea being denied is usually one the reader never held.",
+    example: { before: "It’s not just a roof. It’s peace of mind for your family.", after: "A new roof stops the leak over the kitchen before the next storm." },
     body: "Lines like “it’s not X, it’s Y” and “not just X” argue with a claim nobody made. Each one cost 5 points, up to 15 per post. The script also counted “rather than” and “instead of”, which are often fine, so a count of one or two in the table can be a plain comparison.",
+    draftly: "The writer’s rules ban every form, including hidden ones such as a denial followed by a correction. The code check fails a draft on the explicit forms, such as “not just” and “it’s not X, it’s Y”, and sends it back for one repair pass. “Instead of” and “rather than” are recorded as warnings only, since they are often plain comparisons. The Editor flags each of these sentences and rewrites only those.",
     examples: [
       {
         verdict: "miss",
@@ -71,7 +92,10 @@ export const CONTENT_CRITERIA: Criterion[] = [
   {
     id: "em-dashes",
     title: "Em Dash Overuse",
+    lesson: "The em dash is the long dash writers use to break into a sentence with an aside. People use it, but AI models tend to use it much more often, sometimes twice in one sentence. It is a punctuation habit of the models, and many readers now treat a page full of dashes as a sign a model wrote it. A comma, a period or parentheses usually does the same job.",
+    example: { before: "The fix is simple—reseal the flashing—and it takes an afternoon.", after: "The fix is simple. Resealing the flashing takes an afternoon." },
     body: "The rules allow about one em dash per 300 words. Each dash past that cost 3 points, up to 15. Claude Haiku 4.5 used 29 in three posts, more than every other model put together.",
+    draftly: "By default the writer is told to use at most one em dash per 300 words, and each website can switch to banning them entirely. Over the limit, the code check records a warning on the post. With the ban on, any dash fails the draft and sends it back for repair. In the Editor, when a text is over the limit, each sentence with a dash is flagged and rewritten with a comma or a period.",
     examples: [
       {
         verdict: "miss",
@@ -96,7 +120,9 @@ export const CONTENT_CRITERIA: Criterion[] = [
   {
     id: "faq-section",
     title: "FAQ Section",
+    lesson: "An FAQ section groups the questions readers ask under one heading, each with a short, direct answer. Skimmers can find their question, and search engines get a clean question and answer. Models tend to treat a list of questions in a brief as topics to cover, so when they miss this check they usually still answer the questions, spread through the post as ordinary headings.",
     body: "Each brief listed three questions readers ask. The post needed an FAQ section that answered them, or it lost 8 points.",
+    draftly: "Draftly puts the questions people ask about the topic into the writer’s brief and asks the post to address them. It doesn’t require an FAQ section. When a post has one, the rules say to use those real questions, answer each in one to three sentences and never repeat a heading as a question, and the code check warns on any longer answer.",
     examples: [
       {
         verdict: "miss",
@@ -125,7 +151,10 @@ export const CONTENT_CRITERIA: Criterion[] = [
   {
     id: "call-to-action",
     title: "Closing Call to Action",
+    lesson: "The call to action is the step you want the reader to take next, with a link to take it. Without the link, an interested reader has to go looking. Models often write the right words and drop the link, or close on a summary of the post, because recap endings are common in the articles and essays they learned from.",
+    example: { before: "In summary, three-way matching reduces errors and saves your team time.", after: "To see it on your own invoices, book a 20-minute demo." },
     body: "Each brief gave a call to action and a link. The last section had to end on it, or the post lost 8 points.",
+    draftly: "Each website can set a standard call to action with a button label and URL. When it is set, the writer must end the final section on that offer, and the code check confirms the exact link appears once, in the last section, or sends the draft back for repair. With none set, the model picks a relevant call to action and the link isn’t checked. The rules also ban recap endings and “in conclusion”.",
     examples: [
       {
         verdict: "miss",
@@ -149,7 +178,9 @@ export const COPY_CRITERIA: Criterion[] = [
   {
     id: "google-ad-limits",
     title: "Google Search Ad Headline and Description",
+    lesson: "Google search ads allow 30 characters per headline and 90 per description, and Google rejects text that runs over. AI models write in tokens, which are chunks of words, and they don’t see a running character count as they write. That makes hard character limits easy to overshoot, especially on the longer description line.",
     body: "Google search ads allow 30 characters per headline and 90 per description, spaces included. Each pack asked for three headlines and two descriptions, so every model had 15 limits to hit.",
+    draftly: "Draftly writes blog posts, not ads, so it has no search ad check. The same kind of limit runs on every post’s meta title (50 to 60 characters) and meta description (150 to 160): the code counts both, and a draft outside either range goes back for a repair pass.",
     examples: [
       {
         verdict: "miss",
@@ -180,7 +211,9 @@ export const COPY_CRITERIA: Criterion[] = [
   {
     id: "landing-headlines",
     title: "Landing Page Headlines",
+    lesson: "A landing page headline says what the page offers in one short line. Testing five options teaches you something only when each takes a different angle. Models tend to run long here, trying to fit the whole offer into one line, and the character counting problem from search ads applies too.",
     body: "Each pack needed five headline options of 60 characters or less, different enough from each other to be worth testing. No model wrote two headlines close enough to trip our duplicate check.",
+    draftly: "Draftly doesn’t write landing pages, so there is no headline check in the app. The closest thing is the post title, which the rules ask to be the reader’s question or its answer in plain words.",
     examples: [
       {
         verdict: "miss",
@@ -200,6 +233,8 @@ export const COPY_CRITERIA: Criterion[] = [
   {
     id: "hero-section",
     title: "Hero Section",
+    lesson: "The hero is the top of a landing page: a headline, a subhead that adds a fact or two, and a button. A button label works best as a short action in the reader’s words, like Book My Inspection. Models tend to over-explain, so the label grows into a phrase and the subhead tries to carry every benefit at once.",
+    example: { before: "See How Our Platform Can Help You Today", after: "Book My Inspection" },
     body: "The hero needed a headline of 60 characters or less, a subhead of 25 words or less, and a button label of two to four words.",
     examples: [
       {
@@ -226,6 +261,8 @@ export const COPY_CRITERIA: Criterion[] = [
   {
     id: "email-subject-lines",
     title: "Email Subject Line and Preview Text",
+    lesson: "Inboxes cut off long subject lines and preview text, so the first few words carry the message. A common miss is a slogan-style subject that saves its point for the end, where it gets cut. Models also run past the limits for the same reason as with ads: they don’t count characters as they write.",
+    example: { before: "2 minutes per invoice. That’s the Ledgerline difference.", after: "How old is your roof, roughly?" },
     body: "Each pack needed three subject lines of 50 characters or less and preview text of 90 or less, the line most inboxes show after the subject.",
     examples: [
       {
@@ -255,7 +292,10 @@ export const COPY_CRITERIA: Criterion[] = [
   {
     id: "benefit-bullets",
     title: "Benefit Bullets",
+    lesson: "A benefit bullet names one concrete thing the reader gets, short enough to take in at a glance. Every model stayed under 15 words here. AI bullets usually go wrong on content: a feature with no payoff, or three bullets that say the same thing in different words, a habit that comes from the model’s fondness for groups of three.",
+    example: { before: "Fast, reliable and efficient service you can count on.", after: "Saturday appointments that fit around work and school." },
     body: "Each pack ended with three benefit bullets of 15 words or less. No model went over on any bullet, so this check separated no one.",
+    draftly: "Draftly writes posts, not ad bullets, but the same rules cover lists in a post: use a list only when the items are truly parallel, never to pad, and never three items that all mean the same thing.",
     examples: [
       {
         verdict: "pass",
@@ -271,7 +311,10 @@ export const COPY_CRITERIA: Criterion[] = [
   {
     id: "brief-facts",
     title: "Factual Accuracy: Only the Facts We Gave",
+    lesson: "Copy is only as good as its facts. A 25-year workmanship warranty or a $29 monthly plan gives the reader a reason to choose you, and “quality service” fits any company. Models default to generic claims because those are the most common phrasing in their training data. When a detail is missing, they may fill the gap with one that sounds plausible, which is the more dangerous habit.",
+    example: { before: "Trusted by homeowners for quality service.", after: "Every roof comes with a 25-year workmanship warranty." },
     body: "Each brief listed four facts the copy could use, such as a 25-year workmanship warranty or a $29 monthly plan, and asked for those over generic claims. The script checked that every pack used all four. It does not catch an invented claim.",
+    draftly: "One rule can’t be switched off: never invent statistics, quotes, testimonials or facts about the business, such as prices, warranties or years in business. A code check then compares every number in the draft with the material the writer was given. An unsourced figure fails the draft and goes back for repair, while a hedged rule of thumb (“most tank water heaters last 8 to 12 years”) is flagged for review. A judge model also scores each post for factual safety. Like our test script, the code checks numbers, so a claim made in words relies on the rule and the judge.",
     examples: [
       {
         verdict: "pass",
@@ -300,7 +343,9 @@ export const COPY_CRITERIA: Criterion[] = [
   {
     id: "judge-criteria",
     title: "Judge Criteria: Clarity, Persuasion, Voice and Specificity",
+    lesson: "Code can count characters. It can’t tell whether copy is clear, persuasive, on-brand or specific, so two judge models read every pack. Models lean toward safe, even-toned claims that would fit any brand, which is why persuasion scored lowest. A reason to act now usually comes from a specific fact in the brief.",
     body: "Two judge models scored each pack from 1 to 10 on four questions, then named its strongest and weakest line. Persuasion was the lowest score for every model, topping out at 7.2.",
+    draftly: "Each Draftly post is scored by a judge model on seven reader questions, including whether it is specific to this business, reads like a knowledgeable person wrote it and makes no invented claims. Below the bar, the flagged sentences get one repair pass, and a post still below it is marked for review. The writing rules also ask the model to take a position, name the tradeoff and use concrete names and numbers from the material.",
     examples: [
       {
         verdict: "pass",
@@ -334,7 +379,9 @@ export const SEO_CRITERIA: Criterion[] = [
   {
     id: "keyword-title",
     title: "Target Keyword in the Title",
+    lesson: "The target keyword is the phrase people type into search. Having it in the title tells searchers and search engines what the page answers. Models tend to paraphrase: they keep the question and drop the word that made it a specific search, like “timeline” below. To a model, a title with the same meaning looks as good as one with the exact words.",
     body: "Each brief named a target keyword, and the H1 had to contain every word of it. This and the next two placements were worth 3 points each.",
+    draftly: "When a post has a target keyword, the code check fails a draft whose title (H1) or the first 120 characters of its meta description is missing any of the keyword’s words, and sends it back for repair.",
     examples: [
       {
         verdict: "miss",
@@ -355,7 +402,9 @@ export const SEO_CRITERIA: Criterion[] = [
   {
     id: "keyword-first-100",
     title: "Target Keyword in the First 100 Words",
+    lesson: "The opening lines tell readers and search engines whether they are in the right place, and the keyword near the top confirms it. Models often open with a good direct answer in different words, so the exact phrase shows up later or not at all.",
     body: "The keyword had to appear in the opening 100 words, where readers and search engines decide what the page is about.",
+    draftly: "The writer is asked to use the keyword once in the opening paragraph where it reads naturally. The code check records a warning when it is missing from the first 100 words but never forces it in, since a forced keyword reads worse than none.",
     examples: [
       {
         verdict: "miss",
@@ -380,7 +429,9 @@ export const SEO_CRITERIA: Criterion[] = [
   {
     id: "keyword-h2",
     title: "Target Keyword in an H2",
+    lesson: "H2s are the outline of a page. A keyword in at least one tells skimmers and search engines the page covers the topic in depth. Models write headings around each section’s point, which is good practice, and the full keyword often doesn’t fit those headings naturally.",
     body: "At least one H2 had to carry the full keyword.",
+    draftly: "Draftly asks for the keyword in an H2 only where it reads naturally, and the check that runs when a post is written doesn’t test H2s. The Editor’s keyword check notes when no H2 contains it.",
     examples: [
       {
         verdict: "miss",
@@ -403,7 +454,9 @@ export const SEO_CRITERIA: Criterion[] = [
   {
     id: "meta-title",
     title: "Meta Title Length",
+    lesson: "The meta title is the clickable line in search results. Google cuts off long titles, usually somewhere past 60 characters, and a short one wastes room for the words searchers scan for. Models don’t keep a character count as they write, so they miss in both directions.",
     body: "The brief asked for a meta title of 50 to 60 characters. We passed anything from 45 to 65, and docked 3 points outside that.",
+    draftly: "The writer is asked for 50 to 60 characters, and the code counts the result. Outside that range, the draft goes back for a repair pass.",
     examples: [
       {
         verdict: "miss",
@@ -422,7 +475,9 @@ export const SEO_CRITERIA: Criterion[] = [
   {
     id: "meta-description",
     title: "Meta Description Length",
+    lesson: "The meta description is the summary under the title in search results. Google often shows it as the snippet and cuts off long ones. A good one says what the page answers and gives a reason to click. Models tend to stop once the summary is complete, wherever the count lands, which is how the 121-character miss below happened.",
     body: "The brief asked for 150 to 160 characters. We passed anything from 140 to 170, and docked 3 points outside that.",
+    draftly: "Draftly asks for 150 to 160 characters with the keyword in the first 120, and the code check sends a draft outside the range back for repair.",
     examples: [
       {
         verdict: "miss",
@@ -453,7 +508,9 @@ export const SEO_CRITERIA: Criterion[] = [
   {
     id: "seo-faq",
     title: "FAQ Section",
-    body: "An FAQ gives searchers and AI answer engines a question and a short answer they can quote. The check looked for a heading with FAQ, frequently asked or questions in it.",
+    lesson: "Search engines and AI answer engines pull short, self-contained answers from pages. A question heading followed by a two or three sentence answer is the easiest kind to quote. Models know the FAQ format well, but when a brief doesn’t spell out the layout they often spread the answers through the post, with nothing grouping them.",
+    body: "The check looked for a heading with FAQ, frequently asked or questions in it.",
+    draftly: "Draftly doesn’t force an FAQ section. Its rules ask for one 40 to 80 word paragraph that answers the post’s core question on its own, so search engines and AI assistants can quote it, and when a post has an FAQ, each answer runs one to three sentences.",
     examples: [
       {
         verdict: "miss",
@@ -481,7 +538,9 @@ export const BLOG_CRITERIA: Criterion[] = [
   {
     id: "word-count",
     title: "Word Count Against the Brief",
+    lesson: "Length should fit the question, and a brief’s word count is how the writer and editor agree on depth. Models pad to sound thorough: they restate points, add background nobody asked for and close with a summary. Others stop short when they run out of things to say or hit an output limit.",
     body: "The brief asked for 1,000 to 1,200 words and at least 750. Posts from 950 to 1,500 words kept full marks, posts outside that lost 5 points, and posts under 750 lost 20.",
+    draftly: "The writer is asked for 750 to 1,100 words and told to stop once the question is answered, never padding to reach a count. A draft under 750 words fails the code check and goes back for repair. There is no check for running long.",
     examples: [
       {
         verdict: "miss",
@@ -502,7 +561,9 @@ export const BLOG_CRITERIA: Criterion[] = [
   {
     id: "structure",
     title: "Structure Held to the End",
+    lesson: "A post’s structure is a promise to the reader: a title, sections with clear headings, an FAQ when the brief asks for one, and a closing step. Long outputs are where models drift. They lose track of the plan, or run out of output room and stop mid-sentence, as in the miss below.",
     body: "A full post keeps its H2s, the FAQ and the call to action all the way through. Long outputs are where a model is most likely to drop one.",
+    draftly: "The writer’s brief sets the shape: an H1, an opening with no heading, H2 sections, and a final H2 that ends on a next step. The code check fails a draft with no H1 or more than one, no final H2 section, a bare label heading like Conclusion, or fewer than 750 words, and sends it back for repair.",
     examples: [
       {
         verdict: "miss",
@@ -533,7 +594,9 @@ export const BLOG_CRITERIA: Criterion[] = [
   {
     id: "long-paragraphs",
     title: "Long Paragraphs",
+    lesson: "A paragraph over about 120 words fills a phone screen with unbroken text, and readers start skimming. Models tend to write long, even paragraphs because each one tries to carry a full point, its setup and its caveats in one block.",
     body: "Any paragraph over 120 words cost 3 points. On a phone, that is several screens of unbroken text.",
+    draftly: "The rules cap paragraphs at 120 words and aim for 40 to 80. A longer paragraph is recorded as a warning, and the Editor lists it as an issue to split by hand. Draftly doesn’t rewrite it automatically.",
     examples: [
       {
         verdict: "miss",
@@ -562,7 +625,10 @@ export const BLOG_CRITERIA: Criterion[] = [
   {
     id: "mechanical-openers",
     title: "Mechanical Openers",
+    lesson: "Words like Additionally, Furthermore and Moreover glue sentences together without saying how they relate. School essays and formal reports are full of them, and models picked up the habit of opening sentences with them to sound connected. Most can be deleted with no loss, or swapped for the real link: because, so, but.",
+    example: { before: "Furthermore, the warranty covers labor.", after: "The warranty covers labor too." },
     body: "Sentences that start with Additionally, Furthermore, Moreover or That said cost 3 points each. The word adds length and no meaning.",
+    draftly: "The writer’s rules ban a list of these openers, including Ultimately, Notably and That said. The code check records each one as a warning on the post. In the Editor, each sentence that opens with one is flagged and rewritten on its own.",
     examples: [
       {
         verdict: "miss",

@@ -112,7 +112,32 @@ function ExampleCard({ ex, source }: { ex: Example; source: string }) {
   );
 }
 
-/** One H3 per criterion, each with real pass and miss examples from the benchmark run. */
+/** A made-up line showing the habit, and the same line written plainly. */
+function BeforeAfterLine({ before, after }: { before: string; after: string }) {
+  const rows = [
+    { verdict: "miss" as const, label: "AI habit", text: before },
+    { verdict: "pass" as const, label: "Plain version", text: after },
+  ];
+  return (
+    <dl className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-[15px] leading-relaxed">
+      {rows.map((r) => (
+        <div key={r.verdict} className="rounded-lg px-3.5 py-3 min-w-0" style={{ background: TONE[r.verdict].chip }}>
+          <dt className="text-[11px] font-semibold uppercase tracking-wide" style={{ color: TONE[r.verdict].ink }}>
+            {r.label}
+          </dt>
+          <dd className="mt-0.5 break-words" style={{ color: "var(--color-text-primary)" }}>
+            {r.text}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
+/**
+ * One H3 per criterion: the copy principle and why models break it, then real pass and
+ * miss examples from the benchmark run, then what Draftly does about it.
+ */
 export function CriterionExamples({
   items,
   source,
@@ -139,6 +164,13 @@ export function CriterionExamples({
             {c.title}
           </h3>
           <p className="leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+            {c.lesson}
+          </p>
+          {c.example ? <BeforeAfterLine {...c.example} /> : null}
+          <p className="mt-4 text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+            <span className="font-semibold" style={{ color: "var(--color-text-primary)" }}>
+              In our test:{" "}
+            </span>
             {c.body}
           </p>
           {children?.[c.id]}
@@ -147,10 +179,20 @@ export function CriterionExamples({
               <ExampleCard key={i} ex={ex} source={source} />
             ))}
           </div>
-          {c.aside ? (
-            <p className="mt-4 text-sm leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
-              {c.aside}
-            </p>
+          {c.draftly ? (
+            <aside
+              className="mt-4 rounded-xl px-4 py-3.5 sm:px-5 border-l-4"
+              style={{ background: "var(--color-bg-subtle)", borderColor: "var(--color-accent)" }}
+            >
+              <p className="text-sm font-semibold" style={{ color: "var(--color-text-primary)" }}>
+                How Draftly handles it
+              </p>
+              {c.draftly.split("\n\n").map((para, i) => (
+                <p key={i} className={`${i ? "mt-2" : "mt-1"} text-sm leading-relaxed`} style={{ color: "var(--color-text-secondary)" }}>
+                  {para}
+                </p>
+              ))}
+            </aside>
           ) : null}
         </div>
       ))}
