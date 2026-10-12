@@ -10,6 +10,7 @@ import { jsonLdHtml, authorRef } from "@/lib/schema";
 import { TocLayout } from "@/components/OnThisPage";
 import { PILLARS } from "@/lib/related";
 import { RelatedLinks } from "@/components/RelatedLinks";
+import { RelatedPosts } from "@/components/RelatedPosts";
 import { GUIDE_SHOTS, INTEGRATIONS_SHOT, imageObjectJsonLd } from "@/lib/product-shots";
 import { CHECKED, JASPER_PRO, OG_IMAGE, JASPER_SOURCES as SRC, ROWS, type Edge, type Source } from "@/lib/jasper-vs-draftly";
 
@@ -486,6 +487,7 @@ export default async function JasperVsDraftlyPage() {
 
           <div className="max-w-3xl">
             <RelatedLinks items={PILLARS.filter((p) => p.href !== PATH).slice(0, 4)} />
+            <RelatedPosts topic="AI blog writer Jasper alternative brand voice SEO blog posts" />
           </div>
           <FaqList faqs={FAQS} />
 
