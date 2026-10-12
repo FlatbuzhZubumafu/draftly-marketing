@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { pageImages } from "@/lib/og";
 import { getHomepageData } from "@/lib/graphql";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { BENCHMARK_DATE, BENCHMARK_ISO, type BenchmarkRow, type CopyRow } from "@/lib/benchmark";
+import { BENCHMARK, BENCHMARK_DATE, BENCHMARK_ISO, type BenchmarkRow, type CopyRow } from "@/lib/benchmark";
+import { draftlyCredits } from "@/lib/app-models";
 import {
   BLOG_TABLE,
   CHATGPT_TABLE,
@@ -65,6 +67,14 @@ const PICKS = [
   },
 ];
 
+/** Tested models a Draftly user can pick, best overall score first, with credits per post. */
+const IN_DRAFTLY = BENCHMARK.flatMap((r) => {
+  const credits = draftlyCredits(r.model);
+  return credits === undefined ? [] : [{ ...r, credits }];
+}).sort((a, b) => b.overall - a.overall);
+
+const NEW_IN_DRAFTLY = ["Claude Opus 5.5", "Kimi K3", "GPT 5.5", "DeepSeek V4 Pro", "Gemini 3.8 Flash"];
+
 const CHECKS = [
   "Length between 950 and 1,500 words",
   "Em dashes kept to about one per 300 words",
@@ -100,6 +110,10 @@ const FAQS = [
   {
     q: "Is ChatGPT still the best AI for writing?",
     a: "OpenAI's GPT 5.4 Mini, one of the models behind ChatGPT, finished fifth of 14. The larger GPT 5.5 and GPT 5.4 finished seventh and tenth, mostly for running long and using contrast phrasing.",
+  },
+  {
+    q: "Can I use these models in Draftly?",
+    a: "Yes, most of them. Paid Draftly plans can pick Claude Opus 5.5, Kimi K3 or GPT 5.5 for 250 credits a post, and DeepSeek V4 Pro or Gemini 3.8 Flash for 150. Claude Sonnet 5.5, the default, costs 150 credits a post and also writes the free first post.",
   },
   {
     q: "What is the best AI for SEO writing?",
@@ -404,6 +418,51 @@ export default async function BenchmarkPage() {
             </ul>
           </section>
 
+          <Section id="in-draftly" title="Which of These Models Can You Use in Draftly?">
+            <p>
+              {IN_DRAFTLY.length} of the {BENCHMARK.length} models we tested are available in Draftly. Five of them are new:
+              Claude Opus 5.5, Kimi K3 and GPT 5.5 cost 250 credits a post, and DeepSeek V4 Pro and Gemini 3.8 Flash cost
+              150. Paid plans pick the model for each post. Claude Sonnet 5.5 stays the default on every plan and writes
+              the free first post. Qwen 3.8 Max is coming soon: it ran out of room while reasoning in our first live test,
+              and we're re-testing it before turning it on.
+            </p>
+            <div className="mt-6 overflow-x-auto rounded-xl" style={{ border: "1px solid var(--color-border)" }}>
+              <table className="w-full text-sm">
+                <caption className="text-left px-4 py-3 text-xs font-semibold" style={{ background: "var(--color-bg-surface)", color: "var(--color-text-secondary)" }}>
+                  Tested models available in Draftly, by overall score
+                </caption>
+                <thead style={{ background: "var(--color-bg-surface)" }}>
+                  <tr className="text-left">
+                    <th className="px-4 py-2 font-semibold">Model</th>
+                    <th className="px-4 py-2 font-semibold text-right">Overall</th>
+                    <th className="px-4 py-2 font-semibold text-right">Credits per post</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {IN_DRAFTLY.map((r) => (
+                    <tr key={r.model} style={{ borderTop: "1px solid var(--color-border)" }}>
+                      <td className="px-4 py-2.5 font-medium whitespace-nowrap">
+                        <ModelName model={r.model} provider={r.provider} size={20} />
+                        {NEW_IN_DRAFTLY.includes(r.model) && (
+                          <span className="ml-2 text-xs font-semibold" style={{ color: "var(--color-accent)" }}>New</span>
+                        )}
+                      </td>
+                      <td className="px-4 py-2.5 text-right tabular-nums">{r.overall.toFixed(1)}</td>
+                      <td className="px-4 py-2.5 text-right tabular-nums">{r.credits}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p>
+              Credit prices and plan allowances are on the{" "}
+              <Link href="/pricing" style={{ color: "var(--color-accent)" }}>
+                pricing page
+              </Link>
+              .
+            </p>
+          </Section>
+
           <Section title="What This Test Measures, and Its Limits">
             <p>
               This benchmark measures how well an AI model follows clear writing and SEO rules, and how human the result
@@ -440,8 +499,9 @@ export default async function BenchmarkPage() {
               Start Writing With the Best Models and Draftly&apos;s SEO-Optimized Copywriting Tools Today
             </h2>
             <p className="max-w-2xl mb-8 leading-relaxed" style={{ color: "#bbb" }}>
-              Draftly writes with Claude Sonnet 5.5 by default, offers GPT 6 Luna as a budget option on paid plans, and
-              applies these same writing rules to every post. Your first post, written by Sonnet, is free.
+              Draftly writes with Claude Sonnet 5.5 by default. Paid plans can switch any post to Claude Opus 5.5, Kimi K3,
+              GPT 5.5, DeepSeek V4 Pro, Gemini 3.8 Flash or GPT 6 Luna, the budget option, and every post gets the same
+              writing rules. Your first post, written by Sonnet, is free.
             </p>
             <a href={registerUrl} className="btn btn-primary">
               {s.heroCtaText}

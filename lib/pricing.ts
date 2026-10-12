@@ -1,5 +1,7 @@
 // Mirrors the app's source of truth: src/config/pricing.ts, the credit_costs table
 // and model_catalog in the draftly.blog repo. Change those first, then this.
+import { APP_MODEL_COUNT } from "./app-models";
+
 export type Plan = {
   name: string;
   price: number;
@@ -35,7 +37,7 @@ export const PLANS: Plan[] = [
     pitch: "For one person running one blog who wants to publish every week.",
     includesFrom: "Free",
     features: [
-      "Pick from 8 AI models, including Claude, GPT, Gemini and DeepSeek",
+      `Pick from ${APP_MODEL_COUNT} AI models, including Claude, GPT, Gemini, Kimi and DeepSeek`,
       "Outlines and topic refreshes use no credits",
       "AI images inside your posts, from a suggested visual for each section (53 credits an image)",
       "Keep writing posts with your own AI through the Draftly connector for Claude, ChatGPT and Cursor",

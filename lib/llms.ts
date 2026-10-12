@@ -10,6 +10,7 @@ import {
 } from "@/lib/benchmarkTables";
 import { BYO_AI_LINE, FREE_PLAN_LINE, MCP_URL, READ_ONLY_TOOL_COUNT, TOOLS, toolPlans } from "@/lib/mcp";
 import { PLANS } from "@/lib/pricing";
+import { APP_MODELS, APP_MODEL_COUNT } from "@/lib/app-models";
 import { APP_URL, SITE_URL } from "@/lib/site";
 import { WP_COMPARE_NOTES, WP_COMPARE_ROWS, WP_COMPARE_TOOLS, WP_COMPARED_ON, type Cell } from "@/lib/wordpress-compare";
 import { WP_FEATURES, WP_PLANS, WP_PLUGIN_VERSION, WP_TOP_UPS } from "@/lib/wordpress-plugin";
@@ -20,6 +21,11 @@ import { WP_FEATURES, WP_PLANS, WP_PLUGIN_VERSION, WP_TOP_UPS } from "@/lib/word
 function plansTable(): string {
   const rows = PLANS.map((p) => `| ${p.name} | $${p.price}/month | ${p.posts} | ${p.credits} |`);
   return ["| Plan | Price | Posts | Credits |", "| --- | --- | --- | --- |", ...rows].join("\n");
+}
+
+function modelsTable(): string {
+  const rows = APP_MODELS.map((m) => `| ${m.name}${m.note ? ` (${m.note})` : ""} | ${m.credits} |`);
+  return ["| Model | Credits per blog post |", "| --- | --- |", ...rows].join("\n");
 }
 
 function toolsTable(): string {
@@ -67,9 +73,15 @@ Draftly learns a brand's voice from its website, suggests topics from industry n
 
 ## Plans
 
-The first post is free and comes with a thumbnail. Paid plans add volume, a choice of 8 AI models, AI images inside each post and live SEO data in the MCP connector. Draftly is available to businesses in the United States only.
+The first post is free and comes with a thumbnail. Paid plans add volume, a choice of ${APP_MODEL_COUNT} AI models, AI images inside each post and live SEO data in the MCP connector. Draftly is available to businesses in the United States only.
 
 ${plansTable()}
+
+## AI Models
+
+Free accounts write with Claude Sonnet 5.5. Paid plans pick the model for each post from this list.
+
+${modelsTable()}
 
 ## SEO MCP Connector
 
