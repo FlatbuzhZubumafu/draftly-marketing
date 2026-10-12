@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
-import { DEFAULT_OG_IMAGE, LOGO_URL, SITE_URL } from "@/lib/site";
+import { LOGO_URL, SITE_URL } from "@/lib/site";
 import { plainExcerpt } from "@/lib/text";
 import { getPost, getPosts } from "@/lib/graphql";
 import { sanitizeHtml, tidyPostHtml } from "@/lib/sanitize";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { notFound } from "next/navigation";
-import { RelatedPosts } from "@/components/RelatedPosts";
+import { KeepReading } from "@/components/KeepReading";
 import { OnThisPage } from "@/components/OnThisPage";
-import { NOINDEX_POST_SLUGS, relatedPillars } from "@/lib/related";
-import { RelatedLinks } from "@/components/RelatedLinks";
+import { NOINDEX_POST_SLUGS } from "@/lib/related";
 import { authorRef } from "@/lib/schema";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
 
@@ -41,7 +40,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!post) return {};
 
   const description = plainExcerpt(post.excerpt);
-  const image = post.featuredImage?.node?.sourceUrl;
+  // The featured image from WordPress, or a generated title card when there is none.
+  const featured = post.featuredImage?.node;
+  const shareImage = featured?.sourceUrl
+    ? { url: featured.sourceUrl, alt: featured.altText || plainExcerpt(post.title, 1000) }
+    : { url: `/og/blog/${slug}`, width: 1200, height: 630, alt: plainExcerpt(post.title, 1000) };
   return {
     title: seoTitle(post.title),
     description,
@@ -55,8 +58,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       publishedTime: post.date,
       modifiedTime: post.modified,
       authors: post.author?.node?.name ? [post.author.node.name] : undefined,
-      images: image ? [image] : [DEFAULT_OG_IMAGE],
+      images: [shareImage],
     },
+    twitter: { card: "summary_large_image", title: post.title, description, images: [shareImage] },
   };
 }
 
@@ -80,7 +84,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         mainEntityOfPage: url,
         datePublished: post.date,
         dateModified: post.modified || post.date,
-        image: post.featuredImage?.node?.sourceUrl ?? `${SITE_URL}${DEFAULT_OG_IMAGE.url}`,
+        image: post.featuredImage?.node?.sourceUrl ?? `${SITE_URL}/og/blog/${slug}`,
         author: /preston/i.test(post.author?.node?.name ?? "") ? authorRef : post.author?.node?.name ? { "@type": "Person", name: post.author.node.name } : undefined,
         // Resolves to the Organization node (with logo) that the root layout renders.
         publisher: { "@type": "Organization", "@id": `${SITE_URL}/#organization`, name: "Draftly", url: SITE_URL, logo: LOGO_URL },
@@ -129,8 +133,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             dangerouslySetInnerHTML={{ __html: tidyPostHtml(sanitizeHtml(post.content), post.title) }}
           />
           <NewsletterSignup location="blog_post" className="mt-16" />
-          <RelatedLinks items={relatedPillars(`${post.title} ${post.content.replace(/<[^>]*>/g, " ")}`)} />
-          <RelatedPosts topic={`${post.title} ${post.excerpt}`} exclude={post.slug} count={3} heading="More from the blog" />
+          <KeepReading
+            topic={`${post.title} ${post.excerpt}`}
+            guideTopic={`${post.title} ${post.content.replace(/<[^>]*>/g, " ")}`}
+            exclude={`/blog/${post.slug}`}
+            guideCount={1}
+            postCount={2}
+          />
         </article>
         <OnThisPage />
         </div>

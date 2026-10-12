@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DEFAULT_OG_IMAGE } from "@/lib/site";
+import { pageImages } from "@/lib/og";
 import { getHomepageData } from "@/lib/graphql";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -14,9 +14,8 @@ import {
   type BenchmarkTable,
 } from "@/lib/benchmarkTables";
 import { TocLayout } from "@/components/OnThisPage";
-import { PILLARS } from "@/lib/related";
-import { RelatedLinks } from "@/components/RelatedLinks";
-import { RelatedPosts } from "@/components/RelatedPosts";
+import { KeepReading } from "@/components/KeepReading";
+import { ModelName } from "@/components/ProviderLogo";
 import { authorRef } from "@/lib/schema";
 
 export const revalidate = 3600;
@@ -36,7 +35,7 @@ export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESCRIPTION,
   alternates: { canonical: "/best-ai-for-writing" },
-  openGraph: { title: TITLE, description: DESCRIPTION, type: "article", url: "https://www.draftly.blog/best-ai-for-writing", images: [DEFAULT_OG_IMAGE] },
+  ...pageImages("/best-ai-for-writing", { title: TITLE, description: DESCRIPTION, type: "article", url: "https://www.draftly.blog/best-ai-for-writing" }),
 };
 
 const PICKS = [
@@ -123,7 +122,7 @@ function Section({ id, title, children }: { id?: string; title: string; children
 
 
 /** A leaderboard ranked for one question, with only the columns that question cares about. */
-function QueryTable<T extends { model: string }>({ caption, rows, columns, rank }: BenchmarkTable<T>) {
+function QueryTable<T extends { model: string; provider?: string }>({ caption, rows, columns, rank }: BenchmarkTable<T>) {
   return (
     <div className="mt-8 overflow-x-auto rounded-xl" style={{ border: "1px solid var(--color-border)" }}>
       <table className="w-full text-sm min-w-[640px]">
@@ -142,10 +141,12 @@ function QueryTable<T extends { model: string }>({ caption, rows, columns, rank 
         <tbody>
           {rows.map((r, i) => (
             <tr key={r.model} style={{ borderTop: "1px solid var(--color-border)" }}>
-              {rank && <td className="px-4 py-2.5">{i + 1}</td>}
-              <td className="px-4 py-2.5 font-medium">{r.model}</td>
+              {rank && <td className="px-4 py-2.5 tabular-nums">{i + 1}</td>}
+              <td className="px-4 py-2.5 font-medium whitespace-nowrap">
+                <ModelName model={r.model} provider={r.provider} size={20} />
+              </td>
               {columns.map((c) => (
-                <td key={c.label} className={`px-4 py-2.5 text-right ${c.strong ? "font-semibold" : ""}`}>{c.value(r)}</td>
+                <td key={c.label} className={`px-4 py-2.5 text-right tabular-nums ${c.strong ? "font-semibold" : ""}`}>{c.value(r)}</td>
               ))}
             </tr>
           ))}
@@ -221,8 +222,8 @@ export default async function BenchmarkPage() {
                 <h3 className="text-sm font-semibold" style={{ color: "var(--color-accent)" }}>
                   {p.label}
                 </h3>
-                <p className="mt-1 text-2xl font-semibold" style={{ letterSpacing: "-0.02em" }}>
-                  {p.model}
+                <p className="mt-2 text-2xl font-semibold" style={{ letterSpacing: "-0.02em" }}>
+                  <ModelName model={p.model} size={28} />
                 </p>
                 <p className="mt-1 text-sm font-medium">{p.stat}</p>
                 <p className="mt-3 text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
@@ -416,8 +417,7 @@ export default async function BenchmarkPage() {
           </Section>
 
           <div className="max-w-3xl">
-            <RelatedLinks items={PILLARS.filter((p) => p.href !== "/best-ai-for-writing").slice(0, 4)} />
-            <RelatedPosts topic="AI models Claude ChatGPT writing blog posts" />
+            <KeepReading exclude="/best-ai-for-writing" guides={["/seo-copywriting", "/ai-copywriter"]} topic="AI models Claude ChatGPT writing blog posts" />
           </div>
           <section id="faq" className="mt-20 max-w-3xl">
             <h2 className="text-3xl font-medium mb-6" style={{ letterSpacing: "-0.03em" }}>

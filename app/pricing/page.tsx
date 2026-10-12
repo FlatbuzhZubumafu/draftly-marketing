@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
+import { pageImages } from "@/lib/og";
+import { ProviderLogo } from "@/components/ProviderLogo";
 import { READER_QUALITY_EVIDENCE } from "@/lib/ruleCheck";
-import { DEFAULT_OG_IMAGE } from "@/lib/site";
-import { Check } from "lucide-react";
 import { getHomepageData } from "@/lib/graphql";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -19,13 +19,7 @@ export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESCRIPTION,
   alternates: { canonical: "/pricing" },
-  openGraph: {
-    title: TITLE,
-    description: DESCRIPTION,
-    type: "website",
-    url: "/pricing",
-    images: [DEFAULT_OG_IMAGE],
-  },
+  ...pageImages("/pricing", { title: TITLE, description: DESCRIPTION, type: "website", url: "/pricing" }),
 };
 
 const EVERY_PLAN = [
@@ -201,8 +195,8 @@ export default async function PricingPage() {
             </p>
             <ul className="space-y-2 text-sm">
               {MODELS.map((m) => (
-                <li key={m} className="flex gap-2" style={{ color: "var(--color-text-secondary)" }}>
-                  <Check className="w-4 h-4 mt-1 flex-shrink-0" style={{ color: "var(--color-accent)" }} />
+                <li key={m} className="flex items-center gap-2.5" style={{ color: "var(--color-text-secondary)" }}>
+                  <ProviderLogo model={m} size={18} className="text-[color:var(--color-text-primary)]" />
                   {m}
                 </li>
               ))}

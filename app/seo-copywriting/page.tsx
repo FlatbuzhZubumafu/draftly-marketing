@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { APP_URL, DEFAULT_OG_IMAGE, SITE_URL } from "@/lib/site";
+import { pageImages } from "@/lib/og";
+import { APP_URL, SITE_URL } from "@/lib/site";
 import { getHomepageData } from "@/lib/graphql";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -8,9 +9,7 @@ import { BANNED_SAMPLE, DEFAULT_WRITER as D, EXAMPLES, READER_QUALITY_EVIDENCE, 
 import { BENCHMARK } from "@/lib/benchmark";
 import { jsonLdHtml, authorRef } from "@/lib/schema";
 import { TocLayout } from "@/components/OnThisPage";
-import { PILLARS } from "@/lib/related";
-import { RelatedLinks } from "@/components/RelatedLinks";
-import { RelatedPosts } from "@/components/RelatedPosts";
+import { KeepReading } from "@/components/KeepReading";
 import { ProductFigure } from "@/components/ProductFigure";
 import { GUIDE_SHOTS, imageObjectJsonLd } from "@/lib/product-shots";
 
@@ -29,7 +28,7 @@ export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESCRIPTION,
   alternates: { canonical: PATH },
-  openGraph: { title: TITLE, description: DESCRIPTION, type: "article", url: `${SITE_URL}${PATH}`, images: [DEFAULT_OG_IMAGE] },
+  ...pageImages(PATH, { title: TITLE, description: DESCRIPTION, type: "article", url: `${SITE_URL}${PATH}` }),
 };
 
 const BANNED_FAQ = "What words make writing sound like AI?";
@@ -263,8 +262,7 @@ export default async function SeoCopywritingPage() {
           </Section>
 
           <div className="max-w-3xl">
-            <RelatedLinks items={PILLARS.filter((p) => p.href !== "/seo-copywriting").slice(0, 4)} />
-            <RelatedPosts topic="SEO keywords Google search ranking AEO GEO cited by AI" />
+            <KeepReading exclude="/seo-copywriting" guides={["/ai-seo-agency-vs-tool", "/best-ai-for-writing"]} topic="SEO keywords Google search ranking AEO GEO cited by AI" />
           </div>
           <FaqList faqs={FAQS} skipLint={[BANNED_FAQ]} />
 

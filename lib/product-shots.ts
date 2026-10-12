@@ -67,7 +67,7 @@ export const FEATURE_SLIDES: FeatureSlide[] = [
   },
 ];
 
-/** Equal 16:10 thumbnails for the homepage guide cards, keyed by destination. */
+/** Equal 16:10 card thumbnails (homepage guides, Keep reading, the /blog hub), keyed by destination. */
 export const GUIDE_THUMBS: Record<string, ProductShot> = {
   "/ai-copywriter": shot("guide-thumb-ai-copywriter.webp", 1280, 800,
     "Preview of the AI copywriter page: a website URL going into Draftly and a finished 1,118-word draft about flushing a water heater coming out", ""),
@@ -83,6 +83,10 @@ export const GUIDE_THUMBS: Record<string, ProductShot> = {
     "Preview of the Jasper vs Draftly page: a side-by-side table comparing price, free trial, brand voice, writing checks and publishing", ""),
   "/pricing": shot("guide-thumb-pricing.webp", 1280, 800,
     "Preview of the pricing page: Free, Solopreneur at $29, Growth at $69 and Autopilot at $100 a month", ""),
+  "/wordpress-ai-plugin": shot("guide-thumb-wordpress-plugin.webp", 1280, 800,
+    "Preview of the WordPress AI plugin page: the Draftly plugin inside WordPress suggesting edits to a post, each with Approve and Skip buttons", ""),
+  "/blog": shot("guide-thumb-blog.webp", 1280, 800,
+    "Preview of the Draftly blog: guide cards for the AI copywriter, SEO copywriting rules and the best AI for writing", ""),
 };
 
 export const INTEGRATIONS_SHOT = shot(

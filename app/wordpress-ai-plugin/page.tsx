@@ -4,11 +4,9 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { A, B, DarkCta, FaqList, faqJsonLd, type Faq } from "@/components/ArticleParts";
 import { ProductFigure } from "@/components/ProductFigure";
-import { RelatedLinks } from "@/components/RelatedLinks";
-import { RelatedPosts } from "@/components/RelatedPosts";
+import { KeepReading } from "@/components/KeepReading";
 import { WordPressCompare } from "@/components/WordPressCompare";
 import { WordPressPlans } from "@/components/WordPressPlans";
-import { PILLARS } from "@/lib/related";
 import { PAID_PLANS } from "@/lib/pricing";
 import { imageObjectJsonLd } from "@/lib/product-shots";
 import { jsonLdHtml } from "@/lib/schema";
@@ -348,8 +346,7 @@ export default function WordPressAiPluginPage() {
           </p>
 
           <div className="max-w-3xl">
-            <RelatedLinks items={PILLARS.filter((p) => ["/seo-copywriting", "/ai-copywriter", "/mcp", "/best-ai-for-writing"].includes(p.href))} />
-            <RelatedPosts topic="WordPress SEO blog posts for small business" />
+            <KeepReading exclude="/wordpress-ai-plugin" guides={["/seo-copywriting", "/mcp"]} topic="WordPress SEO blog posts for small business" />
           </div>
 
           <DarkCta

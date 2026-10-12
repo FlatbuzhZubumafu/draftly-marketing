@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DEFAULT_OG_IMAGE } from "@/lib/site";
+import { pageImages } from "@/lib/og";
 import { LegalPage } from "@/components/LegalPage";
 
 export const revalidate = 3600;
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESCRIPTION,
   alternates: { canonical: "/privacy-policy" },
-  openGraph: { title: TITLE, description: DESCRIPTION, type: "website", url: "/privacy-policy", images: [DEFAULT_OG_IMAGE] },
+  ...pageImages("/privacy-policy", { title: TITLE, description: DESCRIPTION, type: "website", url: "/privacy-policy" }),
 };
 
 export default function PrivacyPolicyPage() {

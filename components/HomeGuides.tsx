@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PILLARS } from "@/lib/related";
 import { GUIDE_THUMBS } from "@/lib/product-shots";
+import { ThumbCard } from "@/components/ThumbCard";
 
 /** The three guides we most want read, shown blog-style. Every other guide is linked from the footer's Resources column. */
 const FEATURED: { href: string; tag: string }[] = [
@@ -22,50 +23,15 @@ export function HomeGuides() {
             </h2>
           </div>
           <Link href="/blog" className="font-semibold text-sm" style={{ color: "var(--color-accent)" }}>
-            View all posts <span aria-hidden="true">&rarr;</span>
+            All guides and posts <span aria-hidden="true">&rarr;</span>
           </Link>
         </div>
         <ul className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {cards.map((c) => {
-            const thumb = GUIDE_THUMBS[c.href];
-            return (
-              <li key={c.href}>
-                <a
-                  href={c.href}
-                  className="guide-card flex flex-col h-full rounded-xl overflow-hidden transition-shadow"
-                  style={{ background: "var(--color-bg-surface)", border: "1px solid var(--color-border)" }}
-                >
-                  {thumb ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={thumb.src}
-                      alt={thumb.alt}
-                      width={thumb.width}
-                      height={thumb.height}
-                      loading="lazy"
-                      decoding="async"
-                      className="block w-full h-auto"
-                      style={{ aspectRatio: "16 / 10", borderBottom: "1px solid var(--color-border)" }}
-                    />
-                  ) : null}
-                  <span className="flex flex-col flex-1 p-5">
-                    <span className="eyebrow" style={{ color: "var(--color-text-muted)" }}>
-                      {c.tag}
-                    </span>
-                    <span className="block mt-2 text-lg font-semibold leading-snug" style={{ color: "var(--color-text-primary)" }}>
-                      {c.title}
-                    </span>
-                    <span className="block mt-2 text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-                      {c.blurb}
-                    </span>
-                    <span className="mt-auto pt-4 text-sm font-semibold" style={{ color: "var(--color-accent)" }}>
-                      Read the {c.tag.toLowerCase()} <span aria-hidden="true">&rarr;</span>
-                    </span>
-                  </span>
-                </a>
-              </li>
-            );
-          })}
+          {cards.map((c) => (
+            <li key={c.href}>
+              <ThumbCard href={c.href} tag={c.tag} title={c.title} blurb={c.blurb} image={GUIDE_THUMBS[c.href]} cta={`Read the ${c.tag.toLowerCase()}`} titleClass="text-lg" sizes="(min-width: 768px) 330px, 100vw" />
+            </li>
+          ))}
         </ul>
       </div>
     </section>

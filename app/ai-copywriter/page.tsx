@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { APP_URL, DEFAULT_OG_IMAGE, SITE_URL } from "@/lib/site";
+import { pageImages } from "@/lib/og";
+import { APP_URL, SITE_URL } from "@/lib/site";
 import { getHomepageData } from "@/lib/graphql";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -8,9 +9,7 @@ import { PAID_PLANS, PLANS } from "@/lib/pricing";
 import { DEFAULT_WRITER as D, READER_QUALITY_EVIDENCE, SAMPLE_POST } from "@/lib/ruleCheck";
 import { jsonLdHtml } from "@/lib/schema";
 import { TocLayout } from "@/components/OnThisPage";
-import { PILLARS } from "@/lib/related";
-import { RelatedLinks } from "@/components/RelatedLinks";
-import { RelatedPosts } from "@/components/RelatedPosts";
+import { KeepReading } from "@/components/KeepReading";
 import { ProductFigure } from "@/components/ProductFigure";
 import { GUIDE_SHOTS } from "@/lib/product-shots";
 
@@ -30,7 +29,7 @@ export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESCRIPTION,
   alternates: { canonical: PATH },
-  openGraph: { title: TITLE, description: DESCRIPTION, type: "website", url: `${SITE_URL}${PATH}`, images: [DEFAULT_OG_IMAGE] },
+  ...pageImages(PATH, { title: TITLE, description: DESCRIPTION, type: "website", url: `${SITE_URL}${PATH}` }),
 };
 
 const FIRST_MONTH_OFFER = "50% off the first month";
@@ -209,8 +208,7 @@ export default async function AiCopywriterPage() {
           </Section>
 
           <div className="max-w-3xl">
-            <RelatedLinks items={PILLARS.filter((p) => p.href !== "/ai-copywriter").slice(0, 4)} />
-            <RelatedPosts topic="How an AI blog writer for small business got built, and how it scales your blog" />
+            <KeepReading exclude="/ai-copywriter" guides={["/jasper-vs-draftly", "/best-ai-for-writing"]} topic="How an AI blog writer for small business got built, and how it scales your blog" />
           </div>
           <FaqList faqs={FAQS} />
 

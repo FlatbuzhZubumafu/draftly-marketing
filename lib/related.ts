@@ -42,13 +42,35 @@ export const PILLARS: Pillar[] = [
   },
 ];
 
+/** Every guide-style page, for the /blog hub and "Keep reading": the pillars plus the WordPress plugin page. */
+export const GUIDES: Pillar[] = [
+  ...PILLARS,
+  {
+    href: "/wordpress-ai-plugin",
+    title: "The AI plugin for WordPress",
+    blurb: "Checks the posts you already have, suggests edits in your voice and saves the ones you approve as revisions.",
+    keywords: ["wordpress", "plugin", "yoast", "rank math", "aioseo", "revision"],
+  },
+];
+
+/** Card label for a guide: what kind of page it is. */
+export function guideTag(href: string): string {
+  return ({
+    "/best-ai-for-writing": "Benchmark",
+    "/jasper-vs-draftly": "Comparison",
+    "/ai-seo-agency-vs-tool": "Comparison",
+    "/wordpress-ai-plugin": "Plugin",
+    "/mcp": "Guide",
+  } as Record<string, string>)[href] ?? "Guide";
+}
+
 /** Live but thin or off-strategy posts: kept for readers, marked noindex, left out of the sitemap. */
 export const NOINDEX_POST_SLUGS = new Set<string>([]);
 
-/** The `count` pillars most related to `text` (keyword hits), never `exclude`; ties keep PILLARS order. */
-export function relatedPillars(text: string, exclude?: string, count = 3): Pillar[] {
+/** The `count` pillars most related to `text` (keyword hits), never `exclude`; ties keep list order. */
+export function relatedPillars(text: string, exclude?: string, count = 3, from: Pillar[] = PILLARS): Pillar[] {
   const haystack = text.toLowerCase();
-  return PILLARS.filter((p) => p.href !== exclude)
+  return from.filter((p) => p.href !== exclude)
     .map((p, i) => ({ p, i, score: p.keywords.reduce((n, k) => n + (haystack.split(k).length - 1), 0) }))
     .sort((a, b) => b.score - a.score || a.i - b.i)
     .slice(0, count)

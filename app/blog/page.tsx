@@ -1,28 +1,38 @@
 import type { Metadata } from "next";
-import { DEFAULT_OG_IMAGE, SITE_URL } from "@/lib/site";
+import { SITE_URL } from "@/lib/site";
 import { getPosts } from "@/lib/graphql";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { NOINDEX_POST_SLUGS, PILLARS } from "@/lib/related";
-import { RelatedLinks } from "@/components/RelatedLinks";
+import { GUIDES, NOINDEX_POST_SLUGS, guideTag } from "@/lib/related";
+import { GUIDE_THUMBS } from "@/lib/product-shots";
+import { pageImages } from "@/lib/og";
+import { plainExcerpt } from "@/lib/text";
 import { jsonLdHtml } from "@/lib/schema";
+import { ThumbCard } from "@/components/ThumbCard";
+import { postImage } from "@/components/RelatedPosts";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
 
 export const revalidate = 60;
 
+// The hub for everything written on the site: every guide page, then every
+// WordPress post, newest first. The footer links here as "Guides" and "Blog".
+const TITLE = "Draftly Guides and Blog: AI Writing and SEO";
 const DESCRIPTION =
-  "Notes from building Draftly, an AI blog writer for small businesses: AI writing, SEO and AEO, and how to get your content cited by AI search.";
+  "Guides and posts from Draftly on AI writing, SEO copywriting, AEO and getting cited by AI search, plus our AI model benchmark and tool comparisons.";
 
 export const metadata: Metadata = {
-  title: { absolute: "The Draftly Blog: AI Content and SEO Notes" },
+  title: { absolute: TITLE },
   description: DESCRIPTION,
   alternates: { canonical: "/blog", types: { "application/rss+xml": "/feed.xml" } },
-  openGraph: { title: "The Draftly Blog", description: DESCRIPTION, type: "website", url: "/blog", images: [DEFAULT_OG_IMAGE] },
+  ...pageImages("/blog", { title: TITLE, description: DESCRIPTION, url: "/blog", type: "website" }),
 };
+
+const dateLabel = (iso: string) => new Date(iso).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 
 export default async function BlogPage() {
   const posts = await getPosts();
   const indexed = posts.filter((p) => !NOINDEX_POST_SLUGS.has(p.slug));
+
   const blogJsonLd = {
     "@type": "Blog",
     "@id": `${SITE_URL}/blog#blog`,
@@ -32,58 +42,82 @@ export default async function BlogPage() {
     publisher: { "@id": `${SITE_URL}/#organization` },
     blogPost: indexed.map((p) => ({
       "@type": "BlogPosting",
-      headline: p.title,
+      headline: plainExcerpt(p.title, 110),
       url: `${SITE_URL}/blog/${p.slug}`,
       datePublished: p.date,
       dateModified: p.modified || p.date,
+      ...(p.featuredImage?.node?.sourceUrl ? { image: p.featuredImage.node.sourceUrl } : {}),
     })),
   };
-  const listJsonLd = {
-    "@type": "ItemList",
-    name: "Draftly blog posts",
-    itemListElement: indexed.map((p, i) => ({ "@type": "ListItem", position: i + 1, url: `${SITE_URL}/blog/${p.slug}` })),
+  const collectionJsonLd = {
+    "@type": "CollectionPage",
+    "@id": `${SITE_URL}/blog#page`,
+    name: TITLE,
+    url: `${SITE_URL}/blog`,
+    description: DESCRIPTION,
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    mainEntity: {
+      "@type": "ItemList",
+      name: "Draftly guides and blog posts",
+      itemListElement: [
+        ...GUIDES.map((g) => ({ name: g.title, url: `${SITE_URL}${g.href}` })),
+        ...indexed.map((p) => ({ name: plainExcerpt(p.title, 1000), url: `${SITE_URL}/blog/${p.slug}` })),
+      ].map((item, i) => ({ "@type": "ListItem", position: i + 1, ...item })),
+    },
   };
 
   return (
     <>
       <Header />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdHtml(blogJsonLd, listJsonLd) }} />
-      <main className="pt-16 min-h-screen bg-white">
-        <div className="max-w-3xl mx-auto px-4 py-20">
-          <h1 className="text-4xl font-extrabold text-gray-900 mb-8">Blog</h1>
-          <NewsletterSignup location="blog_index" className="mb-12" />
-          <div className="space-y-8">
-            {posts.map((post) => (
-              <article key={post.id} className="border-b border-gray-100 pb-8">
-                {post.featuredImage?.node?.sourceUrl && (
-                  <a href={`/blog/${post.slug}`}>
-                    <img
-                      src={post.featuredImage.node.sourceUrl}
-                      alt={post.featuredImage.node.altText || post.title}
-                      className="w-full h-auto aspect-video object-cover rounded-xl mb-4"
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdHtml(collectionJsonLd, blogJsonLd) }} />
+      <main className="pt-28 pb-24 px-4" style={{ background: "var(--color-bg-primary)" }}>
+        <div className="container-draftly max-w-6xl">
+          <header className="max-w-3xl">
+            <h1 className="page-heading mb-5" style={{ fontSize: "clamp(2.1rem, 5vw, 56px)" }}>
+              Guides and Posts on AI Writing and SEO
+            </h1>
+            <p className="text-lg leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+              What we learn building Draftly: how to write with AI so it sounds like you, rank in Google and get cited by AI search.
+            </p>
+          </header>
+
+          <section id="guides" aria-labelledby="guides-heading" className="mt-14 scroll-mt-28">
+            <h2 id="guides-heading" className="text-3xl font-medium mb-6" style={{ letterSpacing: "-0.03em" }}>
+              Guides
+            </h2>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {GUIDES.map((g) => (
+                <li key={g.href}>
+                  <ThumbCard href={g.href} tag={guideTag(g.href)} title={g.title} blurb={g.blurb} image={GUIDE_THUMBS[g.href]} titleClass="text-lg" sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw" />
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section id="posts" aria-labelledby="posts-heading" className="mt-20 scroll-mt-28">
+            <h2 id="posts-heading" className="text-3xl font-medium mb-6" style={{ letterSpacing: "-0.03em" }}>
+              Latest Posts
+            </h2>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[...posts]
+                .sort((a, b) => +new Date(b.date) - +new Date(a.date))
+                .map((p) => (
+                  <li key={p.id}>
+                    <ThumbCard
+                      href={`/blog/${p.slug}`}
+                      tag={dateLabel(p.date)}
+                      title={plainExcerpt(p.title, 1000)}
+                      blurb={plainExcerpt(p.excerpt, 160)}
+                      image={postImage(p)}
+                      titleClass="text-lg"
+                      sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw"
                     />
-                  </a>
-                )}
-                <p className="text-xs text-gray-400 mb-2">
-                  {new Date(post.date).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </p>
-                <h2 className="text-xl font-bold text-gray-900 mb-2">
-                  <a href={`/blog/${post.slug}`} className="hover:text-draftly-accent transition-colors">
-                    {post.title}
-                  </a>
-                </h2>
-                <div
-                  className="text-gray-500 text-sm leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: post.excerpt }}
-                />
-              </article>
-            ))}
-          </div>
-          <RelatedLinks items={PILLARS.slice(0, 4)} heading="Guides from the Draftly team" />
+                  </li>
+                ))}
+            </ul>
+          </section>
+
+          <NewsletterSignup location="blog_index" className="mt-20 max-w-3xl" />
         </div>
       </main>
       <Footer />
