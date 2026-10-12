@@ -54,7 +54,7 @@ export type BakeoffRun = {
 
 export const BAKEOFF: BakeoffRun[] = [
   {
-    business: "A dental practice in Phoenix",
+    business: "A dental practice",
     topic: "How long do dental implants last?",
     humanVoice: { jasper: 71, draftly: 100 },
     readsAsAi: { jasper: 39, draftly: 29 },
@@ -105,11 +105,11 @@ export type Callout = { business: string; title: string; jasper: Excerpt; draftl
 
 export const CALLOUTS: Callout[] = [
   {
-    business: "A dental practice in Phoenix",
+    business: "A dental practice",
     title: "Experience the practice never gave it",
     jasper: {
-      text: "At [the practice], we've placed implants for patients across Phoenix...",
-      hl: "we've placed implants for patients across Phoenix",
+      text: "At [the practice], we've placed implants for patients across [the city]...",
+      hl: "we've placed implants for patients across [the city]",
     },
     draftly: {
       text: "Read about dental implants at [the practice], then schedule a consultation and bring this list of questions with you.",
