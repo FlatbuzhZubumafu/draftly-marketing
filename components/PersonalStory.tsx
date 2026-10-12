@@ -1,7 +1,11 @@
 import { getHomepageData } from "@/lib/graphql";
 import { AccentText } from "./AccentText";
 
-const PORTRAIT_URL = "https://wp.draftly.blog/wp-content/uploads/2025/10/DSC03429-Edit-1-scaled.jpg";
+// WordPress's own resized copies of the 2560px original (273 KB), so phones and
+// the half-width desktop column load 45-130 KB instead.
+const PORTRAIT_BASE = "https://wp.draftly.blog/wp-content/uploads/2025/10/DSC03429-Edit-1";
+const PORTRAIT_URL = `${PORTRAIT_BASE}-1024x683.jpg`;
+const PORTRAIT_SRCSET = [768, 1024, 1536].map((w) => `${PORTRAIT_BASE}-${w}x${Math.round((w * 2) / 3)}.jpg ${w}w`).join(", ");
 
 export async function PersonalStory() {
   const { marketingSettings: s } = await getHomepageData();
@@ -19,6 +23,10 @@ export async function PersonalStory() {
             >
               <img
                 src={PORTRAIT_URL}
+                srcSet={PORTRAIT_SRCSET}
+                sizes="(min-width: 1024px) 470px, calc(100vw - 32px)"
+                width={1024}
+                height={683}
                 alt="Preston Vawdrey, founder of Draftly"
                 className="w-full h-auto"
                 loading="lazy"

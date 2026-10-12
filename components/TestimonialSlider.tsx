@@ -35,24 +35,7 @@ export function TestimonialSlider({ testimonials }: { testimonials: WPTestimonia
             <div className="flex">
               {testimonials.map((t, i) => (
                 <div key={i} className="flex-[0_0_100%] min-w-0 sm:flex-[0_0_50%] lg:flex-[0_0_40%] pl-4">
-                  <div
-                    className="relative rounded-xl p-8 flex flex-col justify-between min-h-[280px] card-depth"
-                    style={{ background: "var(--color-bg-primary)" }}
-                  >
-                    <span
-                      className="absolute top-4 left-6 text-5xl leading-none pointer-events-none"
-                      style={{ fontFamily: "var(--font-display)", color: "var(--color-accent)", opacity: 0.15 }}
-                    >
-                      &ldquo;
-                    </span>
-                    <p className="relative leading-relaxed text-base mb-6" style={{ color: "var(--color-text-primary)" }}>
-                      {t.quote}
-                    </p>
-                    <div>
-                      <p className="font-semibold">{t.personName}</p>
-                      <p className="text-sm" style={{ color: "var(--color-text-secondary)" }}>{t.subtitle}</p>
-                    </div>
-                  </div>
+                  <TestimonialCard t={t} />
                 </div>
               ))}
             </div>
@@ -78,5 +61,48 @@ export function TestimonialSlider({ testimonials }: { testimonials: WPTestimonia
         </div>
       </div>
     </section>
+  );
+}
+
+/**
+ * One quote. Photo, full name, company and outcome show when WordPress has them
+ * (see WPTestimonial); without them the card is name, role and quote as before.
+ */
+function TestimonialCard({ t }: { t: WPTestimonial }) {
+  const name = t.fullName?.trim() || t.personName;
+  const role = [t.subtitle, t.company?.trim()].filter(Boolean).join(", ");
+  return (
+    <figure
+      className="relative rounded-xl p-8 flex flex-col justify-between min-h-[280px] card-depth"
+      style={{ background: "var(--color-bg-primary)" }}
+    >
+      <span
+        className="absolute top-4 left-6 text-5xl leading-none pointer-events-none"
+        style={{ fontFamily: "var(--font-display)", color: "var(--color-accent)", opacity: 0.15 }}
+        aria-hidden="true"
+      >
+        &ldquo;
+      </span>
+      <div className="relative mb-6">
+        {t.outcome?.trim() && (
+          <p className="font-semibold mb-3" style={{ color: "var(--color-accent)" }}>
+            {t.outcome}
+          </p>
+        )}
+        <blockquote className="leading-relaxed text-base" style={{ color: "var(--color-text-primary)" }}>
+          {t.quote}
+        </blockquote>
+      </div>
+      <figcaption className="flex items-center gap-3">
+        {t.photoUrl?.trim() && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={t.photoUrl} alt="" width={48} height={48} loading="lazy" className="w-12 h-12 rounded-full object-cover flex-shrink-0" />
+        )}
+        <span>
+          <span className="block font-semibold">{name}</span>
+          <span className="block text-sm" style={{ color: "var(--color-text-secondary)" }}>{role}</span>
+        </span>
+      </figcaption>
+    </figure>
   );
 }

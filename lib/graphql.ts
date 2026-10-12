@@ -74,6 +74,17 @@ export interface WPTestimonial {
   personName: string;
   subtitle: string;
   quote: string;
+  /**
+   * Optional proof fields. Add them to the Testimonial post type in WordPress
+   * (text fields, exposed to GraphQL under these names) and getTestimonials()
+   * starts reading them; until then it falls back to the three fields above.
+   */
+  fullName?: string | null;
+  company?: string | null;
+  /** One specific result in the customer's words, e.g. "Went from 1 post a month to 3 a week". */
+  outcome?: string | null;
+  /** Square headshot URL, used only with the person's permission. */
+  photoUrl?: string | null;
 }
 
 export interface WPPost {
@@ -202,4 +213,38 @@ const PAGE_QUERY = `
 export async function getPage(slug: string) {
   const data = await fetchGQL<{ page: { title: string; modified: string; content: string } | null }>(PAGE_QUERY, { slug });
   return data.page;
+}
+
+const TESTIMONIALS_FULL_QUERY = `
+  query Testimonials {
+    testimonials(where: { orderby: { field: MENU_ORDER, order: ASC } }) {
+      nodes { personName subtitle quote fullName company outcome photoUrl }
+    }
+  }
+`;
+
+const TESTIMONIALS_BASIC_QUERY = `
+  query Testimonials {
+    testimonials(where: { orderby: { field: MENU_ORDER, order: ASC } }) {
+      nodes { personName subtitle quote }
+    }
+  }
+`;
+
+/**
+ * Homepage testimonials. Tries the proof fields (photo, full name, company,
+ * outcome) first; WordPress rejects the query until those fields exist, so it
+ * then falls back to name, role and quote.
+ *
+ * Quotes from Draftly's own team (role "Owner" or "Founder") are left out:
+ * they aren't customer proof.
+ */
+export async function getTestimonials(): Promise<WPTestimonial[]> {
+  let nodes: WPTestimonial[];
+  try {
+    nodes = (await fetchGQL<{ testimonials: { nodes: WPTestimonial[] } }>(TESTIMONIALS_FULL_QUERY)).testimonials.nodes;
+  } catch {
+    nodes = (await fetchGQL<{ testimonials: { nodes: WPTestimonial[] } }>(TESTIMONIALS_BASIC_QUERY)).testimonials.nodes;
+  }
+  return nodes.filter((t) => !/^(owner|founder|co-?founder)$/i.test(t.subtitle?.trim() ?? ""));
 }

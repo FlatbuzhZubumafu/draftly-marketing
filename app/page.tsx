@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { getHomepageData } from "@/lib/graphql";
+import { getHomepageData, getTestimonials } from "@/lib/graphql";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { HeroDemo } from "@/components/HeroDemo";
 import { ProductShowcase } from "@/components/ProductShowcase";
+import { UsageProof } from "@/components/UsageProof";
 import { BeforeAfter } from "@/components/BeforeAfter";
 import { VideoSection } from "@/components/VideoSection";
 import { PersonalStory } from "@/components/PersonalStory";
@@ -12,14 +13,15 @@ import { HowItWorks } from "@/components/HowItWorks";
 import { Features } from "@/components/Features";
 import { Integrations } from "@/components/Integrations";
 import { NotForEveryone } from "@/components/NotForEveryone";
-import { ScrollingBands } from "@/components/ScrollingBands";
 import { FAQ } from "@/components/FAQ";
+import { ReviewProfiles } from "@/components/ReviewProfiles";
 import { HomePricing } from "@/components/HomePricing";
 import { CtaBand } from "@/components/CtaBand";
 import { PAID_PLANS } from "@/lib/pricing";
 import { jsonLdHtml, softwareApplicationJsonLd } from "@/lib/schema";
 import { HOME_DESCRIPTION, HOME_TITLE } from "@/lib/site";
 import { HomeGuides } from "@/components/HomeGuides";
+import { withCodeFaqs } from "@/lib/faq";
 
 export const metadata: Metadata = {
   title: { absolute: HOME_TITLE },
@@ -36,7 +38,7 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const data = await getHomepageData();
+  const [data, testimonials] = await Promise.all([getHomepageData(), getTestimonials()]);
 
   return (
     <>
@@ -45,9 +47,11 @@ export default async function HomePage() {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdHtml(softwareApplicationJsonLd) }} />
         <HeroDemo settings={data.marketingSettings} startingPrice={PAID_PLANS[0].price} />
         <ProductShowcase />
+        {/* Avatars: none yet. Pass `avatars` only for signups who gave permission. */}
+        <UsageProof />
         <BeforeAfter />
         <PersonalStory />
-        <TestimonialSlider testimonials={data.testimonials.nodes} />
+        <TestimonialSlider testimonials={testimonials} />
         <CtaBand
           heading={<>See What Draftly Writes <em className="italic" style={{ color: "var(--color-accent)" }}>for Your Site</em></>}
           body="Paste your URL and get a finished, SEO-ready post in your brand's voice in about a minute."
@@ -64,10 +68,10 @@ export default async function HomePage() {
         />
         <NotForEveryone />
         <HomeGuides />
-        <ScrollingBands />
         <VideoSection />
         <HomePricing />
-        <FAQ faqs={data.faqs.nodes} />
+        <ReviewProfiles />
+        <FAQ faqs={withCodeFaqs(data.faqs.nodes)} />
         <CtaBand
           heading={<>Your First Post <em className="italic" style={{ color: "var(--color-accent)" }}>Is on Us</em></>}
           body={`Paste your URL, read the draft, then decide. Paid plans start at $${PAID_PLANS[0].price} a month when you want more.`}

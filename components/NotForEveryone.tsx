@@ -24,6 +24,10 @@ export async function NotForEveryone() {
                   Built For
                 </AccentText>
               </h2>
+              <p className="mt-4 text-lg leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+                If your blog hasn&apos;t had a new post in months, Draftly gets it publishing again without you finding
+                the hours to write. Each post reads like you wrote it, so you can put your name on it.
+              </p>
             </div>
             <div className="reveal rounded-xl p-8 card-depth" style={{ background: "var(--color-bg-primary)", transitionDelay: "0.1s" }}>
               <p className="text-sm font-semibold mb-4">Draftly is built for people who:</p>
