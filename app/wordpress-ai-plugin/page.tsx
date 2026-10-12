@@ -193,14 +193,8 @@ export default function WordPressAiPluginPage() {
                 Download for Free
               </a>
             </div>
-            <p className="mt-4 text-sm" style={{ color: "var(--color-text-muted)" }}>
-              Version {WP_PLUGIN_VERSION}. Works with Yoast SEO, Rank Math and All in One SEO.
-            </p>
-            <p className="mt-1 text-sm" style={{ color: "var(--color-text-muted)" }}>
-              Available to businesses in the United States only.
-            </p>
           </div>
-          <ProductFigure shot={WP_SHOTS.review} className="min-w-0" />
+          <ProductFigure shot={WP_SHOTS.review} className="min-w-0" showCaption={false} />
         </section>
 
         <section id="how-it-works" className="container-draftly max-w-5xl mt-24">
