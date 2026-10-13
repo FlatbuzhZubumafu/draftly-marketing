@@ -9,14 +9,20 @@ export type UsageAvatar = { name: string; photoUrl: string };
 const fmt = (n: number) => n.toLocaleString("en-US");
 
 /**
+ * Below this many posts the count reads as "barely used" rather than proof,
+ * so the strip stays hidden until real usage passes it, then appears on its own.
+ */
+const MIN_POSTS_TO_SHOW = 500;
+
+/**
  * Real usage under the hero showcase (site audit D3.1): posts Draftly has
  * written and for how many websites, read live from the app. Renders nothing
- * when the numbers can't be fetched or there are no posts yet. The weekly line
+ * when the numbers can't be fetched or are below MIN_POSTS_TO_SHOW. The weekly line
  * only shows when there were posts this week.
  */
 export async function UsageProof({ avatars = [] }: { avatars?: UsageAvatar[] }) {
   const stats = await getSiteStats();
-  if (!stats || stats.totalPosts < 1) return null;
+  if (!stats || stats.totalPosts < MIN_POSTS_TO_SHOW) return null;
 
   return (
     <section aria-label="Draftly usage" className="px-4 py-10" style={{ background: "var(--color-bg-primary)" }}>
