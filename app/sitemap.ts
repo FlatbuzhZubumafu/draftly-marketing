@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getPage, getPosts } from "@/lib/graphql";
 import { NOINDEX_POST_SLUGS } from "@/lib/related";
+import { FREE_TOOLS, TOOLS_DATE, TOOLS_HUB } from "@/lib/free-tools";
 
 export const revalidate = 3600;
 
@@ -21,6 +22,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/seo-copywriting`, lastModified: new Date("2026-10-08"), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/ai-seo-agency-vs-tool`, lastModified: new Date("2026-10-08"), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/jasper-vs-draftly`, lastModified: new Date("2026-10-12"), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}${TOOLS_HUB.path}`, lastModified: new Date(TOOLS_DATE.iso), changeFrequency: "monthly", priority: 0.7 },
+    ...FREE_TOOLS.map((t) => ({ url: `${baseUrl}${t.path}`, lastModified: new Date(TOOLS_DATE.iso), changeFrequency: "monthly" as const, priority: 0.7 })),
     { url: `${baseUrl}/blog`, lastModified: posts[0] ? new Date(posts[0].modified || posts[0].date) : new Date("2026-10-06"), changeFrequency: "weekly", priority: 0.8 },
     { url: `${baseUrl}/privacy-policy`, lastModified: legalModified(privacy, "2026-10-09"), changeFrequency: "yearly", priority: 0.2 },
     { url: `${baseUrl}/terms-and-conditions`, lastModified: legalModified(terms, "2026-10-09"), changeFrequency: "yearly", priority: 0.2 },

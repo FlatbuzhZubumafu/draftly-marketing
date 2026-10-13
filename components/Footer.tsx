@@ -18,6 +18,7 @@ const PRODUCT: [string, string][] = [
 const RESOURCES: [string, string][] = [
   ["/blog", "Blog"],
   ["/blog#guides", "Guides"],
+  ["/tools", "Free SEO tools"],
   ["/best-ai-for-writing", "Best AI for writing"],
   ["/jasper-vs-draftly", "Jasper vs Draftly"],
   ["/#faq", "FAQ"],
