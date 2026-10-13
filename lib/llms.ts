@@ -14,6 +14,7 @@ import { APP_MODELS, APP_MODEL_COUNT } from "@/lib/app-models";
 import { APP_URL, SITE_URL } from "@/lib/site";
 import { WP_COMPARE_NOTES, WP_COMPARE_ROWS, WP_COMPARE_TOOLS, WP_COMPARED_ON, type Cell } from "@/lib/wordpress-compare";
 import { WP_FEATURES, WP_PLANS, WP_PLUGIN_VERSION, WP_TOP_UPS } from "@/lib/wordpress-plugin";
+import { FREE_TOOLS, TOOLS_HUB } from "@/lib/free-tools";
 
 // Builds /llms.txt and /llms-full.txt from the same data the pages render, so
 // prices, tools and benchmark numbers match the site.
@@ -106,6 +107,12 @@ ${WP_TOP_UPS} Writing new posts, topic ideas, AI images and autopilot are on the
 ### Compared with other WordPress AI plugins (checked ${WP_COMPARED_ON})
 
 ${wpCompareTable()}
+
+## Free SEO Tools
+
+Free, no sign-up, at ${SITE_URL}${TOOLS_HUB.path}. Each tool fetches the pages you enter and runs fixed rules on them; no AI model reads the pages, and the URLs and results are not stored.
+
+${FREE_TOOLS.map((t) => `- [${t.name}](${SITE_URL}${t.path}): ${t.intro.split(". ")[0]}. Checks: ${t.checks.map((c) => c.label).join(", ")}.`).join("\n")}
 
 ## Pages
 
