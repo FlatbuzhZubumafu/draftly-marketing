@@ -211,7 +211,7 @@ export default async function BenchmarkPage() {
             </p>
             <p className="text-sm" style={{ color: "var(--color-text-muted)" }}>
               Edition 1. Tested {BENCHMARK_DATE} by{" "}
-              <a href="https://prestonvawdrey.com" style={{ color: "var(--color-accent)" }}>
+              <a href="/about" rel="author" style={{ color: "var(--color-accent)" }}>
                 Preston Vawdrey
               </a>{" "}
               at Draftly.

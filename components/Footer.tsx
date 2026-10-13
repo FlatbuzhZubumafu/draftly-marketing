@@ -3,6 +3,7 @@ import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { CopyEmail } from "@/components/CopyEmail";
 import { BILLING_TERMS_HREF } from "@/lib/pricing";
 import { ReviewProfiles } from "@/components/ReviewProfiles";
+import { COMPANY } from "@/lib/schema";
 
 const MUTED = "#8a8a8a";
 const FAINT = "#666";
@@ -22,6 +23,11 @@ const RESOURCES: [string, string][] = [
   ["/best-ai-for-writing", "Best AI for writing"],
   ["/jasper-vs-draftly", "Jasper vs Draftly"],
   ["/#faq", "FAQ"],
+];
+
+const COMPANY_PAGES: [string, string][] = [
+  ["/about", "About"],
+  ["/contact", "Contact"],
 ];
 
 export async function Footer() {
@@ -51,8 +57,15 @@ export async function Footer() {
           <div className="col-span-2 sm:col-span-1 md:col-span-2">
             <h2 className="text-white font-semibold mb-4 text-sm">Company</h2>
             <ul className="space-y-3 text-sm">
+              {COMPANY_PAGES.map(([href, label]) => (
+                <li key={href}>
+                  <a href={href} className="transition-colors hover:text-white" style={{ color: MUTED }}>
+                    {label}
+                  </a>
+                </li>
+              ))}
               <li>
-                <CopyEmail email="preston@draftly.blog" color={MUTED} />
+                <CopyEmail email={COMPANY.email} color={MUTED} />
               </li>
               <li>
                 <a href="/privacy-policy" className="transition-colors hover:text-white" style={{ color: MUTED }}>
@@ -71,11 +84,11 @@ export async function Footer() {
               </li>
               <li>
                 <a
-                  href="sms:+13857224497?&body=Hi%2C%20I%20am%20interested%20in%20learning%20more%20about%20Draftly."
+                  href={COMPANY.textHref}
                   className="text-xs transition-colors hover:text-white"
                   style={{ color: FAINT }}
                 >
-                  Text 385-722-4497
+                  Text {COMPANY.textNumber}
                 </a>
               </li>
             </ul>

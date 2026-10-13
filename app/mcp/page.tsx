@@ -9,6 +9,7 @@ import { BYO_AI_LINE, FREE_PLAN_LINE, MCP_URL, READ_ONLY_TOOL_COUNT, TOOLS, tool
 import { TocLayout } from "@/components/OnThisPage";
 import { KeepReading } from "@/components/KeepReading";
 import { ModelName } from "@/components/ProviderLogo";
+import { authorRef } from "@/lib/schema";
 
 export const revalidate = 3600;
 
@@ -117,7 +118,7 @@ export default async function McpPage() {
         url: "https://www.draftly.blog/mcp",
         datePublished: "2026-10-06",
         dateModified: "2026-10-08",
-        author: { "@type": "Person", name: "Preston Vawdrey", url: "https://prestonvawdrey.com" },
+        author: authorRef,
         publisher: { "@type": "Organization", name: "Draftly", url: "https://www.draftly.blog" },
       },
       {
