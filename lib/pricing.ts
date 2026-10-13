@@ -7,6 +7,8 @@ export type Plan = {
   price: number;
   credits: string;
   posts: string;
+  /** People who can sign in to the account, owner included. null = unlimited. Mirrors subscription_plans.seat_limit in the app. */
+  seats: number | null;
   pitch: string;
   includesFrom?: string;
   features: string[];
@@ -19,6 +21,7 @@ export const PLANS: Plan[] = [
     price: 0,
     credits: "1,000 credits a month",
     posts: "1 free blog post",
+    seats: 1,
     pitch: "See what Draftly writes for your site before you pay anything.",
     features: [
       "Your first full blog post, free",
@@ -34,6 +37,7 @@ export const PLANS: Plan[] = [
     price: 29,
     credits: "10,000 credits a month",
     posts: "About 66 posts a month",
+    seats: 2,
     pitch: "For one person running one blog who wants to publish every week.",
     includesFrom: "Free",
     features: [
@@ -50,6 +54,7 @@ export const PLANS: Plan[] = [
     price: 69,
     credits: "35,000 credits a month",
     posts: "About 233 posts a month",
+    seats: 5,
     pitch: "For teams and agencies publishing most days of the week.",
     includesFrom: "Solopreneur",
     features: [
@@ -63,6 +68,7 @@ export const PLANS: Plan[] = [
     price: 100,
     credits: "50,000 credits a month",
     posts: "About 333 posts a month",
+    seats: null,
     pitch: "Set a schedule once and Draftly keeps your blog publishing.",
     includesFrom: "Growth",
     features: [
@@ -73,6 +79,19 @@ export const PLANS: Plan[] = [
     ],
   },
 ];
+
+/** "Team members: 2", "Team members: Unlimited". */
+export const teamMembersLabel = (plan: Plan) => `Team members: ${plan.seats ?? "Unlimited"}`;
+
+/** "1 / 2 / 5 / Unlimited", in plan order. */
+export const teamMembersList = () => PLANS.map((p) => p.seats ?? "Unlimited").join(" / ");
+
+/**
+ * Team seats (app: subscription_plans.seat_limit). The owner counts as one,
+ * everyone shares the plan's credits, and there is no per-seat price or seat add-on.
+ */
+export const TEAM_NOTE =
+  "Team members means people who can sign in to your account, you included. Everyone shares the plan's credits. No per-seat charge.";
 
 /** The paid plans, cheapest first. */
 export const PAID_PLANS = PLANS.filter((p) => p.price > 0);

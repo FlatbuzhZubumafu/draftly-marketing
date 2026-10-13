@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION, images: [OG_IMAGE.url] },
 };
 
-const [SOLO, , AUTOPILOT] = PAID_PLANS;
+const [SOLO, GROWTH, AUTOPILOT] = PAID_PLANS;
 const T = BAKEOFF_TOTALS;
 
 const FAQS: Faq[] = [
@@ -68,7 +68,7 @@ const FAQS: Faq[] = [
   },
   {
     q: "How much does Draftly cost?",
-    a: `Your first post is free. Paid plans start at $${SOLO.price} a month, billed monthly with no annual contract.`,
+    a: `Your first post is free. Paid plans start at $${SOLO.price} a month, billed monthly with no annual contract. The price is per plan, not per seat: Solopreneur includes ${SOLO.seats} people, Growth ${GROWTH.seats} and Autopilot unlimited.`,
   },
   {
     q: "Does Jasper publish to WordPress?",
@@ -487,9 +487,10 @@ export default async function JasperVsDraftlyPage() {
           <KeywordSection id="pricing" title="Jasper AI pricing vs Draftly pricing" shot={SHOTS.pricing}>
             <p>
               Jasper Pro is <B>${JASPER_PRO.monthly} per seat a month</B>, or ${JASPER_PRO.yearly} billed yearly, so a two-person team pays $
-              {JASPER_PRO.monthly * 2} a month.
-              <SourceLinks items={[SRC.pricing]} /> Draftly starts at <B>${SOLO.price} a month</B> for the plan, not per seat, with no annual
-              contract. See <A href="/pricing">every Draftly plan</A>.
+              {JASPER_PRO.monthly * 2} a month and a five-person team pays ${JASPER_PRO.monthly * 5}.
+              <SourceLinks items={[SRC.pricing]} /> Draftly charges for the plan, not per seat, with no annual contract. Solopreneur is{" "}
+              <B>${SOLO.price} a month for {SOLO.seats} people</B>, Growth is <B>${GROWTH.price} a month for {GROWTH.seats}</B>, and Autopilot is ${AUTOPILOT.price}{" "}
+              a month with no limit on people. Everyone on the account shares the plan&apos;s credits. See <A href="/pricing">every Draftly plan</A>.
             </p>
           </KeywordSection>
 

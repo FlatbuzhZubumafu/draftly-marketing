@@ -58,7 +58,7 @@ export const softwareApplicationJsonLd = {
     name: plan.name,
     price: plan.price.toFixed(2),
     priceCurrency: "USD",
-    description: `${plan.posts}. ${plan.pitch}`,
+    description: `${plan.posts}. Team members: ${plan.seats ?? "unlimited"}. ${plan.pitch}`,
     url: `${SITE_URL}/pricing`,
     ...(plan.price > 0
       ? { priceSpecification: { "@type": "UnitPriceSpecification", price: plan.price.toFixed(2), priceCurrency: "USD", unitText: "MONTH" } }
