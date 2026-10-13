@@ -98,7 +98,7 @@ export async function ToolPage({ tool }: { tool: FreeTool }) {
 
           <section id="what-it-checks" className="mt-20">
             <h2 className="text-3xl font-medium mb-6" style={{ letterSpacing: "-0.03em" }}>
-              What the {tool.name.toLowerCase()} looks at
+              What this checker looks at
             </h2>
             <ol className="grid sm:grid-cols-2 gap-3">
               {tool.checks.map((c, i) => (
