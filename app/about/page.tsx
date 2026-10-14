@@ -126,8 +126,11 @@ export default function AboutPage() {
 
           <Section id="editorial-standards" title="How posts on this blog are written">
             <p>I rely heavily on AI to help me communicate ideas clearly, and the posts here are written with its help.</p>
-            {/* Pending Preston's confirmation (see the PR). Keep process claims to what he has confirmed. */}
-            <p>Every post is reviewed by me before it publishes.</p>
+            {/* Confirmed by Preston 2026-10-14: he does not review every post before it publishes. Keep process claims to what he has confirmed. */}
+            <p>
+              I don&apos;t read every post before it goes live. I do read every support request, and every piece of
+              feedback people send after Draftly writes a post for them. That feedback is what shapes how Draftly writes.
+            </p>
             <p>When a post changes after it&apos;s published, the page shows an Updated date next to the original one.</p>
             <p>
               If you spot something wrong, email me at <A href={`mailto:${COMPANY.email}`}>{COMPANY.email}</A>. I read
