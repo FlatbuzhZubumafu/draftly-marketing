@@ -34,7 +34,7 @@ const CLIENTS: { name: string; steps: React.ReactNode[] }[] = [
   {
     name: "Claude (Web and Desktop App)",
     steps: [
-      <>Open <strong>Settings</strong>, then <strong>Connectors</strong>, then <strong>Add custom connector</strong>.</>,
+      <>Open <strong>Customize</strong>, then <strong>Connectors</strong>, then click <strong>+ Add</strong>.</>,
       <>Name it Draftly and paste the connector URL above. Click <strong>Add</strong>.</>,
       <>Click <strong>Connect</strong>, sign in to Draftly and approve the connection.</>,
       <>Start a new chat and ask Claude to use Draftly.</>,
@@ -43,8 +43,8 @@ const CLIENTS: { name: string; steps: React.ReactNode[] }[] = [
   {
     name: "ChatGPT",
     steps: [
-      <>Open <strong>Settings</strong>, then <strong>Apps and Connectors</strong>. Turn on developer mode under the advanced settings if your workspace asks for it.</>,
-      <>Create a connector, paste the connector URL above and choose OAuth sign-in.</>,
+      <>Open <strong>Plugins</strong>, click <strong>+</strong> and choose <strong>Add custom MCP server</strong>.</>,
+      <>Paste the connector URL above and choose OAuth sign-in.</>,
       <>Sign in to Draftly and approve the connection.</>,
     ],
   },
