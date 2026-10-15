@@ -29,6 +29,8 @@ export type FreeTool = {
   checks: { label: string; text: string }[];
   /** How Draftly relates to what this tool finds. Only facts the app supports. */
   draftly: { title: string; points: string[]; cta: string };
+  /** Optional extra sections shown after "What this checker looks at". */
+  sections?: { id: string; heading: string; paragraphs: string[] }[];
   faqs: Faq[];
   ogAlt: string;
   ogLine: string;
@@ -41,11 +43,11 @@ export const FREE_TOOLS: FreeTool[] = [
     id: "ai-visibility",
     path: "/tools/ai-visibility-checker",
     name: "AI visibility checker",
-    title: "Free AI Visibility Checker: Can ChatGPT and Claude Read Your Site?",
+    title: "Free AI Visibility Checker: Can ChatGPT Read Your Site?",
     description:
-      "Check if ChatGPT, Claude, Perplexity and Google can crawl and cite your website. Free AI visibility checker for robots.txt, llms.txt, sitemap and schema.",
-    eyebrow: "Free AI visibility checker",
-    h1: "Can AI assistants read",
+      "Check if ChatGPT, Claude, Perplexity and Google AI Overviews can crawl and cite your site. Tests robots.txt, bot access, noindex, sitemap and schema.",
+    eyebrow: "Free tool for ChatGPT, Claude and Google",
+    h1: "AI Visibility Checker: can AI assistants read",
     h1Accent: "your site?",
     intro:
       "Enter your website and this checker tells you whether ChatGPT, Claude, Perplexity and Google can crawl it and cite it. It reads your robots.txt, sitemap, llms.txt and homepage markup, then loads your homepage as GPTBot and ClaudeBot to compare what they get with what a browser gets.",
@@ -61,6 +63,17 @@ export const FREE_TOOLS: FreeTool[] = [
       { label: "Blog and newest post", text: "From sitemap dates or your RSS feed." },
       { label: "llms.txt", text: "Present at /llms.txt. Optional, and flagged as such." },
     ],
+    sections: [
+      {
+        id: "ai-overview-checker",
+        heading: "Is this an AI Overview checker?",
+        paragraphs: [
+          "Partly. Google builds AI Overviews from pages Googlebot crawls, so this checker tests the two things that keep a site out: a Googlebot block in robots.txt, and a noindex or nosnippet tag on the homepage.",
+          "Google-Extended only controls Gemini training and grounding. AI Overviews follow Googlebot's rules, which is why the checker lists them separately.",
+          "It won't tell you whether you show up in an AI Overview today, or what ChatGPT says about you. That takes a tracker that runs real searches. Run this first, though. If the bots can't read your site, there's nothing for a tracker to find.",
+        ],
+      },
+    ],
     draftly: {
       title: "A site AI can read still needs something worth citing",
       points: [
@@ -74,6 +87,10 @@ export const FREE_TOOLS: FreeTool[] = [
       {
         q: "What is an AI visibility checker?",
         a: "It checks whether AI assistants like ChatGPT, Claude and Perplexity can reach your website and use it in their answers. This one reads your robots.txt rules for each AI crawler, compares what bots and browsers get, and checks your sitemap, schema and noindex signals.",
+      },
+      {
+        q: "Is this an AI Overview checker?",
+        a: "It checks whether Google can use your homepage in AI Overviews: Googlebot access in robots.txt, plus noindex and nosnippet tags. It doesn't track whether you appear in an AI Overview for a search. That needs a rank tracker.",
       },
       {
         q: "Does blocking GPTBot stop ChatGPT from citing my site?",
@@ -215,7 +232,7 @@ export const FREE_TOOLS: FreeTool[] = [
     id: "eeat",
     path: "/tools/eeat-checker",
     name: "E-E-A-T checker",
-    title: "Free E-E-A-T Checker: Test a Post for Author Expertise Signals",
+    title: "Free E-E-A-T Checker: Test a Post for Author Signals",
     description:
       "Free E-E-A-T checker: see if a blog post shows a byline, author page, Person schema, dates, About and Contact pages and citations to trusted sources.",
     eyebrow: "Free E-E-A-T checker",

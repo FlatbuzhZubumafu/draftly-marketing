@@ -11,6 +11,7 @@ import { OnThisPage } from "@/components/OnThisPage";
 import { NOINDEX_POST_SLUGS } from "@/lib/related";
 import { authorRef } from "@/lib/schema";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
+import { SignupCta } from "@/components/SignupCta";
 
 export const revalidate = 60;
 
@@ -132,6 +133,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             className="prose prose-lg max-w-none text-gray-700 leading-relaxed"
             dangerouslySetInnerHTML={{ __html: tidyPostHtml(sanitizeHtml(post.content), post.title) }}
           />
+          <SignupCta className="mt-16" />
           <NewsletterSignup location="blog_post" className="mt-16" />
           <KeepReading
             topic={`${post.title} ${post.excerpt}`}

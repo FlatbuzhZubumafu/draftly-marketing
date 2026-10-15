@@ -1,4 +1,5 @@
 import { getHomepageData } from "@/lib/graphql";
+import { LOGO_SRC } from "@/lib/site";
 import { HeaderInteractions } from "./HeaderInteractions";
 import { Menu } from "lucide-react";
 
@@ -20,9 +21,7 @@ export async function Header() {
       >
         <div className="container-draftly flex items-center justify-between py-4">
           <a href="/" className="flex items-center gap-2.5">
-            {s.logoUrl && (
-              <img src={s.logoUrl} alt={s.companyName} className="h-8 w-auto" />
-            )}
+            <img src={LOGO_SRC} alt={s.companyName} width={64} height={64} className="h-8 w-auto" />
             <span
               className="text-[26px] font-bold lowercase"
               style={{ letterSpacing: "var(--tracking-logo)", color: "var(--color-text-primary)" }}

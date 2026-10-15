@@ -14,7 +14,7 @@ export const revalidate = 3600;
 
 const TITLE = "SEO MCP Server for Claude and ChatGPT | Draftly";
 const DESCRIPTION =
-  "Draftly's SEO MCP server connects Claude, ChatGPT or Cursor to live keyword, SERP and People Also Ask data plus your brand voice. Free to connect; live SEO data on paid plans.";
+  "Draftly's SEO MCP server gives Claude, ChatGPT or Cursor live keyword, SERP and People Also Ask data plus your brand voice. Free to connect.";
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },

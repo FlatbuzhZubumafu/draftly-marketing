@@ -120,6 +120,19 @@ export async function ToolPage({ tool }: { tool: FreeTool }) {
             </p>
           </section>
 
+          {tool.sections?.map((sec) => (
+            <section key={sec.id} id={sec.id} className="mt-20 max-w-3xl">
+              <h2 className="text-3xl font-medium mb-5" style={{ letterSpacing: "-0.03em" }}>
+                {sec.heading}
+              </h2>
+              <div className="space-y-4 text-lg leading-relaxed" style={secondary}>
+                {sec.paragraphs.map((p) => (
+                  <p key={p}>{p}</p>
+                ))}
+              </div>
+            </section>
+          ))}
+
           <section
             id="how-draftly-helps"
             data-toc-skip
