@@ -11,6 +11,7 @@ import { jsonLdHtml } from "@/lib/schema";
 import { ThumbCard } from "@/components/ThumbCard";
 import { postImage } from "@/components/RelatedPosts";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
+import { SignupCta } from "@/components/SignupCta";
 
 export const revalidate = 60;
 
@@ -117,7 +118,8 @@ export default async function BlogPage() {
             </ul>
           </section>
 
-          <NewsletterSignup location="blog_index" className="mt-20 max-w-3xl" />
+          <SignupCta className="mt-20 max-w-3xl" />
+          <NewsletterSignup location="blog_index" className="mt-12 max-w-3xl" />
         </div>
       </main>
       <Footer />

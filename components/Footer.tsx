@@ -1,4 +1,5 @@
 import { getHomepageData } from "@/lib/graphql";
+import { LOGO_SRC } from "@/lib/site";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { CopyEmail } from "@/components/CopyEmail";
 import { BILLING_TERMS_HREF } from "@/lib/pricing";
@@ -41,7 +42,7 @@ export async function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-12 gap-x-8 gap-y-10">
           <div className="col-span-2 md:col-span-5">
             <a href="/" className="inline-flex items-center gap-2.5">
-              {s.logoUrl && <img src={s.logoUrl} alt="" className="h-7 w-auto" />}
+              <img src={LOGO_SRC} alt="" width={64} height={64} className="h-7 w-auto" />
               <span className="text-[22px] font-bold lowercase text-white" style={{ letterSpacing: "var(--tracking-logo)" }}>
                 {s.companyName.toLowerCase()}
               </span>

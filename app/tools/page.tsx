@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { FaqList, faqJsonLd, type Faq } from "@/components/ArticleParts";
 import { KeepReading } from "@/components/KeepReading";
+import { SignupCta } from "@/components/SignupCta";
 import { FREE_TOOLS, TOOLS_HUB } from "@/lib/free-tools";
 import { jsonLdHtml } from "@/lib/schema";
 import { APP_URL, SITE_URL } from "@/lib/site";
@@ -107,6 +108,12 @@ export default function ToolsHub() {
               </p>
             </div>
           </section>
+
+          <SignupCta
+            className="mt-16 max-w-3xl"
+            heading="Next step: a fresh post for your blog"
+            body="Your blog needs fresh posts that answer real questions. Paste your URL and Draftly writes one in your brand's voice, with the meta title, description and slug filled in."
+          />
 
           <FaqList faqs={FAQS} />
           <KeepReading exclude={TOOLS_HUB.path} topic="seo ai search blog posts aeo" />

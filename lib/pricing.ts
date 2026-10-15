@@ -93,6 +93,14 @@ export const teamMembersList = () => PLANS.map((p) => p.seats ?? "Unlimited").jo
 export const TEAM_NOTE =
   "Team members means people who can sign in to your account, you included. Everyone shares the plan's credits. No per-seat charge.";
 
+/**
+ * Additional websites. Mirrors supabase/functions/_shared/site-addons.ts in the app
+ * (checked 2026-10-15): $29 a month per extra website on Solopreneur, Growth or
+ * Autopilot, each with its own 10,000 monthly credits. Free and the WordPress
+ * plugin and Shopify app plans keep one website.
+ */
+export const SITE_ADDON = { price: 29, credits: "10,000" };
+
 /** The paid plans, cheapest first. */
 export const PAID_PLANS = PLANS.filter((p) => p.price > 0);
 

@@ -8,7 +8,8 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { AccentText } from "@/components/AccentText";
 import { PricingPlans } from "@/components/PricingPlans";
-import { BILLING_TERMS_HREF, CANCEL_NOTE, PAID_PLANS, TEAM_NOTE, paidPostCounts, paidPriceList } from "@/lib/pricing";
+import { BILLING_TERMS_HREF, CANCEL_NOTE, PAID_PLANS, PLANS, SITE_ADDON, TEAM_NOTE, paidPostCounts, paidPriceList, type Plan } from "@/lib/pricing";
+import { FaqList, faqJsonLd, type Faq } from "@/components/ArticleParts";
 import { jsonLdHtml, softwareApplicationJsonLd } from "@/lib/schema";
 
 export const revalidate = 3600;
@@ -59,6 +60,28 @@ const CREDIT_COSTS = [
   { action: "Rewrite", credits: "30 (50 on premium models). 2 free on your first post" },
 ];
 
+const plan = (name: string) => PLANS.find((p) => p.name === name) as Plan;
+const [SOLO, GROWTH, AUTOPILOT] = [plan("Solopreneur"), plan("Growth"), plan("Autopilot")];
+
+// Team questions, built from lib/pricing.ts so seat counts and prices match the plan cards.
+const FAQS: Faq[] = [
+  {
+    q: "Which plan fits a team of 3?",
+    a: `Growth. It's $${GROWTH.price} a month for up to ${GROWTH.seats} team members and includes ${GROWTH.credits}, enough for about ${GROWTH.posts.replace(/^About /, "").replace(/ a month$/, "")}. Solopreneur covers ${SOLO.seats} people, and Autopilot ($${AUTOPILOT.price}) has no limit on team members.`,
+  },
+  {
+    q: "Can my team share one account?",
+    a: `Yes. That's how teams work in Draftly. Everyone you add signs in to the same account, writes for the same brand voice and spends the same pool of credits. Free has 1 seat, Solopreneur ${SOLO.seats}, Growth ${GROWTH.seats} and Autopilot unlimited.`,
+  },
+  {
+    q: "Do team members cost extra?",
+    a: "No. There's no per-seat charge. Each plan includes a set number of team members, you included. If your team outgrows the plan, move up a plan.",
+  },
+  {
+    q: "Can one account run blogs for several websites?",
+    a: `Yes, on Solopreneur, Growth or Autopilot. Each extra website costs $${SITE_ADDON.price} a month and comes with its own ${SITE_ADDON.credits} credits a month, so one client's posts never use another's credits. Free accounts and the WordPress plugin plans cover one website.`,
+  },
+];
 
 export default async function PricingPage() {
   const { marketingSettings: s } = await getHomepageData();
@@ -68,7 +91,7 @@ export default async function PricingPage() {
     <>
       <Header />
       <main className="pt-28 pb-24 px-4" style={{ background: "var(--color-bg-primary)" }}>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdHtml(softwareApplicationJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdHtml(softwareApplicationJsonLd, faqJsonLd(FAQS)) }} />
         <section className="container-draftly max-w-6xl">
           <div className="text-center max-w-2xl mx-auto mb-14">
             <h1 className="page-heading mb-6" style={{ fontSize: "clamp(2.25rem, 5.5vw, 64px)" }}>
@@ -212,6 +235,10 @@ export default async function PricingPage() {
             </ul>
           </div>
         </section>
+
+        <div className="container-draftly max-w-5xl">
+          <FaqList faqs={FAQS} />
+        </div>
 
         <section className="container-draftly max-w-2xl mt-24 text-center">
           <h2 className="text-3xl font-medium mb-4" style={{ letterSpacing: "-0.03em" }}>

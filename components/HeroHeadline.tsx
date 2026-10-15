@@ -124,7 +124,7 @@ export function HeroHeadline({ phase, struck }: { phase: Phase; struck: number }
   return (
     <h1 className={`page-heading hero-heading mb-8${verbose ? " hero-verbose" : ""}`}>
       <span className="eyebrow font-sans block mb-5" style={{ lineHeight: 1.4 }} data-flip>
-        For small businesses
+        For small businesses and marketing teams
       </span>{" "}
       {cut("opener")}
       <span className="hero-keep whitespace-nowrap" data-flip>The AI Blog Writer</span>

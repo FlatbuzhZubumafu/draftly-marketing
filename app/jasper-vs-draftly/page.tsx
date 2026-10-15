@@ -36,7 +36,7 @@ export const revalidate = 3600;
 const PATH = "/jasper-vs-draftly";
 const TITLE = "Jasper vs Draftly: Jasper AI Alternative for SEO Blogs";
 const DESCRIPTION =
-  "Jasper vs Draftly, tested on the same topics for four real businesses. Scores, pricing, brand voice and WordPress publishing compared. Your first Draftly post is free.";
+  "Jasper vs Draftly, tested on the same topics for four real businesses. Scores, pricing, brand voice and WordPress publishing compared side by side.";
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
