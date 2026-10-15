@@ -9,7 +9,7 @@ import { notFound } from "next/navigation";
 import { KeepReading } from "@/components/KeepReading";
 import { OnThisPage } from "@/components/OnThisPage";
 import { NOINDEX_POST_SLUGS } from "@/lib/related";
-import { authorRef } from "@/lib/schema";
+import { PostByline, postAuthorJsonLd } from "@/components/PostByline";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
 
 export const revalidate = 60;
@@ -85,7 +85,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         datePublished: post.date,
         dateModified: post.modified || post.date,
         image: post.featuredImage?.node?.sourceUrl ?? `${SITE_URL}/og/blog/${slug}`,
-        author: /preston/i.test(post.author?.node?.name ?? "") ? authorRef : post.author?.node?.name ? { "@type": "Person", name: post.author.node.name } : undefined,
+        author: postAuthorJsonLd(post.author?.node?.name),
         // Resolves to the Organization node (with logo) that the root layout renders.
         publisher: { "@type": "Organization", "@id": `${SITE_URL}/#organization`, name: "Draftly", url: SITE_URL, logo: LOGO_URL },
         isPartOf: { "@type": "Blog", "@id": `${SITE_URL}/blog#blog` },
@@ -111,16 +111,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <a href="/blog" className="text-sm text-gray-400 hover:text-gray-600 transition-colors mb-8 inline-block">
             ← Back to blog
           </a>
-          <p className="text-xs text-gray-400 mb-2">
-            {new Date(post.date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </p>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-6">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-5">
             {post.title}
           </h1>
+          <PostByline authorName={post.author?.node?.name} published={post.date} modified={post.modified} />
           {post.featuredImage?.node?.sourceUrl && (
             <img
               src={post.featuredImage.node.sourceUrl}

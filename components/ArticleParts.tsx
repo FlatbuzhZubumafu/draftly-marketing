@@ -43,7 +43,7 @@ export function Byline({ verb, date }: { verb: string; date: string }) {
   return (
     <p className="text-sm" style={{ color: "var(--color-text-muted)" }}>
       {verb} {date} by{" "}
-      <a href="https://prestonvawdrey.com" style={{ color: "var(--color-accent)" }}>
+      <a href="/about" rel="author" style={{ color: "var(--color-accent)" }}>
         Preston Vawdrey
       </a>{" "}
       at Draftly.

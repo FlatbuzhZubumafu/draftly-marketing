@@ -127,6 +127,8 @@ ${FREE_TOOLS.map((t) => `- [${t.name}](${SITE_URL}${t.path}): ${t.intro.split(".
 - [WordPress AI Plugin](${SITE_URL}/wordpress-ai-plugin): The Draftly plugin for WordPress: check, optimize, approve as a revision and revert existing posts, meta for Yoast SEO, Rank Math and AIOSEO, plugin plans and a feature and price comparison with Rank Math Content AI, Yoast SEO Premium, All in One SEO and GetGenie.
 - [Pricing](${SITE_URL}/pricing): Plans, credit costs and the AI models on each plan.
 - [Blog](${SITE_URL}/blog): Notes on AI writing, SEO and AEO for small businesses.
+- [About](${SITE_URL}/about): Who Preston Vawdrey is, why he built Draftly, the company behind it (Meta-Marketing LLC, Utah, US only) and how posts on the blog are written.
+- [Contact](${SITE_URL}/contact): Email preston@draftly.blog for support, billing and privacy requests; text line and mailing address.
 - [App](${APP_URL}): Sign up and write the first post free.
 
 ## Optional
