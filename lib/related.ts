@@ -51,6 +51,18 @@ export const GUIDES: Pillar[] = [
     blurb: "Checks the posts you already have, suggests edits in your voice and saves the ones you approve as revisions.",
     keywords: ["wordpress", "plugin", "yoast", "rank math", "aioseo", "revision"],
   },
+  {
+    href: "/blog-writing-service",
+    title: "Blog writing service or AI: what a post costs",
+    blurb: "Freelancer, agency and Draftly prices per post, and when a human writer is still the better hire.",
+    keywords: ["writing service", "freelance", "outsourc", "hire a writer", "cost per post", "agency"],
+  },
+  {
+    href: "/for-teams",
+    title: "Draftly for teams and agencies",
+    blurb: "Team members on each plan, client websites at $29 a month, and one brand voice for everyone who writes.",
+    keywords: ["team", "agency", "agencies", "client", "seats", "marketing team"],
+  },
 ];
 
 /** Card label for a guide: what kind of page it is. */
@@ -60,6 +72,8 @@ export function guideTag(href: string): string {
     "/jasper-vs-draftly": "Comparison",
     "/ai-seo-agency-vs-tool": "Comparison",
     "/wordpress-ai-plugin": "Plugin",
+    "/blog-writing-service": "Comparison",
+    "/for-teams": "Teams",
     "/mcp": "Guide",
   } as Record<string, string>)[href] ?? "Guide";
 }
