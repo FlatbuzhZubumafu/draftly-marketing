@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { GlobalAnimations } from "@/components/GlobalAnimations";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { AhrefsAnalytics } from "@/components/AhrefsAnalytics";
 import { jsonLdHtml, organizationJsonLd, personJsonLd, websiteJsonLd } from "@/lib/schema";
 import { HOME_DESCRIPTION, HOME_TITLE, SITE_URL } from "@/lib/site";
 
@@ -41,6 +42,7 @@ export default function RootLayout({
         {children}
         <GlobalAnimations />
         <GoogleAnalytics />
+        <AhrefsAnalytics />
       </body>
     </html>
   );
