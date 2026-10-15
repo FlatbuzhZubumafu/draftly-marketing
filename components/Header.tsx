@@ -30,11 +30,13 @@ export async function Header() {
             </span>
           </a>
 
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-6 lg:gap-8">
             <a href="/#how-it-works" className="text-[15px] font-medium text-text-secondary hover:text-text-primary transition-colors">How it works</a>
             <a href="/#features" className="text-[15px] font-medium text-text-secondary hover:text-text-primary transition-colors">Features</a>
             <a href="/#testimonials" className="text-[15px] font-medium text-text-secondary hover:text-text-primary transition-colors">Reviews</a>
             <a href="/pricing" className="text-[15px] font-medium text-text-secondary hover:text-text-primary transition-colors">Pricing</a>
+            {/* lg and up only: at md widths the header has no room for a seventh link (it's in the footer). */}
+            <a href="/for-teams" className="hidden lg:inline text-[15px] font-medium text-text-secondary hover:text-text-primary transition-colors">Teams</a>
             <a href="/blog" className="text-[15px] font-medium text-text-secondary hover:text-text-primary transition-colors">Blog</a>
             <a href="/#faq" className="text-[15px] font-medium text-text-secondary hover:text-text-primary transition-colors">FAQ</a>
           </nav>
@@ -70,6 +72,7 @@ export async function Header() {
           <a href="/#features" className="block text-[15px] font-medium text-text-secondary">Features</a>
           <a href="/#testimonials" className="block text-[15px] font-medium text-text-secondary">Reviews</a>
           <a href="/pricing" className="block text-[15px] font-medium text-text-secondary">Pricing</a>
+          <a href="/for-teams" className="block text-[15px] font-medium text-text-secondary">Teams</a>
           <a href="/blog" className="block text-[15px] font-medium text-text-secondary">Blog</a>
           <a href="/#faq" className="block text-[15px] font-medium text-text-secondary">FAQ</a>
           <a href={loginUrl} className="block text-[15px] font-medium text-text-secondary">Log in</a>

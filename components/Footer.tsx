@@ -12,6 +12,7 @@ const FAINT = "#666";
 const PRODUCT: [string, string][] = [
   ["/#how-it-works", "How it works"],
   ["/pricing", "Pricing"],
+  ["/for-teams", "For teams"],
   ["/wordpress-ai-plugin", "WordPress plugin"],
   ["/mcp", "MCP connector"],
 ];
@@ -23,6 +24,7 @@ const RESOURCES: [string, string][] = [
   ["/tools", "Free SEO tools"],
   ["/best-ai-for-writing", "Best AI for writing"],
   ["/jasper-vs-draftly", "Jasper vs Draftly"],
+  ["/blog-writing-service", "Blog writing service vs AI"],
   ["/#faq", "FAQ"],
 ];
 

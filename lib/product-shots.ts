@@ -85,6 +85,10 @@ export const GUIDE_THUMBS: Record<string, ProductShot> = {
     "Preview of the pricing page: Free, Solopreneur at $29, Growth at $69 and Autopilot at $100 a month", ""),
   "/wordpress-ai-plugin": shot("guide-thumb-wordpress-plugin.webp", 1280, 800,
     "Preview of the WordPress AI plugin page: the Draftly plugin inside WordPress suggesting edits to a post, each with Approve and Skip buttons", ""),
+  "/blog-writing-service": shot("guide-url-to-post.webp", 1600, 900,
+    "Preview of the blog writing service page: Draftly's setup screen with a website URL beside a finished 1,118-word example draft for a made-up plumber", ""),
+  "/for-teams": shot("guide-brand-voice-sliders.webp", 1600, 900,
+    "Preview of the Draftly for teams page: the Voice and Tone sliders every writer on a team shares, Friendly 75, Authoritative 80, Formal 40, Technical 55 and Empathetic 85", ""),
   "/blog": shot("guide-thumb-blog.webp", 1280, 800,
     "Preview of the Draftly blog: guide cards for the AI copywriter, SEO copywriting rules and the best AI for writing", ""),
 };
