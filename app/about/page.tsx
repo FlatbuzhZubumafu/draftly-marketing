@@ -112,6 +112,11 @@ export default function AboutPage() {
               that decides whether a post is worth publishing: the writing. I explained the change in{" "}
               <A href={SHIFT_POST}>why Draftly went from agency tool to self-serve blog writer</A>.
             </p>
+            <p>
+              Once the writing was good, teams asked to share an account. In October 2026 I added team members to every
+              paid plan. Everyone signs in with their own login and shares the plan&apos;s credits, with no per-seat
+              charge. The numbers are on the <A href="/pricing">pricing page</A>.
+            </p>
           </Section>
 
           <Section id="company" title="Who runs Draftly">
