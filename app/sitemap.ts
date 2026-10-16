@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { getPage, getPosts } from "@/lib/graphql";
 import { NOINDEX_POST_SLUGS } from "@/lib/related";
 import { FREE_TOOLS, TOOLS_DATE, TOOLS_HUB } from "@/lib/free-tools";
+import { INDUSTRIES, INDUSTRIES_DATE, INDUSTRIES_HUB, industryPath } from "@/lib/industries";
 
 export const revalidate = 3600;
 
@@ -29,6 +30,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/best-ai-for-seo`, lastModified: new Date("2026-10-16"), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}${TOOLS_HUB.path}`, lastModified: new Date(TOOLS_DATE.iso), changeFrequency: "monthly", priority: 0.7 },
     ...FREE_TOOLS.map((t) => ({ url: `${baseUrl}${t.path}`, lastModified: new Date(TOOLS_DATE.iso), changeFrequency: "monthly" as const, priority: 0.7 })),
+    { url: `${baseUrl}${INDUSTRIES_HUB.path}`, lastModified: new Date(INDUSTRIES_DATE.iso), changeFrequency: "monthly", priority: 0.6 },
+    ...INDUSTRIES.map((i) => ({ url: `${baseUrl}${industryPath(i)}`, lastModified: new Date(INDUSTRIES_DATE.iso), changeFrequency: "monthly" as const, priority: 0.7 })),
     { url: `${baseUrl}/about`, lastModified: new Date("2026-10-13"), changeFrequency: "yearly", priority: 0.5 },
     { url: `${baseUrl}/contact`, lastModified: new Date("2026-10-13"), changeFrequency: "yearly", priority: 0.4 },
     { url: `${baseUrl}/blog`, lastModified: posts[0] ? new Date(posts[0].modified || posts[0].date) : new Date("2026-10-06"), changeFrequency: "weekly", priority: 0.8 },

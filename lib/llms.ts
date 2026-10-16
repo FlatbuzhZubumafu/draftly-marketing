@@ -15,6 +15,7 @@ import { APP_URL, SITE_URL } from "@/lib/site";
 import { WP_COMPARE_NOTES, WP_COMPARE_ROWS, WP_COMPARE_TOOLS, WP_COMPARED_ON, type Cell } from "@/lib/wordpress-compare";
 import { WP_FEATURES, WP_PLANS, WP_PLUGIN_VERSION, WP_TOP_UPS } from "@/lib/wordpress-plugin";
 import { FREE_TOOLS, TOOLS_HUB } from "@/lib/free-tools";
+import { INDUSTRIES, INDUSTRIES_HUB, industryPath, topicCount } from "@/lib/industries";
 
 // Builds /llms.txt and /llms-full.txt from the same data the pages render, so
 // prices, tools and benchmark numbers match the site.
@@ -126,6 +127,8 @@ ${FREE_TOOLS.map((t) => `- [${t.name}](${SITE_URL}${t.path}): ${t.intro.split(".
 - [Claude vs ChatGPT for Writing](${SITE_URL}/claude-vs-chatgpt-for-writing): Claude Opus 5.5, Claude Sonnet 5.5, Claude Sonnet 4.6 and Claude Haiku 4.5 against GPT 5.5, GPT 5.4 and GPT 5.4 Mini on the same blog posts and copy, from Draftly's Edition 1 benchmark: overall, voice, SEO checks, AI habits, cost per post and which to pick.
 - [Writesonic Alternatives](${SITE_URL}/writesonic-alternatives): What Writesonic sells now (AI search visibility plans from $79 a month billed yearly, with 15 to 50 AI articles) and five alternatives for SEO blog posts: Draftly, Koala, SEOWriting.ai, Jasper and Copy.ai, with prices from each company's pricing page as of October 2026.
 - [Best AI for SEO](${SITE_URL}/best-ai-for-seo): AI tools picked by SEO job, with prices from each company's own page as of October 2026: Ahrefs or Semrush for keyword research, Draftly for writing and publishing blog posts (Koala and SEOWriting.ai as cheaper volume options), Surfer or Clearscope for optimizing pages, AI visibility tracking in Semrush, Clearscope, Surfer and Ahrefs, Google Search Console and Ahrefs Free for technical SEO, and which AI models wrote the best SEO content in Draftly's benchmark.
+- [Blog Ideas by Industry](${SITE_URL}${INDUSTRIES_HUB.path}): ${INDUSTRIES_HUB.description}
+${INDUSTRIES.map((i) => `  - [${i.title}](${SITE_URL}${industryPath(i)}): ${topicCount(i)} topics. ${i.description}`).join("\n")}
 - [SEO MCP Server](${SITE_URL}/mcp): What an SEO MCP is, setup steps for each AI app, the tool list and data allowances by plan.
 - [How to Use an SEO MCP Server With Claude and ChatGPT](${SITE_URL}/blog/seo-mcp-server): What an SEO MCP server does, Draftly's ${TOOLS.length} tools by plan (${READ_ONLY_TOOL_COUNT} read-only, plus tools that brief, check, edit and save drafts; none publishes), example requests and setup for Claude, ChatGPT, Claude Code and Cursor.
 - [AEO and GEO for Small Business Blogs in 2026](${SITE_URL}/blog/the-death-of-keyword-how-aeo-aio-is-leaving-keywords-behind): How to get a small business blog cited by ChatGPT, Claude and Google AI Overviews, based on Google's guidance, the GEO research paper and Pew's 2025 click data.
