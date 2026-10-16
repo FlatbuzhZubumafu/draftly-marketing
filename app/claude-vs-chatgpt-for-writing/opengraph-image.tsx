@@ -6,5 +6,5 @@ export const size = TOOL_OG_SIZE;
 export const contentType = "image/png";
 
 export default function Image() {
-  return toolOgImage({ label: "Benchmark", lead: "Claude vs ChatGPT", accent: "for writing", line: "7 models, 84 scored drafts" });
+  return toolOgImage({ label: "Benchmark", lead: "Claude vs ChatGPT", accent: "for writing", line: "7 models, 42 scored drafts" });
 }

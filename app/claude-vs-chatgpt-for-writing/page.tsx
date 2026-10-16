@@ -177,7 +177,7 @@ export default function ClaudeVsChatGptPage() {
             <h1 className="page-heading mb-6" style={{ fontSize: "clamp(2.1rem, 5vw, 56px)" }}>
               Claude vs ChatGPT for writing:{" "}
               <em className="italic" style={{ color: "var(--color-accent)" }}>
-                what 84 scored drafts show
+                what 42 scored drafts show
               </em>
             </h1>
             <p className="text-lg leading-relaxed mb-4" style={{ color: "var(--color-text-secondary)" }}>
