@@ -5,14 +5,17 @@
 // Slugs follow US search demand (Ahrefs, 2026-10-13): ai visibility checker 1,600
 // (KD 2), ai search visibility checker 600, llm visibility checker 450; blog seo
 // checker 400, blog post seo checker 90; content refresh 350; e-e-a-t checker 100,
-// eeat checker 50, eeat audit 40. Each tool is deterministic: no AI model sees the
-// URL or the results.
+// eeat checker 50, eeat audit 40; faq schema generator 600 (KD 4, 2026-10-15). Each
+// tool is deterministic: no AI model sees the URL or the results. The FAQ schema
+// generator runs entirely in the browser (lib/tools/faq-schema.ts).
 import type { Faq } from "@/components/ArticleParts";
 
-export type ToolId = "ai-visibility" | "blog-seo" | "content-refresh" | "eeat";
+export type ToolId = "ai-visibility" | "blog-seo" | "content-refresh" | "eeat" | "faq-schema";
 
 export type FreeTool = {
   id: ToolId;
+  /** "checker" (default) fetches a URL through /api/tools; "generator" runs in the browser. */
+  kind?: "checker" | "generator";
   path: string;
   /** Short name for cards and nav. */
   name: string;
@@ -24,13 +27,16 @@ export type FreeTool = {
   h1Accent: string;
   /** Answer-first intro: what the tool does, in two or three short sentences. */
   intro: string;
+  /** Checker form. A generator only uses `button`, as the call to action on its /tools card. */
   input: { label: string; placeholder: string; button: string; extra?: { label: string; placeholder: string } };
-  /** One line per check, for the "What it checks" list. */
+  /** One line per check (or feature, for a generator), for the "What it checks" list. */
   checks: { label: string; text: string }[];
+  checksHeading?: string;
+  checksNote?: string;
   /** How Draftly relates to what this tool finds. Only facts the app supports. */
   draftly: { title: string; points: string[]; cta: string };
   /** Optional extra sections shown after "What this checker looks at". */
-  sections?: { id: string; heading: string; paragraphs: string[] }[];
+  sections?: { id: string; heading: string; paragraphs: string[]; sources?: { label: string; href: string }[] }[];
   faqs: Faq[];
   ogAlt: string;
   ogLine: string;
@@ -289,6 +295,102 @@ export const FREE_TOOLS: FreeTool[] = [
     ogAlt: "Free E-E-A-T checker from Draftly: byline, author page, Person schema, dates and citations",
     ogLine: "Byline, author page, schema, dates, citations",
   },
+  {
+    id: "faq-schema",
+    kind: "generator",
+    path: "/tools/faq-schema-generator",
+    name: "FAQ schema generator",
+    title: "Free FAQ Schema Generator: FAQPage JSON-LD and HTML",
+    description:
+      "Build FAQPage JSON-LD and a matching FAQ block in HTML. Add, reorder and edit questions, then copy the code. Runs in your browser. Free, no sign-up.",
+    eyebrow: "Free tool for FAQ sections",
+    h1: "FAQ Schema Generator for",
+    h1Accent: "any page",
+    intro:
+      "Type your questions and answers and this generator writes the FAQPage JSON-LD and a matching FAQ block in HTML. Paste both into your page. It runs in your browser, so nothing you type leaves it.",
+    input: { label: "", placeholder: "", button: "Build my FAQ schema" },
+    checksHeading: "What the generator does",
+    checksNote: "Everything runs in your browser. Nothing you type is sent to Draftly or stored.",
+    checks: [
+      { label: "FAQPage JSON-LD", text: "A schema.org FAQPage with a Question and Answer for each pair, in a script tag ready to paste." },
+      { label: "Matching visible HTML", text: "A details and summary block with the same questions and answers, so readers see what the markup says." },
+      { label: "Clean answer HTML", text: "Keeps headings, paragraphs, line breaks, lists, links, bold and italic. Strips every other tag and attribute." },
+      { label: "Escaped output", text: "Characters that could break the script tag or the page are escaped." },
+      { label: "Warnings as you type", text: "Flags a question without an answer, repeated questions and answers over 120 words." },
+      { label: "Edit existing markup", text: "Paste FAQ JSON-LD from any page to load it back in and change it." },
+    ],
+    sections: [
+      {
+        id: "google-faq-rich-results",
+        heading: "Does Google still show FAQ rich results?",
+        paragraphs: [
+          "No. Google stopped showing FAQ rich results on May 7, 2026, and removed the FAQ documentation in June. Since 2023 they had only appeared for well-known government and health sites.",
+          "So FAQ markup won't put expandable questions under your search result. If someone sells it to you that way, they're out of date.",
+        ],
+        sources: [{ label: "Google Search Central documentation changelog", href: "https://developers.google.com/search/updates" }],
+      },
+      {
+        id: "why-add-faq-schema",
+        heading: "Why add FAQ markup anyway",
+        paragraphs: [
+          "FAQPage is still a valid schema.org type. Any crawler that reads JSON-LD can pick out your questions and answers without guessing from the layout, and that includes the bots behind AI search tools.",
+          "No search engine or AI company has promised to rank or cite a page more because of it. Think of the markup as a clear label on content that has to be good on its own.",
+          "The part that does the work is the FAQ itself. Real questions your customers ask, each with a short, direct answer, are easy for a reader to scan and easy for an AI assistant to quote.",
+        ],
+      },
+      {
+        id: "how-to-add-faq-schema",
+        heading: "How to add FAQ schema to a page",
+        paragraphs: [
+          "Add your questions and answers above. Copy the visible HTML into the page where you want the FAQ to show.",
+          "Copy the JSON-LD script tag into the same page, in the head or anywhere in the body. In WordPress, a Custom HTML block works for both.",
+          "Keep the two in sync. Google's structured data guidelines say markup should only describe content readers can see on the page, and that applies to every schema type.",
+          "Then check the page with the Schema Markup Validator at validator.schema.org.",
+        ],
+        sources: [
+          { label: "Google's general structured data guidelines", href: "https://developers.google.com/search/docs/appearance/structured-data/sd-policies" },
+          { label: "Schema Markup Validator", href: "https://validator.schema.org/" },
+        ],
+      },
+    ],
+    draftly: {
+      title: "Draftly writes the post and its FAQ",
+      points: [
+        "Draftly writes blog posts in your brand's voice. With the FAQ setting on (it is by default), a post's FAQ uses questions readers actually ask, answered from the post itself.",
+        "Every FAQ answer is checked for length. Answers over three sentences get flagged before you publish.",
+        "Drop the finished FAQ into this generator for the schema, and publish the post to WordPress, Shopify, Webflow, Ghost, Squarespace or HubSpot.",
+      ],
+      cta: "Your first post is free. No credit card.",
+    },
+    faqs: [
+      {
+        q: "Is the FAQ schema generator free?",
+        a: "Yes, with no sign-up. It runs in your browser, so nothing you type is sent to Draftly or stored.",
+      },
+      {
+        q: "Does FAQ schema still work in Google?",
+        a: "Google stopped showing FAQ rich results on May 7, 2026. The markup is still valid schema.org, and other crawlers, including AI search bots, can read it.",
+      },
+      {
+        q: "Where do I put FAQ schema on a page?",
+        a: "Paste the script tag into the page's HTML, in the head or the body. Put the visible FAQ where readers will see it. Both should have the same questions and answers.",
+      },
+      {
+        q: "Can I use HTML in FAQ answers?",
+        a: "A little. The generator keeps headings, paragraphs, line breaks, lists, links, bold and italic, the tags Google's FAQ documentation allowed. Other tags are removed and their text kept. Questions are plain text.",
+      },
+      {
+        q: "How many questions should an FAQ have?",
+        a: "Three to eight is typical. Use questions customers really ask you, and answer each one in one to three sentences.",
+      },
+      {
+        q: "Can I add FAQ schema to every page?",
+        a: "Only to pages with a real FAQ that readers can see. Questions invented to repeat a keyword don't help the reader, and they won't help the page.",
+      },
+    ],
+    ogAlt: "Free FAQ schema generator from Draftly: FAQPage JSON-LD and matching FAQ HTML",
+    ogLine: "FAQPage JSON-LD and matching FAQ HTML",
+  },
 ];
 
 export const toolById = (id: ToolId) => FREE_TOOLS.find((t) => t.id === id)!;
@@ -297,5 +399,5 @@ export const TOOLS_HUB = {
   path: "/tools",
   title: "Free SEO Tools for Small Business Blogs",
   description:
-    "Four free SEO tools for your blog: an AI visibility checker, a blog post SEO checker, a content refresh checker and an E-E-A-T checker. No sign-up.",
+    "Five free SEO tools for your blog: an AI visibility checker, blog post SEO checker, content refresh checker, E-E-A-T checker and FAQ schema generator.",
 };

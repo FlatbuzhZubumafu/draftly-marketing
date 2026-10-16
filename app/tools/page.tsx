@@ -30,7 +30,7 @@ const FAQS: Faq[] = [
   },
   {
     q: "Do these tools use AI?",
-    a: "No. Every check is a fixed rule run on your live pages, so the same page gets the same result each time.",
+    a: "No. Every check is a fixed rule run on your live pages, so the same page gets the same result each time. The FAQ schema generator only formats what you type.",
   },
   {
     q: "Which tool should I start with?",
@@ -68,7 +68,7 @@ export default function ToolsHub() {
               </em>
             </h1>
             <p className="text-lg leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-              Four free checkers for small-business blogs. Find out if AI assistants can read your site, score one post for SEO, find old posts to refresh and test a post for author trust signals. No sign-up, and nothing you enter is stored.
+              Five free tools for small-business blogs. Find out if AI assistants can read your site, score one post for SEO, find old posts to refresh, test a post for author trust signals and build FAQ schema. No sign-up, and nothing you enter is stored.
             </p>
           </header>
 

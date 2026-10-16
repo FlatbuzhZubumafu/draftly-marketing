@@ -34,7 +34,7 @@ export default async function OpengraphImage() {
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ display: "flex", fontSize: 26, fontWeight: 600, letterSpacing: "0.12em", color: ACCENT, textTransform: "uppercase" }}>
-            For small businesses
+            For small businesses and marketing teams
           </div>
           <div style={{ display: "flex", flexDirection: "column", marginTop: 28, fontSize: 92, lineHeight: 1.05 }}>
             <span>The AI Blog Writer</span>
