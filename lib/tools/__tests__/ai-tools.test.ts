@@ -330,3 +330,32 @@ test("API rate limits one IP", async () => {
     m.restore();
   }
 });
+
+test("previews without a key sign in with the request's OIDC token; production stays off", async () => {
+  delete process.env.TOOLS_AI_GATEWAY_API_KEY;
+  const original = globalThis.fetch;
+  const auths: string[] = [];
+  const titles = ["Freeze-Proof Your Pipes", "Tank or Tankless", "Drain Cleaning Costs", "Before the Plumber Arrives", "Popping Water Heater", "Thanksgiving Drain Tips", "DIY Fixes That Backfire", "Find Your Main Shutoff", "Running Toilet Costs", "Hiring a Plumber"];
+  globalThis.fetch = (async (_url: string, init: RequestInit) => {
+    auths.push(String((init.headers as Record<string, string>).Authorization));
+    const content = JSON.stringify({ business: "Plumbing", ideas: titles.map((t) => idea(`${t} for Homeowners`)) });
+    return new Response(JSON.stringify({ choices: [{ message: { content } }], usage: { cost: 0.001 } }), { status: 200 });
+  }) as typeof fetch;
+  try {
+    process.env.VERCEL_ENV = "production";
+    assert.equal((await handleAiTool("blog-ideas", req({ topic: "plumbing" }, { "x-vercel-oidc-token": "oidc-123" }))).status, 503);
+
+    process.env.VERCEL_ENV = "preview";
+    assert.equal((await handleAiTool("blog-ideas", req({ topic: "plumbing" }, { "x-vercel-oidc-token": "oidc-123" }))).status, 200);
+    assert.deepEqual(auths, ["Bearer oidc-123"]);
+    assert.equal((await handleAiTool("blog-ideas", req({ topic: "plumbing" }))).status, 503, "no token, no call");
+    assert.equal(auths.length, 1);
+
+    process.env.TOOLS_AI_GATEWAY_API_KEY = "test-key";
+    assert.equal((await handleAiTool("blog-ideas", req({ topic: "plumbing" }, { "x-vercel-oidc-token": "oidc-123" }))).status, 200);
+    assert.equal(auths[1], "Bearer test-key", "a real key wins over OIDC");
+  } finally {
+    globalThis.fetch = original;
+    delete process.env.VERCEL_ENV;
+  }
+});

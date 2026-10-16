@@ -4,7 +4,7 @@
 // money. Inputs and results aren't stored or logged.
 import { ToolError } from "../ssrf.ts";
 import { acquireSlot, releaseSlot } from "../rate-limit.ts";
-import { aiToolsEnabled } from "./gateway.ts";
+import { aiToolsEnabled, oidcToken, previewOidc } from "./gateway.ts";
 import { aiPerDay, aiPerHour, aiPerMinute, dailyBudget } from "./limits.ts";
 import { runBrief, validateBriefInput } from "./brief.ts";
 import { runIdeas, validateIdeasInput } from "./ideas.ts";
@@ -80,9 +80,11 @@ export async function handleAiTool(tool: AiToolId, req: Request): Promise<Respon
     return json({ error: "The tool is busy. Try again in a few seconds." }, 503, { "Retry-After": "5" });
   }
 
+  // Previews without a key pass the deployment's OIDC token through to the gateway call.
+  const token = previewOidc() ? (req.headers.get("x-vercel-oidc-token") ?? "") : "";
   try {
     const result = await Promise.race([
-      run((usd) => dailyBudget.spend(usd)),
+      oidcToken.run(token, () => run((usd) => dailyBudget.spend(usd))),
       new Promise<never>((_, reject) => setTimeout(() => reject(new ToolError("That took too long. Try again.", 504)), HARD_TIMEOUT_MS)),
     ]);
     return json(result);

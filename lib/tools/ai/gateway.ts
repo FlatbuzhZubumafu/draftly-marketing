@@ -2,7 +2,10 @@
 // brief and blog ideas generators). Server only. The key is a dedicated gateway key
 // (TOOLS_AI_GATEWAY_API_KEY), separate from the app's, so tool spend is easy to see
 // and to revoke. Without it the tools are switched off and the pages show the static
-// template and example output instead.
+// template and example output instead. Preview deployments can run without the key:
+// they sign in with the deployment's own Vercel OIDC token, so a PR can be tried on
+// real output before anyone makes a key. Production never uses the OIDC fallback.
+import { AsyncLocalStorage } from "node:async_hooks";
 import { ToolError } from "../ssrf.ts";
 
 const GATEWAY_URL = "https://ai-gateway.vercel.sh/v1/chat/completions";
@@ -12,8 +15,16 @@ export const DEFAULT_MODEL = "openai/gpt-6-luna";
 const PRICE_PER_M = { input: 0.1, output: 0.5 };
 
 export function aiToolsEnabled(): boolean {
-  return Boolean(process.env.TOOLS_AI_GATEWAY_API_KEY);
+  return Boolean(process.env.TOOLS_AI_GATEWAY_API_KEY) || previewOidc();
 }
+
+/** True on Vercel preview deployments when no dedicated key is set. */
+export function previewOidc(): boolean {
+  return !process.env.TOOLS_AI_GATEWAY_API_KEY && process.env.VERCEL_ENV === "preview";
+}
+
+/** The request's OIDC token (from the x-vercel-oidc-token header), set by the API handler on previews. */
+export const oidcToken = new AsyncLocalStorage<string>();
 
 export type ChatResult = { json: unknown; costUsd: number };
 
@@ -33,7 +44,7 @@ export function estimateCost(tokensIn: number, tokensOut: number): number {
 }
 
 export async function chatJson(opts: ChatOptions): Promise<ChatResult> {
-  const key = process.env.TOOLS_AI_GATEWAY_API_KEY;
+  const key = process.env.TOOLS_AI_GATEWAY_API_KEY || (previewOidc() ? oidcToken.getStore() : undefined);
   if (!key) throw new ToolError("This tool is switched off right now. Try the template below.", 503);
   const model = process.env.TOOLS_AI_MODEL || DEFAULT_MODEL;
 
