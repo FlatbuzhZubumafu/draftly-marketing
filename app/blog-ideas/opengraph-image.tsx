@@ -2,7 +2,7 @@ import { TOOL_OG_SIZE, toolOgImage } from "@/lib/tool-og";
 import { INDUSTRIES } from "@/lib/industries";
 
 // Share image for /blog-ideas, in the same frame as the tool pages.
-export const alt = "Blog ideas by industry: topics and publishing rules for plumbers, HVAC companies, real estate agents and law firms";
+export const alt = "Blog ideas by industry: topics and publishing rules for eight industries, from plumbers and roofers to dentists, law firms and financial advisors";
 export const size = TOOL_OG_SIZE;
 export const contentType = "image/png";
 

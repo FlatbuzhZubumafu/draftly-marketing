@@ -47,7 +47,7 @@ export default function BlogIdeasHub() {
             <p className="text-lg leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
               Each page lists topics grouped by what the reader is going through, with a note on what makes each post
               worth writing. Each one also covers the rules that industry&apos;s posts have to follow, like fair housing
-              wording for agents and bar advertising rules for lawyers.
+              wording for agents, bar advertising rules for lawyers, HIPAA for dentists and FINRA review for advisors.
             </p>
           </header>
 
