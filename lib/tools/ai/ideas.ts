@@ -4,7 +4,7 @@
 import { ToolError, checkUrl } from "../ssrf.ts";
 import { chatJson } from "./gateway.ts";
 import { readSite, siteForPrompt, type SiteContext } from "./site.ts";
-import { bannedHits, cleanOut, validatePhrase } from "./text.ts";
+import { bannedHits, cleanOut, titleCase, validatePhrase } from "./text.ts";
 import { overlap, titleTokens } from "../checks/content-refresh.ts";
 
 export const IDEA_TYPES = ["how-to", "cost", "comparison", "checklist", "mistakes", "seasonal", "local", "faq", "story", "opinion"] as const;
@@ -41,7 +41,7 @@ export const IDEAS_SYSTEM = `You suggest blog post ideas for small businesses. R
 "ideas":[{"title":"post title, under 70 characters, Title Case","angle":"one sentence: the specific take that makes this post worth reading","type":"how-to|cost|comparison|checklist|mistakes|seasonal|local|faq|story|opinion","reader":"who searches for this and why, in a few words"}]}
 
 Rules:
-- Exactly 10 ideas. Each one must be a post this business could write well and its customers would actually search for or want to read. Prefer specific problems, decisions and questions over broad topics.
+- Exactly 12 ideas. Each one must be a post this business could write well and its customers would actually search for or want to read. Prefer specific problems, decisions and questions over broad topics.
 - Mix the types. Include at least 2 seasonal or timely ideas tied to the next three months from today's date. Include at least one cost or pricing question if the business sells a service or product.
 - Plain, specific titles. No clickbait, no hype words (ultimate, comprehensive, unlock, elevate, delve, landscape, game-changer, secrets), no em dashes, no "not X but Y" contrasts. Don't invent statistics or promise results.
 - Don't repeat a post the site already has (see "Existing pages"), and don't give two ideas with the same answer.
@@ -76,7 +76,7 @@ export function parseIdeas(raw: unknown, input: IdeasInput, site: SiteContext | 
     .map((i) => {
       const o = (i && typeof i === "object" ? i : {}) as Record<string, unknown>;
       const type = IDEA_TYPES.includes(o.type as IdeaType) ? (o.type as IdeaType) : "how-to";
-      return { title: cleanOut(o.title, 90), angle: cleanOut(o.angle, 240), type, reader: cleanOut(o.reader, 120) };
+      return { title: titleCase(cleanOut(o.title, 90)), angle: cleanOut(o.angle, 240), type, reader: cleanOut(o.reader, 120) };
     })
     .filter((i) => i.title.length >= 10 && i.angle.length >= 10);
 

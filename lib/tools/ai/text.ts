@@ -21,6 +21,20 @@ export function cleanOut(s: unknown, max: number): string {
     .trim();
 }
 
+const SMALL_WORDS = new Set(["a", "an", "the", "and", "but", "or", "nor", "for", "so", "yet", "to", "of", "in", "on", "at", "by", "as", "vs", "via", "per"]);
+
+/** Title Case house style: small words stay lowercase unless they start the title or follow a colon or question mark. */
+export function titleCase(title: string): string {
+  return title
+    .split(" ")
+    .map((w, i, all) => {
+      const lower = w.toLowerCase();
+      const startsPart = i === 0 || /[:?]$/.test(all[i - 1]);
+      return !startsPart && SMALL_WORDS.has(lower) ? lower : w;
+    })
+    .join(" ");
+}
+
 export function cleanList(v: unknown, maxItems: number, maxLen: number): string[] {
   if (!Array.isArray(v)) return [];
   const out: string[] = [];

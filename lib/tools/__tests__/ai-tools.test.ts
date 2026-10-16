@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { ToolError } from "../ssrf.ts";
 import { DailyBudget, aiPerMinute } from "../ai/limits.ts";
 import { SlidingLimiter } from "../rate-limit.ts";
-import { cleanOut, validatePhrase } from "../ai/text.ts";
+import { cleanOut, titleCase, validatePhrase } from "../ai/text.ts";
 import { chatJson, estimateCost } from "../ai/gateway.ts";
 import { keywordStuffed, needsRetry, parseBrief, runBrief, validateBriefInput, type BriefInput } from "../ai/brief.ts";
 import { dedupeIdeas, looksLikeUrl, parseIdeas, runIdeas, validateIdeasInput } from "../ai/ideas.ts";
@@ -358,4 +358,10 @@ test("previews without a key sign in with the request's OIDC token; production s
     globalThis.fetch = original;
     delete process.env.VERCEL_ENV;
   }
+});
+
+test("titleCase lowercases small words mid-title", () => {
+  assert.equal(titleCase("How To Shut Off Your Home's Water Before A Freeze"), "How to Shut Off Your Home's Water Before a Freeze");
+  assert.equal(titleCase("Wool or Tree Shoes: A Comparison For Commuters"), "Wool or Tree Shoes: A Comparison for Commuters");
+  assert.equal(titleCase("A Year-End Review In One Hour"), "A Year-End Review in One Hour");
 });

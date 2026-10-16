@@ -4,7 +4,7 @@
 import { ToolError, checkUrl } from "../ssrf.ts";
 import { chatJson } from "./gateway.ts";
 import { readSite, siteForPrompt, type SiteContext } from "./site.ts";
-import { bannedHits, clean, cleanList, cleanOut, validatePhrase } from "./text.ts";
+import { bannedHits, clean, cleanList, cleanOut, titleCase, validatePhrase } from "./text.ts";
 
 export type BriefInput = { keyword: string; url: string | null; audience: string | null };
 
@@ -109,7 +109,7 @@ export function parseBrief(raw: unknown, input: BriefInput, site: SiteContext | 
     keyword: input.keyword,
     intent: { type, summary: cleanOut(intentRaw.summary, 300) },
     audience: cleanOut(r.audience, 200),
-    title: cleanOut(r.title, 80),
+    title: titleCase(cleanOut(r.title, 80)),
     meta: cleanOut(r.meta, 170),
     wordCount: { min: Math.round(min / 50) * 50, max: Math.round(max / 50) * 50 },
     outline,
