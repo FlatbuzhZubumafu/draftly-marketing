@@ -7,10 +7,13 @@ type Window = { count: number; resetAt: number };
 
 export class SlidingLimiter {
   private hits = new Map<string, Window>();
-  constructor(
-    private readonly limit: number,
-    private readonly windowMs: number,
-  ) {}
+  private readonly limit: number;
+  private readonly windowMs: number;
+  // Plain fields, not parameter properties, so node's type stripping can load this file in tests.
+  constructor(limit: number, windowMs: number) {
+    this.limit = limit;
+    this.windowMs = windowMs;
+  }
 
   /** Records a hit. Returns seconds to wait when over the limit, else 0. */
   hit(key: string, now = Date.now()): number {

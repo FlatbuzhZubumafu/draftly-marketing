@@ -5,7 +5,10 @@ import { A, B, Bullets, Byline, FaqList, faqJsonLd } from "@/components/ArticleP
 import { KeepReading } from "@/components/KeepReading";
 import { ToolChecker } from "@/components/tools/ToolChecker";
 import { FaqSchemaGenerator } from "@/components/tools/FaqSchemaGenerator";
-import { FREE_TOOLS, TOOLS_DATE, TOOLS_HUB, type FreeTool } from "@/lib/free-tools";
+import { GeneratorTool } from "@/components/tools/GeneratorTool";
+import { SAMPLE_BRIEF, SAMPLE_IDEAS } from "@/lib/brief-template";
+import { aiToolsEnabled } from "@/lib/tools/ai/gateway";
+import { FREE_TOOLS, TOOLS_DATE, TOOLS_HUB, type CheckerId, type FreeTool } from "@/lib/free-tools";
 import { jsonLdHtml } from "@/lib/schema";
 import { APP_URL, SITE_URL } from "@/lib/site";
 
@@ -63,7 +66,8 @@ export function OtherTools({ exclude, heading = "More free tools" }: { exclude?:
   );
 }
 
-export async function ToolPage({ tool }: { tool: FreeTool }) {
+export async function ToolPage({ tool, children }: { tool: FreeTool; children?: React.ReactNode }) {
+  const generator = tool.kind === "generator";
   const { marketingSettings: s } = await getHomepageData();
   const registerUrl = `${APP_URL}/register`;
   const ctaLabel = s.heroCtaText || "Generate Free Post";
@@ -94,16 +98,27 @@ export async function ToolPage({ tool }: { tool: FreeTool }) {
           </header>
 
           <div className="mt-10">
-            {tool.kind === "generator" ? (
+            {tool.id === "faq-schema" ? (
               <FaqSchemaGenerator />
+            ) : generator ? (
+              <GeneratorTool
+                tool={tool.id as "content-brief" | "blog-ideas"}
+                label={tool.input.label}
+                placeholder={tool.input.placeholder}
+                button={tool.input.button}
+                extra={tool.input.extra}
+                enabled={aiToolsEnabled()}
+                sampleBrief={tool.id === "content-brief" ? SAMPLE_BRIEF : undefined}
+                sampleIdeas={tool.id === "blog-ideas" ? SAMPLE_IDEAS : undefined}
+              />
             ) : (
-              <ToolChecker tool={tool.id} label={tool.input.label} placeholder={tool.input.placeholder} button={tool.input.button} extra={tool.input.extra} />
+              <ToolChecker tool={tool.id as CheckerId} label={tool.input.label} placeholder={tool.input.placeholder} button={tool.input.button} extra={tool.input.extra} />
             )}
           </div>
 
           <section id="what-it-checks" className="mt-20">
             <h2 className="text-3xl font-medium mb-6" style={{ letterSpacing: "-0.03em" }}>
-              {tool.checksHeading ?? "What this checker looks at"}
+              {tool.checksHeading ?? (generator ? "What you get" : "What this checker looks at")}
             </h2>
             <ol className="grid sm:grid-cols-2 gap-3">
               {tool.checks.map((c, i) => (
@@ -122,9 +137,13 @@ export async function ToolPage({ tool }: { tool: FreeTool }) {
             </ol>
             <p className="mt-4 text-sm" style={{ color: "var(--color-text-muted)" }}>
               {tool.checksNote ??
-                "Every check is a fixed rule run on your live pages. Results can differ from what a crawler sees if your site blocks automated visits."}
+                (generator
+                  ? "Written by an AI model from what you enter and, if you add it, your homepage and sitemap. Read it with your own judgment before you use it."
+                  : "Every check is a fixed rule run on your live pages. Results can differ from what a crawler sees if your site blocks automated visits.")}
             </p>
           </section>
+
+          {children}
 
           {tool.sections?.map((sec) => (
             <section key={sec.id} id={sec.id} className="mt-20 max-w-3xl">
