@@ -10,6 +10,9 @@ import { TocLayout } from "@/components/OnThisPage";
 import { KeepReading } from "@/components/KeepReading";
 import { SignupCta } from "@/components/SignupCta";
 import { ProductFigure } from "@/components/ProductFigure";
+import { BarChart } from "@/components/BarChart";
+import { ContentImage } from "@/components/ContentImage";
+import { STOCK } from "@/lib/stock-images";
 import { GUIDE_SHOTS, imageObjectJsonLd } from "@/lib/product-shots";
 import { CHECKED, DRAFTLY, PICKS, SOURCES, type Source } from "@/lib/best-ai-for-seo";
 
@@ -103,7 +106,7 @@ export default function BestAiForSeoPage() {
       dateModified: PUBLISHED.iso,
       author: authorRef,
       publisher: { "@type": "Organization", name: "Draftly", url: SITE_URL },
-      image: [imageObjectJsonLd(GUIDE_SHOTS.urlToPost)],
+      image: [imageObjectJsonLd(GUIDE_SHOTS.urlToPost), imageObjectJsonLd(GUIDE_SHOTS.seoMeta)],
       citation: Object.values(SOURCES).map((s) => s.href),
     },
     {
@@ -215,6 +218,10 @@ export default function BestAiForSeoPage() {
               If you only need a handful of lookups a month, Draftly Solopreneur includes {DRAFTLY.keywordLookups} keyword
               lookups (volume, difficulty, intent and related terms) through its connector for Claude and ChatGPT.
             </p>
+            <ContentImage
+              image={STOCK.analyticsOnLaptop}
+              caption="Search volume and difficulty data tell you which posts are worth writing."
+            />
           </Section>
 
           <Section id="writing" title="Writing blog posts: Draftly">
@@ -228,6 +235,7 @@ export default function BestAiForSeoPage() {
               is ${GROWTH.price} a month with {GROWTH.seats} team members and no per-seat charge. Your first post is free.
             </p>
             <ProductFigure shot={GUIDE_SHOTS.urlToPost} className="mt-2" />
+            <ProductFigure shot={GUIDE_SHOTS.seoMeta} className="mt-2" />
             <p>
               <B>Skip it if</B> you need posts in languages other than English or you&apos;re outside the US. Draftly
               also doesn&apos;t do keyword research at Ahrefs depth, build links or track rankings.
@@ -279,6 +287,12 @@ export default function BestAiForSeoPage() {
               The newest model in a family can lose to a smaller one. GPT 5.5 scored {GPT55.overall}, below GPT 5.4 Mini,
               after losing points for length and contrast phrasing. Claude Haiku 4.5 came last at {HAIKU.overall} with {HAIKU.emDashes} em dashes across three posts.
             </p>
+            <BarChart
+              title="On-page SEO checks passed, out of 18, all 14 models"
+              rows={[...BENCHMARK].sort((a, b) => seoScore(b) - seoScore(a) || b.overall - a.overall).map((r) => ({ key: r.model, label: r.model, value: seoScore(r) }))}
+              max={18}
+              note={`Keyword placement, meta title, meta description and FAQ, checked by code on three posts per model. Benchmark run ${BENCHMARK_DATE}.`}
+            />
             <p>
               Full results are on the <A href="/best-ai-for-writing">best AI for writing</A> benchmark, and{" "}
               <A href="/claude-vs-chatgpt-for-writing">Claude vs ChatGPT for writing</A> puts the two families side by

@@ -8,6 +8,9 @@ import { TocLayout } from "@/components/OnThisPage";
 import { KeepReading } from "@/components/KeepReading";
 import { SignupCta } from "@/components/SignupCta";
 import { ProductFigure } from "@/components/ProductFigure";
+import { BarChart } from "@/components/BarChart";
+import { ContentImage } from "@/components/ContentImage";
+import { STOCK } from "@/lib/stock-images";
 import { SourceLinks } from "@/components/SourceLinks";
 import { CompareTable, type CompareRow } from "@/components/CompareTable";
 import { GUIDE_SHOTS, imageObjectJsonLd } from "@/lib/product-shots";
@@ -174,6 +177,10 @@ export default function KoalaReviewPage() {
                 </>,
               ]}
             />
+            <ContentImage
+              image={STOCK.readingOnLaptop}
+              caption="Koala suits people who publish a lot of articles and want one plan to cover writing, linking and images."
+            />
           </Section>
 
           <Section id="pricing" title="Koala AI pricing">
@@ -216,6 +223,12 @@ export default function KoalaReviewPage() {
               Article counts are our math: Starter&apos;s {words(STARTER.words)} words, divided by the multiplier, divided
               by {words(ARTICLE_WORDS)} words an article. Koala doesn&apos;t state an article count.
             </p>
+            <BarChart
+              title={`Articles a month on Koala ${STARTER.name}, by model (our math)`}
+              rows={KOALA_MULTIPLIERS.map((m) => ({ key: m.model, label: m.model, value: koalaArticles(STARTER.words, m.x) }))}
+              max={koalaArticles(STARTER.words, 1)}
+              note={`${words(STARTER.words)} words a month at ${words(ARTICLE_WORDS)} words an article, using Koala's published word multipliers. Checked ${CHECKED.label}.`}
+            />
             <p>
               That&apos;s the main thing to plan around. If you want Claude to write, Starter covers about half as many
               articles as the headline number suggests.
