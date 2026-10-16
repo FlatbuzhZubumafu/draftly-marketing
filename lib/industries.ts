@@ -4,7 +4,7 @@ import type { Faq } from "@/components/ArticleParts";
 // them all the same way, so a new industry is one more entry here plus its keyword check.
 // Keyword numbers are Ahrefs Keywords Explorer, US, checked 2026-10-16. Rules and dates in
 // `rules` were read on the linked source pages that day (the ABA pages block scripts, so
-// those links were not fetched).
+// those links were not fetched; the AICPA code PDF didn't load, so the AICPA mention is general).
 
 export type Source = { label: string; href: string };
 export type Topic = { title: string; note: string };
@@ -47,7 +47,7 @@ export const INDUSTRIES_HUB = {
   path: "/blog-ideas",
   title: "Blog Ideas by Industry, With the Rules for Each",
   description:
-    "Blog topic ideas for plumbers, HVAC companies, real estate agents and law firms, grouped by what readers need, plus the advertising rules each has to follow.",
+    "Blog topic ideas for eight industries, from plumbers and roofers to dentists, law firms and financial advisors, plus the advertising rules each one follows.",
 };
 
 const CMS_LINE = "WordPress, Shopify, Webflow, Ghost, Squarespace or HubSpot";
@@ -561,6 +561,514 @@ export const INDUSTRIES: Industry[] = [
     ],
     readingTopic: "law firm legal blog lawyer attorney small business write blog post brand voice",
     ogLine: "Topics plus the ethics rules",
+  },
+  {
+    slug: "roofing",
+    postNoun: "roofing",
+    name: "Roofing",
+    audience: "roofing contractors",
+    // "roofing blog" 350/mo KD 2, "roofing blog topics" 100 KD 1, "roofing blog ideas" 50 KD 0.
+    keywords: "roofing blog, roofing blog topics, roofing blog ideas",
+    title: "Roofing Blog Topics: Ideas for Contractors, With Storm Rules",
+    description:
+      "Roofing blog topics for storm damage, insurance claims, replacement costs and materials, plus the deductible and adjuster rules to check before you publish.",
+    h1: { lead: "Roofing blog topics", accent: "for contractors" },
+    intro: [
+      "Most roofing searches start after something happens: a hailstorm, a stain on the ceiling, an insurance letter. The rest come from homeowners pricing a replacement they've put off for years. A roofing blog that wins jobs has posts ready for both.",
+      "Storm posts are also where roofers get into legal trouble. Several states bar contractors from promising to cover a deductible or from acting as the homeowner's adjuster, and website copy counts as advertising. The ideas below come with notes on how to write them so they stay on the right side of those rules.",
+    ],
+    groups: [
+      {
+        id: "storm",
+        heading: "After a storm",
+        intro:
+          "These readers are looking at their roof from the driveway. Tell them what to check from the ground, what to photograph, and when to call. Publish them before storm season so they're indexed when the hail hits.",
+        topics: [
+          { title: "How to spot hail damage from the ground", note: "Dented gutters, downspouts and vents, granules in the gutters. Say why nobody should climb up to check." },
+          { title: "What to do in the first 24 hours after a storm", note: "Photos, a tarp if water is coming in, a call to the insurer. Keep the steps short and put your phone number near the top." },
+          { title: "Wind damage: missing shingles and what they let in", note: "Creased and lifted shingles, exposed nail heads. Explain why a small spot can turn into a ceiling stain." },
+          { title: "How to spot a storm chaser", note: "Out-of-state plates, pressure to sign the same day, an offer to cover the deductible. Link your state's consumer guide." },
+          { title: "Emergency tarping: when it's needed and what it costs", note: "Your real price, how fast you can get there, and that most policies expect you to prevent further damage." },
+        ],
+      },
+      {
+        id: "insurance",
+        heading: "Insurance claims, explained",
+        intro:
+          "Explain how claims work in general. Don't promise to negotiate with the insurer or get the homeowner paid, because some states treat that as acting as an unlicensed public adjuster.",
+        topics: [
+          { title: "How a roof insurance claim works, step by step", note: "Claim, adjuster visit, estimate, depreciation, final payment. Describe your part honestly: the inspection and the work." },
+          { title: "What recoverable depreciation means for your roof", note: "Why the first check is smaller and what releases the rest." },
+          { title: "Why you have to pay your deductible", note: "Explain the law in your state and link it. Readers who got a too-good offer will find this post." },
+          { title: "Repair or full replacement: how adjusters decide", note: "Matching shingles, how much of a slope is damaged, local code. Keep it general and say the insurer decides." },
+          { title: "What a roof inspection report should include", note: "Photos of each slope, measurements, the damage you found. Show a real one with the address removed." },
+        ],
+      },
+      {
+        id: "replacement",
+        heading: "Planning a replacement",
+        intro:
+          "These readers are comparing quotes. Real price ranges, dated and specific to your market, keep them reading.",
+        topics: [
+          { title: "What a roof replacement costs in your city this year", note: "Your real range by roof size and material, the year, and what moves the price (tear-off layers, decking, pitch)." },
+          { title: "Architectural shingles or metal roofing", note: "Upfront cost, lifespan, noise, and how each handles your weather." },
+          { title: "How long does an asphalt roof last here?", note: "Climate, ventilation and attic heat. Use what you see on local tear-offs." },
+          { title: "What's in a roofing estimate, line by line", note: "Underlayment, drip edge, flashing, ventilation, disposal. Explain why two bids differ." },
+          { title: "Manufacturer warranty or workmanship warranty", note: "What each covers and who honors it. Name the warranties you actually offer." },
+          { title: "Do you need a permit to replace a roof in your city?", note: "Many cities require one. Link the permit page and say who pulls it." },
+        ],
+      },
+      {
+        id: "trust",
+        heading: "Seasonal posts and local trust",
+        intro: "Lower search volume, and they're what a homeowner reads right before calling you.",
+        topics: [
+          { title: "Fall roof checklist before the first freeze", note: "Gutters, flashing, attic ventilation. Time it for your region." },
+          { title: "Ice dams: why they form and how to prevent them", note: "Attic insulation and ventilation do more than heat cables. Skip this one if you work where it doesn't snow." },
+          { title: "How to check a roofer's license or registration in your state", note: "Link the lookup if your state has one. Then show yours." },
+          { title: "A recent roof replacement, start to finish", note: "The problem, what you found under the shingles, the cost and photos. Get the homeowner's OK and leave out the address." },
+        ],
+      },
+    ],
+    rulesHeading: "Rules to check before you publish a roofing post",
+    rulesIntro:
+      "Storm and insurance posts are advertising. Here's what to check, with two states' rules as examples. Your state may have its own, so look them up before you rely on this list.",
+    rules: [
+      {
+        heading: "Never offer to cover the deductible",
+        body: "Colorado law says a roofing contractor paid from an insurance policy \"shall not advertise or promise to pay, waive, or rebate\" any part of the deductible. Texas bars contractors from offering to waive, rebate or absorb a deductible. Lines like \"we'll work with your deductible\" don't belong in a blog post.",
+        sources: [
+          { label: "Colorado C.R.S. 6-22-105", href: "https://colorado.public.law/statutes/crs_6-22-105" },
+          { label: "Texas Department of Insurance: roofing and insurance", href: "https://www.tdi.texas.gov/consumer/storms/roofing-and-insurance-know-the-law.html" },
+        ],
+      },
+      {
+        heading: "Don't write like a public adjuster",
+        body: "Texas bars roofers from acting as a public adjuster on jobs they're doing or advertising that they will, and the state says websites count as advertising. Skip promises to negotiate the claim, speak for the homeowner on coverage, or get them \"every dime\" from the insurer.",
+        sources: [{ label: "Texas Department of Insurance: roofing and insurance", href: "https://www.tdi.texas.gov/consumer/storms/roofing-and-insurance-know-the-law.html" }],
+      },
+      {
+        heading: "Retire the ENERGY STAR roof claims",
+        body: "EPA ended the ENERGY STAR program for roof products on June 1, 2022. If an old post calls a shingle ENERGY STAR certified, update it and use the Cool Roof Rating Council's directory for reflectance numbers instead.",
+        sources: [{ label: "Cool Roof Rating Council: ENERGY STAR roofing sunset", href: "https://coolroofs.org/news/energy-star-roofing-program-sunsets" }],
+      },
+      {
+        heading: "No federal tax credit for a new roof",
+        body: "The IRS page for the Energy Efficient Home Improvement Credit doesn't list roofs, and the credit covered property placed in service through 2025. Take down any post that says otherwise.",
+        sources: [{ label: "IRS: Energy Efficient Home Improvement Credit", href: "https://www.irs.gov/credits-deductions/energy-efficient-home-improvement-credit" }],
+      },
+      {
+        heading: "Reviews have to be real",
+        body: "Since October 21, 2024, the FTC's rule on consumer reviews bans fake reviews and paying for reviews that have to be positive. Quote real customers, with permission.",
+        sources: [{ label: "FTC: Consumer Reviews and Testimonials Rule Q&A", href: "https://www.ftc.gov/business-guidance/resources/consumer-reviews-testimonials-rule-questions-answers" }],
+      },
+    ],
+    draftly: [
+      "Draftly reads your website and sets your brand voice from it, so posts sound like your crew and your service area. Type a topic like \"how to spot hail damage from the ground\" and it writes the full post with a URL slug, meta title and meta description.",
+      "You add what only you have: your prices, your state's deductible rule and photos from real jobs. Then publish to " + CMS_LINE + ". Marketing agencies that run blogs for several roofers can add each client as its own website with its own voice.",
+    ],
+    tool: { href: "/tools/blog-ideas-generator", name: "blog ideas generator", why: "Enter your website and it suggests 10 posts your customers would search for, skipping topics your blog already covers." },
+    shot: "urlToPost",
+    cta: {
+      heading: "Get a roofing post written for your site",
+      body: "Paste your URL and Draftly writes a full post in your company's voice, ready for " + CMS_LINE + ". Your first post is free.",
+    },
+    faqs: [
+      {
+        q: "What should a roofing company blog about?",
+        a: "Storm damage posts before storm season, plain explanations of how insurance claims work, replacement costs with your real prices, and material comparisons for your climate.",
+      },
+      {
+        q: "Can a roofer offer to pay the deductible in a blog post?",
+        a: "Not in states like Colorado and Texas, which bar contractors from offering to pay, waive or rebate a deductible. Check your own state's law before you mention deductibles at all.",
+      },
+      {
+        q: "When should roofers publish storm posts?",
+        a: "Four to six weeks before your hail or hurricane season, so they're indexed when the first storm hits.",
+      },
+      {
+        q: "Can AI write roofing blog posts?",
+        a: "It can write the draft. Someone at the company should add local prices, check every insurance and safety detail, and make sure nothing reads like a deductible offer before it goes live.",
+      },
+    ],
+    readingTopic: "roofing roofer blog small business local service write blog post brand voice",
+    ogLine: "Topics plus the storm and insurance rules",
+  },
+  {
+    slug: "dental",
+    postNoun: "dental",
+    name: "Dental",
+    audience: "dental practices",
+    // "dental blog" 350/mo KD 4 (SERP mostly lists of blogs to follow), "content marketing for dentists" 90 KD 0,
+    // "dentist blog" 70 KD 3, "dental blog ideas" 20 KD 0, "dental blog topics" 20 KD 2.
+    keywords: "dental blog ideas, dental blog topics, dental blog, content marketing for dentists",
+    title: "Dental Blog Ideas: Topics Patients Search Before They Book",
+    description:
+      "Dental blog ideas grouped by what patients search: urgent problems, costs and insurance, family care and treatments, plus the ADA and HIPAA rules to check.",
+    h1: { lead: "Dental blog ideas", accent: "patients search before they book" },
+    intro: [
+      "Patients look up a dentist when something hurts, when a bill surprises them, or when a treatment plan has a word they don't know. A dental blog that fills the schedule answers those questions in your practice's voice, with your fees and your insurance list.",
+      "Dental posts carry rules most small businesses don't have. The ADA's ethics code covers bylines and before-and-after claims, and HIPAA covers patient stories and photos. The ideas below come with notes on writing them so they stay inside those lines.",
+    ],
+    groups: [
+      {
+        id: "urgent",
+        heading: "When something hurts",
+        intro:
+          "These readers are in pain or scared. Lead with what to do right now, put your phone number near the top, and say when it means the ER instead of your office.",
+        topics: [
+          { title: "Knocked-out tooth: what to do in the first hour", note: "Hold it by the crown, keep it moist (milk works) and get to a dentist fast. Put this one where people can find it quickly." },
+          { title: "Toothache at night: what helps until morning", note: "Rinse, floss around it, an over-the-counter pain reliever. Say which signs mean the ER, like facial swelling with a fever." },
+          { title: "Chipped or cracked tooth: does it need same-day care?", note: "Pain, sharp edges and sensitivity. Explain what you can do in one visit." },
+          { title: "Lost a filling or crown: what to do", note: "Keep the crown, avoid that side, call. Mention any same-week openings you hold for it." },
+          { title: "Bleeding gums when you brush: what it usually means", note: "Usually gingivitis, sometimes a new brush or medication. When to book a visit." },
+        ],
+      },
+      {
+        id: "cost",
+        heading: "Costs and insurance",
+        intro:
+          "Patients search prices before they call. Give your real fees or ranges and the year, and list the plans you take by name.",
+        topics: [
+          { title: "How much does a cleaning cost without insurance here?", note: "Your fee for a cleaning and exam, and any in-house membership plan." },
+          { title: "Use your dental benefits before they reset", note: "Many plans reset on January 1. Publish in October and link your booking page." },
+          { title: "What our in-house membership plan covers", note: "Price, what's included and the discount on other work. Readers want the list." },
+          { title: "Which insurance plans we take, and what in-network means", note: "Name the plans. Explain out-of-network billing in plain words." },
+          { title: "Crown cost and what changes the price", note: "Material, a build-up, a root canal first. Give your range." },
+        ],
+      },
+      {
+        id: "family",
+        heading: "Kids and family",
+        intro: "Parents search these, and a family practice can answer them better than a national health site.",
+        topics: [
+          { title: "When should my child see a dentist for the first time?", note: "The American Academy of Pediatric Dentistry says by the first birthday. Describe what that first visit looks like in your office." },
+          { title: "Sealants or fluoride: what does my child need?", note: "What each does and when you recommend them." },
+          { title: "Helping a child who's nervous about the dentist", note: "What your team does differently, in your own words." },
+          { title: "Halloween candy and kids' teeth", note: "Which treats stick and when to brush. Publish in early October." },
+          { title: "Mouthguards for youth sports", note: "Store-bought or custom, and your price for a custom one." },
+        ],
+      },
+      {
+        id: "treatment",
+        heading: "Treatment choices",
+        intro: "Readers with a treatment plan in hand. Explain the choice plainly, give the tradeoffs and skip promises about results.",
+        topics: [
+          { title: "Implant or bridge: how to choose", note: "Cost, time, bone and the teeth next to the gap." },
+          { title: "What happens during a root canal", note: "Step by step, how long it takes, and what recovery feels like." },
+          { title: "Clear aligners or braces", note: "Who each one fits and your price range. Name the brand you offer." },
+          { title: "Teeth whitening: in-office or take-home", note: "Cost, sensitivity and how long results last. No guarantees about shades." },
+          { title: "Meet our new dentist", note: "Training, why they chose the practice and what they enjoy treating. Good for E-E-A-T." },
+        ],
+      },
+    ],
+    rulesHeading: "Rules for dental blog posts",
+    rulesIntro:
+      "These come from the ADA's ethics code, federal privacy law and the FTC. Your state dental board has its own advertising rules too, so check them before you rely on this list.",
+    rules: [
+      {
+        heading: "Disclose who wrote the post",
+        body: "The ADA Code says an article published under a dentist's byline without truthful disclosure of its source and authorship is a false or misleading representation. If a writer, an agency or AI drafts the post, say so, or have the dentist rewrite it and stand behind it.",
+        sources: [{ label: "ADA Code of Ethics (PDF), 5.F.1", href: "https://www.ada.org/-/media/project/ada-organization/ada/ada-org/files/about/ada_code_of_ethics.pdf" }],
+      },
+      {
+        heading: "No unjustified expectations",
+        body: "The ADA Code lists statements likely to create an unjustified expectation about results, and unsupported claims of superior quality, as examples of false or misleading advertising. Before-and-after posts need context, and \"best dentist in town\" needs to go.",
+        sources: [{ label: "ADA Code of Ethics (PDF), 5.F.2", href: "https://www.ada.org/-/media/project/ada-organization/ada/ada-org/files/about/ada_code_of_ethics.pdf" }],
+      },
+      {
+        heading: "Use \"specialist\" only when it's true",
+        body: "Under the ADA Code, a dentist can announce as a specialist only in a recognized specialty, such as orthodontics or periodontics, and only with the required training. A general dentist who does implants should say \"we place implants\" and not \"implant specialist.\"",
+        sources: [{ label: "ADA Code of Ethics (PDF), 5.H", href: "https://www.ada.org/-/media/project/ada-organization/ada/ada-org/files/about/ada_code_of_ethics.pdf" }],
+      },
+      {
+        heading: "Get written authorization for patient stories",
+        body: "HIPAA requires a covered entity to get an authorization before using protected health information for marketing. A patient story, a smile photo or a case write-up on your blog needs that signed form first.",
+        sources: [{ label: "45 CFR 164.508(a)(3)", href: "https://www.law.cornell.edu/cfr/text/45/164.508" }],
+      },
+      {
+        heading: "Reviews have to be real",
+        body: "The FTC's rule on consumer reviews, in effect since October 21, 2024, bans fake reviews and paying for reviews that have to be positive. Quote real patients, with their authorization.",
+        sources: [{ label: "FTC: Consumer Reviews and Testimonials Rule Q&A", href: "https://www.ftc.gov/business-guidance/resources/consumer-reviews-testimonials-rule-questions-answers" }],
+      },
+    ],
+    draftly: [
+      "Draftly sets your practice's voice from your website and writes the full post from a topic, with a URL slug, meta title and meta description. It never needs patient records, so keep patient details out of the topics you type.",
+      "A dentist reads each draft, checks the clinical details, adds your fees and insurance list, and puts their name on it. Then publish to " + CMS_LINE + ". Agencies that market several practices can add each one as its own website with its own voice.",
+    ],
+    tool: { href: "/tools/blog-ideas-generator", name: "blog ideas generator", why: "Enter your practice's website and it suggests 10 posts your patients would search for, including a few timed to the next three months." },
+    shot: "brandVoice",
+    cta: {
+      heading: "Get a dental post drafted for your practice",
+      body: "Paste your URL and Draftly writes a full draft in your practice's voice for a dentist to review, ready for " + CMS_LINE + ". Your first post is free.",
+    },
+    faqs: [
+      {
+        q: "What should a dental practice blog about?",
+        a: "Urgent problems like toothaches and broken teeth, real costs and the insurance you take, questions parents ask, and plain explanations of the treatments you offer.",
+      },
+      {
+        q: "Can a dentist use patient photos or stories on a blog?",
+        a: "Only with the patient's written HIPAA authorization for marketing use. Your state dental board may also have rules on testimonials and before-and-after photos.",
+      },
+      {
+        q: "Does the ADA allow ghostwritten dental blog posts?",
+        a: "The ADA Code says a post under a dentist's byline needs truthful disclosure of its source and authorship. Disclose who wrote it, or have the dentist rewrite it as their own.",
+      },
+      {
+        q: "Can AI write dental blog posts?",
+        a: "It can write a draft. A dentist should check every clinical detail, add the practice's own fees and policies, and approve it before it's published.",
+      },
+    ],
+    readingTopic: "dental dentist practice blog small business local service write blog post brand voice",
+    ogLine: "Topics plus the ADA and HIPAA rules",
+  },
+  {
+    slug: "financial-advisors",
+    postNoun: "financial advisor",
+    name: "Financial advisors",
+    audience: "financial advisors",
+    // "content marketing for financial advisors" 200/mo KD 3 (traffic potential 450), "financial advisor blog topics" 30 KD 2.
+    keywords: "content marketing for financial advisors, financial advisor blog topics",
+    title: "Financial Advisor Blog Topics, With the SEC and FINRA Rules",
+    description:
+      "Blog topics for financial advisors built around client life events, taxes and plain explainers, plus the SEC Marketing Rule and FINRA 2210 points to check.",
+    h1: { lead: "Financial advisor blog topics", accent: "and the rules that apply" },
+    intro: [
+      "People rarely search for a financial advisor out of the blue. They search when something changes: an inheritance, a job offer with stock, a parent who needs care, a retirement date. An advisor's blog that brings in clients answers those moments in plain language.",
+      "Every post is also a regulated communication. Registered investment advisers answer to the SEC Marketing Rule, and broker-dealer reps answer to FINRA Rule 2210, which usually means a compliance review before anything goes live. The topics below are picked to be useful and to get through that review.",
+    ],
+    groups: [
+      {
+        id: "life-events",
+        heading: "Life events",
+        intro: "These are the searches that turn into first meetings. Walk through the decisions in order and skip product pitches.",
+        topics: [
+          { title: "Just inherited money: what to do in the first 90 days", note: "Park it, find out the tax treatment, then decide. Cover inherited IRAs separately." },
+          { title: "Selling your business: money questions to settle first", note: "Taxes on the sale, what you'll live on, and who else is at the table." },
+          { title: "What to do with stock options from a new job", note: "Vesting, the kinds of options and the tax on each. No predictions about the stock." },
+          { title: "Money decisions in a divorce", note: "Retirement account splits, the house, and the order things happen in. Work with family law attorneys on this one." },
+          { title: "Planning for a parent's long-term care", note: "Costs where you practice, Medicare and Medicaid basics, and the conversation itself." },
+          { title: "Retiring in the next five years: a checklist", note: "Income plan, Social Security timing, health coverage before Medicare." },
+        ],
+      },
+      {
+        id: "tax",
+        heading: "Taxes and year-end",
+        intro: "Clients search these every fall. Date them, link the IRS source, and update them each year.",
+        topics: [
+          { title: "Required minimum distributions: when yours start", note: "SECURE 2.0 changed the starting age. Give the age by birth year and link the IRS page." },
+          { title: "Is a Roth conversion worth it this year?", note: "Tax bracket now versus later, and how to pay the tax. Walk through the reasoning and say who it tends to fit." },
+          { title: "Year-end money checklist", note: "Contributions, RMDs, charitable gifts, flexible spending deadlines." },
+          { title: "Giving to charity from an IRA", note: "How qualified charitable distributions work and who they fit." },
+          { title: "What the latest tax law changes mean for retirees", note: "Name the law and link the IRS guidance. Keep it to what changed." },
+        ],
+      },
+      {
+        id: "explainers",
+        heading: "Choosing an advisor",
+        intro: "Prospects read these right before they book a call. Be specific about how you work.",
+        topics: [
+          { title: "Fee-only, fee-based or commission: what's the difference?", note: "Define each one and say which you are." },
+          { title: "What does fiduciary mean?", note: "Plain definition and how it applies to your firm." },
+          { title: "What to bring to a first meeting with us", note: "A real checklist. It lowers the bar to booking." },
+          { title: "How we charge, with an example", note: "Your actual fee schedule and what it means on a sample account." },
+          { title: "What a financial plan includes", note: "The sections of the plan you deliver, with a redacted sample page." },
+        ],
+      },
+      {
+        id: "markets",
+        heading: "When markets make news",
+        intro: "Clients will ask after a big drop or a rate change. Explain what happened and what you're doing. Never predict what comes next.",
+        topics: [
+          { title: "The market dropped. Here's how we think about it", note: "Your process, in your words. Leave out forecasts and performance claims." },
+          { title: "What a Fed rate change means for savers and borrowers", note: "CDs, mortgages, credit cards. Date the post." },
+          { title: "Cash, CDs or Treasuries for money you'll need soon", note: "The tradeoffs and the risks, explained evenly." },
+        ],
+      },
+    ],
+    rulesHeading: "Compliance rules for financial advisor blog posts",
+    rulesIntro:
+      "Which rules apply depends on how you're registered. Your compliance team or chief compliance officer has the final say. Use this list to prepare for their review.",
+    rules: [
+      {
+        heading: "SEC Marketing Rule basics (RIAs)",
+        body: "Since November 4, 2022, registered investment advisers have had to follow the SEC Marketing Rule. It bars untrue or misleading statements and unsubstantiated material claims, and benefits have to be discussed alongside fair treatment of material risks.",
+        sources: [{ label: "SEC: Marketing Rule small entity compliance guide", href: "https://www.sec.gov/resources-small-businesses/small-business-compliance-guides/investment-adviser-marketing" }],
+      },
+      {
+        heading: "Testimonials and performance (RIAs)",
+        body: "Under the Marketing Rule, a testimonial or endorsement has to say clearly whether the person is a client and whether they were paid. Gross performance can appear only next to net performance. Most blog posts are easier to approve without either.",
+        sources: [{ label: "SEC: Marketing Rule small entity compliance guide", href: "https://www.sec.gov/resources-small-businesses/small-business-compliance-guides/investment-adviser-marketing" }],
+      },
+      {
+        heading: "Principal approval first (broker-dealers)",
+        body: "Under FINRA Rule 2210, a communication sent or made available to more than 25 retail investors within 30 days is a retail communication, and a registered principal has to approve it before it's used. A public blog post qualifies. New member firms also file certain retail communications with FINRA 10 business days before first use for their first year.",
+        sources: [{ label: "FINRA Rule 2210", href: "https://www.finra.org/rules-guidance/rulebooks/finra-rules/2210" }],
+      },
+      {
+        heading: "No predictions",
+        body: "FINRA Rule 2210 says communications may not predict or project performance or imply that past performance will recur, with narrow exceptions. Write about your process and the tradeoffs and leave out where the market is headed.",
+        sources: [{ label: "FINRA Rule 2210", href: "https://www.finra.org/rules-guidance/rulebooks/finra-rules/2210" }],
+      },
+      {
+        heading: "AI drafts follow the same rules",
+        body: "FINRA's Regulatory Notice 24-09 (June 27, 2024) says Rule 2210's content standards apply whether a person or an AI tool wrote the communication. An AI draft goes through the same review as anything else.",
+        sources: [{ label: "FINRA Regulatory Notice 24-09", href: "https://www.finra.org/rules-guidance/notices/24-09" }],
+      },
+    ],
+    draftly: [
+      "Draftly writes from your website and a topic, so it never needs client data. It sets your firm's voice from your site and drafts the post with a URL slug, meta title and meta description, checked for AI-sounding phrasing before you see it.",
+      "Your compliance reviewer approves the draft and keeps the record. Publish by hand to " + CMS_LINE + " instead of using Autopilot's automatic publishing, so nothing goes live before approval.",
+    ],
+    tool: { href: "/tools/eeat-checker", name: "E-E-A-T checker", why: "Google holds money pages to a high bar for experience and trust, and the checker shows whether your posts carry bylines, author pages, dates and sources." },
+    shot: "brandVoice",
+    cta: {
+      heading: "Get a draft post for your compliance review",
+      body: "Paste your URL and Draftly writes a full draft in your firm's voice, ready for review and for " + CMS_LINE + ". Your first post is free.",
+    },
+    faqs: [
+      {
+        q: "What should a financial advisor blog about?",
+        a: "The life events that bring clients in, like inheritances, business sales and retirement, plus yearly tax topics and plain explanations of how you work and charge.",
+      },
+      {
+        q: "Do financial advisor blog posts need compliance approval?",
+        a: "For broker-dealer reps, FINRA Rule 2210 requires principal approval of retail communications before use, and a public blog post is one. RIAs follow the SEC Marketing Rule and their own compliance policies. Ask your compliance team.",
+      },
+      {
+        q: "Can financial advisors use AI to write blog posts?",
+        a: "Yes, with the same review as any other communication. FINRA Regulatory Notice 24-09 says Rule 2210's content standards apply whether or not AI wrote it.",
+      },
+      {
+        q: "Can I share client results or testimonials on my blog?",
+        a: "Only within the SEC Marketing Rule or FINRA's testimonial rules, which require specific disclosures. Many firms keep blog posts free of both to make approval simpler.",
+      },
+    ],
+    readingTopic: "financial advisor wealth management blog compliance write blog post brand voice",
+    ogLine: "Topics plus the SEC and FINRA rules",
+  },
+  {
+    slug: "accounting-firms",
+    postNoun: "accounting firm",
+    name: "Accounting firms",
+    audience: "CPA and accounting firms",
+    // "content marketing for accountants" 150/mo KD 0, "accounting blog topics" 80 KD 0, "accounting blog ideas" 10.
+    keywords: "content marketing for accountants, accounting blog topics, accounting blog ideas",
+    title: "Accounting Blog Topics for CPA Firms, With the Ethics Rules",
+    description:
+      "Blog topics for CPA and accounting firms: tax season, small business questions and year-end planning, plus the Circular 230 and confidentiality rules to check.",
+    h1: { lead: "Accounting blog topics", accent: "for CPA firms" },
+    intro: [
+      "An accounting firm's blog runs on the calendar. Clients search for document checklists in January, extensions in April, estimated payments in June and year-end moves in November. The firms that win those searches publish a few weeks early and update the same posts every year.",
+      "Small business owners are the other big audience. They search before they hire anyone: which entity to pick, when to run payroll, whether they need a CPA at all. The topics below cover both, with notes on the rules for advertising tax services.",
+    ],
+    groups: [
+      {
+        id: "tax-season",
+        heading: "Tax season",
+        intro: "Publish these in December and January and update the dates each year.",
+        topics: [
+          { title: "What to bring to your tax appointment", note: "A real checklist by client type: W-2 employee, freelancer, landlord, business owner." },
+          { title: "Do you need to file an extension?", note: "An extension gives more time to file. Any tax owed is still due by the April deadline." },
+          { title: "Got a letter from the IRS? Here's what to do", note: "Don't ignore it, read which notice it is, call us. Link the IRS page on notices." },
+          { title: "What our tax prep costs and what changes the price", note: "Your fee ranges by return type. Readers compare these." },
+          { title: "Freelancers: how quarterly estimated taxes work", note: "Who has to pay them, the due dates and how to figure the amount." },
+        ],
+      },
+      {
+        id: "small-business",
+        heading: "Small business questions",
+        intro: "Owners search these before they hire anyone. Answer them well and the call comes to you.",
+        topics: [
+          { title: "LLC or S corp: which fits your business?", note: "When the S corp election starts to make sense and what it costs to run." },
+          { title: "When to hire a bookkeeper, and when you need a CPA", note: "Be honest about the tasks software handles." },
+          { title: "Running payroll for your first employee", note: "Registrations, deposits and the forms that come due. Use your state's agencies by name." },
+          { title: "Who needs a 1099 from you", note: "Contractors, the forms, the deadline. Link the IRS instructions." },
+          { title: "How to read your profit and loss statement", note: "A sample P&L, line by line, with the questions to ask." },
+          { title: "Cash or accrual accounting for a small business", note: "Who can use which and how it changes taxes." },
+        ],
+      },
+      {
+        id: "year-end",
+        heading: "Year-end and planning",
+        intro: "Publish in October and November, when clients still have time to act.",
+        topics: [
+          { title: "Year-end tax moves for small business owners", note: "Equipment purchases, retirement plan deadlines, bonuses. Date it." },
+          { title: "What the latest federal tax law changes mean for your return", note: "Name the law and link the IRS guidance. Stick to what changed." },
+          { title: "Should you set up a retirement plan for your business?", note: "SEP, SIMPLE and 401(k) compared by cost and setup deadline." },
+          { title: "Planning for a big year: bonuses, a home sale or a business sale", note: "What to do before December 31 and what can wait." },
+        ],
+      },
+      {
+        id: "firm",
+        heading: "About the firm",
+        intro: "Prospects read these right before they reach out.",
+        topics: [
+          { title: "How we work with new clients, step by step", note: "Your real onboarding, including the portal and the timeline." },
+          { title: "Our fees, and why we price this way", note: "Fixed fees, hourly or monthly packages. Show the numbers." },
+          { title: "Meet the partner who handles your industry", note: "Their background and the clients they serve. Good for E-E-A-T." },
+        ],
+      },
+    ],
+    rulesHeading: "Rules for accounting firm blog posts",
+    rulesIntro:
+      "Tax services advertising is covered by Treasury's Circular 230, and client information is protected by federal law and professional ethics. Your state board of accountancy adds its own rules, so check them before you rely on this list.",
+    rules: [
+      {
+        heading: "No false or misleading claims about tax matters",
+        body: "Circular 230 section 10.30 bars practitioners from using public communications with false, deceptive or coercive claims about IRS matters. Enrolled agents can't call themselves \"certified\" or imply they work for the IRS.",
+        sources: [{ label: "31 CFR 10.30", href: "https://www.law.cornell.edu/cfr/text/31/10.30" }],
+      },
+      {
+        heading: "Published fees have to hold",
+        body: "Section 10.30 allows firms to publish fixed fees, hourly rates, fee ranges and consultation fees, and requires them to honor published rates for at least 30 days. If a post lists prices, date it.",
+        sources: [{ label: "31 CFR 10.30", href: "https://www.law.cornell.edu/cfr/text/31/10.30" }],
+      },
+      {
+        heading: "Client stories need consent",
+        body: "Federal law (26 U.S.C. 7216) bars tax preparers from disclosing return information or using it for anything other than preparing the return without the client's consent, and the AICPA Code protects confidential client information. Get written consent before a case study, and change the details.",
+        sources: [{ label: "26 U.S.C. 7216", href: "https://www.law.cornell.edu/uscode/text/26/7216" }],
+      },
+      {
+        heading: "Check the CPA title rules",
+        body: "State laws reserve \"CPA\" for licensees, and some apply that to firm names too. If an unlicensed staff member writes a post, the byline shouldn't suggest they're a CPA.",
+      },
+      {
+        heading: "Date every tax figure",
+        body: "Limits, thresholds and deadlines change every year. Put the tax year in the post, link the IRS source and update the post each January.",
+      },
+    ],
+    draftly: [
+      "Draftly sets your firm's voice from your website and writes the full post from a topic, with a URL slug, meta title and meta description. It never needs client returns, so keep client details out of the topics you type.",
+      "A CPA checks the numbers and the tax year, adds your fees and deadlines, and puts their name on it. Then publish to " + CMS_LINE + ". Firms that serve clients in several niches can run a separate website and voice for each.",
+    ],
+    tool: { href: "/tools/content-refresh-checker", name: "content refresh checker", why: "Tax posts go stale every year, and the checker lists the posts on your blog that haven't been updated in a year." },
+    shot: "urlToPost",
+    cta: {
+      heading: "Get a post drafted for your firm's blog",
+      body: "Paste your URL and Draftly writes a full draft in your firm's voice for a CPA to review, ready for " + CMS_LINE + ". Your first post is free.",
+    },
+    faqs: [
+      {
+        q: "What should an accounting firm blog about?",
+        a: "Tax season checklists and deadlines, the questions small business owners ask before they hire you, year-end planning, and how your firm works and charges.",
+      },
+      {
+        q: "Can a CPA firm list its fees on its blog?",
+        a: "Yes. Circular 230 section 10.30 allows published fee information, and the firm has to honor published rates for at least 30 days. Date any post with prices.",
+      },
+      {
+        q: "When should accounting firms publish tax posts?",
+        a: "A few weeks before the deadline they cover: December and January for filing season, March for extensions, and October for year-end planning.",
+      },
+      {
+        q: "Can AI write accounting blog posts?",
+        a: "It can write a draft. A CPA should check every figure, threshold and deadline for the right tax year before it's published.",
+      },
+    ],
+    readingTopic: "accounting cpa firm tax blog small business write blog post brand voice",
+    ogLine: "Topics plus the Circular 230 rules",
   },
 ];
 

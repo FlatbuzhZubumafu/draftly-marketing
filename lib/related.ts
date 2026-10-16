@@ -78,8 +78,8 @@ export const GUIDES: Pillar[] = [
   {
     href: "/blog-ideas",
     title: "Blog ideas by industry",
-    blurb: "Topics for plumbers, HVAC companies, real estate agents and law firms, with the rules each industry's posts have to follow.",
-    keywords: ["blog ideas", "blog topics", "plumb", "hvac", "real estate", "law firm", "lawyer", "attorney", "industry"],
+    blurb: "Topics for plumbers, HVAC companies, roofers, dentists, real estate agents, law firms, financial advisors and CPA firms, with the rules for each.",
+    keywords: ["blog ideas", "blog topics", "plumb", "hvac", "roof", "dental", "dentist", "real estate", "law firm", "lawyer", "attorney", "financial advisor", "accounting", "cpa", "industry"],
   },
   {
     href: "/for-teams",
