@@ -9,6 +9,8 @@ export function HeaderInteractions() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
+    // Pages can load already scrolled (anchor links like /#faq, reloads), so check once now.
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
