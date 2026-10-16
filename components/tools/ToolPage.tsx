@@ -6,6 +6,7 @@ import { KeepReading } from "@/components/KeepReading";
 import { ToolChecker } from "@/components/tools/ToolChecker";
 import { FaqSchemaGenerator } from "@/components/tools/FaqSchemaGenerator";
 import { GeneratorTool } from "@/components/tools/GeneratorTool";
+import { ToolHeroVideo } from "@/components/tools/ToolHeroVideo";
 import { SAMPLE_BRIEF, SAMPLE_IDEAS } from "@/lib/brief-template";
 import { aiToolsEnabled } from "@/lib/tools/ai/gateway";
 import { FREE_TOOLS, TOOLS_DATE, TOOLS_HUB, type CheckerId, type FreeTool } from "@/lib/free-tools";
@@ -42,6 +43,9 @@ export function toolJsonLd(tool: FreeTool): string {
   );
 }
 
+/** "Content brief generator" → "content brief generator"; keeps "AI ..." and "FAQ ..." as written. */
+const sentenceCase = (name: string) => (/^[A-Z][A-Z-]/.test(name) ? name : name[0].toLowerCase() + name.slice(1));
+
 export function OtherTools({ exclude, heading = "More free tools" }: { exclude?: string; heading?: string }) {
   const others = FREE_TOOLS.filter((t) => t.path !== exclude);
   return (
@@ -71,6 +75,7 @@ export async function ToolPage({ tool, children }: { tool: FreeTool; children?: 
   const { marketingSettings: s } = await getHomepageData();
   const registerUrl = `${APP_URL}/register`;
   const ctaLabel = s.heroCtaText || "Generate Free Post";
+  const slug = tool.path.split("/").pop() ?? "";
 
   return (
     <>
@@ -84,7 +89,9 @@ export async function ToolPage({ tool, children }: { tool: FreeTool; children?: 
             </a>{" "}
             / {tool.name}
           </nav>
-          <header className="max-w-3xl">
+          {/* Wide screens: intro and the hero loop side by side, form below. Phones: intro, form, then the loop. */}
+          <div className="grid grid-cols-[minmax(0,1fr)] gap-y-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-x-12">
+          <header className="max-w-3xl order-1 lg:self-center">
             <p className="eyebrow mb-4">{tool.eyebrow}</p>
             <h1 className="page-heading mb-5" style={{ fontSize: "clamp(2.4rem, 6vw, 64px)" }}>
               {tool.h1}{" "}
@@ -97,7 +104,12 @@ export async function ToolPage({ tool, children }: { tool: FreeTool; children?: 
             </p>
           </header>
 
-          <div className="mt-10">
+          {/* The AI generators show a long sample under the form on phones, so their loop is desktop only. */}
+          <div className={`order-3 mx-auto w-full max-w-[420px] lg:order-2 lg:max-w-none ${generator && tool.id !== "faq-schema" ? "hidden lg:block" : ""}`}>
+            <ToolHeroVideo slug={slug} label={`Animation of the ${sentenceCase(tool.name)} working on a made-up plumber's website`} />
+          </div>
+
+          <div className="order-2 lg:order-3 lg:col-span-2">
             {tool.id === "faq-schema" ? (
               <FaqSchemaGenerator />
             ) : generator ? (
@@ -114,6 +126,7 @@ export async function ToolPage({ tool, children }: { tool: FreeTool; children?: 
             ) : (
               <ToolChecker tool={tool.id as CheckerId} label={tool.input.label} placeholder={tool.input.placeholder} button={tool.input.button} extra={tool.input.extra} />
             )}
+          </div>
           </div>
 
           <section id="what-it-checks" className="mt-20">
