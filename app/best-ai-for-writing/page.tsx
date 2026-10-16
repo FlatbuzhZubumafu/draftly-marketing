@@ -381,6 +381,13 @@ export default async function BenchmarkPage() {
             </p>
             <p>So the smallest OpenAI model wrote the best blog posts of the three, at the lowest cost.</p>
             <p>
+              For the Claude models side by side with these three, see{" "}
+              <a href="/claude-vs-chatgpt-for-writing" style={{ color: "var(--color-accent)" }}>
+                Claude vs ChatGPT for writing
+              </a>
+              .
+            </p>
+            <p>
               If you already write in ChatGPT or Claude, the{" "}
               <a href="/mcp" style={{ color: "var(--color-accent)" }}>
                 Draftly SEO MCP server

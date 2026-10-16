@@ -24,6 +24,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/jasper-vs-draftly`, lastModified: new Date("2026-10-12"), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/blog-writing-service`, lastModified: new Date("2026-10-15"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/for-teams`, lastModified: new Date("2026-10-15"), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/claude-vs-chatgpt-for-writing`, lastModified: new Date("2026-10-16"), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/writesonic-alternatives`, lastModified: new Date("2026-10-16"), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}${TOOLS_HUB.path}`, lastModified: new Date(TOOLS_DATE.iso), changeFrequency: "monthly", priority: 0.7 },
     ...FREE_TOOLS.map((t) => ({ url: `${baseUrl}${t.path}`, lastModified: new Date(TOOLS_DATE.iso), changeFrequency: "monthly" as const, priority: 0.7 })),
     { url: `${baseUrl}/about`, lastModified: new Date("2026-10-13"), changeFrequency: "yearly", priority: 0.5 },

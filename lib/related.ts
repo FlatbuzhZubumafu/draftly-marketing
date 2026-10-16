@@ -58,6 +58,18 @@ export const GUIDES: Pillar[] = [
     keywords: ["writing service", "freelance", "outsourc", "hire a writer", "cost per post", "agency"],
   },
   {
+    href: "/claude-vs-chatgpt-for-writing",
+    title: "Claude vs ChatGPT for writing",
+    blurb: "Four Claude and three GPT models scored on the same blog posts and copy, with costs and which to pick.",
+    keywords: ["claude", "chatgpt", "gpt", "model", "llm", "anthropic", "openai"],
+  },
+  {
+    href: "/writesonic-alternatives",
+    title: "Writesonic alternatives for SEO blog posts",
+    blurb: "Draftly, Koala, SEOWriting.ai, Jasper and Copy.ai compared on price, posts included and publishing.",
+    keywords: ["writesonic", "alternative", "koala", "seowriting", "copy.ai", "compare"],
+  },
+  {
     href: "/for-teams",
     title: "Draftly for teams and agencies",
     blurb: "Team members on each plan, client websites at $29 a month, and one brand voice for everyone who writes.",
@@ -74,6 +86,8 @@ export function guideTag(href: string): string {
     "/wordpress-ai-plugin": "Plugin",
     "/blog-writing-service": "Comparison",
     "/for-teams": "Teams",
+    "/claude-vs-chatgpt-for-writing": "Benchmark",
+    "/writesonic-alternatives": "Comparison",
     "/mcp": "Guide",
   } as Record<string, string>)[href] ?? "Guide";
 }
