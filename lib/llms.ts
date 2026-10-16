@@ -110,9 +110,9 @@ ${wpCompareTable()}
 
 ## Free SEO Tools
 
-Free, no sign-up, at ${SITE_URL}${TOOLS_HUB.path}. Each tool fetches the pages you enter and runs fixed rules on them; no AI model reads the pages, and the URLs and results are not stored.
+Free, no sign-up, at ${SITE_URL}${TOOLS_HUB.path}. The checkers fetch the pages you enter and run fixed rules on them; no AI model reads the pages, and the URLs and results are not stored. The FAQ schema generator runs entirely in the browser.
 
-${FREE_TOOLS.map((t) => `- [${t.name}](${SITE_URL}${t.path}): ${t.intro.split(". ")[0]}. Checks: ${t.checks.map((c) => c.label).join(", ")}.`).join("\n")}
+${FREE_TOOLS.map((t) => `- [${t.name}](${SITE_URL}${t.path}): ${t.intro.split(". ")[0]}. ${t.kind === "generator" ? "Does" : "Checks"}: ${t.checks.map((c) => c.label).join(", ")}.`).join("\n")}
 
 ## Pages
 

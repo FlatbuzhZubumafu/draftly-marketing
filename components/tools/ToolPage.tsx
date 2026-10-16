@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { A, B, Bullets, Byline, FaqList, faqJsonLd } from "@/components/ArticleParts";
 import { KeepReading } from "@/components/KeepReading";
 import { ToolChecker } from "@/components/tools/ToolChecker";
+import { FaqSchemaGenerator } from "@/components/tools/FaqSchemaGenerator";
 import { FREE_TOOLS, TOOLS_DATE, TOOLS_HUB, type FreeTool } from "@/lib/free-tools";
 import { jsonLdHtml } from "@/lib/schema";
 import { APP_URL, SITE_URL } from "@/lib/site";
@@ -93,12 +94,16 @@ export async function ToolPage({ tool }: { tool: FreeTool }) {
           </header>
 
           <div className="mt-10">
-            <ToolChecker tool={tool.id} label={tool.input.label} placeholder={tool.input.placeholder} button={tool.input.button} extra={tool.input.extra} />
+            {tool.kind === "generator" ? (
+              <FaqSchemaGenerator />
+            ) : (
+              <ToolChecker tool={tool.id} label={tool.input.label} placeholder={tool.input.placeholder} button={tool.input.button} extra={tool.input.extra} />
+            )}
           </div>
 
           <section id="what-it-checks" className="mt-20">
             <h2 className="text-3xl font-medium mb-6" style={{ letterSpacing: "-0.03em" }}>
-              What this checker looks at
+              {tool.checksHeading ?? "What this checker looks at"}
             </h2>
             <ol className="grid sm:grid-cols-2 gap-3">
               {tool.checks.map((c, i) => (
@@ -116,7 +121,8 @@ export async function ToolPage({ tool }: { tool: FreeTool }) {
               ))}
             </ol>
             <p className="mt-4 text-sm" style={{ color: "var(--color-text-muted)" }}>
-              Every check is a fixed rule run on your live pages. Results can differ from what a crawler sees if your site blocks automated visits.
+              {tool.checksNote ??
+                "Every check is a fixed rule run on your live pages. Results can differ from what a crawler sees if your site blocks automated visits."}
             </p>
           </section>
 
@@ -130,6 +136,19 @@ export async function ToolPage({ tool }: { tool: FreeTool }) {
                   <p key={p}>{p}</p>
                 ))}
               </div>
+              {sec.sources?.length ? (
+                <p className="mt-4 text-sm" style={{ color: "var(--color-text-muted)" }}>
+                  {sec.sources.length === 1 ? "Source: " : "Sources: "}
+                  {sec.sources.map((src, i) => (
+                    <span key={src.href}>
+                      {i ? ", " : ""}
+                      <a href={src.href} target="_blank" rel="noopener" className="underline underline-offset-2">
+                        {src.label}
+                      </a>
+                    </span>
+                  ))}
+                </p>
+              ) : null}
             </section>
           ))}
 
