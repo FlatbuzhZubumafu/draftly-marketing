@@ -5,12 +5,19 @@
 // Slugs follow US search demand (Ahrefs, 2026-10-13): ai visibility checker 1,600
 // (KD 2), ai search visibility checker 600, llm visibility checker 450; blog seo
 // checker 400, blog post seo checker 90; content refresh 350; e-e-a-t checker 100,
-// eeat checker 50, eeat audit 40; faq schema generator 600 (KD 4, 2026-10-15). Each
-// tool is deterministic: no AI model sees the URL or the results. The FAQ schema
-// generator runs entirely in the browser (lib/tools/faq-schema.ts).
+// eeat checker 50, eeat audit 40; faq schema generator 600 (KD 4, 2026-10-15); seo
+// content brief template 700 (KD 7), ai content brief generator 300 (KD 3), content
+// brief generator 200 (KD 5); blog ideas generator 300 (KD 18), blog topic generator 80.
+// The four checkers are deterministic: no AI model sees the URL or the results. The FAQ
+// schema generator runs entirely in the browser (lib/tools/faq-schema.ts). The content
+// brief and blog ideas generators make one GPT 6 Luna call each and are off unless
+// TOOLS_AI_GATEWAY_API_KEY is set.
 import type { Faq } from "@/components/ArticleParts";
 
-export type ToolId = "ai-visibility" | "blog-seo" | "content-refresh" | "eeat" | "faq-schema";
+export type CheckerId = "ai-visibility" | "blog-seo" | "content-refresh" | "eeat";
+/** The AI-written generators. The FAQ schema generator is a browser-only generator. */
+export type GeneratorId = "content-brief" | "blog-ideas";
+export type ToolId = CheckerId | GeneratorId | "faq-schema";
 
 export type FreeTool = {
   id: ToolId;
@@ -391,6 +398,143 @@ export const FREE_TOOLS: FreeTool[] = [
     ogAlt: "Free FAQ schema generator from Draftly: FAQPage JSON-LD and matching FAQ HTML",
     ogLine: "FAQPage JSON-LD and matching FAQ HTML",
   },
+  {
+    id: "content-brief",
+    kind: "generator",
+    path: "/tools/content-brief-generator",
+    name: "Content brief generator",
+    title: "Free AI Content Brief Generator and SEO Brief Template",
+    description:
+      "Enter a keyword and get an SEO content brief: search intent, title, meta description, H2 outline, questions to answer and sources. Free template too.",
+    eyebrow: "Free AI content brief generator",
+    h1: "Content brief generator for",
+    h1Accent: "your next post",
+    intro:
+      "Type the keyword you want to rank for and get a content brief a writer can work from. It gives you the search intent, a title and meta description, an H2 outline, the questions to answer and the sources to cite. Add your website and it suggests internal links from your own sitemap.",
+    input: {
+      label: "Target keyword",
+      placeholder: "water heater repair cost",
+      button: "Write my brief",
+      extra: { label: "Your website (optional)", placeholder: "yourbusiness.com" },
+    },
+    checks: [
+      { label: "Search intent", text: "What the person searching wants, and which kind of page fits." },
+      { label: "Title and meta description", text: "A working title under 60 characters and a 120 to 155 character description." },
+      { label: "H2 outline", text: "Five to seven sections in reading order, each with the points it has to make." },
+      { label: "Questions to answer", text: "The follow-up questions people ask about the topic." },
+      { label: "What ranking pages cover", text: "The subtopics a page usually needs to compete for the search." },
+      { label: "Sources to cite", text: "Which claims need a source and where to find one. No made-up stats." },
+      { label: "Word count range", text: "A realistic length for the search intent." },
+      { label: "Internal links", text: "Pages from your own sitemap to link to, if you add your website." },
+    ],
+    sections: [
+      {
+        id: "where-the-brief-comes-from",
+        heading: "Where the brief comes from",
+        paragraphs: [
+          "An AI model (GPT 6 Luna, the same default model Draftly uses to write posts) builds the brief from your keyword and, if you add it, your homepage and sitemap. Internal links are limited to real URLs from your sitemap, so it can't invent a page you don't have.",
+          "It doesn't pull live Google results. The \"what ranking pages cover\" list comes from the model's general knowledge of the topic, so search the keyword yourself and check the outline against the top five pages before you write.",
+          "It also won't make up numbers. Where the post needs a price, a statistic or a rule, the brief tells you what kind of source to cite.",
+        ],
+      },
+    ],
+    draftly: {
+      title: "Draftly turns the brief into the post",
+      points: [
+        "Draftly writes the whole post in your brand's voice, built from your website.",
+        "Every post is checked against your writing rules, like keyword placement, meta lengths, banned AI words and unsourced numbers, and gets one automatic fix pass.",
+        "Growth and Autopilot plans add live Google results and People Also Ask data for your keywords.",
+        "It publishes to WordPress, Shopify, Webflow, Ghost, Squarespace or HubSpot.",
+      ],
+      cta: "Your first post is free. Paste your URL and Draftly writes it in your brand's voice.",
+    },
+    faqs: [
+      {
+        q: "What is a content brief?",
+        a: "A one-page plan for a single piece of content. It names the keyword and search intent, then gives the writer a title, an outline, the questions to answer and the sources to use, so the draft matches what people are searching for.",
+      },
+      {
+        q: "What should an SEO content brief include?",
+        a: "The target keyword and intent, a working title and meta description, a word count range, an H2 outline with the points each section makes, the questions to answer, what ranking pages cover, sources to cite and internal links. The free template on this page has a slot for each.",
+      },
+      {
+        q: "Does this content brief generator use live Google results?",
+        a: "No. An AI model writes the brief from your keyword and your site. Check the outline against the pages ranking today before you write. Draftly's Growth and Autopilot plans use live Google and People Also Ask data.",
+      },
+      {
+        q: "Is the content brief generator free?",
+        a: "Yes, with no sign-up. Each visitor can write a few briefs an hour and about 20 a day, because every brief costs us a little to run. We don't store your keyword, your URL or the brief.",
+      },
+      {
+        q: "Can I use the template without the generator?",
+        a: "Yes. Copy it or download it as a Markdown file and fill it in by hand. It has the same sections the generator fills in.",
+      },
+    ],
+    ogAlt: "Free AI content brief generator from Draftly: search intent, outline, questions and sources for any keyword",
+    ogLine: "Intent, outline, questions, sources, internal links",
+  },
+  {
+    id: "blog-ideas",
+    kind: "generator",
+    path: "/tools/blog-ideas-generator",
+    name: "Blog ideas generator",
+    title: "Free Blog Ideas Generator: 10 Post Ideas for Your Site",
+    description:
+      "Enter your website or industry and get 10 blog post ideas fitted to your customers, including timely ones for the next three months. No sign-up.",
+    eyebrow: "Free blog topic generator",
+    h1: "Blog ideas generator:",
+    h1Accent: "10 posts worth writing",
+    intro:
+      "Enter your website and this tool reads your homepage and sitemap, then suggests 10 blog post ideas your customers would search for. It skips topics you've already covered and adds a few timely ones for the next three months. No website yet? Type your industry instead.",
+    input: { label: "Your website or industry", placeholder: "yourbusiness.com or plumbing", button: "Get 10 ideas" },
+    checks: [
+      { label: "Fitted to your business", text: "Ideas come from what your homepage says you do and who you serve." },
+      { label: "Skips what you've written", text: "Ideas that repeat a post in your sitemap are dropped." },
+      { label: "Timely ideas", text: "At least two tied to the next three months." },
+      { label: "A mix of post types", text: "How-to, cost, comparison, checklist, mistakes, seasonal and FAQ posts." },
+      { label: "An angle for each", text: "One sentence on the take that makes the post worth reading." },
+      { label: "Who it's for", text: "The reader each post is written for." },
+    ],
+    sections: [
+      {
+        id: "how-the-ideas-are-picked",
+        heading: "How the ideas are picked",
+        paragraphs: [
+          "An AI model (GPT 6 Luna) reads your homepage text, headings and the page list from your sitemap, then suggests posts your customers would look for. We compare its titles with your existing posts and drop close matches.",
+          "It doesn't see your search data or live Google results, so treat the list as a starting point. If an idea fits your business, search it yourself to see what's already ranking.",
+        ],
+      },
+    ],
+    draftly: {
+      title: "Pick an idea and Draftly writes it",
+      points: [
+        "Draftly suggests timely topics from your industry's news, scored for fit with your business.",
+        "It writes the post in your brand's voice and checks it against your writing rules before you see it.",
+        "It publishes to WordPress, Shopify, Webflow, Ghost, Squarespace or HubSpot.",
+      ],
+      cta: "Your first post is free. Paste your URL and Draftly writes it in your brand's voice.",
+    },
+    faqs: [
+      {
+        q: "How do I come up with blog post ideas for my business?",
+        a: "Start with the questions customers ask before they buy: what it costs, how long it takes, which option fits them and what goes wrong. Add a few posts tied to the season. This generator does that from your website and drops ideas you've already written.",
+      },
+      {
+        q: "Is the blog ideas generator free?",
+        a: "Yes, with no sign-up. Each visitor can run it a few times an hour and about 20 times a day, because every run costs us a little. We don't store your URL, your topic or the ideas.",
+      },
+      {
+        q: "Does it read my whole website?",
+        a: "No. It reads your homepage and the list of pages in your sitemap, which is enough to tell what you do and what you've already written about.",
+      },
+      {
+        q: "Are the ideas written by AI?",
+        a: "Yes, by GPT 6 Luna. We check them for repeats and for filler words, but read them with your own judgment. You know your customers better than a model does.",
+      },
+    ],
+    ogAlt: "Free blog ideas generator from Draftly: 10 post ideas fitted to your website",
+    ogLine: "10 ideas from your website, with an angle for each",
+  },
 ];
 
 export const toolById = (id: ToolId) => FREE_TOOLS.find((t) => t.id === id)!;
@@ -399,5 +543,5 @@ export const TOOLS_HUB = {
   path: "/tools",
   title: "Free SEO Tools for Small Business Blogs",
   description:
-    "Five free SEO tools for your blog: an AI visibility checker, blog post SEO checker, content refresh checker, E-E-A-T checker and FAQ schema generator.",
+    "Seven free SEO tools for your blog: AI visibility, blog SEO, content refresh and E-E-A-T checkers, plus FAQ schema, content brief and blog ideas generators.",
 };

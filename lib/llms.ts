@@ -110,9 +110,9 @@ ${wpCompareTable()}
 
 ## Free SEO Tools
 
-Free, no sign-up, at ${SITE_URL}${TOOLS_HUB.path}. The checkers fetch the pages you enter and run fixed rules on them; no AI model reads the pages, and the URLs and results are not stored. The FAQ schema generator runs entirely in the browser.
+Free, no sign-up, at ${SITE_URL}${TOOLS_HUB.path}. The four checkers fetch the pages you enter and run fixed rules on them; no AI model reads the pages. The FAQ schema generator runs entirely in the browser. The content brief and blog ideas generators make one AI call (GPT 6 Luna) from what you enter and, optionally, your homepage and sitemap. Inputs and results are not stored.
 
-${FREE_TOOLS.map((t) => `- [${t.name}](${SITE_URL}${t.path}): ${t.intro.split(". ")[0]}. ${t.kind === "generator" ? "Does" : "Checks"}: ${t.checks.map((c) => c.label).join(", ")}.`).join("\n")}
+${FREE_TOOLS.map((t) => `- [${t.name}](${SITE_URL}${t.path}): ${t.intro.split(". ")[0]}. ${t.kind === "generator" ? "Gives you" : "Checks"}: ${t.checks.map((c) => c.label).join(", ")}.`).join("\n")}
 
 ## Pages
 

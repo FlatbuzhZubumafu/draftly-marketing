@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { analytics } from "@heycatch/sdk";
-import type { ToolId } from "@/lib/free-tools";
+import type { CheckerId } from "@/lib/free-tools";
 
 type Status = "pass" | "warn" | "fail" | "info";
 type Item = {
@@ -34,7 +34,7 @@ export function ToolChecker({
   button,
   extra,
 }: {
-  tool: ToolId;
+  tool: CheckerId;
   label: string;
   placeholder: string;
   button: string;
