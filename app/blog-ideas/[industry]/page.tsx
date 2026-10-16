@@ -10,7 +10,8 @@ import { KeepReading } from "@/components/KeepReading";
 import { SignupCta } from "@/components/SignupCta";
 import { ProductFigure } from "@/components/ProductFigure";
 import { GUIDE_SHOTS, imageObjectJsonLd } from "@/lib/product-shots";
-import { INDUSTRIES, INDUSTRIES_DATE, INDUSTRIES_HUB, getIndustry, industryPath, topicCount, type Source } from "@/lib/industries";
+import { INDUSTRIES, INDUSTRIES_DATE, INDUSTRIES_HUB, INDUSTRY_PHOTOS, getIndustry, industryPath, topicCount, type IndustryPhoto, type Source } from "@/lib/industries";
+import { StockPhoto } from "../StockPhoto";
 
 export const revalidate = 3600;
 export const dynamicParams = false;
@@ -39,6 +40,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const muted = { color: "var(--color-text-muted)" };
 const secondary = { color: "var(--color-text-secondary)" };
 
+function photoJsonLd(p: IndustryPhoto) {
+  return { "@type": "ImageObject", contentUrl: `${SITE_URL}${p.src}`, width: p.width, height: p.height, description: p.alt, creditText: `${p.credit.name} on Unsplash`, acquireLicensePage: "https://unsplash.com/license" };
+}
+
 function SourceLinks({ items }: { items?: Source[] }) {
   if (!items?.length) return null;
   return (
@@ -64,6 +69,7 @@ export default async function IndustryPage({ params }: Props) {
   const shot = GUIDE_SHOTS[industry.shot];
   const count = topicCount(industry);
   const others = INDUSTRIES.filter((i) => i.slug !== industry.slug);
+  const photos = INDUSTRY_PHOTOS[industry.slug];
 
   const jsonLd = jsonLdHtml(
     {
@@ -75,7 +81,7 @@ export default async function IndustryPage({ params }: Props) {
       dateModified: INDUSTRIES_DATE.iso,
       author: authorRef,
       publisher: { "@type": "Organization", name: "Draftly", url: SITE_URL },
-      image: [imageObjectJsonLd(shot)],
+      image: [imageObjectJsonLd(shot), ...(photos ? [photos.hero, ...Object.values(photos.groups), photos.rules].map(photoJsonLd) : [])],
       citation: industry.rules.flatMap((r) => r.sources ?? []).map((s) => s.href),
     },
     {
@@ -116,9 +122,12 @@ export default async function IndustryPage({ params }: Props) {
             <Byline verb="Written" date={INDUSTRIES_DATE.label} />
           </header>
 
+          {photos ? <StockPhoto photo={photos.hero} className="max-w-3xl mt-10" /> : null}
+
           {industry.groups.map((g) => (
             <Section key={g.id} id={g.id} title={g.heading}>
               <p>{g.intro}</p>
+              {photos?.groups[g.id] ? <StockPhoto photo={photos.groups[g.id]} /> : null}
               <ol className="space-y-4">
                 {g.topics.map((t) => (
                   <li key={t.title} className="pl-4" style={{ borderLeft: "2px solid var(--color-border-accent)" }}>
@@ -132,6 +141,7 @@ export default async function IndustryPage({ params }: Props) {
 
           <Section id="rules" title={industry.rulesHeading}>
             <p>{industry.rulesIntro}</p>
+            {photos ? <StockPhoto photo={photos.rules} /> : null}
             {industry.rules.map((r) => (
               <div key={r.heading}>
                 <h3 className="text-xl font-medium mb-2" style={{ color: "var(--color-text-primary)", letterSpacing: "-0.02em" }}>

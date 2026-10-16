@@ -3,7 +3,8 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { KeepReading } from "@/components/KeepReading";
 import { SignupCta } from "@/components/SignupCta";
-import { INDUSTRIES, INDUSTRIES_HUB, industryPath, topicCount } from "@/lib/industries";
+import Image from "next/image";
+import { INDUSTRIES, INDUSTRIES_HUB, INDUSTRY_PHOTOS, industryPath, topicCount } from "@/lib/industries";
 import { jsonLdHtml } from "@/lib/schema";
 import { SITE_URL } from "@/lib/site";
 
@@ -54,14 +55,21 @@ export default function BlogIdeasHub() {
           <ul className="mt-12 grid sm:grid-cols-2 gap-5">
             {INDUSTRIES.map((i) => (
               <li key={i.slug}>
-                <a href={industryPath(i)} className="block h-full rounded-2xl p-6 card-depth" style={{ color: "var(--color-text-primary)" }}>
-                  <span className="eyebrow">{i.name}</span>
-                  <span className="block text-xl font-semibold mt-3">{i.title}</span>
-                  <span className="block text-sm mt-2 leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-                    {i.description}
-                  </span>
-                  <span className="block text-sm font-semibold mt-4" style={{ color: "var(--color-accent)" }}>
-                    See {topicCount(i)} topics
+                <a href={industryPath(i)} className="block h-full rounded-2xl overflow-hidden card-depth" style={{ color: "var(--color-text-primary)" }}>
+                  {INDUSTRY_PHOTOS[i.slug] ? (
+                    <span className="relative block w-full" style={{ aspectRatio: "16 / 9", borderBottom: "1px solid var(--color-border)", background: "#f0efed" }}>
+                      <Image src={INDUSTRY_PHOTOS[i.slug].hero.src} alt="" fill sizes="(min-width: 640px) 420px, 100vw" className="object-cover" />
+                    </span>
+                  ) : null}
+                  <span className="block p-6">
+                    <span className="eyebrow">{i.name}</span>
+                    <span className="block text-xl font-semibold mt-3">{i.title}</span>
+                    <span className="block text-sm mt-2 leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+                      {i.description}
+                    </span>
+                    <span className="block text-sm font-semibold mt-4" style={{ color: "var(--color-accent)" }}>
+                      See {topicCount(i)} topics
+                    </span>
                   </span>
                 </a>
               </li>

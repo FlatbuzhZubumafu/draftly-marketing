@@ -1079,3 +1079,84 @@ export const industryPath = (i: Industry) => `${INDUSTRIES_HUB.path}/${i.slug}`;
 export function getIndustry(slug: string): Industry | undefined {
   return INDUSTRIES.find((i) => i.slug === slug);
 }
+
+/** A stock photo on an industry page. Files are 3:2 webp in public/images/industries/<slug>/. */
+export type IndustryPhoto = { src: string; width: number; height: number; alt: string; credit: { name: string; href: string } };
+export type IndustryPhotos = { hero: IndustryPhoto; groups: Record<string, IndustryPhoto>; rules: IndustryPhoto };
+
+// Unsplash photos (free under the Unsplash License), downloaded 2026-10-16 and cropped to
+// 3:2. `credit` points at each photo's page so every image can be traced to its source.
+const photo = (slug: string, slot: string, alt: string, name: string, id: string, width = 1200, height = 800): IndustryPhoto => ({
+  src: `/images/industries/${slug}/${slot}.webp`,
+  width,
+  height,
+  alt,
+  credit: { name, href: `https://unsplash.com/photos/${id}` },
+});
+
+export const INDUSTRY_PHOTOS: Record<string, IndustryPhotos> = {
+  plumbing: {
+    hero: photo("plumbing", "hero", "A plumber reaching under a bathroom sink to work on the drain pipes", "Timur Shakerzianov", "c314Gh8dXAo"),
+    groups: {
+      planning: photo("plumbing", "planning", "A wrench on the pipe fittings at the top of a white tank water heater", "Marian Florinel Condruz", "C-oYJoIfgCs"),
+      trust: photo("plumbing", "trust", "A plumber in overalls working on the pipes behind a toilet, with a blue toolbox on the floor", "bhagya laxmi", "jaP5ClBdIyU"),
+    },
+    rules: photo("plumbing", "rules", "A modern kitchen with a dark tile wall, a range and a black faucet over the sink", "Clay Banks", "C-FqIffctHI"),
+  },
+  hvac: {
+    hero: photo("hvac", "hero", "An outdoor air conditioning condenser in the rain, with trees behind it", "Sam Jotham Sutharson", "gSvCiyLnCeU"),
+    groups: {
+      replacement: photo("hvac", "replacement", "An outdoor heat pump unit mounted on a dark brick wall", "Everett Pachmann", "JsPkVrHMQoo"),
+      maintenance: photo("hvac", "maintenance", "A finger pressing a wall thermostat, with a small digital thermometer beside it", "HUUM", "3_nf1qKJGf4"),
+    },
+    rules: photo("hvac", "rules", "Three outdoor air conditioning units mounted on an orange apartment wall", "Jose Antonio Gallego Vázquez", "bpq1X06_yHQ", 1050, 700),
+  },
+  "real-estate": {
+    hero: photo("real-estate", "hero", "A two-story white house with dark shutters, palm trees and a front walk", "Christian McMenamy", "3gXWURwT1U4"),
+    groups: {
+      buyers: photo("real-estate", "buyers", "A hand holding up a house key on a house-shaped keychain inside an empty home", "Jakub Żerdzicki", "bqUZEAeWuok"),
+      sellers: photo("real-estate", "sellers", "A green and white For Sale sign", "Richard Bell", "z1EIv3nsHJQ"),
+    },
+    rules: photo("real-estate", "rules", "A tree-lined residential street with cars parked along the curb", "Vincent Y", "jtBaFcdug-E"),
+  },
+  "law-firms": {
+    hero: photo("law-firms", "hero", "A lawyer reviewing a document on a clipboard with a client across the desk", "Vitaly Gariev", "2AOIg7Qvu8w"),
+    groups: {
+      "what-next": photo("law-firms", "what-next", "A hand signing a printed document with a fountain pen", "Cytonn Photography", "GJao3ZTX9gU"),
+      firm: photo("law-firms", "firm", "A quiet office hallway lined with glass-walled rooms", "Nastuh Abootalebi", "yWwob8kwOCk"),
+    },
+    rules: photo("law-firms", "rules", "A columned county courthouse with an American flag out front", "goodrich kingrey", "W49kEdoe01E"),
+  },
+  roofing: {
+    hero: photo("roofing", "hero", "Two roofers in safety harnesses measuring on a dark shingle roof", "Raze Solar", "MyBBMM317A4"),
+    groups: {
+      storm: photo("roofing", "storm", "A fallen tree beside a white two-story house after a storm", "Roger Starnes Sr", "oUPBGyhjffU"),
+      replacement: photo("roofing", "replacement", "A roofer carrying a bundle of shingles across a roof", "Zohair Mirza", "4XMHsy4Rvi8"),
+    },
+    rules: photo("roofing", "rules", "Rain running off the edge of an asphalt shingle roof", "Luke Southern", "ZzZouwiQWV0"),
+  },
+  dental: {
+    hero: photo("dental", "hero", "A dentist talking with a smiling patient seated in a dental chair", "Harold Hisona", "Bg81yWKZlMg"),
+    groups: {
+      family: photo("dental", "family", "A girl brushing her teeth, seen from the side", "Roman Marchenko", "f-QUTyqRS1Y"),
+      treatment: photo("dental", "treatment", "Hands holding a dental model of a set of teeth with a probe", "Harold Hisona", "LOgBp87WzIk"),
+    },
+    rules: photo("dental", "rules", "A dentist pointing to an X-ray on a screen for a patient in the chair", "Caroline LM", "-m-4tYmtLlI"),
+  },
+  "financial-advisors": {
+    hero: photo("financial-advisors", "hero", "Two men in business clothes talking over a laptop showing a chart", "Vitaly Gariev", "YR4zsA7QwRk"),
+    groups: {
+      "life-events": photo("financial-advisors", "life-events", "An older couple walking arm in arm down a tree-lined road", "Hector Reyes", "GrSfB6-OPoY"),
+      markets: photo("financial-advisors", "markets", "A price chart with candlesticks and market data on a dark screen", "Nick Chong", "N__BnvQ_w18"),
+    },
+    rules: photo("financial-advisors", "rules", "A man in a suit reviewing a bar chart on a tablet beside a calculator and a coffee mug", "Towfiqu barbhuiya", "nApaSgkzaxg"),
+  },
+  "accounting-firms": {
+    hero: photo("accounting-firms", "hero", "Hands typing on a blue calculator beside a keyboard and a yellow mug", "Towfiqu barbhuiya", "JhevWHCbVyw"),
+    groups: {
+      "tax-season": photo("accounting-firms", "tax-season", "A sheet of paper reading Tax Return in a vintage typewriter", "Markus Winkler", "Ber3q-zEhd4"),
+      "small-business": photo("accounting-firms", "small-business", "A salon owner checking in a customer at the front desk on a tablet", "Blake Wisz", "GFrBMipOd_E"),
+    },
+    rules: photo("accounting-firms", "rules", "Tax withholding worksheets, a phone calculator and sticky notes on a dark desk", "Kelly Sikkema", "M98NRBuzbpc"),
+  },
+};
