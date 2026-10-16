@@ -161,7 +161,8 @@ export default async function AgencyVsToolPage() {
             <p>
               Draftly also shows your Google Analytics and Search Console reports on every plan, and paid plans add
               keyword data through its connector. It does not build links or change your site&apos;s code. The <A href="/ai-copywriter">Draftly AI
-              copywriter page</A> covers how a post gets made.
+              copywriter page</A> covers how a post gets made, and <A href="/best-ai-for-seo">best AI for SEO</A> lists
+              the tools that handle research, optimization and tracking.
             </p>
           </Section>
 

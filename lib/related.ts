@@ -70,6 +70,12 @@ export const GUIDES: Pillar[] = [
     keywords: ["writesonic", "alternative", "koala", "seowriting", "copy.ai", "compare"],
   },
   {
+    href: "/best-ai-for-seo",
+    title: "Best AI for SEO, picked by job",
+    blurb: "The AI tools for keyword research, blog writing, optimization, AI visibility and technical SEO, with prices.",
+    keywords: ["seo tool", "ahrefs", "semrush", "surfer", "clearscope", "keyword research", "ai seo"],
+  },
+  {
     href: "/for-teams",
     title: "Draftly for teams and agencies",
     blurb: "Team members on each plan, client websites at $29 a month, and one brand voice for everyone who writes.",
@@ -88,6 +94,7 @@ export function guideTag(href: string): string {
     "/for-teams": "Teams",
     "/claude-vs-chatgpt-for-writing": "Benchmark",
     "/writesonic-alternatives": "Comparison",
+    "/best-ai-for-seo": "Guide",
     "/mcp": "Guide",
   } as Record<string, string>)[href] ?? "Guide";
 }
