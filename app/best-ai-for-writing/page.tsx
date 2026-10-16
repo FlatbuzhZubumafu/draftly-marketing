@@ -392,7 +392,12 @@ export default async function BenchmarkPage() {
               <a href="/mcp" style={{ color: "var(--color-accent)" }}>
                 Draftly SEO MCP server
               </a>{" "}
-              brings your brand voice, past posts and live keyword data into the chat.
+              brings your brand voice, past posts and live keyword data into the chat. For the research and optimization
+              side of SEO, see our picks for the{" "}
+              <Link href="/best-ai-for-seo" style={{ color: "var(--color-accent)" }}>
+                best AI for SEO
+              </Link>
+              .
             </p>
           </Section>
           <div className="max-w-4xl">
