@@ -246,6 +246,16 @@ export default function WritesonicAlternativesPage() {
                   <ProductFigure shot={GUIDE_SHOTS.urlToPost} className="mt-2" />
                 </>
               )}
+              {a.id === "koala" && (
+                <p>
+                  The <A href="/koala-ai-review">Koala AI review</A> covers each plan and how far the words go on each model.
+                </p>
+              )}
+              {a.id === "copy-ai" && (
+                <p>
+                  For other ways out of Copy.ai, see <A href="/copy-ai-alternatives">Copy.ai alternatives</A>.
+                </p>
+              )}
             </Section>
           ))}
 

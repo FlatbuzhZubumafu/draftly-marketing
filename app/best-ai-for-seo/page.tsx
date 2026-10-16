@@ -237,7 +237,7 @@ export default function BestAiForSeoPage() {
               items={[
                 <>
                   <B>Koala</B> is $25 a month for 45,000 words and publishes to WordPress, Shopify, Webflow and Ghost.
-                  <SourceLinks items={[SOURCES.koala]} />
+                  <SourceLinks items={[SOURCES.koala]} /> More in the <A href="/koala-ai-review">Koala AI review</A>.
                 </>,
                 <>
                   <B>SEOWriting.ai</B> is $19 a month, or $14 billed yearly, for up to 50 articles, publishing to WordPress
