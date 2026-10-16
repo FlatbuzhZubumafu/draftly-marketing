@@ -4,7 +4,12 @@ import { pageImages } from "@/lib/og";
 import { getHomepageData } from "@/lib/graphql";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { BENCHMARK, BENCHMARK_DATE, BENCHMARK_ISO, type BenchmarkRow, type CopyRow } from "@/lib/benchmark";
+import { BENCHMARK, BENCHMARK_DATE, BENCHMARK_ISO, COPY_BENCHMARK, type BenchmarkRow, type CopyRow } from "@/lib/benchmark";
+import { BarChart } from "@/components/BarChart";
+import { ContentImage } from "@/components/ContentImage";
+import { ProductFigure } from "@/components/ProductFigure";
+import { GUIDE_SHOTS } from "@/lib/product-shots";
+import { STOCK } from "@/lib/stock-images";
 import { draftlyCredits } from "@/lib/app-models";
 import {
   BLOG_TABLE,
@@ -252,6 +257,12 @@ export default async function BenchmarkPage() {
               rules. Voice is how human the writing sounds, judged by two AI models from different companies. Cost is what
               we were billed per post.
             </p>
+            <BarChart
+              title="Overall writing score, out of 100, all 14 models"
+              rows={[...BENCHMARK].sort((a, b) => b.overall - a.overall).map((r) => ({ key: r.model, label: r.model, value: r.overall }))}
+              format={(n) => n.toFixed(1)}
+              note={`Three blog posts per model, run ${BENCHMARK_DATE}. The full table with every column is below.`}
+            />
             <QueryTable<BenchmarkRow> {...LEADERBOARD_TABLE} />
           </section>
 
@@ -276,6 +287,10 @@ export default async function BenchmarkPage() {
               </a>
               , from your URL to a published post.
             </p>
+            <ContentImage
+              image={STOCK.typingByWindow}
+              caption="A model writes the draft. Picking the topic, keeping the voice and publishing is the rest of the job."
+            />
           </Section>
           <div className="max-w-4xl">
             <QueryTable<BenchmarkRow> {...CONTENT_TABLE} />
@@ -302,6 +317,12 @@ export default async function BenchmarkPage() {
               Above that line, the top ten are close. Their judge scores span 74 to 82, so treat a gap of a point or two as a
               tie and choose on cost and speed.
             </p>
+            <BarChart
+              title="Copywriting score, out of 100, all 14 models"
+              rows={[...COPY_BENCHMARK].sort((a, b) => b.overall - a.overall).map((r) => ({ key: r.model, label: r.model, value: r.overall }))}
+              format={(n) => n.toFixed(1)}
+              note="Three copy packs per model, scored by code on hard limits and by two AI judges on the writing."
+            />
           </Section>
           <div className="max-w-4xl">
             <QueryTable<CopyRow> {...COPY_TABLE} />
@@ -417,6 +438,17 @@ export default async function BenchmarkPage() {
               <B>Em dashes are the most common AI tell.</B> Claude Haiku 4.5 used 29 of them in three posts, even with a rule
               asking it to ration them. That one habit cost it more points than anything else.
             </p>
+            <BarChart
+              title="Em dashes across three posts (lower is better)"
+              rows={[...BENCHMARK].sort((a, b) => b.emDashes - a.emDashes).map((r) => ({ key: r.model, label: r.model, value: r.emDashes }))}
+              max={Math.max(...BENCHMARK.map((r) => r.emDashes))}
+              defaultColor="var(--color-text-secondary)"
+              note="Every model had the same rule asking it to ration em dashes."
+            />
+            <ProductFigure
+              shot={GUIDE_SHOTS.genericVsDraftly}
+              caption="Draftly flags these habits in every draft, whichever model wrote it, and fixes them before you see the post."
+            />
             <p>
               <B>Reasoning models score high and cost time.</B> Qwen 3.8 Max and Kimi K3 took first and second, but Qwen
               averaged about three minutes a post and Kimi was the most expensive model we tested.

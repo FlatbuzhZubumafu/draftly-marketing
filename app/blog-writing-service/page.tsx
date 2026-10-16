@@ -11,7 +11,9 @@ import { jsonLdHtml, authorRef } from "@/lib/schema";
 import { TocLayout } from "@/components/OnThisPage";
 import { KeepReading } from "@/components/KeepReading";
 import { ProductFigure } from "@/components/ProductFigure";
-import { GUIDE_SHOTS, imageObjectJsonLd } from "@/lib/product-shots";
+import { GUIDE_SHOTS, STEP_SHOTS, imageObjectJsonLd } from "@/lib/product-shots";
+import { ContentImage } from "@/components/ContentImage";
+import { STOCK } from "@/lib/stock-images";
 
 export const revalidate = 3600;
 
@@ -175,6 +177,10 @@ export default async function BlogWritingServicePage() {
               rates. It lists blog posts at 25 to 45 cents a word. I left agencies without a number on purpose: there&apos;s no
               independent survey of agency per-post prices I trust, and most agencies sell retainers anyway.
             </p>
+            <ContentImage
+              image={STOCK.shopOwnerAtLaptop}
+              caption="Most small business owners don't have time to write every week. The question is who does it, and at what price per post."
+            />
           </Section>
 
           <section id="compare" className="mt-10">
@@ -291,7 +297,10 @@ export default async function BlogWritingServicePage() {
                 comes with a URL slug, meta title and meta description.
               </li>
             </ol>
-            <ProductFigure shot={GUIDE_SHOTS.brandVoice} className="mt-2" />
+            <div className="mt-2 grid gap-5 sm:grid-cols-2">
+              <ProductFigure shot={STEP_SHOTS[1]} aspect="16 / 10" />
+              <ProductFigure shot={GUIDE_SHOTS.brandVoice} aspect="16 / 10" fit="contain" />
+            </div>
             <p>
               Want to know which AI model writes best before you trust one with your blog? We tested 14 of them in the{" "}
               <A href="/best-ai-for-writing">best AI for writing benchmark</A>. Every plan and what it includes is on the{" "}
