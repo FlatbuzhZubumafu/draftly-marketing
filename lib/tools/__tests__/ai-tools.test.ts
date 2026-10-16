@@ -364,4 +364,6 @@ test("titleCase lowercases small words mid-title", () => {
   assert.equal(titleCase("How To Shut Off Your Home's Water Before A Freeze"), "How to Shut Off Your Home's Water Before a Freeze");
   assert.equal(titleCase("Wool or Tree Shoes: A Comparison For Commuters"), "Wool or Tree Shoes: A Comparison for Commuters");
   assert.equal(titleCase("A Year-End Review In One Hour"), "A Year-End Review in One Hour");
+  assert.equal(titleCase("Pipe Bursting Vs. Pipe Lining: Which Repair Fits?"), "Pipe Bursting vs. Pipe Lining: Which Repair Fits?");
+  assert.equal(titleCase("Why Your Pipes Freeze Even When the Heat Is on"), "Why Your Pipes Freeze Even When the Heat Is On");
 });

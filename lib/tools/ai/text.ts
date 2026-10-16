@@ -21,16 +21,17 @@ export function cleanOut(s: unknown, max: number): string {
     .trim();
 }
 
-const SMALL_WORDS = new Set(["a", "an", "the", "and", "but", "or", "nor", "for", "so", "yet", "to", "of", "in", "on", "at", "by", "as", "vs", "via", "per"]);
+const SMALL_WORDS = new Set(["a", "an", "the", "and", "but", "or", "nor", "for", "so", "yet", "to", "of", "in", "on", "at", "by", "as", "vs", "vs.", "via", "per"]);
 
-/** Title Case house style: small words stay lowercase unless they start the title or follow a colon or question mark. */
+/** Title Case house style: small words stay lowercase unless they start or end the title or follow a colon or question mark. */
 export function titleCase(title: string): string {
   return title
     .split(" ")
     .map((w, i, all) => {
       const lower = w.toLowerCase();
-      const startsPart = i === 0 || /[:?]$/.test(all[i - 1]);
-      return !startsPart && SMALL_WORDS.has(lower) ? lower : w;
+      const edge = i === 0 || i === all.length - 1 || /[:?]$/.test(all[i - 1]);
+      if (edge) return /^[a-z]/.test(w) && SMALL_WORDS.has(lower) ? w[0].toUpperCase() + w.slice(1) : w;
+      return SMALL_WORDS.has(lower) ? lower : w;
     })
     .join(" ");
 }
