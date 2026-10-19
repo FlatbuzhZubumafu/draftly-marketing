@@ -160,27 +160,22 @@ export default async function BlogWritingServicePage() {
               </em>
             </h1>
             <p className="text-lg leading-relaxed mb-4" style={{ color: "var(--color-text-secondary)" }}>
-              Hire a blog writing service when a post needs interviews, original reporting or an expert&apos;s name on it.
-              For steady SEO posts in your brand voice, an AI blog writer costs a fraction as much per post. Freelance writers in the EFA&apos;s 2026 rate survey charge {efaRange(1500)}{" "}for a 1,500-word post. Draftly&apos;s first post is free, and paid plans start
-              at ${SOLO.price} a month.
+              A freelance writer charges {efaRange(1500)}{" "}for a 1,500-word blog post, going by the Editorial Freelancers
+              Association&apos;s 2026 rates. Draftly writes posts in your brand voice from ${SOLO.price} a month, and your first
+              post is free. Below is what each option costs per post, what you get for it and when a human writer is worth it.
             </p>
             <Byline verb="Written" date={PUBLISHED.label} />
             <p className="mt-2 text-sm" style={{ color: "var(--color-text-muted)" }}>
-              I built Draftly, so read this knowing I have a horse in the race. The freelance rates come from a survey I
-              had nothing to do with.
+              I built Draftly, so I&apos;m biased. The freelance rates come from an outside survey.
             </p>
           </header>
 
-          <Section id="cost" title="What a blog post costs from each option">
+          <Section id="cost" title="Cost per post: freelancer, agency or Draftly">
             <p>
-              The freelance range is the <A href={EFA.href}>{EFA.label}</A>, built from a survey of its members&apos; 2025
-              rates. It lists blog posts at 25 to 45 cents a word. I left agencies without a number on purpose: there&apos;s no
-              independent survey of agency per-post prices I trust, and most agencies sell retainers anyway.
+              Freelance prices come from the <A href={EFA.href}>{EFA.label}</A>, which lists blog posts at 25 to 45 cents a
+              word. Agencies mostly sell monthly retainers, and I couldn&apos;t find an independent survey of their per-post
+              prices, so the agency column describes what&apos;s included.
             </p>
-            <ContentImage
-              image={STOCK.shopOwnerAtLaptop}
-              caption="Most small business owners don't have time to write every week. The question is who does it, and at what price per post."
-            />
           </Section>
 
           <section id="compare" className="mt-10">
@@ -229,9 +224,13 @@ export default async function BlogWritingServicePage() {
               </table>
             </div>
             <p className="mt-3 max-w-3xl text-sm" style={{ color: "var(--color-text-muted)" }}>
-              Freelance prices: {EFA.label}, blog posts at 25 to 45 cents a word. Draftly&apos;s per-post figure divides the
-              plan price by its estimated posts on the default model.
+              Draftly&apos;s per-post figure divides the plan price by its estimated posts on the default model.
             </p>
+            <ContentImage
+              className="mt-8"
+              image={STOCK.shopOwnerAtLaptop}
+              caption="Most small business owners don't have time to write every week. The question is who does it, and at what price per post."
+            />
           </section>
 
           <Section id="what-you-get" title="What you get for the money">
