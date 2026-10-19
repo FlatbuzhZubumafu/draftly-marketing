@@ -11,6 +11,7 @@ import { PAID_PLANS } from "@/lib/pricing";
 import { imageObjectJsonLd } from "@/lib/product-shots";
 import { jsonLdHtml } from "@/lib/schema";
 import { WP_PLANS, WP_PLUGIN_DOWNLOAD_PATH, WP_PLUGIN_PATH, WP_PLUGIN_VERSION, WP_SHOTS, WP_TOP_UPS } from "@/lib/wordpress-plugin";
+import { pageImages } from "@/lib/og";
 
 export const revalidate = 3600;
 
@@ -19,7 +20,7 @@ export const revalidate = 3600;
 // "ai plugins for wordpress", "ai seo plugin for wordpress", "ai content editor",
 // "humanize ai content" and "wordpress ai writer" (marketplace-plans/analysis.md).
 // The plugin's Plans link and readme point here. The WordPress plans live on this
-// page only. The share image is ./opengraph-image.tsx.
+// page only. The share image is public/images/og/wordpress-ai-plugin.jpg (lib/og-images.ts).
 const TITLE = "AI Post Optimizer: The WordPress AI Plugin | Draftly";
 const DESCRIPTION =
   "Draftly is an AI plugin for WordPress that checks your posts, suggests edits in your voice and saves the ones you approve as revisions you can revert.";
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESCRIPTION,
   alternates: { canonical: WP_PLUGIN_PATH },
-  openGraph: { title: TITLE, description: DESCRIPTION, type: "website", url: `${SITE_URL}${WP_PLUGIN_PATH}` },
+  ...pageImages(WP_PLUGIN_PATH, { title: TITLE, description: DESCRIPTION, type: "website", url: `${SITE_URL}${WP_PLUGIN_PATH}` }),
 };
 
 const STEPS = [

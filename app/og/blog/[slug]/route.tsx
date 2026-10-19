@@ -5,7 +5,7 @@ import { getPost } from "@/lib/graphql";
 import { plainExcerpt } from "@/lib/text";
 
 // Share image and card thumbnail for a blog post that has no featured image in
-// WordPress: the post title and the Draftly mark, in the style of app/opengraph-image.tsx.
+// WordPress: the post title and the Draftly mark, in the site's share image style.
 export const revalidate = 3600;
 
 const ACCENT = "#ff6b3d";

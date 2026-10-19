@@ -7,6 +7,7 @@ import Image from "next/image";
 import { INDUSTRIES, INDUSTRIES_HUB, INDUSTRY_PHOTOS, industryPath, topicCount } from "@/lib/industries";
 import { jsonLdHtml } from "@/lib/schema";
 import { SITE_URL } from "@/lib/site";
+import { pageImages } from "@/lib/og";
 
 export const revalidate = 3600;
 
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
   title: { absolute: INDUSTRIES_HUB.title },
   description: INDUSTRIES_HUB.description,
   alternates: { canonical: INDUSTRIES_HUB.path },
-  openGraph: { title: INDUSTRIES_HUB.title, description: INDUSTRIES_HUB.description, type: "website", url: `${SITE_URL}${INDUSTRIES_HUB.path}` },
+  ...pageImages(INDUSTRIES_HUB.path, { title: INDUSTRIES_HUB.title, description: INDUSTRIES_HUB.description, type: "website", url: `${SITE_URL}${INDUSTRIES_HUB.path}` }),
 };
 
 export default function BlogIdeasHub() {

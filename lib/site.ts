@@ -12,11 +12,11 @@ export const HOME_TITLE = "Draftly: AI Blog Writer That Sounds Like Your Brand";
 export const HOME_DESCRIPTION =
   "Draftly is an AI blog writer for small businesses. Paste your URL and get SEO-ready posts in your brand's voice, free of AI filler. Your first post is free.";
 
-// The share image from app/opengraph-image.tsx. Pages below the root that set their
-// own openGraph object list it explicitly, because that object replaces the
-// root's Open Graph tags, image included.
+// The site's default share image: the homepage's, also served as app/opengraph-image.jpg.
+// Pages below the root that set their own openGraph object list an image explicitly,
+// because that object replaces the root's Open Graph tags, image included.
 export const DEFAULT_OG_IMAGE = {
-  url: "/opengraph-image",
+  url: "/images/og/home.jpg",
   width: 1200,
   height: 630,
   alt: "Draftly: the AI blog writer that hates AI copy, for small businesses and marketing teams.",

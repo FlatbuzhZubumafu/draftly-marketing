@@ -7,6 +7,7 @@ import { SignupCta } from "@/components/SignupCta";
 import { FREE_TOOLS, TOOLS_HUB } from "@/lib/free-tools";
 import { jsonLdHtml } from "@/lib/schema";
 import { APP_URL, SITE_URL } from "@/lib/site";
+import { pageImages } from "@/lib/og";
 
 export const revalidate = 3600;
 
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
   title: { absolute: TOOLS_HUB.title },
   description: TOOLS_HUB.description,
   alternates: { canonical: TOOLS_HUB.path },
-  openGraph: { title: TOOLS_HUB.title, description: TOOLS_HUB.description, type: "website", url: `${SITE_URL}${TOOLS_HUB.path}` },
+  ...pageImages(TOOLS_HUB.path, { title: TOOLS_HUB.title, description: TOOLS_HUB.description, type: "website", url: `${SITE_URL}${TOOLS_HUB.path}` }),
 };
 
 const FAQS: Faq[] = [

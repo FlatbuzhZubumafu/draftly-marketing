@@ -21,14 +21,6 @@ export const JASPER_SOURCES = {
   home: { label: "jasper.ai", href: "https://www.jasper.ai/" },
 } satisfies Record<string, Source>;
 
-/** The page's share image and homepage card source (public/images/og). */
-export const OG_IMAGE = {
-  url: "/images/og/jasper-vs-draftly.png",
-  width: 1200,
-  height: 630,
-  alt: "Jasper vs Draftly bake-off scorecard: average Human voice score 80 for Jasper and 99 for Draftly, Reads as AI 30 and 22, and links to the business's own pages 0 and 10, across four real businesses",
-};
-
 /** Jasper's list prices as published on jasper.ai/pricing on CHECKED. */
 export const JASPER_PRO = { monthly: 69, yearly: 59 } as const;
 

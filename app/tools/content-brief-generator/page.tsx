@@ -3,6 +3,7 @@ import { ToolPage } from "@/components/tools/ToolPage";
 import { BriefTemplate } from "@/components/tools/BriefTemplate";
 import { toolById } from "@/lib/free-tools";
 import { SITE_URL } from "@/lib/site";
+import { pageImages } from "@/lib/og";
 
 export const revalidate = 3600;
 
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
   title: { absolute: TOOL.title },
   description: TOOL.description,
   alternates: { canonical: TOOL.path },
-  openGraph: { title: TOOL.title, description: TOOL.description, type: "website", url: `${SITE_URL}${TOOL.path}` },
+  ...pageImages(TOOL.path, { title: TOOL.title, description: TOOL.description, type: "website", url: `${SITE_URL}${TOOL.path}` }),
 };
 
 const secondary = { color: "var(--color-text-secondary)" };
