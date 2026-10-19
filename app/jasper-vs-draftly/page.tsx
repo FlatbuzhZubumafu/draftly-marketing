@@ -342,18 +342,18 @@ export default async function JasperVsDraftlyPage() {
               <span className="absolute -top-3 left-6 rounded-full px-3 py-1 text-xs font-semibold" style={{ background: "var(--color-accent)", color: "#fff" }}>
                 Better for small-business blogs
               </span>
-              <p className="text-xl font-semibold">Draftly</p>
+              <p className="text-xl font-semibold">Draftly {SOLO.name}</p>
               <p className="text-sm mt-1" style={muted}>
                 For small-business blogs
               </p>
               <p className="mt-6">
-                <span className="text-5xl font-medium">Free</span>
+                <span className="text-5xl font-medium tabular-nums">${SOLO.price}</span>
                 <span className="text-sm ml-1" style={muted}>
-                  first post
+                  a month
                 </span>
               </p>
               <p className="text-sm mt-2" style={secondary}>
-                then ${SOLO.price} a month, not per seat
+                for {SOLO.seats} people, not per seat. First post free.
               </p>
               <a href={registerUrl} className="btn btn-primary mt-6 self-start">
                 {ctaLabel}
