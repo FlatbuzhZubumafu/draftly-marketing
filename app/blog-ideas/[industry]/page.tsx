@@ -12,6 +12,7 @@ import { ProductFigure } from "@/components/ProductFigure";
 import { GUIDE_SHOTS, imageObjectJsonLd } from "@/lib/product-shots";
 import { INDUSTRIES, INDUSTRIES_DATE, INDUSTRIES_HUB, INDUSTRY_PHOTOS, getIndustry, industryPath, topicCount, type IndustryPhoto, type Source } from "@/lib/industries";
 import { StockPhoto } from "../StockPhoto";
+import { pageImages } from "@/lib/og";
 
 export const revalidate = 3600;
 export const dynamicParams = false;
@@ -32,8 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: { absolute: industry.title },
     description: industry.description,
     alternates: { canonical: path },
-    openGraph: { title: industry.title, description: industry.description, type: "article", url: `${SITE_URL}${path}` },
-    twitter: { card: "summary_large_image", title: industry.title, description: industry.description },
+    ...pageImages(path, { title: industry.title, description: industry.description, type: "article", url: `${SITE_URL}${path}` }),
   };
 }
 

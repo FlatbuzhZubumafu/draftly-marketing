@@ -16,7 +16,6 @@ import {
   CALLOUTS,
   CHECKED,
   JASPER_PRO,
-  OG_IMAGE,
   JASPER_SOURCES as SRC,
   TABLE,
   type Cell,
@@ -24,6 +23,7 @@ import {
   type Score,
   type Source,
 } from "@/lib/jasper-vs-draftly";
+import { pageImages } from "@/lib/og";
 
 export const revalidate = 3600;
 
@@ -42,8 +42,7 @@ export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESCRIPTION,
   alternates: { canonical: PATH },
-  openGraph: { title: TITLE, description: DESCRIPTION, type: "article", url: `${SITE_URL}${PATH}`, images: [OG_IMAGE] },
-  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION, images: [OG_IMAGE.url] },
+  ...pageImages(PATH, { title: TITLE, description: DESCRIPTION, type: "article", url: `${SITE_URL}${PATH}` }),
 };
 
 const [SOLO, GROWTH, AUTOPILOT] = PAID_PLANS;

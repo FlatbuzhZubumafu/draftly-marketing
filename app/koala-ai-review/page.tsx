@@ -27,6 +27,7 @@ import {
   SOURCES,
   koalaArticles,
 } from "@/lib/competitor-reviews";
+import { pageImages } from "@/lib/og";
 
 export const revalidate = 3600;
 
@@ -44,8 +45,7 @@ export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESCRIPTION,
   alternates: { canonical: PATH },
-  openGraph: { title: TITLE, description: DESCRIPTION, type: "article", url: `${SITE_URL}${PATH}` },
-  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION },
+  ...pageImages(PATH, { title: TITLE, description: DESCRIPTION, type: "article", url: `${SITE_URL}${PATH}` }),
 };
 
 const [STARTER, PRO, BOOST] = KOALA_PLANS;
