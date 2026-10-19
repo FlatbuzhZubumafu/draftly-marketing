@@ -9,6 +9,9 @@ import { TocLayout } from "@/components/OnThisPage";
 import { KeepReading } from "@/components/KeepReading";
 import { SignupCta } from "@/components/SignupCta";
 import { ProductFigure } from "@/components/ProductFigure";
+import { BarChart } from "@/components/BarChart";
+import { ContentImage } from "@/components/ContentImage";
+import { STOCK } from "@/lib/stock-images";
 import { GUIDE_SHOTS, imageObjectJsonLd } from "@/lib/product-shots";
 import {
   ALTERNATIVES,
@@ -162,6 +165,10 @@ export default function WritesonicAlternativesPage() {
               That&apos;s a good deal if you want the tracking. If you only use the articles, Starter works out to about{" "}
               {usd2(WRITESONIC_PER_ARTICLE)} per article over a year, which is why people go looking for something else.
             </p>
+            <ContentImage
+              image={STOCK.contentStrategyPlanner}
+              caption="Before you switch, list what you actually use each month: articles, brand voices, tracking or audits."
+            />
           </Section>
 
           <section id="at-a-glance" className="mt-16">
@@ -269,6 +276,16 @@ export default function WritesonicAlternativesPage() {
               That comparison flatters Draftly, because Writesonic&apos;s price also pays for visibility tracking, site
               audits and ads monitoring. Count only what you&apos;d use.
             </p>
+            <BarChart
+              title="Price per article or post, entry plan"
+              rows={[
+                { key: "writesonic", label: `Writesonic ${WS_STARTER.name}`, value: WRITESONIC_PER_ARTICLE },
+                { key: "draftly", label: `Draftly ${SOLO.name}`, value: DRAFTLY_PER_POST },
+              ]}
+              max={WRITESONIC_PER_ARTICLE}
+              format={(n) => `$${n.toFixed(2)}`}
+              note={`Writesonic billed yearly, Draftly billed monthly. Writesonic's price also covers tracking, audits and ads monitoring. Prices checked ${CHECKED.label}.`}
+            />
           </Section>
 
           <Section id="stay-with-writesonic" title="When Writesonic is still the right pick">

@@ -11,6 +11,11 @@ import { TocLayout } from "@/components/OnThisPage";
 import { KeepReading } from "@/components/KeepReading";
 import { ModelName } from "@/components/ProviderLogo";
 import { SignupCta } from "@/components/SignupCta";
+import { BarChart, type BarGroup } from "@/components/BarChart";
+import { ProductFigure } from "@/components/ProductFigure";
+import { ContentImage } from "@/components/ContentImage";
+import { GUIDE_SHOTS } from "@/lib/product-shots";
+import { STOCK } from "@/lib/stock-images";
 
 export const revalidate = 3600;
 
@@ -52,6 +57,15 @@ const GPT55 = blog("GPT 5.5");
 const GPT54 = blog("GPT 5.4");
 const TOP_VOICE = Math.max(...BENCHMARK.map((r) => r.voice));
 const CENTS = (n: number) => `${(n * 100).toFixed(1)} cents`;
+
+// Claude in the site accent, ChatGPT in the site blue. Every bar also prints its value and
+// each row names the model, so color is never the only cue.
+const APP_GROUPS: Record<string, BarGroup> = {
+  claude: { label: "Claude (Anthropic)", color: "var(--color-accent)" },
+  chatgpt: { label: "ChatGPT (OpenAI)", color: "var(--color-blue)" },
+};
+const barRows = (rows: { model: string; provider: string }[], value: (m: string) => number) =>
+  rows.map((r) => ({ key: r.model, label: r.model, value: value(r.model), group: isClaude(r) ? "claude" : "chatgpt" }));
 
 type Col<T> = { label: string; value: (r: T) => string | number; strong?: boolean };
 
@@ -208,6 +222,12 @@ export default function ClaudeVsChatGptPage() {
               Sonnet 5.5, and Claude Haiku 4.5 came last of the 14 at {HAIKU.overall}. If you write with an older Claude
               model, GPT 5.4 Mini beats it.
             </p>
+            <BarChart
+              title="Overall blog writing score, out of 100"
+              groups={APP_GROUPS}
+              rows={barRows(BLOG, (m) => blog(m).overall)}
+              note={`Average of formatting and voice across three posts per model. Benchmark run ${BENCHMARK_DATE}.`}
+            />
           </Section>
           <div className="max-w-4xl">
             <ModelTable caption="Blog writing: three posts per model, Claude and GPT models only" rows={BLOG} cols={BLOG_COLS} />
@@ -225,6 +245,10 @@ export default function ClaudeVsChatGptPage() {
               three posts and Sonnet 4.6 used {SONNET46.emDashes}, even with a rule telling them not to. Both Claude 5.5
               models used none.
             </p>
+            <ProductFigure
+              shot={GUIDE_SHOTS.genericVsDraftly}
+              caption="Draftly checks every draft for these habits, whichever model wrote it. The generic paragraph trips four rules; the Draftly example trips none."
+            />
           </Section>
           <div className="max-w-4xl">
             <ModelTable caption="AI writing habits across three posts (lower is better, except posts in range)" rows={BLOG} cols={HABIT_COLS} />
@@ -240,6 +264,12 @@ export default function ClaudeVsChatGptPage() {
               each judge scored its own model lower than the other judge did. GPT 5.4 gave itself 77, and the Gemini judge
               gave it 81.
             </p>
+            <BarChart
+              title="Voice score, out of 100 (how human the writing sounds)"
+              groups={APP_GROUPS}
+              rows={barRows([...BLOG].sort((a, b) => b.voice - a.voice), (m) => blog(m).voice)}
+              note="Average of two AI judges running a 13-point human-voice audit on each post."
+            />
           </Section>
 
           <Section id="copywriting" title="Copywriting: close to a tie">
@@ -269,6 +299,10 @@ export default function ClaudeVsChatGptPage() {
               prices from our test, which is what a tool like Draftly pays. A ChatGPT or Claude subscription is a flat
               monthly fee.
             </p>
+            <ContentImage
+              image={STOCK.writingAtDesk}
+              caption="At a few cents a draft, cost rarely decides it. Pick the model whose drafts need the least editing."
+            />
           </Section>
 
           <Section id="which-to-pick" title="Which to pick for each job">
@@ -319,6 +353,7 @@ export default function ClaudeVsChatGptPage() {
               writing rules and the same check for AI-sounding writing. Credits per post are on the{" "}
               <A href="/pricing">pricing page</A>.
             </p>
+            <ProductFigure shot={GUIDE_SHOTS.urlToPost} caption="Paste your URL and Draftly writes the post with Claude Sonnet 5.5 unless you pick another model. The example plumber is made up." />
             <p>
               If you&apos;d rather keep writing in the Claude or ChatGPT app, the <A href="/mcp">Draftly MCP connector</A>{" "}
               brings your brand voice and past posts into the chat.

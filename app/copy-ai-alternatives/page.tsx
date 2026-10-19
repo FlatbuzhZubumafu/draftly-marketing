@@ -8,6 +8,9 @@ import { TocLayout } from "@/components/OnThisPage";
 import { KeepReading } from "@/components/KeepReading";
 import { SignupCta } from "@/components/SignupCta";
 import { ProductFigure } from "@/components/ProductFigure";
+import { BarChart } from "@/components/BarChart";
+import { ContentImage } from "@/components/ContentImage";
+import { STOCK } from "@/lib/stock-images";
 import { SourceLinks } from "@/components/SourceLinks";
 import { GUIDE_SHOTS, imageObjectJsonLd } from "@/lib/product-shots";
 import { JASPER_PRO } from "@/lib/jasper-vs-draftly";
@@ -132,6 +135,10 @@ export default function CopyAiAlternativesPage() {
               The pricing page names no CMS integration.{src([SOURCES.copyaiPricing])} The jump from ${CHAT.monthly} to{" "}
               {money(CA_GROWTH.monthly)} a month is why small teams who want more than chat go looking.
             </p>
+            <ContentImage
+              image={STOCK.planningWithStickyNotes}
+              caption="Copy.ai now builds for sales and go-to-market teams. If your team mostly plans and writes marketing content, the tools below fit better."
+            />
           </Section>
 
           <section id="at-a-glance" className="mt-16">
@@ -241,6 +248,16 @@ export default function CopyAiAlternativesPage() {
                   <B>Publishing:</B> Jasper lists a Webflow app. Copy.ai&apos;s pricing page names no CMS.
                 </>,
               ]}
+            />
+            <BarChart
+              title="Monthly price for a team of five"
+              rows={[
+                { key: "copyai", label: `Copy.ai ${CHAT.name}`, value: CHAT.monthly },
+                { key: "jasper", label: "Jasper Pro, 5 seats", value: JASPER_PRO.monthly * 5 },
+              ]}
+              max={JASPER_PRO.monthly * 5}
+              format={(n) => `$${n}`}
+              note={`Monthly billing, from each company's pricing page, checked ${CHECKED.label}.`}
             />
             <p>
               For marketing copy, pick Jasper. For sales workflows, Copy.ai. For a small team that mainly wants chat, Copy.ai

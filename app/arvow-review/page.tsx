@@ -8,6 +8,9 @@ import { TocLayout } from "@/components/OnThisPage";
 import { KeepReading } from "@/components/KeepReading";
 import { SignupCta } from "@/components/SignupCta";
 import { ProductFigure } from "@/components/ProductFigure";
+import { BarChart } from "@/components/BarChart";
+import { ContentImage } from "@/components/ContentImage";
+import { STOCK } from "@/lib/stock-images";
 import { SourceLinks } from "@/components/SourceLinks";
 import { CompareTable, type CompareRow } from "@/components/CompareTable";
 import { GUIDE_SHOTS, imageObjectJsonLd } from "@/lib/product-shots";
@@ -174,6 +177,10 @@ export default function ArvowReviewPage() {
                 </>,
               ]}
             />
+            <ContentImage
+              image={STOCK.workingFromHome}
+              caption="Arvow packs writing, automation, backlinks and AI visibility tracking into one subscription."
+            />
           </Section>
 
           <Section id="pricing" title="Arvow pricing">
@@ -193,6 +200,12 @@ export default function ArvowReviewPage() {
               Article counts are our math: credits divided by {ARVOW_CREDITS_PER_ARTICLE}, assuming you spend them only on
               articles. Arvow doesn&apos;t state an article count.
             </p>
+            <BarChart
+              title="Articles a month on each Arvow plan (our math)"
+              rows={ARVOW_PLANS.map((p) => ({ key: p.name, label: `${p.name}, $${p.yearlyMonthly}/mo yearly`, value: arvowArticles(p.credits) }))}
+              max={arvowArticles(ARVOW_PLANS[ARVOW_PLANS.length - 1].credits)}
+              note={`Monthly credits divided by ${ARVOW_CREDITS_PER_ARTICLE} credits an article, if you spend them only on articles. Checked ${CHECKED.label}.`}
+            />
             <p>
               Solo includes AutoBlog, AI chat, the MCP server, the site optimizer, images and the API. Business adds the
               backlink exchange, AI visibility tracking, local SEO tools, custom images and 1 sub-account. Ultimate adds

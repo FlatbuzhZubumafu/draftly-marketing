@@ -13,6 +13,8 @@ import { TocLayout } from "@/components/OnThisPage";
 import { KeepReading } from "@/components/KeepReading";
 import { ProductFigure } from "@/components/ProductFigure";
 import { GUIDE_SHOTS, INTEGRATIONS_SHOT, imageObjectJsonLd } from "@/lib/product-shots";
+import { ContentImage } from "@/components/ContentImage";
+import { STOCK } from "@/lib/stock-images";
 
 export const revalidate = 3600;
 
@@ -171,6 +173,10 @@ export default async function ForTeamsPage() {
               anyone on the account can publish. And Draftly serves businesses in the United States only, so teammates
               outside the US can&apos;t create a login.
             </p>
+            <ContentImage
+              image={STOCK.teamAtCafeTable}
+              caption="Everyone signs in with their own login and works from the same websites, posts and brand settings."
+            />
           </Section>
 
           <Section id="agencies" title="For agencies running several client blogs">
@@ -188,6 +194,10 @@ export default async function ForTeamsPage() {
               If you already sell SEO retainers, Draftly covers the writing side. Strategy, links and technical fixes stay
               with your team. The <A href="/ai-seo-agency-vs-tool">AI SEO agency vs tool guide</A> splits up who does what.
             </p>
+            <ContentImage
+              image={STOCK.teamWorkingTogether}
+              caption="Each client website keeps its own voice, details and credits, so the whole team can work across clients without mixing them up."
+            />
           </Section>
 
           <Section id="brand-voice" title="Every writer on the team sounds like the brand">
