@@ -13,6 +13,7 @@ import { TocLayout } from "@/components/OnThisPage";
 import { KeepReading } from "@/components/KeepReading";
 import { ProductFigure } from "@/components/ProductFigure";
 import { GUIDE_SHOTS } from "@/lib/product-shots";
+import { AccentText } from "@/components/AccentText";
 
 export const revalidate = 3600;
 
@@ -88,9 +89,9 @@ export default async function AiCopywriterPage() {
           <header className="max-w-3xl">
             <h1 className="page-heading mb-6" style={{ fontSize: "clamp(2.1rem, 5vw, 56px)" }}>
               The AI copywriter{" "}
-              <em className="italic" style={{ color: "var(--color-accent)" }}>
+              <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">
                 for small-business blogs
-              </em>
+              </AccentText>
             </h1>
             <p className="text-lg leading-relaxed mb-8" style={{ color: "var(--color-text-secondary)" }}>
               Draftly is an AI copywriter that writes blog posts for small businesses in their own brand voice, checks

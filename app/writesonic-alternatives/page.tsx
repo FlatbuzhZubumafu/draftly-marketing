@@ -24,6 +24,7 @@ import {
   type Source,
 } from "@/lib/writesonic-alternatives";
 import { pageImages } from "@/lib/og";
+import { AccentText } from "@/components/AccentText";
 
 export const revalidate = 3600;
 
@@ -129,9 +130,9 @@ export default function WritesonicAlternativesPage() {
           <header className="max-w-3xl">
             <h1 className="page-heading mb-6" style={{ fontSize: "clamp(2.1rem, 5vw, 56px)" }}>
               Writesonic alternatives{" "}
-              <em className="italic" style={{ color: "var(--color-accent)" }}>
+              <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">
                 for SEO blog posts
-              </em>
+              </AccentText>
             </h1>
             <p className="text-lg leading-relaxed mb-4" style={secondary}>
               Writesonic is now an AI search visibility platform first. Its plans start at ${WS_STARTER.yearlyMonthly} a

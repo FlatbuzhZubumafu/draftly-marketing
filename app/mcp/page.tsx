@@ -10,6 +10,8 @@ import { TocLayout } from "@/components/OnThisPage";
 import { KeepReading } from "@/components/KeepReading";
 import { ModelName } from "@/components/ProviderLogo";
 import { authorRef } from "@/lib/schema";
+import { FaqList } from "@/components/ArticleParts";
+import { AccentText } from "@/components/AccentText";
 
 export const revalidate = 3600;
 
@@ -138,9 +140,9 @@ export default async function McpPage() {
           <header className="max-w-3xl">
             <h1 className="page-heading mb-6" style={{ fontSize: "clamp(2.1rem, 5vw, 56px)" }}>
               Draftly in Your AI:{" "}
-              <em className="italic" style={{ color: "var(--color-accent)" }}>
+              <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">
                 The SEO MCP Connector
-              </em>
+              </AccentText>
             </h1>
             <p className="text-lg mb-8" style={{ color: "var(--color-text-secondary)" }}>
               Paste one URL into Claude, ChatGPT or Cursor. Your assistant gets your brand voice, your posts and your
@@ -319,19 +321,7 @@ export default async function McpPage() {
             </div>
           </section>
 
-          <section className="mt-20 max-w-3xl">
-            <h2 className="text-3xl font-medium mb-8" style={{ letterSpacing: "-0.03em" }}>
-              Questions
-            </h2>
-            <div className="space-y-6">
-              {FAQS.map((f) => (
-                <div key={f.q}>
-                  <h3 className="font-semibold mb-2">{f.q}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>{f.a}</p>
-                </div>
-              ))}
-            </div>
-          </section>
+          <FaqList faqs={FAQS} />
 
           <div className="max-w-3xl">
             <KeepReading exclude="/mcp" guides={["/best-ai-for-writing", "/seo-copywriting"]} topic="SEO MCP server for Claude and ChatGPT with live keyword data" />

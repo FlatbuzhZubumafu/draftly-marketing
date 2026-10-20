@@ -12,6 +12,7 @@ import { TocLayout } from "@/components/OnThisPage";
 import { KeepReading } from "@/components/KeepReading";
 import { ProductFigure } from "@/components/ProductFigure";
 import { GUIDE_SHOTS, imageObjectJsonLd } from "@/lib/product-shots";
+import { AccentText } from "@/components/AccentText";
 
 export const revalidate = 3600;
 
@@ -89,9 +90,9 @@ export default async function AgencyVsToolPage() {
           <header className="max-w-3xl">
             <h1 className="page-heading mb-6" style={{ fontSize: "clamp(2.1rem, 5vw, 56px)" }}>
               AI SEO agency or AI SEO tool:{" "}
-              <em className="italic" style={{ color: "var(--color-accent)" }}>
+              <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">
                 what should a small business pay for?
-              </em>
+              </AccentText>
             </h1>
             <p className="text-lg leading-relaxed mb-4" style={{ color: "var(--color-text-secondary)" }}>
               Pay an AI SEO agency when you need strategy, technical fixes, link building and someone accountable for

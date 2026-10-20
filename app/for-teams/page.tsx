@@ -15,6 +15,7 @@ import { ProductFigure } from "@/components/ProductFigure";
 import { GUIDE_SHOTS, INTEGRATIONS_SHOT, imageObjectJsonLd } from "@/lib/product-shots";
 import { ContentImage } from "@/components/ContentImage";
 import { STOCK } from "@/lib/stock-images";
+import { AccentText } from "@/components/AccentText";
 
 export const revalidate = 3600;
 
@@ -103,9 +104,9 @@ export default async function ForTeamsPage() {
           <header className="max-w-3xl">
             <h1 className="page-heading mb-6" style={{ fontSize: "clamp(2.1rem, 5vw, 56px)" }}>
               Draftly for teams:{" "}
-              <em className="italic" style={{ color: "var(--color-accent)" }}>
+              <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">
                 one brand voice for everyone who writes
-              </em>
+              </AccentText>
             </h1>
             <p className="text-lg leading-relaxed mb-4" style={{ color: "var(--color-text-secondary)" }}>
               Draftly is an AI blog writer for marketing teams and agencies. Your whole team works in one account, every

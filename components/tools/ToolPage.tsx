@@ -12,6 +12,7 @@ import { aiToolsEnabled } from "@/lib/tools/ai/gateway";
 import { FREE_TOOLS, TOOLS_DATE, TOOLS_HUB, type CheckerId, type FreeTool } from "@/lib/free-tools";
 import { jsonLdHtml } from "@/lib/schema";
 import { APP_URL, SITE_URL } from "@/lib/site";
+import { AccentText } from "@/components/AccentText";
 
 const card = { background: "var(--color-bg-surface)", border: "1px solid var(--color-border)" };
 const secondary = { color: "var(--color-text-secondary)" };
@@ -95,9 +96,9 @@ export async function ToolPage({ tool, children }: { tool: FreeTool; children?: 
             <p className="eyebrow mb-4">{tool.eyebrow}</p>
             <h1 className="page-heading mb-5" style={{ fontSize: "clamp(2.4rem, 6vw, 64px)" }}>
               {tool.h1}{" "}
-              <em className="italic" style={{ color: "var(--color-accent)" }}>
+              <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">
                 {tool.h1Accent}
-              </em>
+              </AccentText>
             </h1>
             <p className="text-lg leading-relaxed" style={secondary}>
               {tool.intro}

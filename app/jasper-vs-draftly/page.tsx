@@ -24,6 +24,7 @@ import {
   type Source,
 } from "@/lib/jasper-vs-draftly";
 import { pageImages } from "@/lib/og";
+import { AccentText } from "@/components/AccentText";
 
 export const revalidate = 3600;
 
@@ -305,9 +306,9 @@ export default async function JasperVsDraftlyPage() {
             <p className="eyebrow mb-4">Jasper AI alternative</p>
             <h1 className="page-heading mb-5" style={{ fontSize: "clamp(2.6rem, 7vw, 72px)" }}>
               Jasper vs{" "}
-              <em className="italic" style={{ color: "var(--color-accent)" }}>
+              <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">
                 Draftly
-              </em>
+              </AccentText>
             </h1>
             <p className="text-lg sm:text-xl leading-relaxed" style={secondary}>
               Jasper is built for marketing teams. Draftly is built to grow a small business&apos;s blog.
