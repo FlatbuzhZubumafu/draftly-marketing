@@ -1,3 +1,5 @@
+import { BENCHMARK } from "@/lib/benchmark";
+
 // Internal-linking map for the marketing site: the pillar pages every related page
 // should point to, and posts that stay live but out of search.
 
@@ -18,7 +20,7 @@ export const PILLARS: Pillar[] = [
   },
   {
     href: "/best-ai-for-writing",
-    title: "Best AI for writing: 14 models tested",
+    title: `Best AI for writing: ${BENCHMARK.length} models tested`,
     blurb: "Which models write the most human-sounding posts, and what each one costs.",
     keywords: ["model", "chatgpt", "claude", "gpt", "llm", "ai writing", "benchmark"],
   },

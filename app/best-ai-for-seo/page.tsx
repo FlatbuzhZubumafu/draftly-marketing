@@ -3,7 +3,7 @@ import { SITE_URL } from "@/lib/site";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { A, B, Bullets, Byline, FaqList, Section, faqJsonLd, type Faq } from "@/components/ArticleParts";
-import { BENCHMARK, BENCHMARK_DATE, seoScore } from "@/lib/benchmark";
+import { BENCHMARK, BENCHMARK_DATE, BENCHMARK_UPDATED, seoScore } from "@/lib/benchmark";
 import { APP_MODEL_COUNT } from "@/lib/app-models";
 import { jsonLdHtml, authorRef } from "@/lib/schema";
 import { TocLayout } from "@/components/OnThisPage";
@@ -23,7 +23,7 @@ export const revalidate = 3600;
 // Targets "best ai for seo" (Ahrefs US: 400/mo, KD 0) and "best ai tool for seo" (600, KD 0),
 // checked 2026-10-16. The SERP is "best AI SEO tools" listicles, so the page sorts tools by
 // the SEO job they do. Third-party facts live in lib/best-ai-for-seo.ts, each read on the
-// company's own page. Model scores come from lib/benchmark.ts (Edition 1). No new test was run.
+// company's own page. Model scores come from lib/benchmark.ts (Edition 1, plus models added 2026-10-20). No new test was run.
 const PATH = "/best-ai-for-seo";
 const PUBLISHED = { iso: CHECKED.iso, label: CHECKED.label };
 const TITLE = "Best AI for SEO in 2026: The Right Tool for Each Job";
@@ -264,7 +264,7 @@ export default function BestAiForSeoPage() {
           <Section id="which-model" title="Which AI model writes the best SEO content">
             <p>
               Most of these tools let you pick the model, or pick it for you. We tested {BENCHMARK.length} models on the
-              same three blog briefs under the same rules on {BENCHMARK_DATE}, scoring formatting, human voice and 18 SEO
+              same three blog briefs under the same rules ({BENCHMARK_DATE}, with new models added {BENCHMARK_UPDATED}), scoring formatting, human voice and 18 SEO
               checks (keyword placement, meta title, meta description and FAQ).
             </p>
             <Bullets
@@ -289,10 +289,10 @@ export default function BestAiForSeoPage() {
               after losing points for length and contrast phrasing. Claude Haiku 4.5 came last at {HAIKU.overall} with {HAIKU.emDashes} em dashes across three posts.
             </p>
             <BarChart
-              title="On-page SEO checks passed, out of 18, all 14 models"
+              title={`On-page SEO checks passed, out of 18, all ${BENCHMARK.length} models`}
               rows={[...BENCHMARK].sort((a, b) => seoScore(b) - seoScore(a) || b.overall - a.overall).map((r) => ({ key: r.model, label: r.model, value: seoScore(r) }))}
               max={18}
-              note={`Keyword placement, meta title, meta description and FAQ, checked by code on three posts per model. Benchmark run ${BENCHMARK_DATE}.`}
+              note={`Keyword placement, meta title, meta description and FAQ, checked by code on three posts per model. Benchmark run ${BENCHMARK_DATE}, updated ${BENCHMARK_UPDATED}.`}
             />
             <p>
               Full results are on the <A href="/best-ai-for-writing">best AI for writing</A> benchmark, and{" "}

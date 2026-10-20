@@ -152,7 +152,7 @@ export const COPYAI_ALTERNATIVES: Alternative[] = [
     bestFor: "One person who wants a strong writing model in a chat app",
     startingPrice: "$20 a month (Pro), or $17 a month billed yearly",
     publishing: "None. You copy drafts into your CMS",
-    summary: "If you mostly used Copy.ai as a chat window, a chat app does the same job. Claude Pro is $20 a month, or $17 billed yearly. Claude Opus 5.5 scored 93.8 on blog posts in Draftly's writing benchmark, third of 14 models.",
+    summary: "If you mostly used Copy.ai as a chat window, a chat app does the same job. Claude Pro is $20 a month, or $17 billed yearly. Claude Opus 5.5 scored 93.8 on blog posts in Draftly's writing benchmark, third of 19 models.",
     pickIf: "You write one draft at a time and are happy to edit and publish by hand.",
     skipIf: "You're a team of five. Copy.ai Chat at $29 a month for 5 seats is cheaper than five chat subscriptions.",
     sources: [SOURCES.claudePricing],

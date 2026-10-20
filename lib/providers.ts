@@ -11,6 +11,8 @@ const RULES: [RegExp, string][] = [
   [/^grok\b/i, "xAI"],
   [/^(mistral|magistral|codestral)\b/i, "Mistral AI"],
   [/^cursor\b/i, "Cursor"],
+  [/^muse\b/i, "Meta"],
+  [/^minimax\b/i, "MiniMax"],
 ];
 
 /** The provider behind a model or app name, e.g. "Claude Sonnet 5.5" -> "Anthropic". */
