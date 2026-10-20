@@ -5,6 +5,7 @@
 // guess. Draftly's side must match lib/pricing.ts and the app.
 
 import { PAID_PLANS } from "./pricing";
+import type { FeatureId } from "@/lib/features";
 
 const [SOLO, GROWTH] = PAID_PLANS;
 
@@ -142,7 +143,7 @@ export const CALLOUTS: Callout[] = [
 
 /** The checkmark table. `true` = has it, `false` = doesn't, a string = the detail. */
 export type Cell = boolean | string;
-export type TableRow = { label: string; draftly: Cell; jasper: Cell; draftlyNote?: string; jasperNote?: string; /** The /feature page for this row. */ feature?: string };
+export type TableRow = { label: string; draftly: Cell; jasper: Cell; draftlyNote?: string; jasperNote?: string; /** The /feature page for this row, by feature id (lib/features.ts). */ feature?: FeatureId };
 
 export const TABLE: TableRow[] = [
   { label: "Built for", draftly: "Small-business blogs", jasper: "Marketing teams" },

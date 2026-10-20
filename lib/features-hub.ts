@@ -2,19 +2,19 @@
 // search (People Also Ask, Reddit, Quora; sources below, checked 2026-10-20). Each
 // answer only restates what lib/features.ts and the homepage already claim.
 import type { ArtName } from "@/components/feature-art/FeatureArt";
-import type { CategoryId } from "@/lib/features";
+import type { CategoryId, FeatureId } from "@/lib/features";
 import { GUIDE_SHOTS, INTEGRATIONS_SHOT, STEP_SHOTS, type ProductShot } from "@/lib/product-shots";
 
-/** A run of answer text: plain words, or a link to a feature page by slug. */
-export type Seg = string | { slug: string; text: string };
+/** A run of answer text: plain words, or a link to a feature page by feature id. */
+export type Seg = string | { id: FeatureId; text: string };
 
 export type PainPoint = {
   id: string;
   question: string;
   /** Answer-first paragraphs. */
   answer: Seg[][];
-  /** Feature slugs shown as chips under the answer. */
-  features: string[];
+  /** Feature ids shown as chips under the answer. */
+  features: FeatureId[];
   tint: CategoryId;
   graphic: { shot: ProductShot } | { art: ArtName; caption: string };
   /** Where the question came from, for the PR and future edits. Not rendered. */
@@ -31,11 +31,11 @@ export const PAIN_POINTS: PainPoint[] = [
       ],
       [
         "Draftly checks every draft for those patterns before you see it, and a draft that fails a rule gets one automatic fix pass. That's the ",
-        { slug: "writing-rules", text: "writing rules checker" },
+        { id: "writing-rules", text: "writing rules checker" },
         ". For copy you already have, the ",
-        { slug: "ai-detector", text: "AI writing detector" },
+        { id: "ai-detector", text: "AI content detector" },
         " shows which passages read like AI, and the ",
-        { slug: "editor", text: "Editor" },
+        { id: "editor", text: "AI copy editor" },
         " rewrites only those sentences.",
       ],
     ],
@@ -53,12 +53,12 @@ export const PAIN_POINTS: PainPoint[] = [
     answer: [
       [
         "Yes. Draftly reads your website and sets eight tone sliders from it, then fills in what you sell and who you sell to. Every post and every edit uses that ",
-        { slug: "brand-voice", text: "brand voice" },
+        { id: "brand-voice", text: "brand voice" },
         ".",
       ],
       [
         "You can move any slider, list words you always or never use, and type changes in plain words. Your ratings and edits nudge the voice a few points at a time, and Brand Memory lets you undo any change. If you write in Claude or ChatGPT, the ",
-        { slug: "mcp", text: "Draftly connector" },
+        { id: "mcp", text: "Draftly connector" },
         " gives them the same voice.",
       ],
     ],
@@ -79,9 +79,9 @@ export const PAIN_POINTS: PainPoint[] = [
       ],
       [
         "Each idea is checked against your website first, so old news, competitor announcements and off-topic ideas are dropped before you see them. Pick one of the ",
-        { slug: "topic-ideas", text: "topic ideas" },
-        " and Draftly writes the post. To check a keyword before you write, use the ",
-        { slug: "seo-research", text: "SEO research data" },
+        { id: "topic-ideas", text: "blog topic ideas" },
+        " and Draftly writes the post. To check a keyword before you write, use Draftly's ",
+        { id: "seo-research", text: "keyword research" },
         ".",
       ],
     ],
@@ -98,12 +98,12 @@ export const PAIN_POINTS: PainPoint[] = [
     answer: [
       [
         "Give the writer real sources and check every number against them. Draftly's ",
-        { slug: "writing-rules", text: "writing rules" },
+        { id: "writing-rules", text: "writing rules" },
         " fail any number with no source, and the checker compares the figures in a post with the sources the writer was given, so a made-up statistic gets flagged.",
       ],
       [
         "When the ",
-        { slug: "editor", text: "Editor" },
+        { id: "editor", text: "AI copy editor" },
         " rewrites a sentence, it drops any change to a number, quote or link. Someone who knows your business should still read each post before it goes live.",
       ],
     ],
@@ -121,12 +121,12 @@ export const PAIN_POINTS: PainPoint[] = [
     answer: [
       [
         "Yes. Connect WordPress once and Draftly ",
-        { slug: "publishing", text: "publishes a finished post" },
+        { id: "publishing", text: "publishes a finished post" },
         " with its title, slug, meta title and meta description in place, or sends it as a draft for you to review first. Shopify, Webflow, Ghost, Squarespace and HubSpot work the same way.",
       ],
       [
         "On the Autopilot plan, ",
-        { slug: "autopilot", text: "Autopilot scheduling" },
+        { id: "autopilot", text: "automated blogging" },
         " picks the topics, writes the posts and publishes them to WordPress or Shopify on a schedule you set. A weekly email lists everything that went out.",
       ],
     ],

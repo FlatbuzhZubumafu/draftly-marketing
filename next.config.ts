@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { FEATURE_SLUG_REDIRECTS } from "./lib/feature-redirects";
 
 const nextConfig: NextConfig = {
   images: {
@@ -59,6 +60,12 @@ const nextConfig: NextConfig = {
         destination: "/jasper-vs-draftly",
         permanent: true,
       },
+      // Feature pages renamed for search on launch day (lib/feature-redirects.ts).
+      ...Object.entries(FEATURE_SLUG_REDIRECTS).map(([from, to]) => ({
+        source: `/feature/${from}`,
+        destination: `/feature/${to}`,
+        permanent: true,
+      })),
       {
         source: "/faq",
         destination: "/#faq",

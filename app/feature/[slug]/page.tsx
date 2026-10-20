@@ -11,7 +11,7 @@ import { FeatureTile } from "@/components/FeatureTile";
 import { FeatureArt, isArtName } from "@/components/feature-art/FeatureArt";
 import { ProductFigure } from "@/components/ProductFigure";
 import { ThumbCard } from "@/components/ThumbCard";
-import { CATEGORIES, FEATURES, FEATURES_HUB, compareBasis, featurePath, featuresIn, getFeature } from "@/lib/features";
+import { CATEGORIES, FEATURES, FEATURES_HUB, compareBasis, featurePath, featuresIn, getFeature, getFeatureBySlug } from "@/lib/features";
 import { DIFFERENCE } from "@/lib/feature-pages";
 import { TINTS, tintVars } from "@/lib/feature-tints";
 import { getHomepageData } from "@/lib/graphql";
@@ -34,7 +34,7 @@ export function generateStaticParams() {
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const feature = getFeature((await params).slug);
+  const feature = getFeatureBySlug((await params).slug);
   if (!feature) return {};
   const path = featurePath(feature);
   return {
@@ -59,7 +59,7 @@ const NumberChip = ({ n, bg }: { n: number; bg: string }) => (
 const Dot = () => <span className="mt-[11px] h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: "var(--color-accent)" }} aria-hidden="true" />;
 
 export default async function FeaturePage({ params }: Props) {
-  const feature = getFeature((await params).slug);
+  const feature = getFeatureBySlug((await params).slug);
   if (!feature) notFound();
   const { marketingSettings: s } = await getHomepageData();
   const registerUrl = `${s.appName}/register`;
@@ -67,7 +67,7 @@ export default async function FeaturePage({ params }: Props) {
   const path = featurePath(feature);
   const category = CATEGORIES.find((c) => c.id === feature.category);
   const tint = TINTS[feature.category];
-  const diff = DIFFERENCE[feature.slug];
+  const diff = DIFFERENCE[feature.id];
   const related = feature.related.map(getFeature).filter((f) => f !== undefined);
   const guide = feature.guide ? GUIDES.find((g) => g.href === feature.guide!.href) : undefined;
   const guideThumb = feature.guide ? GUIDE_THUMBS[feature.guide.href] : undefined;
@@ -129,7 +129,7 @@ export default async function FeaturePage({ params }: Props) {
               </div>
               <div className="min-w-0">
                 <div className="rounded-2xl p-4 sm:p-8" style={{ background: "rgba(255,255,255,0.75)", border: "1.5px solid #111", boxShadow: `8px 8px 0 ${tint.fill}` }}>
-                  <FeatureArt name={isArtName(feature.slug) ? feature.slug : "writing-rules"} className="max-w-[520px] mx-auto" />
+                  <FeatureArt name={isArtName(feature.id) ? feature.id : "writing-rules"} className="max-w-[520px] mx-auto" />
                 </div>
               </div>
             </div>
@@ -251,7 +251,7 @@ export default async function FeaturePage({ params }: Props) {
               <div className="min-w-0">
                 <NumberChip n={1} bg={tint.soft} />
                 <h2 className="text-3xl sm:text-4xl font-medium mb-5" style={h2Style}>
-                  How it <AccentText squiggle="squiggle" color="var(--color-accent)" squiggleColor="#2f8ccc">works</AccentText>
+                  <SquiggleLast text={feature.howHeading ?? "How it works"} />
                 </h2>
                 {introRest.map((p) => (
                   <p key={p.slice(0, 24)} className="text-lg leading-relaxed mb-4" style={secondary}>
@@ -277,7 +277,7 @@ export default async function FeaturePage({ params }: Props) {
                   <ProductFigure shot={feature.shot} />
                 ) : (
                   <div className="rounded-xl p-4 sm:p-6" style={{ background: tint.bg, border: `1px solid ${tint.grid}` }}>
-                    <FeatureArt name={isArtName(feature.slug) ? feature.slug : "writing-rules"} className="max-w-[440px] mx-auto" />
+                    <FeatureArt name={isArtName(feature.id) ? feature.id : "writing-rules"} className="max-w-[440px] mx-auto" />
                   </div>
                 )}
               </div>
@@ -384,6 +384,19 @@ export default async function FeaturePage({ params }: Props) {
         />
       </main>
       <Footer />
+    </>
+  );
+}
+
+/** A heading with the site's blue squiggle under its last word. */
+function SquiggleLast({ text }: { text: string }) {
+  const i = text.lastIndexOf(" ");
+  return (
+    <>
+      {i > 0 ? `${text.slice(0, i)} ` : ""}
+      <AccentText squiggle="squiggle" color="var(--color-accent)" squiggleColor="#2f8ccc">
+        {text.slice(i + 1)}
+      </AccentText>
     </>
   );
 }
