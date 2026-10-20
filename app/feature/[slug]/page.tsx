@@ -118,12 +118,12 @@ export default async function FeaturePage({ params }: Props) {
                   {introLead}
                 </p>
                 <div className="flex flex-wrap items-center gap-3">
-                  <Link href="/pricing" className="btn btn-secondary" style={{ background: "rgba(255,255,255,0.7)" }}>
-                    See pricing
-                  </Link>
                   <a href={registerUrl} className="btn btn-primary">
                     {s.heroCtaText} <ArrowRight className="w-4 h-4" aria-hidden="true" />
                   </a>
+                  <Link href="/pricing" className="btn btn-secondary" style={{ background: "rgba(255,255,255,0.7)" }}>
+                    See pricing
+                  </Link>
                 </div>
               </div>
               <div className="min-w-0">
