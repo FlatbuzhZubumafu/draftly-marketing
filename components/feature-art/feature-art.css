@@ -1,0 +1,190 @@
+/*
+ * Feature art: flat ink drawings with a looping tease of what each feature does.
+ * Used by the /features cards (FeatureTile), the /features hero and the /feature/[slug] heroes.
+ * Only transform and opacity animate. With reduced motion nothing animates and the
+ * base styles below are the static frame, so every drawing is drawn to read at rest.
+ */
+
+.graph-paper {
+  background-color: var(--tint-band, #f0efed);
+  background-image:
+    linear-gradient(var(--tint-grid, rgba(0, 0, 0, 0.06)) 1px, transparent 1px),
+    linear-gradient(90deg, var(--tint-grid, rgba(0, 0, 0, 0.06)) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: -1px -1px;
+}
+
+.fa { display: block; width: 100%; height: auto; }
+.fa .ink { stroke: #111; stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.fa .thin { stroke-width: 2; }
+.fa .fill { fill: var(--art-fill, #ff7a4d); }
+.fa .soft { fill: var(--art-soft, #ffc0a8); }
+.fa .paper { fill: #fff; }
+.fa .inkfill { fill: #111; }
+.fa .line { stroke: #111; stroke-width: 4; stroke-linecap: round; stroke-opacity: 0.18; }
+.fa .line-strong { stroke: #111; stroke-width: 4; stroke-linecap: round; }
+.fa text { font-family: var(--font-ui); font-weight: 700; fill: #111; letter-spacing: -0.01em; }
+.fa .box { transform-box: fill-box; transform-origin: center; }
+.fa .from-left { transform-box: fill-box; transform-origin: left center; }
+.fa .from-bottom { transform-box: fill-box; transform-origin: center bottom; }
+
+/* Resting positions (also the reduced-motion frame). */
+.fa-topics .c2 { transform: translateY(44px); }
+.fa-topics .c3 { transform: translateY(88px); }
+
+/* States that only exist mid-loop start hidden when motion is allowed. */
+@media (prefers-reduced-motion: no-preference) {
+  /* topic-ideas: headlines cycle down the list, the top one gets the star */
+  .fa-topics .card { animation: fa-cycle 6s cubic-bezier(.6, 0, .3, 1) infinite; }
+  .fa-topics .card.c2 { animation-delay: -2s; }
+  .fa-topics .card.c3 { animation-delay: -4s; }
+  .fa-topics .star { animation: fa-pop 2s ease-in-out infinite; }
+
+  /* seo-research: the magnifier scans the bars as they grow */
+  .fa-research .lens { animation: fa-scan 4s ease-in-out infinite; }
+  .fa-research .bar { animation: fa-grow 4s ease-in-out infinite; }
+  .fa-research .b2 { animation-delay: .2s; }
+  .fa-research .b3 { animation-delay: .4s; }
+  .fa-research .b4 { animation-delay: .6s; }
+  .fa-research .b5 { animation-delay: .8s; }
+
+  /* brand-voice: sliders move */
+  .fa-voice .k1 { animation: fa-knob-a 5s ease-in-out infinite; }
+  .fa-voice .f1 { animation: fa-fill-a 5s ease-in-out infinite; }
+  .fa-voice .k2 { animation: fa-knob-b 5s ease-in-out infinite; }
+  .fa-voice .f2 { animation: fa-fill-b 5s ease-in-out infinite; }
+  .fa-voice .k3 { animation: fa-knob-c 5s ease-in-out infinite; }
+  .fa-voice .f3 { animation: fa-fill-c 5s ease-in-out infinite; }
+
+  /* ai-models: the selection ring moves between models, the draft writes */
+  .fa-models .ring { animation: fa-pick 6s cubic-bezier(.6, 0, .3, 1) infinite; }
+  .fa-models .w { animation: fa-write 3s ease-out infinite; }
+  .fa-models .w2 { animation-delay: .25s; }
+  .fa-models .w3 { animation-delay: .5s; }
+  .fa-models .w4 { animation-delay: .75s; }
+
+  /* writing-rules: a banned word gets struck and replaced */
+  .fa-rules .strike { animation: fa-strike 4s ease-in-out infinite; }
+  .fa-rules .old { animation: fa-out 4s ease-in-out infinite; }
+  .fa-rules .new { animation: fa-in 4s ease-in-out infinite; }
+  .fa-rules .badge { animation: fa-badge 4s ease-in-out infinite; }
+
+  /* ai-detector: the needle drops from "reads as AI" to human */
+  .fa-detector .needle { animation: fa-needle 4s cubic-bezier(.5, 0, .2, 1) infinite; }
+
+  /* editor: a sentence is highlighted, then rewritten */
+  .fa-editor .hl { animation: fa-highlight 4.5s ease-in-out infinite; }
+  .fa-editor .old { animation: fa-out-late 4.5s ease-in-out infinite; }
+  .fa-editor .new { animation: fa-in-late 4.5s ease-in-out infinite; }
+
+  /* seo-meta: the search result draws in, then the length check passes */
+  .fa-meta .w { animation: fa-write-hold 4s ease-out infinite; }
+  .fa-meta .w2 { animation-delay: .2s; }
+  .fa-meta .w3 { animation-delay: .4s; }
+  .fa-meta .w4 { animation-delay: .6s; }
+  .fa-meta .badge { animation: fa-badge 4s ease-in-out infinite; }
+
+  /* publishing: a post slides into a CMS tile */
+  .fa-publish .post { animation: fa-send 4s cubic-bezier(.6, 0, .3, 1) infinite; }
+  .fa-publish .lit { animation: fa-light 4s ease-in-out infinite; }
+
+  /* autopilot: posts land on the calendar while the clock turns */
+  .fa-auto .hand { animation: fa-spin 6s linear infinite; }
+  .fa-auto .dot { animation: fa-dot 6s ease-in-out infinite; }
+  .fa-auto .d2 { animation-delay: 1s; }
+  .fa-auto .d3 { animation-delay: 2s; }
+  .fa-auto .d4 { animation-delay: 3s; }
+
+  /* analytics: bars climb, the trend arrow pops */
+  .fa-analytics .bar { animation: fa-climb 4s ease-out infinite; }
+  .fa-analytics .b2 { animation-delay: .15s; }
+  .fa-analytics .b3 { animation-delay: .3s; }
+  .fa-analytics .b4 { animation-delay: .45s; }
+  .fa-analytics .b5 { animation-delay: .6s; }
+  .fa-analytics .arrow { animation: fa-badge 4s ease-in-out infinite; }
+
+  /* mcp: requests travel from the chat to Draftly */
+  .fa-mcp .pkt { animation: fa-travel 2.4s linear infinite; }
+  .fa-mcp .p2 { animation-delay: -.8s; }
+  .fa-mcp .p3 { animation-delay: -1.6s; }
+  .fa-mcp .badge { animation: fa-pop 2.4s ease-in-out infinite; }
+
+  /* wordpress-plugin: a suggestion pops up and gets approved */
+  .fa-wp .pop { animation: fa-suggest 5s cubic-bezier(.4, 0, .2, 1) infinite; }
+  .fa-wp .ok { animation: fa-press 5s ease-in-out infinite; }
+  .fa-wp .fixed { animation: fa-in-late 5s ease-in-out infinite; }
+  .fa-wp .old { animation: fa-out-late 5s ease-in-out infinite; }
+
+  /* teams: people join, the second website slides out */
+  .fa-teams .p { animation: fa-join 5s ease-out infinite; }
+  .fa-teams .pp2 { animation-delay: .3s; }
+  .fa-teams .pp3 { animation-delay: .6s; }
+  .fa-teams .site2 { animation: fa-fan 5s ease-in-out infinite; }
+
+  /* stat-check (hub illustration): an unsourced number is flagged */
+  .fa-stat .flag { animation: fa-badge 4s ease-in-out infinite; }
+  .fa-stat .ring { animation: fa-ring 4s ease-in-out infinite; }
+
+  /* hero flow: topic, draft, check, publish, one after another */
+  .fa-flow .stage { animation: fa-stage 8s ease-in-out infinite; }
+  .fa-flow .s2 { animation-delay: 2s; }
+  .fa-flow .s3 { animation-delay: 4s; }
+  .fa-flow .s4 { animation-delay: 6s; }
+  .fa-flow .t1 { animation: fa-t1 8s ease-in-out infinite; }
+  .fa-flow .t2 { animation: fa-t2 8s ease-in-out infinite; }
+  .fa-flow .t3 { animation: fa-t3 8s ease-in-out infinite; }
+  .fa-flow .t4 { animation: fa-t4 8s ease-in-out infinite; }
+  .fa-flow .w { animation: fa-write 4s ease-out infinite; animation-delay: 2s; }
+  .fa-flow .needle { animation: fa-needle 8s cubic-bezier(.5, 0, .2, 1) infinite; animation-delay: 3s; }
+}
+
+@keyframes fa-cycle {
+  0%, 25% { transform: translateY(0); opacity: 1; }
+  33%, 58% { transform: translateY(44px); opacity: 1; }
+  66%, 88% { transform: translateY(88px); opacity: 1; }
+  93% { transform: translateY(104px); opacity: 0; }
+  94% { transform: translateY(-16px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+@keyframes fa-pop { 0%, 100% { transform: scale(1) rotate(0); } 50% { transform: scale(1.25) rotate(15deg); } }
+@keyframes fa-scan { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(150px); } }
+@keyframes fa-grow { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.55); } }
+@keyframes fa-knob-a { 0%, 100% { transform: translateX(0); } 40% { transform: translateX(70px); } 70% { transform: translateX(30px); } }
+@keyframes fa-fill-a { 0%, 100% { transform: scaleX(1); } 40% { transform: scaleX(2.17); } 70% { transform: scaleX(1.5); } }
+@keyframes fa-knob-b { 0%, 100% { transform: translateX(0); } 40% { transform: translateX(-60px); } 70% { transform: translateX(-20px); } }
+@keyframes fa-fill-b { 0%, 100% { transform: scaleX(1); } 40% { transform: scaleX(.4); } 70% { transform: scaleX(.8); } }
+@keyframes fa-knob-c { 0%, 100% { transform: translateX(0); } 40% { transform: translateX(40px); } 70% { transform: translateX(80px); } }
+@keyframes fa-fill-c { 0%, 100% { transform: scaleX(1); } 40% { transform: scaleX(1.5); } 70% { transform: scaleX(2); } }
+@keyframes fa-pick { 0%, 28% { transform: translateY(0); } 36%, 61% { transform: translateY(42px); } 69%, 94% { transform: translateY(84px); } 100% { transform: translateY(0); } }
+@keyframes fa-write { 0% { transform: scaleX(0); } 40%, 85% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+@keyframes fa-write-hold { 0%, 5% { transform: scaleX(0); } 30%, 92% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+@keyframes fa-strike { 0%, 15% { transform: scaleX(0); opacity: 1; } 35%, 50% { transform: scaleX(1); opacity: 1; } 60%, 100% { transform: scaleX(1); opacity: 0; } }
+@keyframes fa-out { 0%, 50% { opacity: 1; } 60%, 95% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes fa-in { 0%, 55% { opacity: 0; transform: translateY(6px); } 68%, 92% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; } }
+@keyframes fa-badge { 0%, 60% { transform: scale(0); } 70% { transform: scale(1.2); } 76%, 92% { transform: scale(1); } 100% { transform: scale(0); } }
+@keyframes fa-needle { 0%, 15% { transform: rotate(62deg); } 55%, 85% { transform: rotate(-58deg); } 100% { transform: rotate(62deg); } }
+@keyframes fa-highlight { 0%, 10% { transform: scaleX(0); opacity: 1; } 35%, 55% { transform: scaleX(1); opacity: 1; } 65%, 100% { transform: scaleX(1); opacity: 0; } }
+@keyframes fa-out-late { 0%, 55% { opacity: 1; } 62%, 95% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes fa-in-late { 0%, 58% { opacity: 0; } 68%, 92% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes fa-send { 0%, 10% { transform: translate(0, 0) scale(1); opacity: 1; } 55% { transform: translate(152px, -38px) scale(.55); opacity: 1; } 62%, 100% { transform: translate(152px, -38px) scale(.55); opacity: 0; } }
+@keyframes fa-light { 0%, 55% { opacity: 0; } 62%, 90% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes fa-spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+@keyframes fa-dot { 0%, 10% { transform: scale(0); } 18%, 85% { transform: scale(1); } 95%, 100% { transform: scale(0); } }
+@keyframes fa-climb { 0% { transform: scaleY(.15); } 45%, 90% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
+@keyframes fa-travel { 0% { transform: translateX(0); opacity: 0; } 15%, 85% { opacity: 1; } 100% { transform: translateX(84px); opacity: 0; } }
+@keyframes fa-suggest { 0%, 12% { transform: translateY(14px); opacity: 0; } 24%, 70% { transform: translateY(0); opacity: 1; } 80%, 100% { transform: translateY(0); opacity: 0; } }
+@keyframes fa-press { 0%, 45% { transform: scale(1); } 52% { transform: scale(.82); } 60%, 100% { transform: scale(1); } }
+@keyframes fa-join { 0% { transform: translateY(16px) scale(.6); opacity: 0; } 18%, 88% { transform: translateY(0) scale(1); opacity: 1; } 100% { transform: translateY(0) scale(1); opacity: 0; } }
+@keyframes fa-fan { 0%, 30% { transform: translate(0, 0) rotate(0); } 50%, 85% { transform: translate(34px, -6px) rotate(6deg); } 100% { transform: translate(0, 0) rotate(0); } }
+@keyframes fa-ring { 0%, 20% { transform: scale(.6); opacity: 0; } 35%, 90% { transform: scale(1); opacity: 1; } 100% { transform: scale(1); opacity: 0; } }
+@keyframes fa-stage { 0% { transform: scale(1); } 5%, 22% { transform: scale(1.05); } 28%, 100% { transform: scale(1); } }
+@keyframes fa-t1 { 0% { transform: scale(0); } 5% { transform: scale(1.25); } 8%, 94% { transform: scale(1); } 100% { transform: scale(0); } }
+@keyframes fa-t2 { 0%, 25% { transform: scale(0); } 30% { transform: scale(1.25); } 33%, 94% { transform: scale(1); } 100% { transform: scale(0); } }
+@keyframes fa-t3 { 0%, 50% { transform: scale(0); } 55% { transform: scale(1.25); } 58%, 94% { transform: scale(1); } 100% { transform: scale(0); } }
+@keyframes fa-t4 { 0%, 75% { transform: scale(0); } 80% { transform: scale(1.25); } 83%, 94% { transform: scale(1); } 100% { transform: scale(0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .fa * { animation: none !important; }
+  /* Static frame: show the rewritten line, not both. */
+  .fa-editor .old, .fa-wp .old { opacity: 0; }
+}
