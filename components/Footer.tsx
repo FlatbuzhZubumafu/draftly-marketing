@@ -117,7 +117,7 @@ export async function Footer() {
                 <rect x="4" y="10" width="16" height="11" rx="2" />
                 <path d="M8 10V7a4 4 0 0 1 8 0v3" />
               </svg>
-              Secure checkout by Stripe. SOC 2 Type II infrastructure from Supabase, Vercel and Stripe.
+              Secure checkout by Stripe. Hosted on Supabase, Vercel and Stripe, which hold SOC 2 Type II reports.
             </span>
           </p>
         </div>

@@ -30,7 +30,9 @@ export function HeroDemo({ settings, startingPrice }: { settings: MarketingSetti
     }
     setError("");
     setSubmitting(true);
-    window.location.href = `${s.appName}/register?url=${encodeURIComponent(siteUrl)}`;
+    // appName is the app's absolute URL (another origin), so the router can't take this.
+    // eslint-disable-next-line @next/next/no-location-assign-relative-destination
+    window.location.href =`${s.appName}/register?url=${encodeURIComponent(siteUrl)}`;
   };
 
   return (
