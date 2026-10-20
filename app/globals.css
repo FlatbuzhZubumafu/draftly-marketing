@@ -469,3 +469,7 @@ a:hover { color: var(--color-text-primary); }
   transition: background-color var(--transition-base), color var(--transition-base);
 }
 .feature-tile:hover .feature-tile-arrow { background: var(--color-text-primary); color: #fff; }
+
+/* AI content detector gauge: the needle swings from "human" to the score. */
+.detector-needle { transition: transform 900ms cubic-bezier(.5, 0, .2, 1); }
+@media (prefers-reduced-motion: reduce) { .detector-needle { transition: none; } }

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 const FAQS: Faq[] = [
   {
     q: "Are these SEO tools really free?",
-    a: "Yes, with no sign-up. To keep them fast for everyone, each visitor can run a few checks a minute and about 30 an hour. The two AI generators cost us a little per run, so they allow about 10 runs an hour and 20 a day.",
+    a: "Yes, with no sign-up. To keep them fast for everyone, each visitor can run a few checks a minute and about 30 an hour. The two AI generators cost us a little per run, so they allow about 10 runs an hour and 20 a day. The AI content detector and FAQ schema generator run in your browser, so pasted text has no limit.",
   },
   {
     q: "Do you store the URLs I check?",
@@ -32,11 +32,11 @@ const FAQS: Faq[] = [
   },
   {
     q: "Do these tools use AI?",
-    a: "The four checkers and the FAQ schema generator don't. Every check is a fixed rule run on your live pages, so the same page gets the same result each time, and the FAQ schema generator only formats what you type. The content brief and blog ideas generators do: an AI model (GPT 6 Luna) writes from what you enter, so read the results with your own judgment.",
+    a: "The four checkers, the AI content detector and the FAQ schema generator don't. Every check is a fixed rule run on your live pages, so the same page gets the same result each time. The AI content detector is a statistical model that runs in your browser, and the FAQ schema generator only formats what you type. The content brief and blog ideas generators do: an AI model (GPT 6 Luna) writes from what you enter, so read the results with your own judgment.",
   },
   {
     q: "Which tool should I start with?",
-    a: "Start with the AI visibility checker on your homepage. If AI and search bots can read the site, run the blog SEO checker and E-E-A-T checker on your best post, then the content refresh checker on the whole blog. When you're ready for new posts, get ideas from the blog ideas generator and plan each one with the content brief generator.",
+    a: "Start with the AI visibility checker on your homepage. If AI and search bots can read the site, run the blog SEO checker and E-E-A-T checker on your best post, then the content refresh checker on the whole blog. When you're ready for new posts, get ideas from the blog ideas generator and plan each one with the content brief generator. Before you publish, paste the draft into the AI content detector.",
   },
 ];
 
@@ -70,7 +70,7 @@ export default function ToolsHub() {
               </AccentText>
             </h1>
             <p className="text-lg leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-              Free tools for small-business blogs. Find out if AI assistants can read your site, score one post for SEO, find old posts to refresh, test a post for author trust signals and build FAQ schema. Then get post ideas for your site and a content brief for each one. No sign-up, and nothing you enter is stored.
+              Free tools for small-business blogs. Check whether a post reads like AI, find out if AI assistants can read your site, score one post for SEO, find old posts to refresh, test a post for author trust signals and build FAQ schema. Then get post ideas for your site and a content brief for each one. No sign-up, and nothing you enter is stored.
             </p>
           </header>
 

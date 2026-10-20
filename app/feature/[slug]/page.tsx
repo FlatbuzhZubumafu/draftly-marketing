@@ -11,7 +11,7 @@ import { FeatureTile } from "@/components/FeatureTile";
 import { FeatureArt, isArtName } from "@/components/feature-art/FeatureArt";
 import { ProductFigure } from "@/components/ProductFigure";
 import { ThumbCard } from "@/components/ThumbCard";
-import { CATEGORIES, FEATURES, FEATURES_HUB, compareBasis, featurePath, featuresIn, getFeature, getFeatureBySlug } from "@/lib/features";
+import { CATEGORIES, FEATURES, FEATURES_HUB, compareBasis, featurePath, featuresIn, getFeature, getFeatureBySlug, type FeatureId } from "@/lib/features";
 import { DIFFERENCE } from "@/lib/feature-pages";
 import { TINTS, tintVars } from "@/lib/feature-tints";
 import { getHomepageData } from "@/lib/graphql";
@@ -55,6 +55,11 @@ const NumberChip = ({ n, bg }: { n: number; bg: string }) => (
     {String(n).padStart(3, "0")}
   </span>
 );
+
+/** A free tool on /tools that runs the same check as the feature, linked under the hero buttons. */
+const FREE_TOOL: Partial<Record<FeatureId, { lead: string; label: string; href: string }>> = {
+  "ai-detector": { lead: "No sign-up needed:", label: "Try the free detector", href: "/tools/ai-content-detector" },
+};
 
 const Dot = () => <span className="mt-[11px] h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: "var(--color-accent)" }} aria-hidden="true" />;
 
@@ -126,6 +131,14 @@ export default async function FeaturePage({ params }: Props) {
                     See pricing
                   </Link>
                 </div>
+                {FREE_TOOL[feature.id] ? (
+                  <p className="mt-4 text-sm" style={{ color: "#3a3a3a" }}>
+                    {FREE_TOOL[feature.id]!.lead}{" "}
+                    <Link href={FREE_TOOL[feature.id]!.href} className="font-semibold underline underline-offset-2" style={{ color: "#111" }}>
+                      {FREE_TOOL[feature.id]!.label}
+                    </Link>
+                  </p>
+                ) : null}
               </div>
               <div className="min-w-0">
                 <div className="rounded-2xl p-4 sm:p-8" style={{ background: "rgba(255,255,255,0.75)", border: "1.5px solid #111", boxShadow: `8px 8px 0 ${tint.fill}` }}>

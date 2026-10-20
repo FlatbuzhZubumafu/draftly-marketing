@@ -7,7 +7,10 @@
 // checker 400, blog post seo checker 90; content refresh 350; e-e-a-t checker 100,
 // eeat checker 50, eeat audit 40; faq schema generator 600 (KD 4, 2026-10-15); seo
 // content brief template 700 (KD 7), ai content brief generator 300 (KD 3), content
-// brief generator 200 (KD 5); blog ideas generator 300 (KD 18), blog topic generator 80.
+// brief generator 200 (KD 5); blog ideas generator 300 (KD 18), blog topic generator 80;
+// ai content detector 14,800 (KD 79), ai detector and humanizer 1,900 (KD 51) (DataForSEO,
+// 2026-10-20). The AI content detector is the app's statistical detector, ported to
+// lib/tools/ai-detect and run in the browser; its URL mode only fetches the article text.
 // The four checkers are deterministic: no AI model sees the URL or the results. The FAQ
 // schema generator runs entirely in the browser (lib/tools/faq-schema.ts). The content
 // brief and blog ideas generators make one GPT 6 Luna call each and are off unless
@@ -17,12 +20,14 @@ import type { Faq } from "@/components/ArticleParts";
 export type CheckerId = "ai-visibility" | "blog-seo" | "content-refresh" | "eeat";
 /** The AI-written generators. The FAQ schema generator is a browser-only generator. */
 export type GeneratorId = "content-brief" | "blog-ideas";
-export type ToolId = CheckerId | GeneratorId | "faq-schema";
+export type ToolId = CheckerId | GeneratorId | "faq-schema" | "ai-detector";
 
 export type FreeTool = {
   id: ToolId;
-  /** "checker" (default) fetches a URL through /api/tools; "generator" runs in the browser. */
-  kind?: "checker" | "generator";
+  /** "checker" (default) fetches a URL through /api/tools; "generator" runs in the browser; "detector" scores text in the browser. */
+  kind?: "checker" | "generator" | "detector";
+  /** Sign-up link intent (?intent=...), so the app can open on the right screen. */
+  registerIntent?: string;
   path: string;
   /** Short name for cards and nav. */
   name: string;
@@ -41,7 +46,7 @@ export type FreeTool = {
   checksHeading?: string;
   checksNote?: string;
   /** How Draftly relates to what this tool finds. Only facts the app supports. */
-  draftly: { title: string; points: string[]; cta: string };
+  draftly: { title: string; points: string[]; cta: string; /** Button label; defaults to the site's hero CTA. */ button?: string };
   /** Optional extra sections shown after "What this checker looks at". */
   sections?: { id: string; heading: string; paragraphs: string[]; sources?: { label: string; href: string }[] }[];
   faqs: Faq[];
@@ -52,6 +57,114 @@ export type FreeTool = {
 export const TOOLS_DATE = { iso: "2026-10-13", label: "October 2026" };
 
 export const FREE_TOOLS: FreeTool[] = [
+  {
+    id: "ai-detector",
+    kind: "detector",
+    registerIntent: "detector",
+    path: "/tools/ai-content-detector",
+    name: "AI content detector",
+    title: "Free AI content detector: check if text reads like AI",
+    description:
+      "Free AI content detector and AI checker. Paste text or a URL to get a 0 to 100 score, the signals behind it and the sentences that read like AI. No sign-up.",
+    eyebrow: "Free AI detector, no sign-up",
+    h1: "Free AI content detector: does your text",
+    h1Accent: "read like AI?",
+    intro:
+      "Paste your text or enter a URL and this free AI checker scores how much the writing reads like AI, from 0 to 100. It shows the signals behind the score and highlights the sentences that pull it up, with the reasons for each. Pasted text is scored in your browser and never leaves your device.",
+    input: { label: "Text to check", placeholder: "Paste a blog post, page or email here.", button: "Check for AI writing" },
+    checksHeading: "What the AI detector measures",
+    checksNote:
+      "A small statistical model weighs these signals. No AI model reads your text, so the same text always gets the same score. Treat the score as a list of sentences to reread: no detector can prove who wrote something.",
+    checks: [
+      { label: "Burstiness", text: "How much sentence lengths vary. People mix short and long sentences; unedited AI text keeps them even." },
+      { label: "AI-typical words", text: "Crucial, ensure, leverage, seamless, \"plays a key role\" and over 100 more, counted per 100 words." },
+      { label: "Stock transitions", text: "Sentences that open with Additionally, Moreover, Furthermore or Ultimately." },
+      { label: "Three-item lists", text: "Lists of three short items used for rhythm, like \"comfort, safety, and peace of mind\"." },
+      { label: "Repeated openers", text: "Many sentences that start with the same word." },
+      { label: "Specifics", text: "Names, places, numbers and quotes. Generic sentences with none of them score higher." },
+      { label: "Contractions and punctuation", text: "No don't or it's in a long text, and nothing but commas and periods." },
+      { label: "Flagged sentences", text: "The sentences in high-scoring passages that carry the most tells, each with its reasons." },
+    ],
+    sections: [
+      {
+        id: "how-the-score-works",
+        heading: "How the AI score works",
+        paragraphs: [
+          "The detector splits your text into passages of at least 45 words and three sentences, measures the signals above in each one and in the whole text, and turns them into a score from 0 to 100. Under 40 reads as likely human, 40 to 69 is mixed, and 70 or more reads as likely AI.",
+          "A passage that scores 65 or more is flagged, and its sentences with the most tells are highlighted. Headings, block quotes, code and tables are skipped. With little text the score is pulled down toward human, so a two-sentence paragraph can never be called AI on its own.",
+          "Confidence depends on length: low under 150 words, medium up to 399 and high from 400. It's the same detector Draftly runs in the app as the Reads as AI score, so a post scores the same here and there.",
+        ],
+      },
+      {
+        id: "can-a-detector-prove-ai",
+        heading: "Can an AI detector prove who wrote something?",
+        paragraphs: [
+          "No. Detectors like this one measure how a text is written, and people write in many ways. Plain, formulaic or non-native English can score high even when a person wrote every word, and AI text that someone edited can score low.",
+          "OpenAI withdrew its own AI text classifier in 2023 because of its low accuracy, and a Stanford study found popular detectors flagged essays by non-native English writers far more often than essays by native speakers.",
+          "So don't use the score to accuse a student, a freelancer or an employee. Use it to find the sentences that sound generic, then rewrite them.",
+        ],
+        sources: [
+          { label: "OpenAI on its AI classifier", href: "https://openai.com/index/new-ai-classifier-for-indicating-ai-written-text/" },
+          { label: "Liang et al., GPT detectors are biased against non-native English writers", href: "https://arxiv.org/abs/2304.02819" },
+        ],
+      },
+      {
+        id: "ai-detector-and-humanizer",
+        heading: "From AI detector to humanizer: fixing flagged sentences",
+        paragraphs: [
+          "Each flagged sentence comes with its reasons, and most fixes are small. Swap the stock word for the plain one. Cut the transition. Replace the three-item list with the one item that matters. Add the name, the number or the example only you know.",
+          "Then vary the rhythm: split one long sentence, join two short ones. Paste the result back in and check again.",
+          "Draftly's Editor does this for you. It runs the same check, rewrites only the flagged sentences and keeps numbers, quotes and links exactly as written. You keep or reject each change.",
+        ],
+      },
+    ],
+    draftly: {
+      title: "Fix the flagged sentences in Draftly",
+      points: [
+        "Draftly runs this same detector as the Reads as AI score, next to Human voice, Readability and SEO scores.",
+        "Edit rewrites only the flagged sentences. Numbers, quotes and links stay exactly as written, and you keep or reject each change.",
+        "Bring in copy by pasting it, entering a page URL or pulling a post from your connected CMS.",
+      ],
+      cta: "Free first post. No credit card.",
+      button: "Fix the flagged sentences",
+    },
+    faqs: [
+      {
+        q: "Is this AI content detector free?",
+        a: "Yes, with no sign-up. Pasted text is scored in your browser, so there's no limit on how often you check it. Checking a URL uses our server to fetch the page, so each visitor can run a few URL checks a minute and about 30 an hour.",
+      },
+      {
+        q: "How accurate is this AI detector?",
+        a: "We haven't tested it against a public benchmark, so we don't quote an accuracy figure. It's a statistical model tuned by hand on sample texts. It's good at spotting unedited AI drafts and generic copy, and it can be wrong on plain human writing. Read it as a list of sentences to look at again.",
+      },
+      {
+        q: "What does the AI detector look for?",
+        a: "Sentence length variety (burstiness), AI-typical words and phrases, stock transitions like Additionally and Moreover, decorative three-item lists, sentences that open the same way, few names or numbers, no contractions, flat punctuation and sentences that all run about 20 words.",
+      },
+      {
+        q: "What is burstiness in AI detection?",
+        a: "How much sentence lengths vary. People write a four-word sentence, then a thirty-word one. Unedited AI text tends to keep every sentence about the same length, and this detector counts that as one of its strongest signals.",
+      },
+      {
+        q: "Is my text stored or used for training?",
+        a: "No. Pasted text is scored in your browser and never sent to Draftly. For a URL, our server fetches the page, pulls out the article text and sends it back to your browser to score. We don't store the URL, the text or the result, and no AI model reads it.",
+      },
+      {
+        q: "Why does my own writing score as AI?",
+        a: "Writing that is plain, even and generic shares traits with AI text: sentences of the same length, stock transitions, no names or numbers. Templates, product copy and non-native English often score higher for that reason. Short texts are less reliable too.",
+      },
+      {
+        q: "How much text do I need?",
+        a: "At least 45 words and three sentences. Under that, the tool says the text is too short to score reliably. 150 words gives medium confidence and 400 or more gives high confidence.",
+      },
+      {
+        q: "Can it tell if text came from ChatGPT, Claude or Gemini?",
+        a: "It doesn't name a model. It measures traits common in unedited output from any of them. Text that a person has edited, or a model told to write with specifics and varied sentences, can score as human.",
+      },
+    ],
+    ogAlt: "Free AI content detector from Draftly: a Reads as AI score from 0 to 100 with the flagged sentences highlighted",
+    ogLine: "A 0 to 100 AI score and the sentences behind it",
+  },
   {
     id: "ai-visibility",
     path: "/tools/ai-visibility-checker",
@@ -543,5 +656,5 @@ export const TOOLS_HUB = {
   path: "/tools",
   title: "Free SEO Tools for Small Business Blogs",
   description:
-    "Seven free SEO tools for your blog: AI visibility, blog SEO, content refresh and E-E-A-T checkers, plus FAQ schema, content brief and blog ideas generators.",
+    "Eight free blog tools: an AI content detector, AI visibility, blog SEO, content refresh and E-E-A-T checkers, plus FAQ schema, brief and blog ideas generators.",
 };
