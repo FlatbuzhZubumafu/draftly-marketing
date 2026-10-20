@@ -12,6 +12,7 @@ import { imageObjectJsonLd } from "@/lib/product-shots";
 import { jsonLdHtml } from "@/lib/schema";
 import { WP_PLANS, WP_PLUGIN_DOWNLOAD_PATH, WP_PLUGIN_PATH, WP_PLUGIN_VERSION, WP_SHOTS, WP_TOP_UPS } from "@/lib/wordpress-plugin";
 import { pageImages } from "@/lib/og";
+import { AccentText } from "@/components/AccentText";
 
 export const revalidate = 3600;
 
@@ -180,9 +181,9 @@ export default function WordPressAiPluginPage() {
             </p>
             <h1 className="page-heading mb-6" style={{ fontSize: "clamp(2.1rem, 5vw, 56px)" }}>
               The AI post optimizer{" "}
-              <em className="italic" style={{ color: "var(--color-accent)" }}>
+              <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">
                 for WordPress
-              </em>
+              </AccentText>
             </h1>
             <p className="text-lg leading-relaxed mb-4" style={{ color: "var(--color-text-secondary)" }}>
               Draftly AI Post Optimizer is the AI plugin for WordPress that fixes the posts you already have. Your SEO

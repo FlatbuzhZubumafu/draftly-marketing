@@ -28,6 +28,7 @@ import {
   koalaArticles,
 } from "@/lib/competitor-reviews";
 import { pageImages } from "@/lib/og";
+import { AccentText } from "@/components/AccentText";
 
 export const revalidate = 3600;
 
@@ -133,9 +134,9 @@ export default function KoalaReviewPage() {
           <header className="max-w-3xl">
             <h1 className="page-heading mb-6" style={{ fontSize: "clamp(2.1rem, 5vw, 56px)" }}>
               Koala AI review:{" "}
-              <em className="italic" style={{ color: "var(--color-accent)" }}>
+              <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">
                 pricing, features and who it fits
-              </em>
+              </AccentText>
             </h1>
             <p className="text-lg leading-relaxed mb-4" style={secondary}>
               Koala AI, best known for KoalaWriter, is an SEO article writer priced by the word. Starter is $

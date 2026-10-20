@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { A, Section } from "@/components/ArticleParts";
 import { AUTHOR_HEADSHOT, AUTHOR_URL, COMPANY, ORG_ID, PERSON_ID, jsonLdHtml } from "@/lib/schema";
+import { AccentText } from "@/components/AccentText";
 
 export const revalidate = 3600;
 
@@ -55,9 +56,9 @@ export default function AboutPage() {
             <div>
               <h1 className="page-heading mb-3" style={{ fontSize: "clamp(2.1rem, 5vw, 52px)" }}>
                 I&apos;m Preston Vawdrey.{" "}
-                <em className="italic" style={{ color: "var(--color-accent)" }}>
+                <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">
                   I built Draftly.
-                </em>
+                </AccentText>
               </h1>
               <p className="text-lg leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
                 I&apos;m a marketer and the founder of Draftly. I know how to make APIs talk to each other, and

@@ -16,6 +16,7 @@ import { STOCK } from "@/lib/stock-images";
 import { GUIDE_SHOTS, imageObjectJsonLd } from "@/lib/product-shots";
 import { CHECKED, DRAFTLY, PICKS, SOURCES, type Source } from "@/lib/best-ai-for-seo";
 import { pageImages } from "@/lib/og";
+import { AccentText } from "@/components/AccentText";
 
 export const revalidate = 3600;
 
@@ -127,9 +128,9 @@ export default function BestAiForSeoPage() {
           <header className="max-w-3xl">
             <h1 className="page-heading mb-6" style={{ fontSize: "clamp(2.1rem, 5vw, 56px)" }}>
               Best AI for SEO,{" "}
-              <em className="italic" style={{ color: "var(--color-accent)" }}>
+              <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">
                 picked by job
-              </em>
+              </AccentText>
             </h1>
             <p className="text-lg leading-relaxed mb-4" style={secondary}>
               SEO is five or six different jobs, and each AI tool is good at one or two of them. Ahrefs and Semrush own

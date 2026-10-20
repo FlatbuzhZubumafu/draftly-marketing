@@ -13,6 +13,7 @@ import { GUIDE_SHOTS, imageObjectJsonLd } from "@/lib/product-shots";
 import { INDUSTRIES, INDUSTRIES_DATE, INDUSTRIES_HUB, INDUSTRY_PHOTOS, getIndustry, industryPath, topicCount, type IndustryPhoto, type Source } from "@/lib/industries";
 import { StockPhoto } from "../StockPhoto";
 import { pageImages } from "@/lib/og";
+import { AccentText } from "@/components/AccentText";
 
 export const revalidate = 3600;
 export const dynamicParams = false;
@@ -107,9 +108,9 @@ export default async function IndustryPage({ params }: Props) {
             </p>
             <h1 className="page-heading mb-6" style={{ fontSize: "clamp(2.1rem, 5vw, 56px)" }}>
               {industry.h1.lead}{" "}
-              <em className="italic" style={{ color: "var(--color-accent)" }}>
+              <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">
                 {industry.h1.accent}
-              </em>
+              </AccentText>
             </h1>
             {industry.intro.map((p) => (
               <p key={p.slice(0, 24)} className="text-lg leading-relaxed mb-4" style={secondary}>

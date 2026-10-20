@@ -14,6 +14,7 @@ import { ProductFigure } from "@/components/ProductFigure";
 import { GUIDE_SHOTS, STEP_SHOTS, imageObjectJsonLd } from "@/lib/product-shots";
 import { ContentImage } from "@/components/ContentImage";
 import { STOCK } from "@/lib/stock-images";
+import { AccentText } from "@/components/AccentText";
 
 export const revalidate = 3600;
 
@@ -155,9 +156,9 @@ export default async function BlogWritingServicePage() {
           <header className="max-w-3xl">
             <h1 className="page-heading mb-6" style={{ fontSize: "clamp(2.1rem, 5vw, 56px)" }}>
               Blog writing service or AI:{" "}
-              <em className="italic" style={{ color: "var(--color-accent)" }}>
+              <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">
                 what a post really costs
-              </em>
+              </AccentText>
             </h1>
             <p className="text-lg leading-relaxed mb-4" style={{ color: "var(--color-text-secondary)" }}>
               A freelance writer charges {efaRange(1500)}{" "}for a 1,500-word blog post, going by the Editorial Freelancers

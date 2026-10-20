@@ -97,9 +97,9 @@ export default async function PricingPage() {
             <h1 className="page-heading mb-6" style={{ fontSize: "clamp(2.25rem, 5.5vw, 64px)" }}>
               Better AI Blogs
               <br />
-              <em className="italic" style={{ color: "var(--color-accent)" }}>
+              <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">
                 Starting at ${Math.min(...PAID_PLANS.map((p) => p.price))}/mo
-              </em>
+              </AccentText>
             </h1>
             <p className="text-lg" style={{ color: "var(--color-text-secondary)" }}>
               Every plan writes in your brand&apos;s voice and publishes straight to your CMS. Paid plans add volume,
@@ -153,9 +153,9 @@ export default async function PricingPage() {
           <div className="min-w-0">
           <h2 className="text-3xl font-medium mb-4" style={{ letterSpacing: "-0.03em" }}>
             Draftly Inside{" "}
-            <em className="italic" style={{ color: "#ffce59" }}>
+            <AccentText squiggle="squiggle" color="var(--color-accent)" squiggleColor="#2f8ccc">
               Claude, ChatGPT and Cursor
-            </em>
+            </AccentText>
           </h2>
           <div className="max-w-2xl space-y-4 text-base leading-relaxed" style={{ color: "#bbb" }}>
             <p>

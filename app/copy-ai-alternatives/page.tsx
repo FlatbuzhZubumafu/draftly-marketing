@@ -16,6 +16,7 @@ import { GUIDE_SHOTS, imageObjectJsonLd } from "@/lib/product-shots";
 import { JASPER_PRO } from "@/lib/jasper-vs-draftly";
 import { CHECKED, COPYAI_ALTERNATIVES, COPYAI_PLANS, GROWTH, SOURCES } from "@/lib/competitor-reviews";
 import { pageImages } from "@/lib/og";
+import { AccentText } from "@/components/AccentText";
 
 export const revalidate = 3600;
 
@@ -101,9 +102,9 @@ export default function CopyAiAlternativesPage() {
           <header className="max-w-3xl">
             <h1 className="page-heading mb-6" style={{ fontSize: "clamp(2.1rem, 5vw, 56px)" }}>
               Copy.ai alternatives{" "}
-              <em className="italic" style={{ color: "var(--color-accent)" }}>
+              <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">
                 for blog posts and marketing
-              </em>
+              </AccentText>
             </h1>
             <p className="text-lg leading-relaxed mb-4" style={secondary}>
               Copy.ai now calls itself an AI-native go-to-market platform. Its Chat plan is ${CHAT.monthly} a month for{" "}

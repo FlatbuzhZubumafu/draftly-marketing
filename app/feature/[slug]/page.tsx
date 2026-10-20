@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { A, FaqList, faqJsonLd } from "@/components/ArticleParts";
+import { AccentText } from "@/components/AccentText";
 import { CtaBand } from "@/components/CtaBand";
 import { FeatureTile } from "@/components/FeatureTile";
 import { FeatureArt, isArtName } from "@/components/feature-art/FeatureArt";
@@ -112,7 +113,7 @@ export default async function FeaturePage({ params }: Props) {
                   {category?.name}
                 </p>
                 <h1 className="page-heading mb-6" style={{ fontSize: "clamp(2.3rem, 5vw, 64px)" }}>
-                  {feature.h1.lead} <em>{feature.h1.accent}</em>
+                  {feature.h1.lead} <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">{feature.h1.accent}</AccentText>
                 </h1>
                 <p className="text-lg leading-relaxed mb-8 max-w-xl" style={{ color: "#3a3a3a" }}>
                   {introLead}
@@ -141,7 +142,7 @@ export default async function FeaturePage({ params }: Props) {
             <div className="container-draftly max-w-3xl">
               <p className="eyebrow mb-4">The difference</p>
               <h2 id="difference-heading" className="text-3xl sm:text-4xl font-medium mb-6" style={h2Style}>
-                Why it works <em className="italic" style={{ color: "var(--color-accent)" }}>differently</em>
+                Why it works <AccentText squiggle="squiggle" color="var(--color-accent)" squiggleColor="#2f8ccc">differently</AccentText>
               </h2>
               <p className="text-lg leading-relaxed mb-4" style={secondary}>
                 {diff.problem}
@@ -196,7 +197,7 @@ export default async function FeaturePage({ params }: Props) {
                 Where it fits
               </p>
               <h2 id="fits-heading" className="text-3xl sm:text-4xl font-medium" style={h2Style}>
-                One step in getting a post published
+                One step in getting a post <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">published</AccentText>
               </h2>
             </div>
             <ol className="space-y-3">
@@ -250,7 +251,7 @@ export default async function FeaturePage({ params }: Props) {
               <div className="min-w-0">
                 <NumberChip n={1} bg={tint.soft} />
                 <h2 className="text-3xl sm:text-4xl font-medium mb-5" style={h2Style}>
-                  How it works
+                  How it <AccentText squiggle="squiggle" color="var(--color-accent)" squiggleColor="#2f8ccc">works</AccentText>
                 </h2>
                 {introRest.map((p) => (
                   <p key={p.slice(0, 24)} className="text-lg leading-relaxed mb-4" style={secondary}>
@@ -286,7 +287,7 @@ export default async function FeaturePage({ params }: Props) {
               <div className="min-w-0 lg:order-2">
                 <NumberChip n={2} bg={tint.soft} />
                 <h2 id="plans" className="text-3xl sm:text-4xl font-medium mb-5 scroll-mt-24" style={h2Style}>
-                  Which plans include it
+                  Which plans <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">include it</AccentText>
                 </h2>
                 <p className="text-lg leading-relaxed mb-4" style={secondary}>
                   {feature.plans}
@@ -357,7 +358,7 @@ export default async function FeaturePage({ params }: Props) {
             <div className="container-draftly max-w-6xl">
               <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
                 <h2 id="related-heading" className="text-3xl font-medium" style={h2Style}>
-                  Related features
+                  Related <AccentText squiggle="squiggle" color="var(--color-accent)" squiggleColor="#2f8ccc">features</AccentText>
                 </h2>
                 <a href={FEATURES_HUB.path} className="font-semibold text-sm inline-flex items-center gap-1.5" style={{ color: "var(--color-accent-hover)" }}>
                   Explore all {FEATURES.length} features <ArrowRight className="w-4 h-4" aria-hidden="true" />

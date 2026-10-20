@@ -8,6 +8,7 @@ import { FREE_TOOLS, TOOLS_HUB } from "@/lib/free-tools";
 import { jsonLdHtml } from "@/lib/schema";
 import { APP_URL, SITE_URL } from "@/lib/site";
 import { pageImages } from "@/lib/og";
+import { AccentText } from "@/components/AccentText";
 
 export const revalidate = 3600;
 
@@ -64,9 +65,9 @@ export default function ToolsHub() {
             <p className="eyebrow mb-4">Free SEO tools</p>
             <h1 className="page-heading mb-5" style={{ fontSize: "clamp(2.4rem, 6vw, 64px)" }}>
               Free tools for{" "}
-              <em className="italic" style={{ color: "var(--color-accent)" }}>
+              <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">
                 your blog
-              </em>
+              </AccentText>
             </h1>
             <p className="text-lg leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
               Free tools for small-business blogs. Find out if AI assistants can read your site, score one post for SEO, find old posts to refresh, test a post for author trust signals and build FAQ schema. Then get post ideas for your site and a content brief for each one. No sign-up, and nothing you enter is stored.

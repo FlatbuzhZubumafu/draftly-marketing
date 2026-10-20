@@ -35,6 +35,7 @@ import {
   SEO_CRITERIA,
 } from "@/lib/benchmarkExamples";
 import { authorRef } from "@/lib/schema";
+import { FaqList } from "@/components/ArticleParts";
 
 export const revalidate = 3600;
 
@@ -603,21 +604,7 @@ export default async function BenchmarkPage() {
           <div className="max-w-3xl">
             <KeepReading exclude="/best-ai-for-writing" guides={["/seo-copywriting", "/ai-copywriter"]} topic="AI models Claude ChatGPT writing blog posts" />
           </div>
-          <section id="faq" className="mt-20 max-w-3xl">
-            <h2 className="text-3xl font-medium mb-6" style={{ letterSpacing: "-0.03em" }}>
-              Frequently Asked Questions
-            </h2>
-            <div className="space-y-6">
-              {FAQS.map((f) => (
-                <div key={f.q}>
-                  <h3 className="font-semibold mb-2">{f.q}</h3>
-                  <p className="leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-                    {f.a}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </section>
+          <FaqList faqs={FAQS} />
 
           <section data-toc-skip className="mt-20 rounded-2xl p-8 sm:p-12" style={{ background: "#111", color: "var(--color-text-inverted)" }}>
             <h2 className="text-3xl font-medium mb-4" style={{ letterSpacing: "-0.03em" }}>

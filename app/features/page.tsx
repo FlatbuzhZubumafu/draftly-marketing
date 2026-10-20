@@ -136,7 +136,7 @@ export default async function FeaturesHub() {
             <div className="reveal">
               <p className="eyebrow mb-5">Features</p>
               <h1 className="page-heading mb-6" style={{ fontSize: "clamp(2.4rem, 5.2vw, 68px)" }}>
-                Every feature, from topic to <em>published post</em>
+                Every feature, from topic to <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">published post</AccentText>
               </h1>
               <p className="text-lg leading-relaxed mb-8 max-w-xl" style={secondary}>
                 Draftly finds a topic from your industry, writes it in your brand&apos;s voice, checks it for AI filler and SEO basics, then publishes it to your blog. These are the {FEATURES.length} features that do it.

@@ -8,6 +8,7 @@ import { INDUSTRIES, INDUSTRIES_HUB, INDUSTRY_PHOTOS, industryPath, topicCount }
 import { jsonLdHtml } from "@/lib/schema";
 import { SITE_URL } from "@/lib/site";
 import { pageImages } from "@/lib/og";
+import { AccentText } from "@/components/AccentText";
 
 export const revalidate = 3600;
 
@@ -42,9 +43,9 @@ export default function BlogIdeasHub() {
             <p className="eyebrow mb-4">Blog ideas</p>
             <h1 className="page-heading mb-5" style={{ fontSize: "clamp(2.4rem, 6vw, 64px)" }}>
               Blog ideas{" "}
-              <em className="italic" style={{ color: "var(--color-accent)" }}>
+              <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">
                 by industry
-              </em>
+              </AccentText>
             </h1>
             <p className="text-lg leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
               Each page lists topics grouped by what the reader is going through, with a note on what makes each post

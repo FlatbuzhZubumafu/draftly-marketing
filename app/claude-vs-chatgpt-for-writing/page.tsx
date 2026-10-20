@@ -17,6 +17,7 @@ import { ContentImage } from "@/components/ContentImage";
 import { GUIDE_SHOTS } from "@/lib/product-shots";
 import { STOCK } from "@/lib/stock-images";
 import { pageImages } from "@/lib/og";
+import { AccentText } from "@/components/AccentText";
 
 export const revalidate = 3600;
 
@@ -190,9 +191,9 @@ export default function ClaudeVsChatGptPage() {
           <header className="max-w-3xl">
             <h1 className="page-heading mb-6" style={{ fontSize: "clamp(2.1rem, 5vw, 56px)" }}>
               Claude vs ChatGPT for writing:{" "}
-              <em className="italic" style={{ color: "var(--color-accent)" }}>
+              <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">
                 what 42 scored drafts show
-              </em>
+              </AccentText>
             </h1>
             <p className="text-lg leading-relaxed mb-4" style={{ color: "var(--color-text-secondary)" }}>
               Claude wrote better blog posts than ChatGPT&apos;s GPT models in our test. Claude Opus 5.5 scored{" "}
