@@ -10,7 +10,7 @@ import { FeatureTile } from "@/components/FeatureTile";
 import { FeatureArt, HeroFlowArt } from "@/components/feature-art/FeatureArt";
 import { KeepReading } from "@/components/KeepReading";
 import { ProductFigure } from "@/components/ProductFigure";
-import { CATEGORIES, FEATURES, FEATURES_HUB, featurePath, getFeature } from "@/lib/features";
+import { CATEGORIES, FEATURES, FEATURES_HUB, featurePath, featurePathById, getFeature } from "@/lib/features";
 import { PAIN_POINTS, answerText, type PainPoint } from "@/lib/features-hub";
 import { TINTS, tintVars } from "@/lib/feature-tints";
 import { getHomepageData } from "@/lib/graphql";
@@ -60,7 +60,7 @@ function Answer({ p }: { p: PainPoint }) {
             typeof s === "string" ? (
               s
             ) : (
-              <a key={j} href={`/feature/${s.slug}`} className="font-semibold underline underline-offset-4 decoration-1" style={{ color: "var(--color-accent-hover)" }}>
+              <a key={j} href={featurePathById(s.id)} className="font-semibold underline underline-offset-4 decoration-1" style={{ color: "var(--color-accent-hover)" }}>
                 {s.text}
               </a>
             ),

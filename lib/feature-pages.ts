@@ -1,5 +1,6 @@
 // "The difference" band on each /feature/[slug] page. Every line restates a claim
 // already made in lib/features.ts (same facts, same limits); nothing new is claimed here.
+import type { FeatureId } from "@/lib/features";
 import { SITE_ADDON } from "@/lib/pricing";
 
 export type Difference = {
@@ -13,7 +14,8 @@ export type Difference = {
   close: string;
 };
 
-export const DIFFERENCE: Record<string, Difference> = {
+/** Keyed by feature id (lib/features.ts), which stays the same when a URL slug changes. */
+export const DIFFERENCE: Record<FeatureId, Difference> = {
   "topic-ideas": {
     problem: "Most AI writing tools start with an empty box and ask what you want to write about. Coming up with a topic every week is the part that stalls a blog.",
     approach: "Draftly brings the topics to you, checked against your business first.",

@@ -21,7 +21,7 @@ export function FeatureTile({ feature, as: Heading = "h3", compact = false }: { 
         </Heading>
       </div>
       <div className="graph-paper feature-tile-band">
-        <FeatureArt name={isArtName(feature.slug) ? feature.slug : "writing-rules"} className={compact ? "max-w-[240px] mx-auto" : "max-w-[300px] mx-auto"} />
+        <FeatureArt name={isArtName(feature.id) ? feature.id : "writing-rules"} className={compact ? "max-w-[240px] mx-auto" : "max-w-[300px] mx-auto"} />
       </div>
       <div className={`flex flex-col flex-1 ${compact ? "p-5" : "p-6"}`}>
         <p className={`${compact ? "text-sm" : "text-[15px]"} leading-relaxed mb-5`} style={{ color: "#2b2b2b" }}>

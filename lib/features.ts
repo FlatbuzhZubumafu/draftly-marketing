@@ -29,7 +29,7 @@ export const FEATURES_HUB = {
   path: "/features",
   title: "Draftly Features: Topics, Brand Voice, Checks and Publishing",
   description:
-    "Every Draftly feature in one place: topic ideas from your industry, a brand voice built from your website, writing checks, one-click publishing and Search Console reports.",
+    "Every Draftly feature in one place: blog topic ideas, an AI brand voice built from your website, writing checks, one-click publishing and automated blogging.",
 };
 
 export type CategoryId = "topics" | "write" | "check" | "publish" | "anywhere";
@@ -51,7 +51,29 @@ export type FeatureCompare = {
   basis: "tested" | "pricing-page";
 };
 
+/**
+ * Stable internal key for a feature. Art, "The difference" copy, related links and
+ * cross-page links key off this, so a page's URL slug can change without breaking them.
+ */
+export type FeatureId =
+  | "topic-ideas"
+  | "seo-research"
+  | "brand-voice"
+  | "ai-models"
+  | "writing-rules"
+  | "ai-detector"
+  | "editor"
+  | "seo-meta"
+  | "publishing"
+  | "autopilot"
+  | "analytics"
+  | "mcp"
+  | "wordpress-plugin"
+  | "teams";
+
 export type Feature = {
+  id: FeatureId;
+  /** URL slug: /feature/{slug}. Chosen for search (keyword audit, 2026-10-20). Old slugs are in lib/feature-redirects.ts. */
   slug: string;
   /** Short name for cards, nav and breadcrumbs. */
   name: string;
@@ -74,12 +96,14 @@ export type Feature = {
   limits: string[];
   compare?: FeatureCompare;
   faqs: Faq[];
-  related: string[];
+  related: FeatureId[];
   /** A deeper page about the same thing, when one exists. */
   guide?: { href: string; label: string };
   /** A free tool that does part of the job without signing up. */
   tool?: { href: string; label: string };
   ogAlt: string;
+  /** Text for the first "How it works" H2, phrased the way people search. Defaults to "How it works". */
+  howHeading?: string;
 };
 
 const SOLO = PLANS.find((p) => p.name === "Solopreneur")!;
@@ -101,15 +125,16 @@ const dashboardShot: ProductShot = {
 
 export const FEATURES: Feature[] = [
   {
-    slug: "topic-ideas",
-    name: "Topic ideas",
+    id: "topic-ideas",
+    slug: "blog-topic-ideas",
+    name: "Blog topic ideas",
     icon: "Newspaper",
     category: "topics",
     summary: "Post ideas pulled from your industry's news and real Google searches, checked against what your business sells.",
     title: "Blog Topic Ideas From Your Industry's News | Draftly",
     description:
-      "Draftly suggests blog topics from your industry's news and real Google searches, then drops the ones that don't fit your business. One click turns a topic into a post.",
-    h1: { lead: "Topic ideas that fit", accent: "your business" },
+      "Get blog topic ideas from your industry's news and real Google searches, checked against what your business sells. One click turns an idea into a post.",
+    h1: { lead: "Blog topic ideas that fit", accent: "your business" },
     intro: [
       "Draftly reads your industry's news every day and pulls the stories your customers would care about. On paid plans it also adds topics from real Google searches, with the search volume and difficulty attached.",
       "Each idea is checked against your website first. Old news, competitor announcements and topics with nothing to do with what you sell are dropped before you see them.",
@@ -134,21 +159,24 @@ export const FEATURES: Feature[] = [
     faqs: [
       { q: "Where do Draftly's topic ideas come from?", a: "From news sources in your industry, and on paid plans from Google keyword data and People Also Ask questions. Every idea is checked against your website before you see it." },
       { q: "Can I write about my own topic instead?", a: "Yes. Type any topic in Write Your Own Topic and Draftly writes it in your voice." },
+      { q: "How is this different from a blog topic generator?", a: "A topic generator gives ideas for whatever keyword you type. Draftly starts from your website and your industry's news, and drops ideas that don't fit what you sell. For a quick list without signing up, use the free blog ideas generator." },
     ],
     related: ["seo-research", "brand-voice", "autopilot"],
     tool: { href: "/tools/blog-ideas-generator", label: "free blog ideas generator" },
-    ogAlt: "Draftly topic ideas: trending industry headlines, each one click from a blog post",
+    ogAlt: "Draftly blog topic ideas: trending industry headlines, each one click from a blog post",
+    howHeading: "How Draftly finds blog topics for your business",
   },
   {
+    id: "brand-voice",
     slug: "brand-voice",
-    name: "Brand voice",
+    name: "AI brand voice",
     icon: "SlidersHorizontal",
     category: "write",
     summary: "Your tone set from your own website on day one, with sliders you can move and a voice that learns from your edits.",
-    title: "AI Brand Voice Built From Your Website | Draftly",
+    title: "AI Brand Voice Generator Built From Your Website | Draftly",
     description:
-      "Draftly sets your brand voice from your own website, with eight tone sliders you can adjust. It learns from your edits and ratings, and every post uses it.",
-    h1: { lead: "A brand voice built from", accent: "your own website" },
+      "Draftly's AI brand voice generator reads your website and sets eight tone sliders you can adjust. It learns from your edits and ratings, and every post uses it.",
+    h1: { lead: "An AI brand voice built from", accent: "your own website" },
     intro: [
       "Paste your URL and Draftly reads your site. It sets eight tone sliders (professional, friendly, authoritative, formal, technical, empathetic, innovative and conversational) and fills in what you sell and who you sell to.",
       "Every post and every edit uses that voice. Move a slider and the next post follows it.",
@@ -178,15 +206,17 @@ export const FEATURES: Feature[] = [
     related: ["writing-rules", "ai-models", "teams"],
     guide: { href: "/for-teams", label: "Draftly for teams" },
     ogAlt: "Draftly brand voice: tone sliders set from your website, adjustable any time",
+    howHeading: "How to train AI on your brand voice",
   },
   {
+    id: "ai-models",
     slug: "ai-models",
     name: `${APP_MODEL_COUNT} AI models`,
     icon: "Cpu",
     category: "write",
     summary: `Pick the model for each post: Claude Sonnet 5.5 by default, or any of ${APP_MODEL_COUNT} including GPT, Gemini, Kimi and DeepSeek.`,
-    title: `Choose From ${APP_MODEL_COUNT} AI Models for Each Blog Post | Draftly`,
-    description: `Draftly writes with Claude Sonnet 5.5 by default. Paid plans can pick from ${APP_MODEL_COUNT} models per post, including GPT, Gemini, Kimi and DeepSeek, at the credit price shown.`,
+    title: `${APP_MODEL_COUNT} AI Models for Blog Posts: Claude, GPT, Gemini | Draftly`,
+    description: `Draftly writes with Claude Sonnet 5.5 by default. Paid plans pick from ${APP_MODEL_COUNT} models per post, including GPT, Gemini, Kimi and DeepSeek, priced before you write.`,
     h1: { lead: "Pick the AI model", accent: "for each post" },
     intro: [
       `Claude Sonnet 5.5 is the default because it sounded the most human in our tests. In a ${DEFAULT_WRITER.briefs}-brief test it passed every hard writing rule ${DEFAULT_WRITER.rulePass}% of the time after the fix pass.`,
@@ -207,17 +237,19 @@ export const FEATURES: Feature[] = [
     related: ["writing-rules", "brand-voice", "editor"],
     guide: { href: "/best-ai-for-writing", label: "best AI for writing benchmark" },
     ogAlt: `Draftly's model picker: Claude Sonnet 5.5 by default and ${APP_MODEL_COUNT} models on paid plans`,
+    howHeading: "How to pick an AI model for each post",
   },
   {
+    id: "writing-rules",
     slug: "writing-rules",
     name: "Writing rules checker",
     icon: "ListChecks",
     category: "check",
     summary: "Every draft is checked for AI filler, banned words and SEO basics, and gets an automatic fix pass when it misses one.",
-    title: "SEO Writing Rules Checked on Every Post | Draftly",
+    title: "AI Words to Avoid, Checked in Every Draft | Draftly",
     description:
-      "Draftly checks every draft for AI filler words, unsourced numbers, meta lengths, headings and links, then fixes what fails. You choose which rules are on.",
-    h1: { lead: "Every draft checked against", accent: "your writing rules" },
+      "Draftly checks every draft for AI words to avoid, unsourced numbers, meta lengths, headings and links, then fixes what fails. You choose which rules are on.",
+    h1: { lead: "Every draft checked for AI words and", accent: "your writing rules" },
     intro: [
       "Before you see a draft, Draftly checks it against your writing rules. Banned AI words like \"seamless\" and \"leverage\", numbers with no source, meta titles outside 50 to 60 characters, a missing H1 or a call to action in the wrong place all fail the check.",
       `A failed check gets one automatic fix pass. In our ${DEFAULT_WRITER.briefs}-brief test, ${DEFAULT_WRITER.model} posts passed every hard rule ${DEFAULT_WRITER.rulePass}% of the time after that pass, and a reader-quality check scores whether the post makes sense and answers the question.`,
@@ -238,21 +270,24 @@ export const FEATURES: Feature[] = [
     },
     faqs: [
       { q: "What do Draftly's writing rules check?", a: "Banned AI words and phrases, unsourced numbers, meta title and description lengths, one H1, keyword placement, heading style, the call to action link and link placement, among others." },
+      { q: "Which AI words and phrases does Draftly flag?", a: "Banned AI words like \"seamless\" and \"leverage\" and other stock AI phrases. A draft that uses one fails the check and gets an automatic fix pass before you see it." },
       { q: "Can I turn rules off?", a: "Yes. Each website has its own rule toggles and three presets: default, strict and light." },
     ],
     related: ["ai-detector", "editor", "seo-meta"],
     guide: { href: "/seo-copywriting", label: "SEO copywriting rules guide" },
     ogAlt: "Draftly's writing rule checker: a generic AI paragraph with four flagged rules beside a Draftly draft with none",
+    howHeading: "How Draftly checks for AI words and phrases",
   },
   {
+    id: "ai-detector",
     slug: "ai-detector",
-    name: "AI writing detector",
+    name: "AI content detector",
     icon: "ScanSearch",
     category: "check",
     summary: "A Reads as AI score and the exact passages that sound machine-written, with a one-click fix.",
-    title: "AI Writing Detector With a One-Click Fix | Draftly",
+    title: "AI Content Detector That Fixes Flagged Sentences | Draftly",
     description:
-      "Draftly scores how much your copy reads like AI, highlights the passages that do and rewrites only those sentences. Works on Draftly posts and copy you paste in.",
+      "Draftly's AI content detector scores how much your copy reads like AI, highlights the passages that do and rewrites only those sentences. Works on any copy.",
     h1: { lead: "See which sentences", accent: "read like AI" },
     intro: [
       "Draftly gives every piece of copy a Reads as AI score from 0 to 100, lower is better. It flags the passages that pull the score up and says why: stock transitions, three-item lists, sentences all the same length, filler words.",
@@ -269,19 +304,22 @@ export const FEATURES: Feature[] = [
     faqs: [
       { q: "How much does the AI detector cost?", a: "Checking costs about 2 credits per 1,000 words on the default model, with a minimum of 2, and so does fixing the flagged sentences with Edit. The price shows before anything runs." },
       { q: "Does it change my facts?", a: "No. Edit drops any rewrite that changes a number, quote or link." },
+      { q: "Can it rewrite the parts that sound like AI?", a: "Yes. Edit rewrites only the sentences the detector flags and leaves the rest alone. You keep or reject each change." },
     ],
     related: ["editor", "writing-rules", "brand-voice"],
-    ogAlt: "Draftly's AI writing detector: a Reads as AI score with the passages that sound machine-written",
+    ogAlt: "Draftly's AI content detector: a Reads as AI score with the passages that sound machine-written",
+    howHeading: "How the AI content detector works",
   },
   {
-    slug: "editor",
-    name: "Editor",
+    id: "editor",
+    slug: "ai-copy-editor",
+    name: "AI copy editor",
     icon: "PenLine",
     category: "check",
     summary: "Check or fix copy you already have, pasted in, loaded from a URL or pulled from your CMS.",
-    title: "AI Copy Editor That Checks Pages From a URL | Draftly",
+    title: "AI Copy Editor for Blog Posts and Web Pages | Draftly",
     description:
-      "Draftly's Editor checks existing copy against your writing rules and brand voice, from pasted text, any URL or your CMS. It scores the copy and fixes only the sentences that break a rule.",
+      "Draftly's AI copy editor checks existing copy against your rules and brand voice, from pasted text, a URL or your CMS, and fixes only what breaks a rule.",
     h1: { lead: "Check and fix copy", accent: "you already have" },
     intro: [
       "The Editor works on copy Draftly didn't write. Paste text, enter a page URL or pull a post from your CMS, and Draftly checks it against your writing rules and brand voice.",
@@ -307,18 +345,20 @@ export const FEATURES: Feature[] = [
     ],
     related: ["ai-detector", "writing-rules", "wordpress-plugin"],
     tool: { href: "/tools/blog-seo-checker", label: "free blog SEO checker" },
-    ogAlt: "Draftly's Editor scoring a page loaded from its URL: SEO, Human voice, Readability and Reads as AI",
+    ogAlt: "Draftly's AI copy editor scoring a page loaded from its URL: SEO, Human voice, Readability and Reads as AI",
+    howHeading: "How the AI copy editor works",
   },
   {
+    id: "seo-meta",
     slug: "seo-meta",
-    name: "SEO meta and score",
+    name: "Meta title and description",
     icon: "Tags",
     category: "check",
     summary: "A URL slug, meta title and meta description with every draft, sized for Google, plus an SEO score.",
-    title: "Meta Title, Description and Slug With Every Post | Draftly",
+    title: "Meta Title and Description Generator for Blogs | Draftly",
     description:
       "Every Draftly draft comes with a URL slug, a meta title of 50 to 60 characters and a meta description of 150 to 160, plus an SEO score out of 100.",
-    h1: { lead: "SEO meta with", accent: "every draft" },
+    h1: { lead: "A meta title and description with", accent: "every draft" },
     intro: [
       "Every draft comes with a URL slug, a meta title sized to 50 to 60 characters and a meta description of 150 to 160, so they fit how Google shows them.",
       "Each post also gets an SEO score out of 100 that checks keyword placement, headings, length and links. When you publish, the meta goes to your CMS and SEO plugin with the post.",
@@ -333,21 +373,24 @@ export const FEATURES: Feature[] = [
     limits: ["The SEO score checks the page itself. It can't see your backlinks or how competitive the keyword is."],
     faqs: [
       { q: "Does Draftly write the meta title and description?", a: "Yes, with every draft, and it checks their length against Google's display limits." },
+      { q: "What is the best length for a meta description?", a: "Draftly sizes meta descriptions to 150 to 160 characters and meta titles to 50 to 60, so they fit how Google shows them. One outside those lengths fails the writing rules and gets fixed." },
     ],
     related: ["writing-rules", "publishing", "seo-research"],
     tool: { href: "/tools/blog-seo-checker", label: "free blog SEO checker" },
     ogAlt: "SEO fields Draftly writes with every post: URL slug, meta title and meta description",
+    howHeading: "How Draftly writes your meta title and description",
   },
   {
-    slug: "seo-research",
-    name: "SEO research data",
+    id: "seo-research",
+    slug: "keyword-research",
+    name: "Keyword research",
     icon: "Search",
     category: "topics",
     summary: "Search volume, difficulty, live Google results, People Also Ask, competitor gaps and backlinks for your site.",
-    title: "Keyword Research, SERP and Competitor Data | Draftly",
+    title: "Keyword Research and Competitor Keywords for Blogs | Draftly",
     description:
-      "Draftly gives you live SEO data through its connector: keyword volume and difficulty, Google's first page and People Also Ask, competitor keyword gaps and backlinks, by plan.",
-    h1: { lead: "SEO data for", accent: "your site and competitors" },
+      "Check a keyword's volume, difficulty and intent, see Google's first page and People Also Ask, and find the keywords your competitors rank for, by plan.",
+    h1: { lead: "Keyword research for", accent: "your site and competitors" },
     intro: [
       "Draftly includes live search data, so you can check a keyword before you write. Look up search volume, difficulty and intent, see Google's first page and its People Also Ask questions, find the domains you compete with, and on Autopilot see the keywords they rank for that you don't.",
       "Draftly finds your competitors when you add your website, and you can edit the list. Results are cached for 30 days, and repeat lookups from the cache are free.",
@@ -361,22 +404,26 @@ export const FEATURES: Feature[] = [
     limits: ["Data calls are capped per month by plan. Cached results don't count against the cap."],
     faqs: [
       { q: "Where does Draftly's SEO data come from?", a: "From DataForSEO, the same kind of data source many SEO tools use, fetched live and cached for 30 days." },
+      { q: "How do I find the keywords my competitors rank for?", a: "Add your website and Draftly finds the domains you compete with, and you can edit the list. On the Autopilot plan it shows the keywords they rank for that you don't. Keyword gaps and backlinks are Autopilot features." },
+      { q: "Does Draftly show People Also Ask questions?", a: "Yes. From the Growth plan, a lookup shows Google's live first page for a keyword along with its People Also Ask questions." },
       { q: "Do I need a separate SEO tool?", a: "For blog planning, often not. For rank tracking or a full backlink audit, a dedicated SEO tool goes further." },
     ],
     related: ["topic-ideas", "mcp", "seo-meta"],
     guide: { href: "/mcp", label: "SEO MCP connector" },
     tool: { href: "/tools/content-brief-generator", label: "free content brief generator" },
-    ogAlt: "Draftly SEO research: keyword volume, Google results, People Also Ask and competitor data",
+    ogAlt: "Draftly keyword research: keyword volume, Google results, People Also Ask and competitor keywords",
+    howHeading: "How keyword research works in Draftly",
   },
   {
+    id: "publishing",
     slug: "publishing",
     name: "One-click publishing",
     icon: "Send",
     category: "publish",
     summary: "Send a finished post to WordPress, Shopify, Webflow, Ghost, Squarespace or HubSpot in one click.",
-    title: "Publish AI Blog Posts to WordPress, Shopify and More | Draftly",
+    title: "Publish AI Blog Posts to WordPress and Shopify | Draftly",
     description:
-      "Draftly publishes finished posts to WordPress, Shopify, Webflow, Ghost, Squarespace and HubSpot in one click, with the meta title, description and slug filled in.",
+      "Draftly publishes finished posts to WordPress, Shopify, Webflow, Ghost, Squarespace and HubSpot in one click, with meta title, description and slug filled in.",
     h1: { lead: "Publish to your blog", accent: "in one click" },
     intro: [
       "Connect your CMS once, then publish any post from Draftly with its title, body, slug, meta title and meta description in place. You can also send it as a draft to review in your CMS first.",
@@ -401,17 +448,19 @@ export const FEATURES: Feature[] = [
     ],
     related: ["autopilot", "wordpress-plugin", "seo-meta"],
     ogAlt: "Draftly publishing to WordPress, Shopify, Webflow, Ghost, Squarespace and HubSpot",
+    howHeading: "How to post to WordPress without copy and paste",
   },
   {
-    slug: "autopilot",
-    name: "Autopilot scheduling",
+    id: "autopilot",
+    slug: "automated-blogging",
+    name: "Automated blogging",
     icon: "CalendarClock",
     category: "publish",
     summary: "Set a schedule once. Draftly picks topics, writes the posts and publishes them on your cadence.",
-    title: "Automatic Blog Posting on a Schedule | Draftly Autopilot",
+    title: "Automated Blogging: AI Posts on Your Schedule | Draftly",
     description:
-      "On the Autopilot plan, Draftly picks topics, writes posts and publishes them to WordPress or Shopify on your schedule, with a weekly digest of what went out.",
-    h1: { lead: "A blog that keeps", accent: "publishing itself" },
+      "Automated blogging on the Autopilot plan: Draftly picks topics, writes posts and publishes them to WordPress or Shopify on your schedule, with a weekly digest.",
+    h1: { lead: "Automated blogging on", accent: "your schedule" },
     intro: [
       "Set a schedule once: how often, how many topics and how many posts can go out without your review. Draftly picks the topics, writes each post, runs every check and publishes on that cadence.",
       "You get a weekly email listing everything it published. Posts you'd rather check first wait for you as drafts.",
@@ -430,19 +479,22 @@ export const FEATURES: Feature[] = [
       basis: "pricing-page",
     },
     faqs: [
+      { q: "What is automated blogging?", a: "Software that picks topics, writes posts and publishes them on a schedule. In Draftly that's the Autopilot plan: you set the cadence and choose how many posts go live without your review." },
       { q: "Can Draftly post to my blog automatically?", a: "Yes, on the Autopilot plan, to WordPress or Shopify on a schedule you set." },
       { q: "Can I approve posts before they go live?", a: "Yes. You choose how many posts publish on their own; the rest wait for you as drafts." },
     ],
     related: ["publishing", "topic-ideas", "analytics"],
-    ogAlt: "Draftly Autopilot: posts picked, written and published on your schedule",
+    ogAlt: "Draftly automated blogging: posts picked, written and published on your schedule",
+    howHeading: "How automated blogging works in Draftly",
   },
   {
-    slug: "analytics",
-    name: "Search Console and Analytics",
+    id: "analytics",
+    slug: "blog-analytics",
+    name: "Blog analytics",
     icon: "LineChart",
     category: "publish",
     summary: "Connect Google Analytics and Search Console, free on every plan, to see what your posts bring in.",
-    title: "Google Search Console and Analytics Reports for Your Blog | Draftly",
+    title: "Blog Analytics With Google Search Console | Draftly",
     description:
       "Connect Google Analytics and Search Console to Draftly for free on every plan. See which searches bring people to your posts and what they do next.",
     h1: { lead: "See what your posts", accent: "bring in" },
@@ -464,14 +516,16 @@ export const FEATURES: Feature[] = [
     ],
     related: ["seo-research", "autopilot", "topic-ideas"],
     ogAlt: "Draftly's dashboard with Google Analytics and Search Console, free on every plan",
+    howHeading: "How to see which searches bring readers to your blog",
   },
   {
+    id: "mcp",
     slug: "mcp",
     name: "Claude and ChatGPT connector",
     icon: "Plug",
     category: "anywhere",
     summary: "Use Draftly from Claude, ChatGPT or Cursor: your brand voice, posts, topics, checks and live SEO data.",
-    title: "Draftly Connector for Claude, ChatGPT and Cursor (MCP) | Draftly",
+    title: "Claude and ChatGPT Connector for Blog Writing | Draftly",
     description:
       "Connect Draftly to Claude, ChatGPT or Cursor. Your AI gets your brand voice, topics, posts, writing checks and live SEO data, and can save drafts to Draftly.",
     h1: { lead: "Draftly inside", accent: "the AI you already use" },
@@ -501,14 +555,15 @@ export const FEATURES: Feature[] = [
     ogAlt: "Draftly's MCP connector: Claude, ChatGPT and Cursor connected to Draftly",
   },
   {
+    id: "wordpress-plugin",
     slug: "wordpress-plugin",
     name: "WordPress plugin",
     icon: "Blocks",
     category: "anywhere",
     summary: "Check and fix posts inside WordPress, with suggestions you approve one at a time.",
-    title: "WordPress AI Plugin to Check and Fix Posts | Draftly",
+    title: "WordPress Plugin That Checks and Fixes Your Posts | Draftly",
     description:
-      "Draftly's WordPress plugin checks your posts against your writing rules and suggests edits in your voice, inside WordPress. Works with Yoast SEO, Rank Math and All in One SEO.",
+      "Draftly's WordPress plugin checks your posts against your writing rules and suggests edits in your voice. Works with Yoast SEO, Rank Math and All in One SEO.",
     h1: { lead: "Draftly inside", accent: "WordPress" },
     intro: [
       "The Draftly plugin adds a Check and an Optimize button to your WordPress posts. It flags sentences that break your writing rules and suggests fixes in your brand voice, each with Approve and Skip.",
@@ -531,13 +586,14 @@ export const FEATURES: Feature[] = [
     ogAlt: "Draftly's WordPress plugin suggesting edits with Approve and Skip",
   },
   {
+    id: "teams",
     slug: "teams",
     name: "Teams and extra websites",
     icon: "Users",
     category: "anywhere",
     summary: `Team members included with no per-seat price, and $${SITE_ADDON.price} a month for each extra client website.`,
     title: "Team Accounts and Multiple Websites | Draftly",
-    description: `Draftly includes ${SOLO.seats} team members on Solopreneur, ${GROWTH.seats} on Growth and unlimited on Autopilot, with no per-seat price. Each extra website is $${SITE_ADDON.price} a month with its own voice and credits.`,
+    description: `Team members are included: ${SOLO.seats} on Solopreneur, ${GROWTH.seats} on Growth, unlimited on Autopilot. Each extra website is $${SITE_ADDON.price} a month with its own voice and credits.`,
     h1: { lead: "One price for", accent: "your whole team" },
     intro: [
       `Invite your team at no extra cost: ${SOLO.seats} people on Solopreneur, ${GROWTH.seats} on Growth and unlimited on Autopilot, sharing the plan's credits.`,
@@ -566,7 +622,17 @@ export const FEATURES: Feature[] = [
 ];
 
 export const featurePath = (f: Pick<Feature, "slug">) => `/feature/${f.slug}`;
-export const getFeature = (slug: string) => FEATURES.find((f) => f.slug === slug);
+/** Look up a feature by its stable id (related links, hub chips, comparison rows). */
+export const getFeature = (id: string) => FEATURES.find((f) => f.id === id);
+/** Look up a feature by its URL slug (the /feature/[slug] route). */
+export const getFeatureBySlug = (slug: string) => FEATURES.find((f) => f.slug === slug);
+/** /feature/{slug} for a feature id. Throws at build time if the id is unknown. */
+export function featurePathById(id: FeatureId): string {
+  const f = getFeature(id);
+  if (!f) throw new Error(`Unknown feature id: ${id}`);
+  return featurePath(f);
+}
+
 export const featuresIn = (c: CategoryId) => FEATURES.filter((f) => f.category === c);
 
 /** Where a comparison's Jasper side comes from, in one plain line. */
