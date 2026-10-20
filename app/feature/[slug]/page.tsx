@@ -25,7 +25,7 @@ export const dynamicParams = false;
 
 // One page per feature in lib/features.ts. Layout, top to bottom: hero on the category's
 // graph paper, the difference, where it fits in the Draftly flow, numbered how-it-works
-// blocks, FAQ, related features, a closing band, the footer CTA.
+// blocks, FAQ, related features, the footer CTA.
 export function generateStaticParams() {
   return FEATURES.map((f) => ({ slug: f.slug }));
 }
@@ -374,20 +374,7 @@ export default async function FeaturePage({ params }: Props) {
           </section>
         ) : null}
 
-        {/* 6. Closing statement, then the standard footer CTA */}
-        <section className="py-16 sm:py-20 px-4" style={{ background: "#111", color: "#fff" }}>
-          <div className="container-draftly max-w-4xl text-center">
-            <h2 className="font-medium mb-4" style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", ...h2Style }}>
-              From topic to <em className="italic" style={{ color: "#ffce59" }}>published post</em>
-            </h2>
-            <p className="text-lg mb-8 max-w-2xl mx-auto" style={{ color: "#bbb" }}>
-              Every feature is one step from a topic to a post on your blog, written in your brand&apos;s voice.
-            </p>
-            <a href={FEATURES_HUB.path} className="inline-flex items-center gap-2 font-semibold" style={{ color: "#fff" }}>
-              See how the features fit together <ArrowRight className="w-4 h-4" aria-hidden="true" />
-            </a>
-          </div>
-        </section>
+        {/* 6. The footer CTA: the one call to action at the end of the page */}
         <CtaBand
           tone="accent"
           heading={<>Your first post <em className="italic" style={{ color: "var(--color-accent)" }}>is on us</em></>}
