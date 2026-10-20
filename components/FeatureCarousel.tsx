@@ -46,7 +46,7 @@ export function FeatureCarousel({ slides }: { slides: FeatureSlide[] }) {
         {slides.map((s, i) => (
           <article
             key={s.shot.src}
-            className="feature-panel"
+            className="feature-panel relative"
             aria-roledescription="slide"
             aria-label={`${i + 1} of ${slides.length}: ${s.title}`}
           >
@@ -54,9 +54,12 @@ export function FeatureCarousel({ slides }: { slides: FeatureSlide[] }) {
             <h3 className="text-xl font-semibold mb-2" style={{ letterSpacing: "-0.02em" }}>
               {s.title}
             </h3>
-            <p className="text-sm leading-relaxed mb-6" style={{ color: "var(--color-text-secondary)" }}>
+            <p className="text-sm leading-relaxed mb-3" style={{ color: "var(--color-text-secondary)" }}>
               {s.description}
             </p>
+            <a href={s.href} className="inline-block text-sm font-semibold mb-6 hover:underline" style={{ color: "var(--color-accent)" }}>
+              How it works<span className="sr-only">: {s.title}</span>
+            </a>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={s.shot.src}

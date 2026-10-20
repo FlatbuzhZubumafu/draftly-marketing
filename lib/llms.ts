@@ -16,6 +16,7 @@ import { WP_COMPARE_NOTES, WP_COMPARE_ROWS, WP_COMPARE_TOOLS, WP_COMPARED_ON, ty
 import { WP_FEATURES, WP_PLANS, WP_PLUGIN_VERSION, WP_TOP_UPS } from "@/lib/wordpress-plugin";
 import { FREE_TOOLS, TOOLS_HUB } from "@/lib/free-tools";
 import { INDUSTRIES, INDUSTRIES_HUB, industryPath, topicCount } from "@/lib/industries";
+import { FEATURES, FEATURES_HUB, featurePath } from "@/lib/features";
 
 // Builds /llms.txt and /llms-full.txt from the same data the pages render, so
 // prices, tools and benchmark numbers match the site.
@@ -108,6 +109,12 @@ ${WP_TOP_UPS} Writing new posts, topic ideas, AI images and autopilot are on the
 ### Compared with other WordPress AI plugins (checked ${WP_COMPARED_ON})
 
 ${wpCompareTable()}
+
+## Features
+
+Every live feature has its own page, listed at ${SITE_URL}${FEATURES_HUB.path}.
+
+${FEATURES.map((f) => `- [${f.name}](${SITE_URL}${featurePath(f)}): ${f.summary} Plans: ${f.plans}`).join("\n")}
 
 ## Free SEO Tools
 

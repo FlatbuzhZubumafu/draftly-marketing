@@ -3,6 +3,7 @@ import { getPage, getPosts } from "@/lib/graphql";
 import { NOINDEX_POST_SLUGS } from "@/lib/related";
 import { FREE_TOOLS, TOOLS_DATE, TOOLS_HUB } from "@/lib/free-tools";
 import { INDUSTRIES, INDUSTRIES_DATE, INDUSTRIES_HUB, industryPath } from "@/lib/industries";
+import { FEATURES, FEATURES_DATE, FEATURES_HUB, featurePath } from "@/lib/features";
 
 export const revalidate = 3600;
 
@@ -31,6 +32,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/koala-ai-review`, lastModified: new Date("2026-10-16"), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/arvow-review`, lastModified: new Date("2026-10-16"), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/copy-ai-alternatives`, lastModified: new Date("2026-10-16"), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}${FEATURES_HUB.path}`, lastModified: new Date(FEATURES_DATE.iso), changeFrequency: "monthly", priority: 0.8 },
+    ...FEATURES.map((f) => ({ url: `${baseUrl}${featurePath(f)}`, lastModified: new Date(FEATURES_DATE.iso), changeFrequency: "monthly" as const, priority: 0.7 })),
     { url: `${baseUrl}${TOOLS_HUB.path}`, lastModified: new Date(TOOLS_DATE.iso), changeFrequency: "monthly", priority: 0.7 },
     ...FREE_TOOLS.map((t) => ({ url: `${baseUrl}${t.path}`, lastModified: new Date(TOOLS_DATE.iso), changeFrequency: "monthly" as const, priority: 0.7 })),
     { url: `${baseUrl}${INDUSTRIES_HUB.path}`, lastModified: new Date(INDUSTRIES_DATE.iso), changeFrequency: "monthly", priority: 0.6 },

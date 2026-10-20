@@ -1,20 +1,14 @@
-import { getHomepageData } from "@/lib/graphql";
-import type { LucideIcon } from "lucide-react";
-import { Target, PenTool, Zap, Globe, Clock, TrendingUp, Cpu, Gauge, RefreshCw } from "lucide-react";
 import { AccentText } from "./AccentText";
 import { FeatureCarousel } from "./FeatureCarousel";
+import { FeatureCard } from "./FeatureIcon";
 import { FEATURE_SLIDES } from "@/lib/product-shots";
+import { FEATURES, FEATURES_HUB, featurePath } from "@/lib/features";
 
-const ICON_MAP: Record<string, LucideIcon> = { Target, PenTool, Zap, Globe, Clock, TrendingUp, Cpu, Gauge, RefreshCw };
+// Cards that the carousel already covers are left out of the grid below it.
+const IN_CAROUSEL = new Set(FEATURE_SLIDES.map((s) => s.href));
+const GRID = FEATURES.filter((f) => !IN_CAROUSEL.has(featurePath(f))).slice(0, 9);
 
-// Card copy lives in WordPress; these override lines that no longer match the product.
-const DESCRIPTION_OVERRIDES: Record<string, string> = {
-  Analytics: "Connect Google Analytics and Search Console, free on every plan, to see what your content earns.",
-};
-
-export async function Features() {
-  const { features } = await getHomepageData();
-
+export function Features() {
   return (
     <section id="features" className="py-24 px-4" style={{ background: "var(--color-bg-surface)" }}>
       <div className="container-draftly max-w-5xl">
@@ -32,26 +26,17 @@ export async function Features() {
         <h3 className="text-2xl font-medium text-center mt-20 mb-10" style={{ letterSpacing: "-0.03em" }}>
           And much, much more
         </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.nodes.map((feature, index) => {
-            const Icon = ICON_MAP[feature.iconName] || Zap;
-            return (
-              <div
-                key={feature.title}
-                className="reveal p-6 card-depth"
-                style={{ background: "var(--color-bg-primary)", transitionDelay: `${index * 0.08}s` }}
-              >
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4"
-                     style={{ background: "var(--color-accent-muted)" }}>
-                  <Icon className="w-5 h-5" style={{ color: "var(--color-accent)" }} />
-                </div>
-                <h4 className="font-semibold mb-2">{feature.title}</h4>
-                <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-                  {DESCRIPTION_OVERRIDES[feature.title] ?? feature.description}
-                </p>
-              </div>
-            );
-          })}
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {GRID.map((f, index) => (
+            <li key={f.slug} className="reveal" style={{ transitionDelay: `${index * 0.08}s` }}>
+              <FeatureCard feature={f} href={featurePath(f)} />
+            </li>
+          ))}
+        </ul>
+        <div className="text-center mt-10">
+          <a href={FEATURES_HUB.path} className="btn btn-secondary">
+            See all {FEATURES.length} features
+          </a>
         </div>
       </div>
     </section>

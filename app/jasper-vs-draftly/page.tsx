@@ -467,7 +467,7 @@ export default async function JasperVsDraftlyPage() {
               <dl>
                 {TABLE.map((r) => (
                   <div key={r.label} className="grid sm:grid-cols-[1.3fr_1fr_1fr] gap-x-3 gap-y-2 px-4 sm:px-6 py-3.5" style={{ borderTop: "1px solid var(--color-border)" }}>
-                    <dt className="text-sm font-medium">{r.label}</dt>
+                    <dt className="text-sm font-medium">{r.feature ? <a href={`/feature/${r.feature}`} className="underline underline-offset-2" style={{ color: "inherit" }}>{r.label}</a> : r.label}</dt>
                     <dd className="grid grid-cols-2 sm:contents gap-3">
                       <CheckCell value={r.draftly} note={r.draftlyNote} draftly />
                       <CheckCell value={r.jasper} note={r.jasperNote} />
