@@ -4,7 +4,16 @@ import { pageImages } from "@/lib/og";
 import { getHomepageData } from "@/lib/graphql";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { BENCHMARK, BENCHMARK_DATE, BENCHMARK_ISO, COPY_BENCHMARK, type BenchmarkRow, type CopyRow } from "@/lib/benchmark";
+import {
+  BENCHMARK,
+  BENCHMARK_DATE,
+  BENCHMARK_ISO,
+  BENCHMARK_UPDATED,
+  BENCHMARK_UPDATED_ISO,
+  COPY_BENCHMARK,
+  type BenchmarkRow,
+  type CopyRow,
+} from "@/lib/benchmark";
 import { BarChart } from "@/components/BarChart";
 import { ContentImage } from "@/components/ContentImage";
 import { ProductFigure } from "@/components/ProductFigure";
@@ -45,10 +54,24 @@ export const revalidate = 3600;
 // (200), "best ai for content writing", "best ai for blog writing", "best ai for
 // copywriting" (250), "is chatgpt still the best ai". Each one has a section that answers
 // it in its first sentence, with a table ranked on what that question cares about.
-// Every number below comes from lib/benchmark.ts (generated from the run files).
-const TITLE = "Best AI for Writing in 2026: We Tested 14 Models";
-const DESCRIPTION =
-  "Which is the best AI for writing? We tested 14 AI models on the same blog posts and copy to find the best LLM for writing, for SEO, for copywriting and value.";
+// Every number below comes from lib/benchmark.ts (generated from the run files). Edition 1 ran
+// 2026-10-06; five models released Oct 7-19 were added 2026-10-20 with the same briefs, prompts
+// and judges (rows with `added`).
+const N = BENCHMARK.length;
+const TITLE = `Best AI for Writing in 2026: We Tested ${N} Models`;
+const DESCRIPTION = `Which is the best AI for writing? We tested ${N} AI models on the same blog posts and copy to find the best LLM for writing, for SEO, for copywriting and value.`;
+
+const ordinal = (n: number) => `${n}${n % 10 === 1 && n !== 11 ? "st" : n % 10 === 2 && n !== 12 ? "nd" : n % 10 === 3 && n !== 13 ? "rd" : "th"}`;
+const row = (model: string) => BENCHMARK.find((r) => r.model === model)!;
+const copyRow = (model: string) => COPY_BENCHMARK.find((r) => r.model === model)!;
+/** Rank on the blog writing leaderboard, e.g. "6th". */
+const rank = (model: string) => ordinal(BENCHMARK.findIndex((r) => r.model === model) + 1);
+const ADDED = BENCHMARK.filter((r) => r.added);
+const MINI = row("GPT 5.4 Mini");
+const GPT55 = row("GPT 5.5");
+/** Models that cost more per post than GPT 5.4 Mini and scored lower. */
+const BEAT_BY_MINI = BENCHMARK.filter((r) => r.cost > MINI.cost && r.overall < MINI.overall).length;
+const SHORT_UPDATED = BENCHMARK_UPDATED.replace(/, \d{4}$/, "");
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -68,13 +91,13 @@ const PICKS = [
     label: "Most human-sounding",
     model: "Claude Sonnet 5.5",
     stat: "Top voice score: 95 out of 100",
-    body: "Both judges rated it among the most natural writers of the 14, and its average voice score was the highest, at about $0.05 a post. It is Draftly's default writer.",
+    body: `Both judges rated it among the most natural writers of the ${N}, and its average voice score was the highest, at about $0.05 a post. It is Draftly's default writer.`,
   },
   {
     label: "Best value",
     model: "GPT 5.4 Mini",
     stat: "90.2 overall for under a cent a post",
-    body: "Fifth overall, the fastest model in the test at 13 seconds a post, and about a tenth of the cost of the top three. Draftly now writes with Claude Sonnet 5.5 by default: in a later 20-brief test, 95% of its posts with Draftly's quality check passed our reader-quality bar.",
+    body: `${rank("GPT 5.4 Mini")} overall, the fastest model in the test at 13 seconds a post, and about a tenth of the cost of the top three. Two models added in October came within a point for less: DeepSeek V4.1 Flash (89.8) and Claude Haiku 5.5 (89.5, about a third of a cent a post). Draftly now writes with Claude Sonnet 5.5 by default: in a later 20-brief test, 95% of its posts with Draftly's quality check passed our reader-quality bar.`,
   },
   {
     label: "Best for copywriting",
@@ -107,11 +130,11 @@ const FAQS = [
   },
   {
     q: "What is the best AI for copywriting?",
-    a: "Gemini 3.8 Flash and Claude Opus 5.5 tied for first in our copywriting test, and Gemini 3.8 Flash costs about a sixth as much. Claude Sonnet 4.6 and Claude Haiku 4.5 missed many Google Ads character limits.",
+    a: "Gemini 3.8 Flash and Claude Opus 5.5 tied for first in our copywriting test, and Gemini 3.8 Flash costs about a sixth as much. Of the models added in October, Gemini 4 Argon and DeepSeek V4.1 Flash came closest at 90.0, for about half a cent a pack or less. Claude Sonnet 4.6 and Claude Haiku 4.5 missed many Google Ads character limits.",
   },
   {
     q: "Is ChatGPT still the best AI for writing?",
-    a: "OpenAI's GPT 5.4 Mini, one of the models behind ChatGPT, finished fifth of 14. The larger GPT 5.5 and GPT 5.4 finished seventh and tenth, mostly for running long and using contrast phrasing.",
+    a: `OpenAI's GPT 5.4 Mini, one of the models behind ChatGPT, finished ${rank("GPT 5.4 Mini")} of ${N}. The larger GPT 5.5 and GPT 5.4 finished ${rank("GPT 5.5")} and ${rank("GPT 5.4")}, mostly for running long and using contrast phrasing.`,
   },
   {
     q: "Can I use these models in Draftly?",
@@ -119,7 +142,7 @@ const FAQS = [
   },
   {
     q: "What is the best AI for SEO writing?",
-    a: "Qwen 3.8 Max, GPT 5.5, DeepSeek V4 Pro and Claude Opus 5.5 each passed all 18 on-page SEO checks in our test: keyword placement, meta title and description length, and an FAQ section.",
+    a: "Qwen 3.8 Max, GPT 5.5, DeepSeek V4 Pro and Claude Opus 5.5 each passed all 18 on-page SEO checks in our test: keyword placement, meta title and description length, and an FAQ section. Three models added in October also passed all 18: Muse Spark Open, DeepSeek V4.1 Flash and Gemini 4 Argon.",
   },
 ];
 
@@ -138,7 +161,7 @@ function Section({ id, title, children }: { id?: string; title: string; children
 
 
 /** A leaderboard ranked for one question, with only the columns that question cares about. */
-function QueryTable<T extends { model: string; provider?: string }>({ caption, rows, columns, rank }: BenchmarkTable<T>) {
+function QueryTable<T extends { model: string; provider?: string; added?: string }>({ caption, rows, columns, rank }: BenchmarkTable<T>) {
   return (
     <div className="mt-8 overflow-x-auto rounded-xl" style={{ border: "1px solid var(--color-border)" }}>
       <table className="w-full text-sm min-w-[640px]">
@@ -160,6 +183,9 @@ function QueryTable<T extends { model: string; provider?: string }>({ caption, r
               {rank && <td className="px-4 py-2.5 tabular-nums">{i + 1}</td>}
               <td className="px-4 py-2.5 font-medium whitespace-nowrap">
                 <ModelName model={r.model} provider={r.provider} size={20} />
+                {r.added && (
+                  <span className="ml-2 text-xs font-semibold" style={{ color: "var(--color-accent)" }}>Added {SHORT_UPDATED}</span>
+                )}
               </td>
               {columns.map((c) => (
                 <td key={c.label} className={`px-4 py-2.5 text-right tabular-nums ${c.strong ? "font-semibold" : ""}`}>{c.value(r)}</td>
@@ -188,7 +214,7 @@ export default async function BenchmarkPage() {
         headline: TITLE,
         description: DESCRIPTION,
         datePublished: BENCHMARK_ISO,
-        dateModified: BENCHMARK_ISO,
+        dateModified: BENCHMARK_UPDATED_ISO,
         author: authorRef,
         publisher: { "@type": "Organization", name: "Draftly", url: "https://www.draftly.blog" },
       },
@@ -212,11 +238,11 @@ export default async function BenchmarkPage() {
             </h1>
             <p className="text-lg leading-relaxed mb-4" style={{ color: "var(--color-text-secondary)" }}>
               The best AI for writing depends on what you need. Qwen 3.8 Max scored highest overall, Claude Sonnet 5.5
-              wrote the most human-sounding posts, and GPT 5.4 Mini gave the best quality for the money. We tested 14
-              models on the same blog posts and marketing copy, then scored all 84 pieces.
+              wrote the most human-sounding posts, and GPT 5.4 Mini gave the best quality for the money. We tested {N}{" "}
+              models on the same blog posts and marketing copy, then scored all {N * 6} pieces.
             </p>
             <p className="text-sm" style={{ color: "var(--color-text-muted)" }}>
-              Edition 1. Tested {BENCHMARK_DATE} by{" "}
+              Edition 1. Tested {BENCHMARK_DATE}, with {ADDED.length} new models added {BENCHMARK_UPDATED}, by{" "}
               <a href="/about" rel="author" style={{ color: "var(--color-accent)" }}>
                 Preston Vawdrey
               </a>{" "}
@@ -249,6 +275,29 @@ export default async function BenchmarkPage() {
             ))}
           </section>
 
+          <Section id="new-models" title={`New Models Added ${SHORT_UPDATED}`}>
+            <p>
+              We ran five models released in October through the same briefs, prompts and judges: Gemini 4 Argon
+              (generally available October 13), Muse Spark Open from Meta (October 15), DeepSeek V4.1 Flash in its October
+              17 update, MiniMax M3.1 Flash (listed on the Vercel AI Gateway October 19) and Claude Haiku 5.5 (October 7).
+              None of them took first place in either test.
+            </p>
+            <p>
+              <B>Muse Spark Open</B> is the strongest new writer. It placed {rank("Muse Spark Open")} on blog posts at{" "}
+              {row("Muse Spark Open").overall} and passed all 18 SEO checks. <B>Claude Haiku 5.5</B> fixed its
+              predecessor&apos;s worst habit: zero em dashes across three posts, against 29 for Haiku 4.5, and{" "}
+              {row("Claude Haiku 5.5").overall} overall for about a third of a cent a post.
+            </p>
+            <p>
+              <B>Gemini 4 Argon</B> and <B>DeepSeek V4.1 Flash</B> tied Kimi K3 at {copyRow("Gemini 4 Argon").overall} in
+              copywriting, under a cent a pack. On blog posts, Argon ran long (1,710 words on average against a 1,000 to
+              1,200 word brief) and used 14 em or en dashes, so it placed {rank("Gemini 4 Argon")}.{" "}
+              <B>MiniMax M3.1 Flash</B> met every copy limit but had the lowest judge score in copywriting,{" "}
+              {copyRow("MiniMax M3.1 Flash").judge}, and took about three minutes a post. The gateway billed $0 for it
+              during our run, so its cost shows as zero.
+            </p>
+          </Section>
+
           <section id="leaderboard" className="mt-20">
             <h2 className="text-3xl font-medium mb-3" style={{ letterSpacing: "-0.03em" }}>
               The Best LLM for Writing: Full Leaderboard
@@ -259,10 +308,10 @@ export default async function BenchmarkPage() {
               we were billed per post.
             </p>
             <BarChart
-              title="Overall writing score, out of 100, all 14 models"
+              title={`Overall writing score, out of 100, all ${N} models`}
               rows={[...BENCHMARK].sort((a, b) => b.overall - a.overall).map((r) => ({ key: r.model, label: r.model, value: r.overall }))}
               format={(n) => n.toFixed(1)}
-              note={`Three blog posts per model, run ${BENCHMARK_DATE}. The full table with every column is below.`}
+              note={`Three blog posts per model, run ${BENCHMARK_DATE}; the ${ADDED.length} newest models were added ${BENCHMARK_UPDATED}. The full table with every column is below.`}
             />
             <QueryTable<BenchmarkRow> {...LEADERBOARD_TABLE} />
           </section>
@@ -275,8 +324,8 @@ export default async function BenchmarkPage() {
             </p>
             <p>
               On the model side, Qwen 3.8 Max wrote the cleanest content, with an FAQ and the closing call to action in every
-              post and zero AI tells across all three. Kimi K3, GPT 5.4 Mini, Claude Opus 5.5 and Claude Sonnet 5.5 followed
-              with two or three tells each.
+              post and zero AI tells across all three. Kimi K3, Muse Spark Open, MiniMax M3.1 Flash, GPT 5.4 Mini, Claude
+              Haiku 5.5, Claude Opus 5.5 and Claude Sonnet 5.5 followed with two or three tells each.
             </p>
             <p>
               Draftly is built around that pairing. It finds timely topics from your industry&apos;s news, writes in your
@@ -305,21 +354,24 @@ export default async function BenchmarkPage() {
           <Section id="copywriting" title="Best AI for Copywriting">
             <p>
               Gemini 3.8 Flash and Claude Opus 5.5 are the best AI for copywriting in our test, tied at 90.8. Gemini 3.8 Flash
-              costs less than a cent per copy pack, about a sixth of Opus. Each model wrote the same three copy packs: five
+              costs less than a cent per copy pack, about a sixth of Opus. Gemini 4 Argon and DeepSeek V4.1 Flash, added in
+              October, tied Kimi K3 at 90.0 for even less. Each model wrote the same three copy packs: five
               landing page headlines, a hero section, a Google search ad, three email subject lines with preview text, and
               three benefit bullets.
             </p>
             <p>
               The clearest split is on hard limits. Google rejects search ad headlines over 30 characters and descriptions
-              over 90. Eleven of the 14 models hit all 15 of those limits. Claude Sonnet 4.6 hit 8, Claude Haiku 4.5 hit 7
-              and DeepSeek V3.2 hit 11.
+              over 90. {COPY_BENCHMARK.filter((r) => r.adLimits === 15).length} of the {COPY_BENCHMARK.length} models hit all 15 of
+              those limits, including all {ADDED.length} added in October. Claude Sonnet 4.6 hit 8, Claude Haiku 4.5 hit 7 and
+              DeepSeek V3.2 hit 11.
             </p>
             <p>
-              Above that line, the top ten are close. Their judge scores span 74 to 82, so treat a gap of a point or two as a
-              tie and choose on cost and speed.
+              Above that line, the field is close. Every model that met the limits scored 74 to 82 with the judges except
+              MiniMax M3.1 Flash, at 68. Both judges picked its &quot;Ready for a Brighter, Healthier Smile?&quot; as the weakest
+              line in its dental pack. Treat a gap of a point or two as a tie and choose on cost and speed.
             </p>
             <BarChart
-              title="Copywriting score, out of 100, all 14 models"
+              title={`Copywriting score, out of 100, all ${COPY_BENCHMARK.length} models`}
               rows={[...COPY_BENCHMARK].sort((a, b) => b.overall - a.overall).map((r) => ({ key: r.model, label: r.model, value: r.overall }))}
               format={(n) => n.toFixed(1)}
               note="Three copy packs per model, scored by code on hard limits and by two AI judges on the writing."
@@ -350,11 +402,12 @@ export default async function BenchmarkPage() {
           <Section id="seo-writing" title="Best AI for SEO Writing">
             <p>
               Qwen 3.8 Max, GPT 5.5, DeepSeek V4 Pro and Claude Opus 5.5 are the best AI for SEO writing in our test, each
-              passing all 18 on-page SEO checks. Those checks cover the target keyword in the title, the first 100 words and
+              passing all 18 on-page SEO checks. Muse Spark Open, DeepSeek V4.1 Flash and Gemini 4 Argon, added in October,
+              passed all 18 too. Those checks cover the target keyword in the title, the first 100 words and
               an H2, a meta title and meta description at the right length, and an FAQ section, across three posts.
             </p>
             <p>
-              DeepSeek V4 Pro is the value pick here at under two cents a post. GPT 5.4 Mini passed 15: across three posts it
+              DeepSeek V4.1 Flash is the value pick here at under a cent a post. GPT 5.4 Mini passed 15: across three posts it
               missed one keyword placement, one meta title length and one meta description length. All three are quick fixes
               in review.
             </p>
@@ -378,12 +431,12 @@ export default async function BenchmarkPage() {
           <Section id="blog-writing" title="Best AI for Blog Writing">
             <p>
               The best AI for blog writing holds a structure and a word count across a full post. DeepSeek V3.2, Kimi K3 and
-              Gemini 3.8 Flash landed closest to the 1,000 to 1,200 word brief, averaging 20, 27 and 51 words from its
+              DeepSeek V4.1 Flash landed closest to the 1,000 to 1,200 word brief, averaging 20, 27 and 31 words from its
               midpoint. Gemini 3.1 Pro dropped the FAQ section on two of three posts, and its scores ranged from 64 to 95.
             </p>
             <p>
-              GPT 5.5 averaged 1,774 words, which means more editing and a higher bill. GPT 5.4 Mini runs about 175 words
-              long, enough to notice and easy to trim.
+              GPT 5.5 averaged 1,774 words and Gemini 4 Argon 1,710, which means more editing and a higher bill. GPT 5.4
+              Mini runs about 175 words long, enough to notice and easy to trim.
             </p>
           </Section>
           <div className="max-w-4xl">
@@ -397,8 +450,9 @@ export default async function BenchmarkPage() {
 
           <Section id="chatgpt" title="Is ChatGPT Still the Best AI for Writing?">
             <p>
-              ChatGPT runs on OpenAI&apos;s GPT models, and none of them made the top three. GPT 5.4 Mini finished fifth of 14
-              with 90.2 overall. GPT 5.5 finished seventh and GPT 5.4 tenth, losing points for contrast phrasing (&quot;it&apos;s
+              ChatGPT runs on OpenAI&apos;s GPT models, and none of them made the top three. GPT 5.4 Mini finished{" "}
+              {rank("GPT 5.4 Mini")} of {N} with {MINI.overall} overall. GPT 5.5 finished {rank("GPT 5.5")} and GPT 5.4{" "}
+              {rank("GPT 5.4")}, losing points for contrast phrasing (&quot;it&apos;s
               not X, it&apos;s Y&quot;) and, in GPT 5.5&apos;s case, length.
             </p>
             <p>So the smallest OpenAI model wrote the best blog posts of the three, at the lowest cost.</p>
@@ -428,12 +482,14 @@ export default async function BenchmarkPage() {
 
           <Section title="What the Results Show">
             <p>
-              <B>Price and quality barely track each other.</B> GPT 5.5 cost the second most per post and finished seventh.
-              GPT 5.4 Mini beat eight models that cost more per post.
+              <B>Price and quality barely track each other.</B> GPT 5.5 cost the second most per post and finished{" "}
+              {rank(GPT55.model)}. GPT 5.4 Mini beat {BEAT_BY_MINI} models that cost more per post.
             </p>
             <p>
               <B>Upgrade within a family when you can.</B> Claude Sonnet 5.5 scored 11 points higher overall than Sonnet 4.6
-              and had the best voice score of any model. The older model used nine em dashes across three posts.
+              and had the best voice score of any model. The older model used nine em dashes across three posts. Claude Haiku
+              5.5 scored {(row("Claude Haiku 5.5").overall - row("Claude Haiku 4.5").overall).toFixed(1)} points higher than
+              Haiku 4.5.
             </p>
             <p>
               <B>Em dashes are the most common AI tell.</B> Claude Haiku 4.5 used 29 of them in three posts, even with a rule
@@ -467,12 +523,18 @@ export default async function BenchmarkPage() {
                 pack per business, with a brand voice, facts it could use and a call to action.
               </p>
               <p>
-                All 14 models got the same system prompt: the{" "}
+                All {N} models got the same system prompt: the{" "}
                 <a href="/seo-copywriting" style={{ color: "var(--color-accent)" }}>
                   writing rules Draftly uses in production
                 </a>
                 . We called each one
                 through the Vercel AI Gateway, so the cost columns are what we were actually billed.
+              </p>
+              <p>
+                The first 14 models ran on {BENCHMARK_DATE}. On {BENCHMARK_UPDATED} we added {ADDED.length} models released
+                since then ({ADDED.map((r) => r.model).join(", ")}) using the same scripts, briefs, prompts and judges, so
+                their scores compare directly. One MiniMax M3.1 Flash blog post hit our five-minute timeout and we ran it
+                again; its score uses the second attempt. The gateway billed $0 for MiniMax M3.1 Flash during the run.
               </p>
               <p>
                 For voice, two judge models from different companies (Gemini 3 Flash and GPT 5.4) scored every post with
@@ -523,7 +585,7 @@ export default async function BenchmarkPage() {
               <p className="leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
                 Each judge started every post at 100 and took off 12 points for a serious problem on any point below, or 5
                 for a minor one. The list runs from the most flagged to the least, counted across {AUDIT_READS} judge reads
-                (42 posts, two judges each). We kept it as one list so it reads as the single checklist the judges used.
+                (the 42 Edition 1 posts, two judges each). We kept it as one list so it reads as the single checklist the judges used.
               </p>
               <dl className="mt-5 rounded-xl overflow-hidden text-sm" style={{ border: "1px solid var(--color-border)" }} data-lint-skip="">
                 {AUDIT_POINTS.map((a, i) => (

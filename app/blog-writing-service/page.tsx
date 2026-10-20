@@ -15,6 +15,7 @@ import { GUIDE_SHOTS, STEP_SHOTS, imageObjectJsonLd } from "@/lib/product-shots"
 import { ContentImage } from "@/components/ContentImage";
 import { STOCK } from "@/lib/stock-images";
 import { AccentText } from "@/components/AccentText";
+import { BENCHMARK } from "@/lib/benchmark";
 
 export const revalidate = 3600;
 
@@ -302,7 +303,7 @@ export default async function BlogWritingServicePage() {
               <ProductFigure shot={GUIDE_SHOTS.brandVoice} aspect="16 / 10" fit="contain" />
             </div>
             <p>
-              Want to know which AI model writes best before you trust one with your blog? We tested 14 of them in the{" "}
+              Want to know which AI model writes best before you trust one with your blog? We tested {BENCHMARK.length} of them in the{" "}
               <A href="/best-ai-for-writing">best AI for writing benchmark</A>. Every plan and what it includes is on the{" "}
               <A href="/pricing">pricing page</A>.
             </p>

@@ -13,6 +13,7 @@ import { KeepReading } from "@/components/KeepReading";
 import { ProductFigure } from "@/components/ProductFigure";
 import { GUIDE_SHOTS, imageObjectJsonLd } from "@/lib/product-shots";
 import { AccentText } from "@/components/AccentText";
+import { BENCHMARK } from "@/lib/benchmark";
 
 export const revalidate = 3600;
 
@@ -147,7 +148,7 @@ export default async function AgencyVsToolPage() {
                   <B>Rule checks on every post.</B> Each post is checked against your{" "}
                   <A href="/seo-copywriting">SEO copywriting rules</A> and gets one automatic
                   fix pass if it breaks any. In a {D.briefs}-brief test, {D.model} posts, Draftly&apos;s default, passed every hard
-                  rule {D.rulePass}% of the time after that pass. Our <A href="/best-ai-for-writing">14-model writing test</A>{" "}
+                  rule {D.rulePass}% of the time after that pass. Our <A href="/best-ai-for-writing">{BENCHMARK.length}-model writing test</A>{" "}
                   shows how other models handle the same rules.
                 </>,
                 <>

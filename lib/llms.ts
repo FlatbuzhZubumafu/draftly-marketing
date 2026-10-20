@@ -1,4 +1,4 @@
-import { BENCHMARK, BENCHMARK_DATE } from "@/lib/benchmark";
+import { BENCHMARK, BENCHMARK_DATE, BENCHMARK_UPDATED } from "@/lib/benchmark";
 import {
   BLOG_TABLE,
   CHATGPT_TABLE,
@@ -166,7 +166,7 @@ export function buildLlmsFullTxt(): string {
   ];
   return `# Draftly: Best AI for Writing Benchmark, Full Results
 
-> Edition 1, tested ${BENCHMARK_DATE} by Preston Vawdrey at Draftly. Source: ${SITE_URL}/best-ai-for-writing
+> Edition 1, tested ${BENCHMARK_DATE} (new models added ${BENCHMARK_UPDATED}) by Preston Vawdrey at Draftly. Source: ${SITE_URL}/best-ai-for-writing
 
 ## Method
 

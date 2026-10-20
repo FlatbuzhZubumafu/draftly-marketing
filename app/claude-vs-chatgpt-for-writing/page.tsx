@@ -3,7 +3,7 @@ import { SITE_URL } from "@/lib/site";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { A, B, Bullets, Byline, FaqList, Section, faqJsonLd, type Faq } from "@/components/ArticleParts";
-import { BENCHMARK, BENCHMARK_DATE, COPY_BENCHMARK, seoScore, type BenchmarkRow, type CopyRow } from "@/lib/benchmark";
+import { BENCHMARK, BENCHMARK_DATE, BENCHMARK_UPDATED, COPY_BENCHMARK, seoScore, type BenchmarkRow, type CopyRow } from "@/lib/benchmark";
 import { money } from "@/lib/benchmarkTables";
 import { draftlyCredits } from "@/lib/app-models";
 import { jsonLdHtml, authorRef } from "@/lib/schema";
@@ -24,7 +24,8 @@ export const revalidate = 3600;
 // Targets "claude vs chatgpt for writing" (Ahrefs US: 450/mo, KD 9) and "is claude better
 // than chatgpt for writing" (150), checked 2026-10-15. Every score comes from lib/benchmark.ts,
 // the same Edition 1 run as /best-ai-for-writing: the Anthropic rows are "Claude" and the
-// OpenAI rows are "ChatGPT" (the GPT models behind it). No new test was run for this page.
+// OpenAI rows are "ChatGPT" (the GPT models behind it). No new test was run for this page. The
+// comparison stays on the original 7 models; rows added later (`added`) only count toward totals.
 const PATH = "/claude-vs-chatgpt-for-writing";
 const PUBLISHED = { iso: "2026-10-16", label: "October 16, 2026" };
 const TITLE = "Claude vs ChatGPT for Writing: 7 Models Tested";
@@ -41,8 +42,9 @@ export const metadata: Metadata = {
 const isClaude = (r: { provider: string }) => r.provider === "Anthropic";
 const isGpt = (r: { provider: string }) => r.provider === "OpenAI";
 
-const BLOG = BENCHMARK.filter((r) => isClaude(r) || isGpt(r)).sort((a, b) => b.overall - a.overall);
-const COPY = COPY_BENCHMARK.filter((r) => isClaude(r) || isGpt(r)).sort((a, b) => b.overall - a.overall);
+const BLOG = BENCHMARK.filter((r) => !r.added && (isClaude(r) || isGpt(r))).sort((a, b) => b.overall - a.overall);
+const COPY = COPY_BENCHMARK.filter((r) => !r.added && (isClaude(r) || isGpt(r))).sort((a, b) => b.overall - a.overall);
+const N = BENCHMARK.length;
 
 const blog = (model: string) => BENCHMARK.find((r) => r.model === model)!;
 const copy = (model: string) => COPY_BENCHMARK.find((r) => r.model === model)!;
@@ -53,6 +55,7 @@ const OPUS = blog("Claude Opus 5.5");
 const SONNET = blog("Claude Sonnet 5.5");
 const SONNET46 = blog("Claude Sonnet 4.6");
 const HAIKU = blog("Claude Haiku 4.5");
+const HAIKU55 = blog("Claude Haiku 5.5");
 const MINI = blog("GPT 5.4 Mini");
 const GPT55 = blog("GPT 5.5");
 const GPT54 = blog("GPT 5.4");
@@ -132,7 +135,7 @@ function ModelTable<T extends { model: string; provider: string }>({ caption, ro
 }
 
 const PICKS: { use: string; model: string; why: string }[] = [
-  { use: "Everyday blog posts", model: SONNET.model, why: `Highest voice score of all 14 models (${SONNET.voice}) at ${CENTS(SONNET.cost)} a post.` },
+  { use: "Everyday blog posts", model: SONNET.model, why: `Highest voice score of all ${N} models (${SONNET.voice}) at ${CENTS(SONNET.cost)} a post.` },
   { use: "The best post, cost aside", model: OPUS.model, why: `${OPUS.overall} overall, the top Claude or GPT score, and all 18 SEO checks passed.` },
   { use: "Lots of posts on a small budget", model: MINI.model, why: `${MINI.overall} overall for ${CENTS(MINI.cost)} a post, done in ${MINI.seconds} seconds.` },
   { use: "Ads and short copy", model: copy("Claude Opus 5.5").model, why: `Top copy score here (${copy("Claude Opus 5.5").overall}) and every Google Ads limit met. Any GPT model also hit all 15.` },
@@ -145,7 +148,7 @@ const FAQS: Faq[] = [
   },
   {
     q: "Which Claude model is best for writing?",
-    a: `Claude Opus 5.5 had the higher overall score (${OPUS.overall}). Claude Sonnet 5.5 had the best voice score of the 14 models we tested (${SONNET.voice}) at about half the cost per post, so it's the one we'd use day to day.`,
+    a: `Claude Opus 5.5 had the higher overall score (${OPUS.overall}). Claude Sonnet 5.5 had the best voice score of the ${N} models we tested (${SONNET.voice}) at about half the cost per post, so it's the one we'd use day to day.`,
   },
   {
     q: "Which ChatGPT model is best for writing?",
@@ -203,7 +206,7 @@ export default function ClaudeVsChatGptPage() {
             </p>
             <Byline verb="Written" date={PUBLISHED.label} />
             <p className="mt-2 text-sm" style={{ color: "var(--color-text-muted)" }}>
-              Every number here comes from our <A href="/best-ai-for-writing">14-model writing benchmark</A>, run{" "}
+              Every number here comes from our <A href="/best-ai-for-writing">{N}-model writing benchmark</A>, run{" "}
               {BENCHMARK_DATE}. Draftly offers both families, so either result works for me.
             </p>
           </header>
@@ -214,7 +217,7 @@ export default function ClaudeVsChatGptPage() {
               formatting, two AI judges scored how human the writing sounds, and the overall score averages the two.
             </p>
             <p>
-              Claude Opus 5.5 ranked {rank(OPUS.model)} of all 14 models and Claude Sonnet 5.5 ranked {rank(SONNET.model)}.
+              Claude Opus 5.5 ranked {rank(OPUS.model)} of all {N} models and Claude Sonnet 5.5 ranked {rank(SONNET.model)}.
               GPT 5.4 Mini came {rank(MINI.model)}. The two bigger GPT models finished {rank(GPT55.model)} and{" "}
               {rank(GPT54.model)}.
             </p>
@@ -257,7 +260,7 @@ export default function ClaudeVsChatGptPage() {
 
           <Section id="voice" title="Which sounds more human">
             <p>
-              Claude Sonnet 5.5 had the highest voice score of all 14 models, at {TOP_VOICE}. Claude Opus 5.5 scored{" "}
+              Claude Sonnet 5.5 had the highest voice score of all {N} models, at {TOP_VOICE}. Claude Opus 5.5 scored{" "}
               {OPUS.voice}. The best GPT voice score was GPT 5.5&apos;s {GPT55.voice}, and GPT 5.4 Mini scored {MINI.voice}.
             </p>
             <p>
@@ -292,7 +295,7 @@ export default function ClaudeVsChatGptPage() {
           <Section id="cost" title="Cost and speed">
             <p>
               GPT 5.4 Mini is the bargain. It cost {CENTS(MINI.cost)} a post and finished in {MINI.seconds} seconds, the
-              fastest of all 14. Claude Sonnet 5.5 cost {CENTS(SONNET.cost)} and took {SONNET.seconds} seconds.
+              fastest of all {N}. Claude Sonnet 5.5 cost {CENTS(SONNET.cost)} and took {SONNET.seconds} seconds.
             </p>
             <p>
               Paying more didn&apos;t buy a better post on the GPT side. GPT 5.5 cost {CENTS(GPT55.cost)} a post, the most of
@@ -334,7 +337,9 @@ export default function ClaudeVsChatGptPage() {
                 </>,
                 <>
                   <B>Models change fast.</B> This is Edition 1. OpenAI&apos;s GPT 6 models, including GPT 6 Luna, weren&apos;t
-                  in it. The next edition adds them and more briefs.
+                  in it. Claude Haiku 5.5 was added to the benchmark on {BENCHMARK_UPDATED} and scored {HAIKU55.overall} on
+                  blog posts, {(HAIKU55.overall - HAIKU.overall).toFixed(1)} points above Haiku 4.5. The next edition adds the
+                  GPT 6 models and more briefs.
                 </>,
                 <>
                   <B>It doesn&apos;t check facts or sales.</B> It scores rule-following and how human the writing sounds, not
@@ -343,7 +348,7 @@ export default function ClaudeVsChatGptPage() {
               ]}
             />
             <p>
-              The full method, all 14 models and real excerpts are on the <A href="/best-ai-for-writing#method">benchmark page</A>.
+              The full method, all {N} models and real excerpts are on the <A href="/best-ai-for-writing#method">benchmark page</A>.
             </p>
           </Section>
 
