@@ -260,8 +260,8 @@ export default async function FeaturesHub() {
 
         <section className="pb-8 px-4" style={{ background: "var(--color-bg-primary)" }}>
           <div className="container-draftly max-w-5xl">
-            <FaqList faqs={FAQS} />
-            <p className="max-w-3xl mt-4 text-sm" style={{ color: "var(--color-text-muted)" }}>
+            <FaqList faqs={FAQS} centered />
+            <p className="max-w-3xl mx-auto mt-4 text-sm text-center" style={{ color: "var(--color-text-muted)" }}>
               Read the full comparison in{" "}
               <Link href="/jasper-vs-draftly" style={{ color: "var(--color-accent-hover)" }}>
                 Jasper vs Draftly

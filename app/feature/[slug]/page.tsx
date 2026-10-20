@@ -361,7 +361,7 @@ export default async function FeaturePage({ params }: Props) {
 
         <section className="pb-20 px-4" style={{ background: "var(--color-bg-primary)" }}>
           <div className="container-draftly max-w-6xl">
-            <FaqList faqs={feature.faqs} />
+            <FaqList faqs={feature.faqs} centered />
           </div>
         </section>
 

@@ -63,17 +63,20 @@ export function FaqList({
   faqs,
   skipLint = [],
   title,
-  className = "mt-20 max-w-3xl",
+  centered = false,
+  className = centered ? "mt-20 mx-auto max-w-3xl" : "mt-20 max-w-3xl",
 }: {
   faqs: Faq[];
   skipLint?: string[];
   /** Defaults to "Frequently asked questions" with the squiggle on the last word. */
   title?: React.ReactNode;
+  /** Center the heading and the list, as the homepage FAQ does (feature pages). */
+  centered?: boolean;
   className?: string;
 }) {
   return (
     <section id="faq" className={className}>
-      <h2 className="text-3xl font-medium mb-8" style={{ letterSpacing: "-0.03em" }}>
+      <h2 className={`text-3xl font-medium mb-8${centered ? " text-center" : ""}`} style={{ letterSpacing: "-0.03em" }}>
         {title ?? (
           <>
             Frequently asked{" "}
