@@ -1,6 +1,6 @@
 import { AccentText } from "./AccentText";
 import { FeatureCarousel } from "./FeatureCarousel";
-import { FeatureCard } from "./FeatureIcon";
+import { FeatureTile } from "./FeatureTile";
 import { FEATURE_SLIDES } from "@/lib/product-shots";
 import { FEATURES, FEATURES_HUB, featurePath } from "@/lib/features";
 
@@ -29,7 +29,7 @@ export function Features() {
         <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {GRID.map((f, index) => (
             <li key={f.slug} className="reveal" style={{ transitionDelay: `${index * 0.08}s` }}>
-              <FeatureCard feature={f} href={featurePath(f)} />
+              <FeatureTile feature={f} compact />
             </li>
           ))}
         </ul>

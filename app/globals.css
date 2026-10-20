@@ -423,3 +423,49 @@ a:hover { color: var(--color-text-primary); }
 /* Homepage guide cards: whole card is the link. */
 .guide-card:hover { box-shadow: var(--shadow-card), 0 8px 24px -12px rgba(0, 0, 0, 0.18); }
 .guide-card:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+
+/* Pastel feature cards (components/FeatureTile.tsx): flat, one tint per category, the whole card is the link. */
+.feature-tile {
+  background: var(--tint-bg);
+  border: 1px solid var(--tint-grid);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: transform var(--transition-lift), box-shadow var(--transition-lift);
+}
+.feature-tile:hover { transform: translateY(-4px); box-shadow: 0 18px 36px -18px rgba(0, 0, 0, 0.22); }
+.feature-tile:focus-within { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+.feature-tile-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+}
+.feature-tile-band {
+  border-top: 1px solid var(--tint-grid);
+  border-bottom: 1px solid var(--tint-grid);
+  padding: 14px 20px;
+}
+.feature-tile-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+.feature-tile-link::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.feature-tile-link:hover, .feature-tile-link:focus-visible { color: var(--color-text-primary); }
+.feature-tile-link:focus-visible { outline: none; }
+.feature-tile-arrow {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--color-text-primary);
+  transition: background-color var(--transition-base), color var(--transition-base);
+}
+.feature-tile:hover .feature-tile-arrow { background: var(--color-text-primary); color: #fff; }
