@@ -25,6 +25,7 @@ export const OG_IMAGES: Record<string, { file: string; alt: string }> = {
   "/tools": { file: "tools.jpg", alt: "Free SEO tools from Draftly: the AI visibility checker, blog SEO checker and blog ideas generator showing results" },
   "/privacy-policy": { file: "privacy-policy.jpg", alt: "Draftly privacy policy" },
   "/terms-and-conditions": { file: "terms-and-conditions.jpg", alt: "Draftly terms and conditions" },
+  "/tools/ai-content-detector": { file: "tool-ai-content-detector.jpg", alt: "Free AI content detector from Draftly: a Reads as AI score from 0 to 100 with the flagged sentences highlighted" },
   "/tools/ai-visibility-checker": { file: "tool-ai-visibility-checker.jpg", alt: "Free AI visibility checker from Draftly: can ChatGPT, Claude, Perplexity and Google read your site?" },
   "/tools/blog-seo-checker": { file: "tool-blog-seo-checker.jpg", alt: "Free blog SEO checker from Draftly: 13 on-page checks for any blog post URL" },
   "/tools/content-refresh-checker": { file: "tool-content-refresh-checker.jpg", alt: "Free content refresh checker from Draftly: find blog posts not updated in 12 months and posts to merge" },

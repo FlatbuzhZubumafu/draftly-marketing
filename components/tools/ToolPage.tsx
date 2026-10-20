@@ -7,6 +7,9 @@ import { ToolChecker } from "@/components/tools/ToolChecker";
 import { FaqSchemaGenerator } from "@/components/tools/FaqSchemaGenerator";
 import { GeneratorTool } from "@/components/tools/GeneratorTool";
 import { ToolHeroVideo } from "@/components/tools/ToolHeroVideo";
+import { AiContentDetector } from "@/components/tools/AiContentDetector";
+import { FeatureArt } from "@/components/feature-art/FeatureArt";
+import { TINTS, tintVars } from "@/lib/feature-tints";
 import { SAMPLE_BRIEF, SAMPLE_IDEAS } from "@/lib/brief-template";
 import { aiToolsEnabled } from "@/lib/tools/ai/gateway";
 import { FREE_TOOLS, TOOLS_DATE, TOOLS_HUB, type CheckerId, type FreeTool } from "@/lib/free-tools";
@@ -74,7 +77,8 @@ export function OtherTools({ exclude, heading = "More free tools" }: { exclude?:
 export async function ToolPage({ tool, children }: { tool: FreeTool; children?: React.ReactNode }) {
   const generator = tool.kind === "generator";
   const { marketingSettings: s } = await getHomepageData();
-  const registerUrl = `${APP_URL}/register`;
+  const registerUrl = `${APP_URL}/register${tool.registerIntent ? `?intent=${encodeURIComponent(tool.registerIntent)}` : ""}`;
+  const detector = tool.kind === "detector";
   const ctaLabel = s.heroCtaText || "Generate Free Post";
   const slug = tool.path.split("/").pop() ?? "";
 
@@ -106,12 +110,24 @@ export async function ToolPage({ tool, children }: { tool: FreeTool; children?: 
           </header>
 
           {/* The AI generators show a long sample under the form on phones, so their loop is desktop only. */}
-          <div className={`order-3 mx-auto w-full max-w-[420px] lg:order-2 lg:max-w-none ${generator && tool.id !== "faq-schema" ? "hidden lg:block" : ""}`}>
-            <ToolHeroVideo slug={slug} label={`Animation of the ${sentenceCase(tool.name)} working on a made-up plumber's website`} />
+          <div className={`order-3 mx-auto w-full max-w-[420px] lg:order-2 lg:max-w-none ${(generator && tool.id !== "faq-schema") || detector ? "hidden lg:block" : ""}`}>
+            {detector ? (
+              // No hero loop for the detector yet: the feature page's gauge drawing, on the "check" tint.
+              <div
+                className="graph-paper aspect-square rounded-3xl p-6 flex items-center"
+                style={{ ...tintVars("check"), ["--tint-band" as string]: TINTS.check.bg, border: "1.5px solid #111", boxShadow: `8px 8px 0 ${TINTS.check.fill}` }}
+              >
+                <FeatureArt name="ai-detector" className="w-full" />
+              </div>
+            ) : (
+              <ToolHeroVideo slug={slug} label={`Animation of the ${sentenceCase(tool.name)} working on a made-up plumber's website`} />
+            )}
           </div>
 
           <div className="order-2 lg:order-3 lg:col-span-2">
-            {tool.id === "faq-schema" ? (
+            {detector ? (
+              <AiContentDetector registerUrl={registerUrl} button={tool.input.button} />
+            ) : tool.id === "faq-schema" ? (
               <FaqSchemaGenerator />
             ) : generator ? (
               <GeneratorTool
@@ -199,7 +215,7 @@ export async function ToolPage({ tool, children }: { tool: FreeTool; children?: 
             </div>
             <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2">
               <a href={registerUrl} className="btn btn-primary">
-                {ctaLabel}
+                {tool.draftly.button ?? ctaLabel}
               </a>
               <span className="text-sm" style={secondary}>
                 {tool.draftly.cta}

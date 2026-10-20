@@ -8,14 +8,17 @@ import { runAiVisibility } from "./checks/ai-visibility.ts";
 import { runBlogSeo } from "./checks/blog-seo.ts";
 import { runContentRefresh } from "./checks/content-refresh.ts";
 import { runEeat } from "./checks/eeat.ts";
+import { runAiDetectorFetch, type ArticleText } from "./checks/ai-detector.ts";
 
-export type ToolId = "ai-visibility" | "blog-seo" | "content-refresh" | "eeat";
+export type ToolId = "ai-visibility" | "blog-seo" | "content-refresh" | "eeat" | "ai-detector";
 
-const RUNNERS: Record<ToolId, (url: string, extra?: string) => Promise<ToolReport>> = {
+const RUNNERS: Record<ToolId, (url: string, extra?: string) => Promise<ToolReport | ArticleText>> = {
   "ai-visibility": (u) => runAiVisibility(u),
   "blog-seo": (u) => runBlogSeo(u),
   "content-refresh": (u) => runContentRefresh(u),
   eeat: (u, home) => runEeat(u, home),
+  // Returns the article text, not a report: the browser scores it.
+  "ai-detector": (u) => runAiDetectorFetch(u),
 };
 
 const MAX_BODY = 4096;
