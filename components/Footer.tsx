@@ -10,6 +10,7 @@ const MUTED = "#8a8a8a";
 const FAINT = "#666";
 
 const PRODUCT: [string, string][] = [
+  ["/features", "Features"],
   ["/#how-it-works", "How it works"],
   ["/pricing", "Pricing"],
   ["/for-teams", "For teams"],

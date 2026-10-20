@@ -142,21 +142,21 @@ export const CALLOUTS: Callout[] = [
 
 /** The checkmark table. `true` = has it, `false` = doesn't, a string = the detail. */
 export type Cell = boolean | string;
-export type TableRow = { label: string; draftly: Cell; jasper: Cell; draftlyNote?: string; jasperNote?: string };
+export type TableRow = { label: string; draftly: Cell; jasper: Cell; draftlyNote?: string; jasperNote?: string; /** The /feature page for this row. */ feature?: string };
 
 export const TABLE: TableRow[] = [
   { label: "Built for", draftly: "Small-business blogs", jasper: "Marketing teams" },
   { label: "Starting price", draftly: "$29 a month", jasper: `$${JASPER_PRO.monthly} per seat a month` },
   { label: "One price, not per seat", draftly: true, draftlyNote: `${GROWTH.seats} people on Growth for $${GROWTH.price} a month`, jasper: false, jasperNote: `${GROWTH.seats} seats on Pro: $${JASPER_PRO.monthly * (GROWTH.seats ?? 1)} a month` },
-  { label: "Team members included", draftly: `${SOLO.seats} on Solopreneur, ${GROWTH.seats} on Growth, unlimited on Autopilot`, jasper: `Billed per seat, $${JASPER_PRO.monthly} a month each` },
+  { label: "Team members included", feature: "teams", draftly: `${SOLO.seats} on Solopreneur, ${GROWTH.seats} on Growth, unlimited on Autopilot`, jasper: `Billed per seat, $${JASPER_PRO.monthly} a month each` },
   { label: "Free first post, no credit card", draftly: true, jasper: false, jasperNote: "7-day trial of Pro" },
-  { label: "Brand voice on every plan", draftly: true, draftlyNote: "Built from your website", jasper: "2 voices on Pro, unlimited on Business" },
-  { label: "Every draft checked for AI-sounding writing", draftly: true, jasper: false, jasperNote: "Style Guide on Business" },
+  { label: "Brand voice on every plan", feature: "brand-voice", draftly: true, draftlyNote: "Built from your website", jasper: "2 voices on Pro, unlimited on Business" },
+  { label: "Every draft checked for AI-sounding writing", feature: "writing-rules", draftly: true, jasper: false, jasperNote: "Style Guide on Business" },
   { label: "Linked the business's own pages in our test", draftly: true, draftlyNote: "4 of 4 posts", jasper: false, jasperNote: "0 of 4 posts" },
-  { label: "One-click publish to WordPress", draftly: true, jasper: false, jasperNote: "Not on its integrations page" },
+  { label: "One-click publish to WordPress", feature: "publishing", draftly: true, jasper: false, jasperNote: "Not on its integrations page" },
   { label: "Publish to Shopify, Webflow, Ghost, HubSpot, Squarespace", draftly: true, jasper: "Webflow app" },
-  { label: "Scheduled auto-publishing", draftly: true, draftlyNote: "Autopilot plan", jasper: false, jasperNote: "Not listed" },
-  { label: "Claude and ChatGPT connector (MCP)", draftly: true, draftlyNote: "Every plan", jasper: true, jasperNote: "Business plan only" },
+  { label: "Scheduled auto-publishing", feature: "autopilot", draftly: true, draftlyNote: "Autopilot plan", jasper: false, jasperNote: "Not listed" },
+  { label: "Claude and ChatGPT connector (MCP)", feature: "mcp", draftly: true, draftlyNote: "Every plan", jasper: true, jasperNote: "Business plan only" },
   { label: "Ads, emails and social posts", draftly: false, draftlyNote: "Blog posts only", jasper: true, jasperNote: "100+ agents" },
   { label: "Languages other than English", draftly: false, draftlyNote: "US businesses only", jasper: true, jasperNote: "30+ languages" },
   { label: "Single sign-on (SSO)", draftly: false, jasper: true, jasperNote: "Business plan" },

@@ -42,10 +42,13 @@ export interface FeatureSlide {
   title: string;
   description: string;
   shot: ProductShot;
+  /** The slide's /feature page. */
+  href: string;
 }
 export const FEATURE_SLIDES: FeatureSlide[] = [
   {
     title: "Your brand voice, dialed in",
+    href: "/feature/brand-voice",
     description: "Draftly sets your tone sliders from your own website. Move any of them and every new post follows.",
     shot: shot("feature-slide-voice.webp", 1600, 1200,
       "Draftly's Voice and Tone sliders: Friendly 75, Authoritative 80, Formal 40, Technical 55 and Empathetic 85",
@@ -53,6 +56,7 @@ export const FEATURE_SLIDES: FeatureSlide[] = [
   },
   {
     title: "Your topic, your model",
+    href: "/feature/ai-models",
     description: "Type any topic and pick the model that writes it. Claude Sonnet 5.5 is the default, and paid plans unlock the rest, including GPT 6 Luna, Gemini and DeepSeek.",
     shot: shot("feature-slide-models.webp", 1600, 1200,
       "Draftly's Write Your Own Topic screen on the Free plan with a topic box and a model picker: Claude Sonnet 5.5 (default, Best quality, 150 credits) selected, GPT 5.4 Mini at 150 credits, and GPT 6 Luna (Budget), Claude Haiku 4.5, Claude Sonnet 4.6, GPT 5.4, Gemini 3 Flash and DeepSeek V3.2 locked",
@@ -60,6 +64,7 @@ export const FEATURE_SLIDES: FeatureSlide[] = [
   },
   {
     title: "SEO meta, drafted every time",
+    href: "/feature/seo-meta",
     description: "Every draft comes with a URL slug, a meta title and a meta description, sized for how they show in Google.",
     shot: shot("feature-slide-meta.webp", 1600, 1200,
       "SEO fields Draftly wrote for an example water heater post (URL slug how-often-to-flush-water-heater, meta title and meta description) and a preview of how that title and description can appear in a Google result for a made-up plumber, Harbor & Pine Plumbing",

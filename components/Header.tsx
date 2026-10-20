@@ -32,7 +32,7 @@ export async function Header() {
 
           <nav className="hidden md:flex items-center gap-6 lg:gap-8">
             <a href="/#how-it-works" className="text-[15px] font-medium text-text-secondary hover:text-text-primary transition-colors">How it works</a>
-            <a href="/#features" className="text-[15px] font-medium text-text-secondary hover:text-text-primary transition-colors">Features</a>
+            <a href="/features" className="text-[15px] font-medium text-text-secondary hover:text-text-primary transition-colors">Features</a>
             <a href="/#testimonials" className="text-[15px] font-medium text-text-secondary hover:text-text-primary transition-colors">Reviews</a>
             <a href="/pricing" className="text-[15px] font-medium text-text-secondary hover:text-text-primary transition-colors">Pricing</a>
             {/* lg and up only: at md widths the header has no room for a seventh link (it's in the footer). */}
@@ -69,7 +69,7 @@ export async function Header() {
           style={{ display: "none", background: "var(--color-bg-primary)", borderBottom: "1px solid var(--color-border)" }}
         >
           <a href="/#how-it-works" className="block text-[15px] font-medium text-text-secondary">How it works</a>
-          <a href="/#features" className="block text-[15px] font-medium text-text-secondary">Features</a>
+          <a href="/features" className="block text-[15px] font-medium text-text-secondary">Features</a>
           <a href="/#testimonials" className="block text-[15px] font-medium text-text-secondary">Reviews</a>
           <a href="/pricing" className="block text-[15px] font-medium text-text-secondary">Pricing</a>
           <a href="/for-teams" className="block text-[15px] font-medium text-text-secondary">Teams</a>
