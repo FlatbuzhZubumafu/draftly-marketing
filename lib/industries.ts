@@ -66,7 +66,7 @@ export const INDUSTRIES: Industry[] = [
     h1: { lead: "Plumbing blog ideas", accent: "homeowners search for" },
     intro: [
       "People look up a plumber in one of two moods. Something is leaking right now, or they're planning a bigger job like a water heater or a repipe. A plumbing blog that brings in calls answers both.",
-      "The usual lists give you 100 or more titles. This one is shorter and grouped by what the reader is going through, with a note on what makes each post worth writing. Swap in your city, your prices and your own jobs, because that's the part a national site can't copy.",
+      "This list is short and grouped by what the reader is going through, with a note on what makes each post worth writing. Swap in your city, your prices and your own jobs, because that's the part a national site can't copy.",
     ],
     groups: [
       {
@@ -88,7 +88,7 @@ export const INDUSTRIES: Industry[] = [
         id: "planning",
         heading: "Planning a bigger job",
         intro:
-          "These readers are comparing quotes. Real price ranges, dated and specific to your market, are what get these posts read and shared.",
+          "These readers are comparing quotes. Dated price ranges from your own market are what get these posts read and shared.",
         topics: [
           { title: "Tank vs tankless water heater for a family of four", note: "Upfront cost, gas line or electrical upgrades, and how long each lasts in your water." },
           { title: "How long does a water heater last, and when to replace it", note: "Age on the serial number, rust in the water, rumbling. Show how to read the label." },
@@ -141,7 +141,7 @@ export const INDUSTRIES: Industry[] = [
       },
       {
         heading: "Use local code and water data",
-        body: "States and cities adopt different plumbing codes, and water hardness varies by utility. Cite your local code and your utility's water report by name instead of a national average.",
+        body: "States and cities adopt different plumbing codes, and water hardness varies by utility. Cite your local code and your utility's water report by name.",
         sources: [
           { label: "EPA: Consumer Confidence Reports", href: "https://www.epa.gov/ccr" },
           { label: "EPA: lead service line inventories", href: "https://www.epa.gov/ground-water-and-drinking-water/revised-lead-and-copper-rule" },
@@ -154,7 +154,7 @@ export const INDUSTRIES: Industry[] = [
     ],
     draftly: [
       "Draftly reads your website and sets your brand voice from it, so posts sound like your shop and your service area. Type a topic like \"how to flush a water heater\" and it writes the full post with a URL slug, meta title and meta description. The example on this page is exactly that, written for a made-up plumber.",
-      "You add the parts only you have: your prices, your city's permit rules and photos from real jobs. Then publish to " + CMS_LINE + ". Marketing agencies that run blogs for several plumbers can add each client as its own website with its own voice.",
+      "You add the parts only you have: your prices, your city's permit rules and photos from your own jobs. Then publish to " + CMS_LINE + ". Marketing agencies that run blogs for several plumbers can add each client as its own website with its own voice.",
     ],
     tool: { href: "/tools/blog-seo-checker", name: "blog SEO checker", why: "Run your best post through it to see which SEO basics it's missing before you write new ones." },
     shot: "urlToPost",
@@ -215,7 +215,7 @@ export const INDUSTRIES: Industry[] = [
       {
         id: "replacement",
         heading: "Repair or replace",
-        intro: "These readers are about to spend thousands. Give them real numbers from your market and explain your reasoning.",
+        intro: "These readers are about to spend thousands. Give them numbers from your own market and explain your reasoning.",
         topics: [
           { title: "Repair or replace your AC: how we decide", note: "Age, repair cost, refrigerant type. Share the rule of thumb your techs use." },
           { title: "What the new refrigerants mean if you're replacing an AC", note: "EPA rules are moving new systems from R-410A to refrigerants like R-454B and R-32. What that changes for a homeowner." },
@@ -231,7 +231,7 @@ export const INDUSTRIES: Industry[] = [
         heading: "Maintenance and seasonal posts",
         intro: "Publish these before each season and link them from your maintenance plan page.",
         topics: [
-          { title: "Spring AC tune-up: what our techs check", note: "Your real checklist, item by item." },
+          { title: "Spring AC tune-up: what our techs check", note: "The checklist your techs use, item by item." },
           { title: "Fall furnace checklist", note: "Filter, flame sensor, heat exchanger, CO test." },
           { title: "How often to change your air filter", note: "By filter type, pets and allergies. Show the size printed on the frame." },
           { title: "Filters and air cleaners for wildfire smoke", note: "Higher-rated filters and portable air cleaners. Link EPA's home air filter guide." },
@@ -241,7 +241,7 @@ export const INDUSTRIES: Industry[] = [
       {
         id: "money",
         heading: "Money, rebates and rules",
-        intro: "Homeowners search these before they call. Getting them right is how you earn the call.",
+        intro: "Homeowners search these before they call, so get the dates and dollar amounts right.",
         topics: [
           { title: "Is there still a federal tax credit for heat pumps in 2026?", note: "The 25C credit covered equipment installed through December 31, 2025. Point readers to utility and state rebates instead." },
           { title: "Utility rebates for heat pumps and smart thermostats in your area", note: "List the programs by name and link them. Update the post when they change." },
@@ -291,7 +291,7 @@ export const INDUSTRIES: Industry[] = [
     faqs: [
       {
         q: "What should an HVAC company blog about?",
-        a: "Breakdown posts for peak season, repair-or-replace posts with your real prices, maintenance checklists, and current rebate and rule changes in your area.",
+        a: "Breakdown posts for peak season, repair-or-replace posts with your own prices, maintenance checklists, and current rebate and rule changes in your area.",
       },
       {
         q: "When should HVAC companies publish seasonal posts?",
@@ -354,7 +354,7 @@ export const INDUSTRIES: Industry[] = [
       {
         id: "sellers",
         heading: "Seller guides",
-        intro: "Sellers are comparing agents. Show how you think, with real numbers from your listings.",
+        intro: "Sellers are comparing agents. Show how you think, with numbers from your own listings.",
         topics: [
           { title: "What to fix before listing and what to skip", note: "The repairs that paid off on your recent listings and the ones that didn't." },
           { title: "How we price a home", note: "Walk through comps for a real (anonymized) listing." },
@@ -468,7 +468,7 @@ export const INDUSTRIES: Industry[] = [
           { title: "How contingency fees work", note: "Your percentage, when costs come out, and what happens if you lose." },
           { title: "What a retainer is and how billing works", note: "Hourly rates, trust accounts and invoices, explained once." },
           { title: "What to bring to your first consultation", note: "A checklist by practice area." },
-          { title: "How long a divorce takes in your state", note: "Waiting periods, contested and uncontested, with real ranges." },
+          { title: "How long a divorce takes in your state", note: "Waiting periods, contested and uncontested, with the ranges you see." },
           { title: "Mediation or court: how to choose", note: "Cost, time and when mediation doesn't fit." },
         ],
       },
@@ -488,8 +488,8 @@ export const INDUSTRIES: Industry[] = [
         heading: "About the firm",
         intro: "Posts a prospective client reads right before they call.",
         topics: [
-          { title: "How we handle a case like yours, step by step", note: "Your real process, by practice area." },
-          { title: "Attorney profile: why I practice this area of law", note: "A real story in the lawyer's voice. Good for E-E-A-T." },
+          { title: "How we handle a case like yours, step by step", note: "The process you follow, by practice area." },
+          { title: "Attorney profile: why I practice this area of law", note: "The lawyer's own story, in their voice. Good for E-E-A-T." },
           { title: "A case result, with context", note: "Only with client consent, and with the disclaimer your state requires." },
         ],
       },
@@ -533,7 +533,7 @@ export const INDUSTRIES: Industry[] = [
     ],
     draftly: [
       "Draftly writes from your website and a topic. It never needs client files, so keep client details out of the topics you type. It sets your firm's voice from your site, suggests topics from legal news each day, and drafts the post with a URL slug, meta title and meta description.",
-      "An attorney reviews every draft, checks the law and the citations, and adds the disclaimers your state requires. Publish by hand to " + CMS_LINE + " instead of using Autopilot's automatic publishing, so nothing goes live without that review.",
+      "An attorney reviews every draft, checks the law and the citations, and adds the disclaimers your state requires. Publish by hand to " + CMS_LINE + " and leave Autopilot's automatic publishing off, so nothing goes live without that review.",
     ],
     tool: { href: "/tools/eeat-checker", name: "E-E-A-T checker", why: "Google holds legal pages to a high bar for experience and trust, and the checker shows whether your posts carry author bylines, author pages, dates and citations." },
     shot: "brandVoice",
@@ -548,7 +548,7 @@ export const INDUSTRIES: Industry[] = [
       },
       {
         q: "Do lawyer advertising rules apply to a law firm blog?",
-        a: "Generally yes. Most state bars treat a firm's website and blog as advertising, so their versions of ABA Model Rules 7.1 and 7.2 apply. Check your state bar's rules.",
+        a: "Yes, in most states. The state bar treats a firm's website and blog as advertising, so its version of ABA Model Rules 7.1 and 7.2 applies. Check your state bar's rules.",
       },
       {
         q: "Can lawyers use AI to write blog posts?",
@@ -574,7 +574,7 @@ export const INDUSTRIES: Industry[] = [
       "Roofing blog topics for storm damage, insurance claims, replacement costs and materials, plus the deductible and adjuster rules to check before you publish.",
     h1: { lead: "Roofing blog topics", accent: "for contractors" },
     intro: [
-      "Most roofing searches start after something happens: a hailstorm, a stain on the ceiling, an insurance letter. The rest come from homeowners pricing a replacement they've put off for years. A roofing blog that wins jobs has posts ready for both.",
+      "Many roofing searches start after something happens: a hailstorm, a stain on the ceiling, an insurance letter. The rest come from homeowners pricing a replacement they've put off for years. A roofing blog that wins jobs has posts ready for both.",
       "Storm posts are also where roofers get into legal trouble. Several states bar contractors from promising to cover a deductible or from acting as the homeowner's adjuster, and website copy counts as advertising. The ideas below come with notes on how to write them so they stay on the right side of those rules.",
     ],
     groups: [
@@ -588,7 +588,7 @@ export const INDUSTRIES: Industry[] = [
           { title: "What to do in the first 24 hours after a storm", note: "Photos, a tarp if water is coming in, a call to the insurer. Keep the steps short and put your phone number near the top." },
           { title: "Wind damage: missing shingles and what they let in", note: "Creased and lifted shingles, exposed nail heads. Explain why a small spot can turn into a ceiling stain." },
           { title: "How to spot a storm chaser", note: "Out-of-state plates, pressure to sign the same day, an offer to cover the deductible. Link your state's consumer guide." },
-          { title: "Emergency tarping: when it's needed and what it costs", note: "Your real price, how fast you can get there, and that most policies expect you to prevent further damage." },
+          { title: "Emergency tarping: when it's needed and what it costs", note: "Your price, how fast you can get there, and that most policies expect you to prevent further damage." },
         ],
       },
       {
@@ -601,16 +601,16 @@ export const INDUSTRIES: Industry[] = [
           { title: "What recoverable depreciation means for your roof", note: "Why the first check is smaller and what releases the rest." },
           { title: "Why you have to pay your deductible", note: "Explain the law in your state and link it. Readers who got a too-good offer will find this post." },
           { title: "Repair or full replacement: how adjusters decide", note: "Matching shingles, how much of a slope is damaged, local code. Keep it general and say the insurer decides." },
-          { title: "What a roof inspection report should include", note: "Photos of each slope, measurements, the damage you found. Show a real one with the address removed." },
+          { title: "What a roof inspection report should include", note: "Photos of each slope, measurements, the damage you found. Show one of yours with the address removed." },
         ],
       },
       {
         id: "replacement",
         heading: "Planning a replacement",
         intro:
-          "These readers are comparing quotes. Real price ranges, dated and specific to your market, keep them reading.",
+          "These readers are comparing quotes. Dated price ranges from your own market keep them reading.",
         topics: [
-          { title: "What a roof replacement costs in your city this year", note: "Your real range by roof size and material, the year, and what moves the price (tear-off layers, decking, pitch)." },
+          { title: "What a roof replacement costs in your city this year", note: "The range you quote by roof size and material, the year, and what moves the price (tear-off layers, decking, pitch)." },
           { title: "Architectural shingles or metal roofing", note: "Upfront cost, lifespan, noise, and how each handles your weather." },
           { title: "How long does an asphalt roof last here?", note: "Climate, ventilation and attic heat. Use what you see on local tear-offs." },
           { title: "What's in a roofing estimate, line by line", note: "Underlayment, drip edge, flashing, ventilation, disposal. Explain why two bids differ." },
@@ -665,7 +665,7 @@ export const INDUSTRIES: Industry[] = [
     ],
     draftly: [
       "Draftly reads your website and sets your brand voice from it, so posts sound like your crew and your service area. Type a topic like \"how to spot hail damage from the ground\" and it writes the full post with a URL slug, meta title and meta description.",
-      "You add what only you have: your prices, your state's deductible rule and photos from real jobs. Then publish to " + CMS_LINE + ". Marketing agencies that run blogs for several roofers can add each client as its own website with its own voice.",
+      "You add what only you have: your prices, your state's deductible rule and photos from your own jobs. Then publish to " + CMS_LINE + ". Marketing agencies that run blogs for several roofers can add each client as its own website with its own voice.",
     ],
     tool: { href: "/tools/blog-ideas-generator", name: "blog ideas generator", why: "Enter your website and it suggests 10 posts your customers would search for, skipping topics your blog already covers." },
     shot: "urlToPost",
@@ -676,7 +676,7 @@ export const INDUSTRIES: Industry[] = [
     faqs: [
       {
         q: "What should a roofing company blog about?",
-        a: "Storm damage posts before storm season, plain explanations of how insurance claims work, replacement costs with your real prices, and material comparisons for your climate.",
+        a: "Storm damage posts before storm season, plain explanations of how insurance claims work, replacement costs with your own prices, and material comparisons for your climate.",
       },
       {
         q: "Can a roofer offer to pay the deductible in a blog post?",
@@ -708,14 +708,14 @@ export const INDUSTRIES: Industry[] = [
     h1: { lead: "Dental blog ideas", accent: "patients search before they book" },
     intro: [
       "Patients look up a dentist when something hurts, when a bill surprises them, or when a treatment plan has a word they don't know. A dental blog that fills the schedule answers those questions in your practice's voice, with your fees and your insurance list.",
-      "Dental posts carry rules most small businesses don't have. The ADA's ethics code covers bylines and before-and-after claims, and HIPAA covers patient stories and photos. The ideas below come with notes on writing them so they stay inside those lines.",
+      "Dental posts also come with rules of their own. The ADA's ethics code covers bylines and before-and-after claims, and HIPAA covers patient stories and photos. The ideas below come with notes on writing them so they stay inside those lines.",
     ],
     groups: [
       {
         id: "urgent",
         heading: "When something hurts",
         intro:
-          "These readers are in pain or scared. Lead with what to do right now, put your phone number near the top, and say when it means the ER instead of your office.",
+          "These readers are in pain or scared. Lead with what to do right now, put your phone number near the top, and say which signs mean the ER.",
         topics: [
           { title: "Knocked-out tooth: what to do in the first hour", note: "Hold it by the crown, keep it moist (milk works) and get to a dentist fast. Put this one where people can find it quickly." },
           { title: "Toothache at night: what helps until morning", note: "Rinse, floss around it, an over-the-counter pain reliever. Say which signs mean the ER, like facial swelling with a fever." },
@@ -728,7 +728,7 @@ export const INDUSTRIES: Industry[] = [
         id: "cost",
         heading: "Costs and insurance",
         intro:
-          "Patients search prices before they call. Give your real fees or ranges and the year, and list the plans you take by name.",
+          "Patients search prices before they call. Give your fees or ranges and the year, and list the plans you take by name.",
         topics: [
           { title: "How much does a cleaning cost without insurance here?", note: "Your fee for a cleaning and exam, and any in-house membership plan." },
           { title: "Use your dental benefits before they reset", note: "Many plans reset on January 1. Publish in October and link your booking page." },
@@ -740,11 +740,11 @@ export const INDUSTRIES: Industry[] = [
       {
         id: "family",
         heading: "Kids and family",
-        intro: "Parents search these, and a family practice can answer them better than a national health site.",
+        intro: "Parents search these. Answer them with what your office does, in your own words.",
         topics: [
           { title: "When should my child see a dentist for the first time?", note: "The American Academy of Pediatric Dentistry says by the first birthday. Describe what that first visit looks like in your office." },
           { title: "Sealants or fluoride: what does my child need?", note: "What each does and when you recommend them." },
-          { title: "Helping a child who's nervous about the dentist", note: "What your team does differently, in your own words." },
+          { title: "Helping a child who's nervous about the dentist", note: "What your team does for a nervous child, step by step." },
           { title: "Halloween candy and kids' teeth", note: "Which treats stick and when to brush. Publish in early October." },
           { title: "Mouthguards for youth sports", note: "Store-bought or custom, and your price for a custom one." },
         ],
@@ -805,7 +805,7 @@ export const INDUSTRIES: Industry[] = [
     faqs: [
       {
         q: "What should a dental practice blog about?",
-        a: "Urgent problems like toothaches and broken teeth, real costs and the insurance you take, questions parents ask, and plain explanations of the treatments you offer.",
+        a: "Urgent problems like toothaches and broken teeth, your fees and the insurance you take, questions parents ask, and plain explanations of the treatments you offer.",
       },
       {
         q: "Can a dentist use patient photos or stories on a blog?",
@@ -835,7 +835,7 @@ export const INDUSTRIES: Industry[] = [
       "Blog topics for financial advisors built around client life events, taxes and plain explainers, plus the SEC Marketing Rule and FINRA 2210 points to check.",
     h1: { lead: "Financial advisor blog topics", accent: "and the rules that apply" },
     intro: [
-      "People rarely search for a financial advisor out of the blue. They search when something changes: an inheritance, a job offer with stock, a parent who needs care, a retirement date. An advisor's blog that brings in clients answers those moments in plain language.",
+      "People search for a financial advisor when something changes: an inheritance, a job offer with stock, a parent who needs care, a retirement date. An advisor's blog that brings in clients answers those moments in plain language.",
       "Every post is also a regulated communication. Registered investment advisers answer to the SEC Marketing Rule, and broker-dealer reps answer to FINRA Rule 2210, which usually means a compliance review before anything goes live. The topics below are picked to be useful and to get through that review.",
     ],
     groups: [
@@ -871,8 +871,8 @@ export const INDUSTRIES: Industry[] = [
         topics: [
           { title: "Fee-only, fee-based or commission: what's the difference?", note: "Define each one and say which you are." },
           { title: "What does fiduciary mean?", note: "Plain definition and how it applies to your firm." },
-          { title: "What to bring to a first meeting with us", note: "A real checklist. It lowers the bar to booking." },
-          { title: "How we charge, with an example", note: "Your actual fee schedule and what it means on a sample account." },
+          { title: "What to bring to a first meeting with us", note: "The checklist you give new clients. It lowers the bar to booking." },
+          { title: "How we charge, with an example", note: "Your fee schedule and what it means on a sample account." },
           { title: "What a financial plan includes", note: "The sections of the plan you deliver, with a redacted sample page." },
         ],
       },
@@ -919,7 +919,7 @@ export const INDUSTRIES: Industry[] = [
     ],
     draftly: [
       "Draftly writes from your website and a topic, so it never needs client data. It sets your firm's voice from your site and drafts the post with a URL slug, meta title and meta description, checked for AI-sounding phrasing before you see it.",
-      "Your compliance reviewer approves the draft and keeps the record. Publish by hand to " + CMS_LINE + " instead of using Autopilot's automatic publishing, so nothing goes live before approval.",
+      "Your compliance reviewer approves the draft and keeps the record. Publish by hand to " + CMS_LINE + " and leave Autopilot's automatic publishing off, so nothing goes live before approval.",
     ],
     tool: { href: "/tools/eeat-checker", name: "E-E-A-T checker", why: "Google holds money pages to a high bar for experience and trust, and the checker shows whether your posts carry bylines, author pages, dates and sources." },
     shot: "brandVoice",
@@ -969,7 +969,7 @@ export const INDUSTRIES: Industry[] = [
         heading: "Tax season",
         intro: "Publish these in December and January and update the dates each year.",
         topics: [
-          { title: "What to bring to your tax appointment", note: "A real checklist by client type: W-2 employee, freelancer, landlord, business owner." },
+          { title: "What to bring to your tax appointment", note: "A checklist by client type: W-2 employee, freelancer, landlord, business owner." },
           { title: "Do you need to file an extension?", note: "An extension gives more time to file. Any tax owed is still due by the April deadline." },
           { title: "Got a letter from the IRS? Here's what to do", note: "Don't ignore it, read which notice it is, call us. Link the IRS page on notices." },
           { title: "What our tax prep costs and what changes the price", note: "Your fee ranges by return type. Readers compare these." },
@@ -1005,7 +1005,7 @@ export const INDUSTRIES: Industry[] = [
         heading: "About the firm",
         intro: "Prospects read these right before they reach out.",
         topics: [
-          { title: "How we work with new clients, step by step", note: "Your real onboarding, including the portal and the timeline." },
+          { title: "How we work with new clients, step by step", note: "Your onboarding steps, including the portal and the timeline." },
           { title: "Our fees, and why we price this way", note: "Fixed fees, hourly or monthly packages. Show the numbers." },
           { title: "Meet the partner who handles your industry", note: "Their background and the clients they serve. Good for E-E-A-T." },
         ],
