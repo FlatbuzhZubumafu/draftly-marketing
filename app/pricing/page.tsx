@@ -8,6 +8,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { AccentText } from "@/components/AccentText";
 import { PricingPlans } from "@/components/PricingPlans";
+import { PlanCompare } from "@/components/PlanCompare";
 import { BILLING_TERMS_HREF, CANCEL_NOTE, PAID_PLANS, PLANS, SITE_ADDON, TEAM_NOTE, paidPostCounts, paidPriceList, type Plan } from "@/lib/pricing";
 import { FaqList, faqJsonLd, type Faq } from "@/components/ArticleParts";
 import { jsonLdHtml, softwareApplicationJsonLd } from "@/lib/schema";
@@ -109,22 +110,25 @@ export default async function PricingPage() {
 
           <PricingPlans registerUrl={registerUrl} freeCtaText={s.heroCtaText} cardHeading="h2" />
 
-          <p className="mt-6 text-sm text-center max-w-2xl mx-auto" style={{ color: "var(--color-text-muted)" }}>
-            Post counts assume the default model, Claude Sonnet 5.5. {READER_QUALITY_EVIDENCE} Every post is also checked
-            against{" "}
-            <a href="/seo-copywriting" style={{ color: "var(--color-accent)" }}>
-              our writing rules
-            </a>
-            . Premium models such as Claude Opus 5.5 and GPT 5.5 use about 1.7x the credits per post, so a plan covers fewer posts
-            on them. SEO data calls come
-            from a separate monthly allowance, with data packs of 100 extra calls for $10. {TEAM_NOTE} Start free and upgrade any
-            time from Settings inside the app. {CANCEL_NOTE} Your plan stays active to the end of the period you paid
-            for. See the{" "}
-            <a href={BILLING_TERMS_HREF} style={{ color: "var(--color-accent)" }}>
-              billing, cancellation and refund terms
-            </a>
-            . Available to businesses in the United States only.
-          </p>
+          <PlanCompare />
+
+          <ul className="mt-8 max-w-2xl mx-auto space-y-1.5 text-sm" style={{ color: "var(--color-text-muted)" }}>
+            <li>
+              Post counts assume the default model, Claude Sonnet 5.5. Premium models such as Claude Opus 5.5 use about 1.7x
+              the credits per post. {READER_QUALITY_EVIDENCE}
+            </li>
+            <li>
+              Every post is checked against{" "}
+              <a href="/seo-copywriting" style={{ color: "var(--color-accent)" }}>our writing rules</a>.
+            </li>
+            <li>Need more SEO data? Data packs add 100 calls for $10.</li>
+            <li>{TEAM_NOTE}</li>
+            <li>
+              {CANCEL_NOTE} Your plan runs to the end of the period you paid for (
+              <a href={BILLING_TERMS_HREF} style={{ color: "var(--color-accent)" }}>billing terms</a>).
+            </li>
+            <li>Available to businesses in the United States only.</li>
+          </ul>
         </section>
 
         <section className="container-draftly max-w-5xl mt-24">
