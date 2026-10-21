@@ -6,7 +6,6 @@ import { HeroDemo } from "@/components/HeroDemo";
 import { ProductShowcase } from "@/components/ProductShowcase";
 import { UsageProof } from "@/components/UsageProof";
 import { BeforeAfter } from "@/components/BeforeAfter";
-import { VideoSection } from "@/components/VideoSection";
 import { PersonalStory } from "@/components/PersonalStory";
 import { TestimonialSlider } from "@/components/TestimonialSlider";
 import { HowItWorks } from "@/components/HowItWorks";
@@ -68,7 +67,6 @@ export default async function HomePage() {
         />
         <NotForEveryone />
         <HomeGuides />
-        <VideoSection />
         <HomePricing />
         <ReviewProfiles />
         <FAQ faqs={withCodeFaqs(data.faqs.nodes)} />
