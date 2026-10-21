@@ -109,7 +109,7 @@ export const COPYAI_ALTERNATIVES: Alternative[] = [
     startingPrice: `$${SOLO.price} a month for ${SOLO.posts.toLowerCase()}`,
     publishing: "WordPress, Shopify, Webflow, Ghost, Squarespace and HubSpot",
     summary: `Draftly writes blog posts and nothing else. Paste your URL, it sets your brand voice from your site, and posts publish in one click to your CMS. Solopreneur is $${SOLO.price} a month with ${SOLO.seats} team members, Growth is $${GROWTH.price} with ${GROWTH.seats}, and your first post is free.`,
-    pickIf: "Blog posts were the main thing you used Copy.ai for and you want them published, not pasted.",
+    pickIf: "Blog posts were the main thing you used Copy.ai for and you want them published straight to your CMS.",
     skipIf: "You need sales emails, social posts or translation, or you write in languages other than English. Draftly serves US businesses only.",
     sources: [],
   },

@@ -103,7 +103,7 @@ const FAQS: Faq[] = [
   },
   {
     q: "Is Arvow worth it?",
-    a: `If you want articles, backlinks, AI visibility tracking and 150+ languages in one tool, Business at $${AR_BUSINESS.yearlyMonthly} a month billed yearly covers a lot. If you want blog posts in your brand voice for a US business, Draftly costs $${SOLO.price} a month, billed monthly.`,
+    a: `If you want articles, backlinks, AI visibility tracking and 150+ languages in one tool, Business at $${AR_BUSINESS.yearlyMonthly} a month billed yearly covers all four. If you want blog posts in your brand voice for a US business, Draftly costs $${SOLO.price} a month, billed monthly.`,
   },
 ];
 

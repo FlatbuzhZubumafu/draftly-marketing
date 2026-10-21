@@ -46,7 +46,7 @@ const src = (items: { label: string; href: string }[]) => <SourceLinks items={it
 const FAQS: Faq[] = [
   {
     q: "What is the best Copy.ai alternative?",
-    a: "It depends on what you used Copy.ai for. For SEO blog posts in your brand voice, published to your CMS, Draftly. For marketing copy across ads, email and social, Jasper. For bulk articles priced by the word, Koala.",
+    a: "For SEO blog posts in your brand voice, published to your CMS, Draftly. For marketing copy across ads, email and social, Jasper. For bulk articles priced by the word, Koala.",
   },
   {
     q: "How much does Copy.ai cost?",
@@ -66,7 +66,7 @@ const FAQS: Faq[] = [
   },
   {
     q: "Is Copy.ai better than ChatGPT?",
-    a: `They do different jobs. Copy.ai Chat gives ${CHAT.seats} seats access to OpenAI, Anthropic and Gemini models for $${CHAT.monthly} a month. Its bigger plans add sales and marketing workflows that a chat app doesn't have.`,
+    a: `For a team that wants several models in one place, yes. Copy.ai Chat gives ${CHAT.seats} seats access to OpenAI, Anthropic and Gemini models for $${CHAT.monthly} a month. Its bigger plans add sales and marketing workflows that a chat app doesn't have.`,
   },
 ];
 
@@ -196,7 +196,7 @@ export default function CopyAiAlternativesPage() {
           </section>
 
           {COPYAI_ALTERNATIVES.map((a, i) => (
-            <Section key={a.id} id={a.id} title={`${i + 1}. ${a.name}: ${a.bestFor.charAt(0).toLowerCase()}${a.bestFor.slice(1)}`}>
+            <Section key={a.id} id={a.id} title={`${i + 1}. ${a.name}: ${/^[A-Z]{2}/.test(a.bestFor) ? a.bestFor : a.bestFor.charAt(0).toLowerCase() + a.bestFor.slice(1)}`}>
               <p>
                 {a.summary}
                 {src(a.sources)}
@@ -270,7 +270,7 @@ export default function CopyAiAlternativesPage() {
           <Section id="stay-with-copy-ai" title="When Copy.ai is still the right pick">
             <p>
               Stay on Chat if a team of up to five wants one AI chat with OpenAI, Anthropic and Gemini models. ${CHAT.monthly}{" "}
-              a month for five seats is hard to beat.
+              a month for five seats works out to ${(CHAT.monthly / CHAT.seats).toFixed(2)} a seat.
             </p>
             <p>
               Move up to Growth if you run a sales team and want prospecting, lead processing and CRM enrichment automated.

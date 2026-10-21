@@ -69,7 +69,7 @@ const FAQS: Faq[] = [
   },
   {
     q: "How much does Draftly cost?",
-    a: `Your first post is free. Paid plans start at $${SOLO.price} a month, billed monthly with no annual contract. The price is per plan, not per seat: Solopreneur includes ${SOLO.seats} people, Growth ${GROWTH.seats} and Autopilot unlimited.`,
+    a: `Your first post is free. Paid plans start at $${SOLO.price} a month, billed monthly with no annual contract. One plan price covers the team: Solopreneur includes ${SOLO.seats} people, Growth ${GROWTH.seats} and Autopilot unlimited.`,
   },
   {
     q: "Does Jasper publish to WordPress?",
@@ -354,7 +354,7 @@ export default async function JasperVsDraftlyPage() {
                 </span>
               </p>
               <p className="text-sm mt-2" style={secondary}>
-                for {SOLO.seats} people, not per seat. First post free.
+                for {SOLO.seats} people, no per-seat charge. First post free.
               </p>
               <a href={registerUrl} className="btn btn-primary mt-6 self-start">
                 {ctaLabel}
@@ -489,7 +489,7 @@ export default async function JasperVsDraftlyPage() {
             <p>
               Jasper Pro is <B>${JASPER_PRO.monthly} per seat a month</B>, or ${JASPER_PRO.yearly} billed yearly, so a two-person team pays $
               {JASPER_PRO.monthly * 2} a month and a five-person team pays ${JASPER_PRO.monthly * 5}.
-              <SourceLinks items={[SRC.pricing]} /> Draftly charges for the plan, not per seat, with no annual contract. Solopreneur is{" "}
+              <SourceLinks items={[SRC.pricing]} /> Draftly charges one price per plan, with no per-seat charge and no annual contract. Solopreneur is{" "}
               <B>${SOLO.price} a month for {SOLO.seats} people</B>, Growth is <B>${GROWTH.price} a month for {GROWTH.seats}</B>, and Autopilot is ${AUTOPILOT.price}{" "}
               a month with no limit on people. Everyone on the account shares the plan&apos;s credits. See <A href="/pricing">every Draftly plan</A>.
             </p>
