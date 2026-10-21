@@ -185,3 +185,169 @@ export const DIFFERENCE: Record<FeatureId, Difference> = {
     close: `Each extra website is $${SITE_ADDON.price} a month.`,
   },
 };
+
+/** Heading text with the part that gets the accent (squiggle or italic) split out. */
+export type Accented = { lead: string; accent: string };
+
+/**
+ * Section headings on each /feature/[slug] page, keyed by feature id. Text only: the
+ * markup and accents are set in app/feature/[slug]/page.tsx. Each H2 targets a search
+ * phrase that belongs to this page alone, so no two feature pages (or the hub, the free
+ * tools and the guides) share an H2. Keyword map and volumes: PR "Headings: one keyword
+ * per page" (DataForSEO through the Draftly MCP, US, 2026-10-20 and 2026-10-21).
+ */
+export type FeatureHeadings = {
+  /** "The difference" H2. Blue squiggle on the accent. */
+  difference: Accented;
+  /** "Where it fits" H2. Yellow underline on the accent. */
+  fits: Accented;
+  /** "Which plans" H2. Yellow underline on the accent. */
+  plans: Accented;
+  /** H3 over the honest limits. */
+  limits: string;
+  /** H3 over the Jasper comparison, when the feature has one. */
+  compare?: string;
+  /** FAQ H2. The last word gets the blue squiggle. */
+  faq: string;
+  /** Related features H2. The last word gets the blue squiggle. */
+  related: string;
+  /** Closing call-to-action H2. Italic accent. */
+  cta: Accented;
+};
+
+export const HEADINGS: Record<FeatureId, FeatureHeadings> = {
+  "topic-ideas": {
+    difference: { lead: "Unique blog ideas, checked against", accent: "what you sell" },
+    fits: { lead: "Where blog topic ideas fit in", accent: "the Draftly workflow" },
+    plans: { lead: "Which plans include", accent: "blog topic ideas" },
+    limits: "Limits of news-based topic ideas",
+    compare: "Topic ideas in Draftly vs Jasper's Blog Post agent",
+    faq: "Blog topic ideas FAQ",
+    related: "Features that turn a topic into a post",
+    cta: { lead: "Turn a topic idea into", accent: "your first free post" },
+  },
+  "seo-research": {
+    difference: { lead: "Keyword volume and difficulty next to", accent: "your drafts" },
+    fits: { lead: "Where keyword research fits before", accent: "you write" },
+    plans: { lead: "Keyword research limits on", accent: "each plan" },
+    limits: "How the monthly data cap works",
+    faq: "Keyword research FAQ",
+    related: "Turn keyword research into posts",
+    cta: { lead: "Start with a free post, add", accent: "keyword data later" },
+  },
+  "brand-voice": {
+    difference: { lead: "Brand voice guidelines set from", accent: "your own pages" },
+    fits: { lead: "Where your brand voice shows up in", accent: "every post" },
+    plans: { lead: "Is the AI brand voice on", accent: "every plan?" },
+    limits: "What the AI brand voice can't do",
+    compare: "Brand voices in Draftly vs Jasper Pro",
+    faq: "AI brand voice FAQ",
+    related: "Features that use your brand voice",
+    cta: { lead: "Hear your brand voice in", accent: "a free post" },
+  },
+  "ai-models": {
+    difference: { lead: "Each model's price in credits,", accent: "shown up front" },
+    fits: { lead: "Where model choice fits in", accent: "writing a post" },
+    plans: { lead: "Which plans include", accent: "all the models" },
+    limits: "What premium models cost in credits",
+    faq: "AI model picker FAQ",
+    related: "Features that work with any model",
+    cta: { lead: "Try Claude Sonnet 5.5 on", accent: "a free post" },
+  },
+  "writing-rules": {
+    difference: { lead: "Common AI words and phrases,", accent: "caught by code" },
+    fits: { lead: "Where the writing rules run before", accent: "you see a draft" },
+    plans: { lead: "Which plans include", accent: "the writing rules" },
+    limits: "What the writing rules can't catch",
+    compare: "Writing checks in Draftly vs Jasper Style Guides",
+    faq: "Writing rules FAQ",
+    related: "More ways to check a draft",
+    cta: { lead: "Read a checked draft of", accent: "your first post" },
+  },
+  "ai-detector": {
+    difference: { lead: "Flag AI writing, then fix", accent: "only those sentences" },
+    fits: { lead: "Where the AI detection score fits in", accent: "checking copy" },
+    plans: { lead: "What the AI detection score", accent: "costs to run" },
+    limits: "What an AI detection score can't prove",
+    faq: "AI detection score FAQ",
+    related: "Features that fix what the score flags",
+    cta: { lead: "Score and fix", accent: "your first post" },
+  },
+  editor: {
+    difference: { lead: "AI copy editing that keeps", accent: "your facts intact" },
+    fits: { lead: "Where the AI copy editor fits for", accent: "existing pages" },
+    plans: { lead: "What AI copy editing costs on", accent: "each plan" },
+    limits: "When to paste text instead of a URL",
+    compare: "Checking a page from its URL: Draftly vs Jasper",
+    faq: "AI copy editor FAQ",
+    related: "Other ways to check your copy",
+    cta: { lead: "Start with a free post, then", accent: "check your old ones" },
+  },
+  "seo-meta": {
+    difference: { lead: "Meta descriptions sized to", accent: "150 to 160 characters" },
+    fits: { lead: "Where meta titles fit between", accent: "draft and publish" },
+    plans: { lead: "Which plans include", accent: "meta titles and descriptions" },
+    limits: "What the SEO score can't see",
+    faq: "Meta title and description FAQ",
+    related: "Features that check and publish your meta",
+    cta: { lead: "Get a meta title and description with", accent: "your free post" },
+  },
+  publishing: {
+    difference: { lead: "Shopify blog posts with", accent: "the meta filled in" },
+    fits: { lead: "Where publishing fits after", accent: "the final check" },
+    plans: { lead: "Which plans include", accent: "one-click publishing" },
+    limits: "Platforms Draftly can't publish to yet",
+    compare: "Publishing in Draftly vs Jasper's downloads",
+    faq: "One-click publishing FAQ",
+    related: "Features for after you hit publish",
+    cta: { lead: "Publish your first post", accent: "for free" },
+  },
+  autopilot: {
+    difference: { lead: "Blog automation with", accent: "an approval step" },
+    fits: { lead: "Where automated blogging takes over", accent: "every step" },
+    plans: { lead: "Which plan includes", accent: "automated blogging" },
+    limits: "Which blogs can auto-publish",
+    compare: "Scheduled publishing: Draftly vs Jasper",
+    faq: "Automated blogging FAQ",
+    related: "Features automated blogging builds on",
+    cta: { lead: "Read one post before you", accent: "automate the rest" },
+  },
+  analytics: {
+    difference: { lead: "Search Console keywords next to", accent: "your posts" },
+    fits: { lead: "Where blog analytics fits after", accent: "a post goes live" },
+    plans: { lead: "Blog analytics is free on", accent: "every plan" },
+    limits: "What blog analytics in Draftly doesn't replace",
+    faq: "Blog analytics FAQ",
+    related: "Features to use with blog analytics",
+    cta: { lead: "Connect Search Console, then write", accent: "your first post" },
+  },
+  mcp: {
+    difference: { lead: "Your brand voice and SEO data inside", accent: "Claude and ChatGPT" },
+    fits: { lead: "Where the connector fits when you write in", accent: "your own AI" },
+    plans: { lead: "Which plans include", accent: "the connector" },
+    limits: "Which AI apps the connector works with",
+    compare: "The connector in Draftly vs Jasper's MCP",
+    faq: "Claude and ChatGPT connector FAQ",
+    related: "Features your AI can reach through the connector",
+    cta: { lead: "Connect your AI and write", accent: "a free post" },
+  },
+  "wordpress-plugin": {
+    difference: { lead: "Suggested edits you approve", accent: "one at a time" },
+    fits: { lead: "Where the plugin fits in", accent: "your WordPress editor" },
+    plans: { lead: "What the WordPress plugin costs to", accent: "install and run" },
+    limits: "What the plugin leaves to the Draftly app",
+    faq: "WordPress plugin FAQ",
+    related: "Features that work with WordPress",
+    cta: { lead: "Write a free post, then check", accent: "the rest in WordPress" },
+  },
+  teams: {
+    difference: { lead: "Multiple websites, each with", accent: "its own voice" },
+    fits: { lead: "Where team accounts fit when", accent: "several people write" },
+    plans: { lead: "Team seats on", accent: "each paid plan" },
+    limits: "What team accounts don't include",
+    compare: "Team pricing: Draftly Growth vs Jasper Pro",
+    faq: "Team accounts FAQ",
+    related: "Features to pair with team accounts",
+    cta: { lead: "Try one post before you", accent: "invite the team" },
+  },
+};

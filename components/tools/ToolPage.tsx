@@ -228,7 +228,19 @@ export async function ToolPage({ tool, children }: { tool: FreeTool; children?: 
 
           <OtherTools exclude={tool.path} />
 
-          <FaqList faqs={tool.faqs} />
+          <FaqList
+            faqs={tool.faqs}
+            title={
+              tool.faqHeading ? (
+                <>
+                  {tool.faqHeading.slice(0, tool.faqHeading.lastIndexOf(" "))}{" "}
+                  <AccentText squiggle="squiggle" color="var(--color-accent)" squiggleColor="#2f8ccc">
+                    {tool.faqHeading.slice(tool.faqHeading.lastIndexOf(" ") + 1)}
+                  </AccentText>
+                </>
+              ) : undefined
+            }
+          />
 
           <div className="mt-10">
             <Byline verb="Updated" date={TOOLS_DATE.label} />

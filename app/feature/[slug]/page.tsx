@@ -12,7 +12,7 @@ import { FeatureArt, isArtName } from "@/components/feature-art/FeatureArt";
 import { ProductFigure } from "@/components/ProductFigure";
 import { ThumbCard } from "@/components/ThumbCard";
 import { CATEGORIES, FEATURES, FEATURES_HUB, compareBasis, featurePath, featuresIn, getFeature, getFeatureBySlug, type FeatureId } from "@/lib/features";
-import { DIFFERENCE } from "@/lib/feature-pages";
+import { DIFFERENCE, HEADINGS } from "@/lib/feature-pages";
 import { TINTS, tintVars } from "@/lib/feature-tints";
 import { getHomepageData } from "@/lib/graphql";
 import { GUIDES } from "@/lib/related";
@@ -73,6 +73,7 @@ export default async function FeaturePage({ params }: Props) {
   const category = CATEGORIES.find((c) => c.id === feature.category);
   const tint = TINTS[feature.category];
   const diff = DIFFERENCE[feature.id];
+  const hd = HEADINGS[feature.id];
   const related = feature.related.map(getFeature).filter((f) => f !== undefined);
   const guide = feature.guide ? GUIDES.find((g) => g.href === feature.guide!.href) : undefined;
   const guideThumb = feature.guide ? GUIDE_THUMBS[feature.guide.href] : undefined;
@@ -155,7 +156,7 @@ export default async function FeaturePage({ params }: Props) {
             <div className="container-draftly max-w-3xl">
               <p className="eyebrow mb-4">The difference</p>
               <h2 id="difference-heading" className="text-3xl sm:text-4xl font-medium mb-6" style={h2Style}>
-                Why it works <AccentText squiggle="squiggle" color="var(--color-accent)" squiggleColor="#2f8ccc">differently</AccentText>
+                {hd.difference.lead} <AccentText squiggle="squiggle" color="var(--color-accent)" squiggleColor="#2f8ccc">{hd.difference.accent}</AccentText>
               </h2>
               <p className="text-lg leading-relaxed mb-4" style={secondary}>
                 {diff.problem}
@@ -178,7 +179,7 @@ export default async function FeaturePage({ params }: Props) {
 
               {feature.compare ? (
                 <div id="vs-jasper" className="mt-12">
-                  <h3 className="text-xl font-semibold mb-4">How it compares to Jasper</h3>
+                  <h3 className="text-xl font-semibold mb-4">{hd.compare ?? "How it compares to Jasper"}</h3>
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="rounded-2xl p-5" style={{ background: "var(--color-accent-muted)", border: "1px solid var(--color-border-accent)" }}>
                       <p className="text-sm font-semibold mb-2" style={{ color: "var(--color-accent-hover)" }}>
@@ -210,7 +211,7 @@ export default async function FeaturePage({ params }: Props) {
                 Where it fits
               </p>
               <h2 id="fits-heading" className="text-3xl sm:text-4xl font-medium" style={h2Style}>
-                One step in getting a post <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">published</AccentText>
+                {hd.fits.lead} <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">{hd.fits.accent}</AccentText>
               </h2>
             </div>
             <ol className="space-y-3">
@@ -300,7 +301,7 @@ export default async function FeaturePage({ params }: Props) {
               <div className="min-w-0 lg:order-2">
                 <NumberChip n={2} bg={tint.soft} />
                 <h2 id="plans" className="text-3xl sm:text-4xl font-medium mb-5 scroll-mt-24" style={h2Style}>
-                  Which plans <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">include it</AccentText>
+                  {hd.plans.lead} <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">{hd.plans.accent}</AccentText>
                 </h2>
                 <p className="text-lg leading-relaxed mb-4" style={secondary}>
                   {feature.plans}
@@ -309,7 +310,7 @@ export default async function FeaturePage({ params }: Props) {
                   Prices and credits for each plan are on the <A href="/pricing">pricing page</A>.
                 </p>
                 <h3 id="limits" className="text-xl font-semibold mb-3 scroll-mt-24">
-                  What it doesn&apos;t do
+                  {hd.limits}
                 </h3>
                 <ul className="space-y-2 leading-relaxed" style={secondary}>
                   {feature.limits.map((l) => (
@@ -361,7 +362,7 @@ export default async function FeaturePage({ params }: Props) {
 
         <section className="pb-20 px-4" style={{ background: "var(--color-bg-primary)" }}>
           <div className="container-draftly max-w-6xl">
-            <FaqList faqs={feature.faqs} centered />
+            <FaqList faqs={feature.faqs} centered title={<SquiggleLast text={hd.faq} />} />
           </div>
         </section>
 
@@ -371,7 +372,7 @@ export default async function FeaturePage({ params }: Props) {
             <div className="container-draftly max-w-6xl">
               <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
                 <h2 id="related-heading" className="text-3xl font-medium" style={h2Style}>
-                  Related <AccentText squiggle="squiggle" color="var(--color-accent)" squiggleColor="#2f8ccc">features</AccentText>
+                  <SquiggleLast text={hd.related} />
                 </h2>
                 <a href={FEATURES_HUB.path} className="font-semibold text-sm inline-flex items-center gap-1.5" style={{ color: "var(--color-accent-hover)" }}>
                   Explore all {FEATURES.length} features <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -391,7 +392,7 @@ export default async function FeaturePage({ params }: Props) {
         {/* 6. The footer CTA: the one call to action at the end of the page */}
         <CtaBand
           tone="accent"
-          heading={<>Your first post <em className="italic" style={{ color: "var(--color-accent)" }}>is on us</em></>}
+          heading={<>{hd.cta.lead} <em className="italic" style={{ color: "var(--color-accent)" }}>{hd.cta.accent}</em></>}
           body="Paste your URL, read the draft, then decide."
           secondary={{ href: FEATURES_HUB.path, label: "See all features" }}
         />
