@@ -1,5 +1,5 @@
 import { Check } from "lucide-react";
-import { CANCEL_NOTE, FIRST_MONTH_OFFER, PAID_PLANS, PLANS, teamMembersLabel, valueAnchor } from "@/lib/pricing";
+import { CANCEL_NOTE, FIRST_MONTH_OFFER, PLANS } from "@/lib/pricing";
 
 /**
  * The four plan cards. Shared by /pricing and the homepage so the two can never
@@ -15,7 +15,6 @@ export function PricingPlans({
   cardHeading?: "h2" | "h3";
 }) {
   const CardHeading = cardHeading;
-  const cheapestPaid = PAID_PLANS[0];
   return (
     <>
       <p className="mb-8 text-center text-sm" style={{ color: "var(--color-text-secondary)" }}>
@@ -58,21 +57,13 @@ export function PricingPlans({
               {plan.posts}
             </p>
             <p className="text-xs" style={{ color: "var(--color-text-muted)" }}>
-              {plan.credits}
+              {plan.credits.replace(" a month", "")} · {plan.seats === null ? "Unlimited team members" : `${plan.seats} team ${plan.seats === 1 ? "member" : "members"}`}
             </p>
-            <p className="text-xs" style={{ color: "var(--color-text-muted)" }}>
-              {teamMembersLabel(plan)}
-            </p>
-            {plan === cheapestPaid && (
-              <p className="mt-2 text-xs leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-                {valueAnchor(plan)}
-              </p>
-            )}
-            <p className="mt-4 text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+            <p className="mt-4 text-sm font-medium leading-snug" style={{ color: "var(--color-text-primary)" }}>
               {plan.pitch}
             </p>
 
-            <ul className="mt-5 space-y-2.5 text-sm leading-relaxed flex-1">
+            <ul className="mt-4 space-y-2 text-sm leading-snug flex-1">
               {plan.includesFrom && (
                 <li className="font-semibold" style={{ color: "var(--color-text-primary)" }}>
                   Everything in {plan.includesFrom}, plus:
@@ -80,7 +71,7 @@ export function PricingPlans({
               )}
               {plan.features.map((f) => (
                 <li key={f} className="flex gap-2" style={{ color: "var(--color-text-secondary)" }}>
-                  <Check className="w-4 h-4 mt-1 flex-shrink-0" style={{ color: "var(--color-accent)" }} />
+                  <Check className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: "var(--color-accent)" }} />
                   <span>{f}</span>
                 </li>
               ))}
@@ -97,14 +88,12 @@ export function PricingPlans({
             >
               {plan.price === 0 ? freeCtaText : `Start on ${plan.name}`}
             </a>
-            {plan.price > 0 && (
-              <p className="mt-2 text-xs text-center" style={{ color: "var(--color-text-muted)" }}>
-                {CANCEL_NOTE}
-              </p>
-            )}
           </div>
         ))}
       </div>
+      <p className="mt-6 text-center text-xs" style={{ color: "var(--color-text-muted)" }}>
+        {CANCEL_NOTE}
+      </p>
     </>
   );
 }

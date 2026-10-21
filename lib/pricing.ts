@@ -22,14 +22,12 @@ export const PLANS: Plan[] = [
     credits: "1,000 credits a month",
     posts: "1 free blog post",
     seats: 1,
-    pitch: "See what Draftly writes for your site before you pay anything.",
+    pitch: "Try Draftly on your own site first.",
     features: [
-      "Your first full blog post, free",
-      "Brand voice built from your website",
-      "Publish to all 6 CMS integrations",
-      "Your free post comes with its thumbnail; outlines and topic ideas use your monthly credits",
+      "One full blog post",
+      "Brand voice from your website",
+      "Publish to 6 platforms",
       "Google Analytics and Search Console reports",
-      "Connect Claude, ChatGPT or Cursor and write one more post with your own AI",
     ],
   },
   {
@@ -38,15 +36,13 @@ export const PLANS: Plan[] = [
     credits: "10,000 credits a month",
     posts: "About 66 posts a month",
     seats: 2,
-    pitch: "For one person running one blog who wants to publish every week.",
+    pitch: "One blog, a new post every week.",
     includesFrom: "Free",
     features: [
-      `Pick from ${APP_MODEL_COUNT} AI models, including Claude, GPT, Gemini, Kimi and DeepSeek`,
-      "Outlines and topic refreshes use no credits",
-      "AI images inside your posts, from a suggested visual for each section (53 credits an image)",
-      "Keep writing posts with your own AI through the Draftly connector for Claude, ChatGPT and Cursor",
-      "Import your own keyword lists and brand docs (coming soon)",
-      "Keyword data through the connector: search volume, difficulty, intent and related keywords, 40 lookups a month",
+      `${APP_MODEL_COUNT} AI models to choose from`,
+      "AI images inside your posts",
+      "Keyword data, 40 lookups a month",
+      "Keep writing with your own AI",
     ],
   },
   {
@@ -55,11 +51,11 @@ export const PLANS: Plan[] = [
     credits: "35,000 credits a month",
     posts: "About 233 posts a month",
     seats: 5,
-    pitch: "For teams and agencies publishing most days of the week.",
+    pitch: "Teams and agencies posting most days.",
     includesFrom: "Solopreneur",
     features: [
-      "Email notifications when posts are ready",
-      "Live Google results, People Also Ask and domain data for your site and competitors, 150 data calls a month",
+      "Live Google results and competitor data",
+      "Email alerts when posts are ready",
     ],
     highlight: "Lowest cost per post",
   },
@@ -69,19 +65,36 @@ export const PLANS: Plan[] = [
     credits: "50,000 credits a month",
     posts: "About 333 posts a month",
     seats: null,
-    pitch: "Set a schedule once and Draftly keeps your blog publishing.",
+    pitch: "Your blog runs on a schedule.",
     includesFrom: "Growth",
     features: [
-      "Posting schedules: Draftly picks topics, writes and publishes on your cadence",
-      "Automatic publishing to WordPress and Shopify",
-      "Weekly digest email of everything it published",
-      "Every SEO dataset, including keyword gaps against competitors and backlinks, 300 data calls a month",
+      "Scheduled topics, writing and publishing",
+      "Auto-publish to WordPress and Shopify",
+      "Every SEO dataset, including backlinks",
     ],
   },
 ];
 
-/** "Team members: 2", "Team members: Unlimited". */
-export const teamMembersLabel = (plan: Plan) => `Team members: ${plan.seats ?? "Unlimited"}`;
+/**
+ * The plan comparison table on /pricing: where the details trimmed from the cards live.
+ * One value per plan, in PLANS order. true = included, false = not included.
+ */
+export const COMPARE_ROWS: { label: string; values: (string | boolean)[] }[] = [
+  { label: "Posts a month", values: ["1", "About 66", "About 233", "About 333"] },
+  { label: "Credits a month", values: ["1,000", "10,000", "35,000", "50,000"] },
+  { label: "Team members", values: PLANS.map((p) => String(p.seats ?? "Unlimited")) },
+  { label: "AI models", values: ["Claude Sonnet 5.5", `All ${APP_MODEL_COUNT}`, `All ${APP_MODEL_COUNT}`, `All ${APP_MODEL_COUNT}`] },
+  { label: "Brand voice from your site", values: [true, true, true, true] },
+  { label: "Publish to WordPress, Shopify, Webflow, Ghost, Squarespace, HubSpot", values: [true, true, true, true] },
+  { label: "Google Analytics and Search Console reports", values: [true, true, true, true] },
+  { label: "Write with your own AI (Claude, ChatGPT, Cursor)", values: ["1 post", true, true, true] },
+  { label: "Outlines and topic refreshes", values: ["Use credits", "Free", "Free", "Free"] },
+  { label: "AI images inside posts", values: ["Thumbnail on your free post", "53 credits each", "53 credits each", "53 credits each"] },
+  { label: "SEO data calls a month", values: [false, "40, keyword data", "150, plus live Google and domain data", "300, every dataset"] },
+  { label: "Email alerts when posts are ready", values: [false, false, true, true] },
+  { label: "Posting schedules and auto-publishing", values: [false, false, false, true] },
+  { label: "Weekly digest email", values: [false, false, false, true] },
+];
 
 /** "1 / 2 / 5 / Unlimited", in plan order. */
 export const teamMembersList = () => PLANS.map((p) => p.seats ?? "Unlimited").join(" / ");
@@ -134,9 +147,3 @@ export const FIRST_MONTH_OFFER = {
  */
 export const CANCEL_NOTE = "Cancel any time from Settings.";
 export const BILLING_TERMS_HREF = "/terms-and-conditions#billing-cancellation-and-refunds";
-
-/** Value anchor under the cheapest paid plan (site audit D4.3). */
-export function valueAnchor(plan: Plan): string {
-  const posts = plan.posts.replace(/\D+/g, "");
-  return `About ${posts} posts for $${plan.price}. A freelance writer charges more than that for one article.`;
-}
