@@ -293,8 +293,8 @@ export default async function McpPage() {
               SEO Data by Plan
             </h2>
             <p className="mb-8" style={{ color: "var(--color-text-secondary)" }}>
-              Each fresh lookup uses one data call. Allowances reset with your billing period. Need more? A data pack adds
-              100 calls for $10, and purchased calls carry over every month while you are on a paid plan.
+              Each fresh lookup uses one data call. Allowances reset with your billing period. A data pack adds 100 calls
+              for $10, and purchased calls carry over every month while you&apos;re on a paid plan.
             </p>
             <div className="overflow-x-auto">
               <table className="w-full text-sm min-w-[480px]">

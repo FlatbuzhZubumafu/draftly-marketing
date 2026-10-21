@@ -34,7 +34,7 @@ export const metadata: Metadata = {
 };
 
 const DECISIONS = [
-  { situation: "Pages are not getting indexed, the site is slow or redirects are broken", choice: "Agency", why: "These are fixes to your site's code and setup, which a writing tool does not touch." },
+  { situation: "Pages are not getting indexed, the site is slow or redirects are broken", choice: "Agency", why: "These are fixes to your site's code and setup, which a writing tool doesn't touch." },
   { situation: "You need a steady blog in your voice on a small budget", choice: "Tool", why: "A tool produces posts each week for a flat monthly price." },
   { situation: "Your competitors win on backlinks", choice: "Agency", why: "Link building and digital PR take outreach by people." },
   { situation: "You know your topics and want posts out each week", choice: "Tool", why: "The work is writing and publishing, which a tool handles end to end." },
@@ -50,7 +50,7 @@ const FAQS: Faq[] = [
   },
   {
     q: "Is an AI SEO tool enough for a small business?",
-    a: "It can be when your site is technically sound and your main gap is regular content. If pages are not indexed or competitors win on links, a tool alone will not close that gap.",
+    a: "Yes, if your site is technically sound and your main gap is regular content. If pages aren't indexed or competitors win on links, a tool alone won't close that gap.",
   },
   {
     q: "Can I use Draftly alongside an SEO agency?",
@@ -109,7 +109,7 @@ export default async function AgencyVsToolPage() {
           <Section id="agency" title="What an AI SEO agency does that a tool does not">
             <p>
               An AI SEO agency is an SEO agency that uses AI inside its own process. What you pay for is the people, and
-              they cover four jobs software does not do well on its own.
+              they cover four jobs software doesn&apos;t do well on its own.
             </p>
             <Bullets
               items={[
@@ -162,7 +162,7 @@ export default async function AgencyVsToolPage() {
             <ProductFigure shot={GUIDE_SHOTS.urlToPost} className="mt-2" />
             <p>
               Draftly also shows your Google Analytics and Search Console reports on every plan, and paid plans add
-              keyword data through its connector. It does not build links or change your site&apos;s code. The <A href="/ai-copywriter">Draftly AI
+              keyword data through its connector. It doesn&apos;t build links or change your site&apos;s code. The <A href="/ai-copywriter">Draftly AI
               copywriter page</A> covers how a post gets made, and <A href="/best-ai-for-seo">best AI for SEO</A> lists
               the tools that handle research, optimization and tracking.
             </p>

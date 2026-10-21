@@ -76,7 +76,7 @@ export default function AboutPage() {
               At that time Ahrefs cost about $100 a month and just gave you data. There was no AI to write and optimize
               content, so I had to fight to figure it out.
             </p>
-            <p>I put the heart and soul of that work into Draftly so you don&apos;t have to work nearly as hard.</p>
+            <p>Everything that year taught me went into Draftly, so you can skip the slow way.</p>
           </Section>
 
           <Section id="how-it-started" title="Draftly started as a script to save my company's traffic">
@@ -135,7 +135,7 @@ export default function AboutPage() {
             {/* Confirmed by Preston 2026-10-14: he reads every support request and post-generation feedback, not every post. Keep process claims to what he has confirmed. */}
             <p>
               I read every support request and piece of feedback you send after Draftly writes a post. That feedback
-              tells me what shapes how Draftly writes and how it gets better!
+              decides what I change next in how Draftly writes.
             </p>
             <p>When a post changes after it&apos;s published, the page shows an Updated date next to the original one.</p>
             <p>

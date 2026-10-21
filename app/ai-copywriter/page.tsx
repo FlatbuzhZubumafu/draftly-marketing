@@ -7,7 +7,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { A, B, DarkCta, FaqList, Section, faqJsonLd, type Faq } from "@/components/ArticleParts";
 import { PAID_PLANS, PLANS } from "@/lib/pricing";
-import { DEFAULT_WRITER as D, READER_QUALITY_EVIDENCE, SAMPLE_POST } from "@/lib/ruleCheck";
+import { DEFAULT_WRITER as D, SAMPLE_POST } from "@/lib/ruleCheck";
 import { jsonLdHtml } from "@/lib/schema";
 import { TocLayout } from "@/components/OnThisPage";
 import { KeepReading } from "@/components/KeepReading";
@@ -133,8 +133,8 @@ export default async function AiCopywriterPage() {
               <B>Each post is checked against rules, and fixed when it fails.</B> The check covers headings, keyword
               placement, meta title and description length, filler words and contrast phrasing. A second check reads
               the post the way a customer would and sends it back for a fix if it doesn&apos;t make sense or help. In a{" "}
-              {D.briefs}-brief test against Draftly&apos;s production rules, {D.model} posts passed every hard rule{" "}
-              {D.rulePass}% of the time after the fix pass. {READER_QUALITY_EVIDENCE} The previous default,{" "}
+              {D.briefs}-brief test against Draftly&apos;s production rules, {D.rulePass}% of {D.model} posts passed every
+              hard rule after the fix pass, and {D.readerPass}% passed our reader-quality bar. The previous default,{" "}
               {D.previousModel}, cleared that bar {D.previousReaderPass}% of the time with the same check.
             </p>
             <ProductFigure shot={GUIDE_SHOTS.genericVsDraftly} className="mt-2" />
@@ -146,7 +146,7 @@ export default async function AiCopywriterPage() {
             <p>
               <B>No invented numbers.</B>{" "}
               Draftly&apos;s rules forbid made-up statistics, quotes and testimonials. If a
-              figure is not in your site or your brief, it stays out of the post.
+              figure isn&apos;t in your site or your brief, it stays out of the post.
             </p>
             <p>
               The full list of rules, with before and after examples, is in our guide to{" "}
