@@ -30,8 +30,9 @@ export function BeforeAfter() {
             </AccentText>
           </h2>
           <p className="max-w-xl mx-auto text-lg" style={{ color: "var(--color-text-secondary)" }}>
-            Draftly runs each post through a rule checker before you see it. It also checks the figures in the post against
-            the sources the writer was given, so a made-up statistic gets flagged. Here is what it catches in a typical AI paragraph.
+            Draftly is a self-learning, self-healing, strict copywriter and editor that absolutely hates AI copy. One click
+            gets you a post in your brand&apos;s voice, with no made-up stats and the AI tells already edited out, so you&apos;re not
+            rewriting it before it goes live.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
