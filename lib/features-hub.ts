@@ -54,7 +54,7 @@ export const PAIN_POINTS: PainPoint[] = [
     question: "How do I adapt AI writing to my brand voice?",
     answer: [
       [
-        "Start from your own website. Draftly reads your website and sets eight tone sliders from it, then fills in what you sell and who you sell to. Every post and every edit uses that ",
+        "Start from your own website. Draftly reads it and sets eight tone sliders from it, then fills in what you sell and who you sell to. Every post and every edit uses that ",
         { id: "brand-voice", text: "brand voice" },
         ".",
       ],

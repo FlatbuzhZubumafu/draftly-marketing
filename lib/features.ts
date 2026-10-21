@@ -232,7 +232,7 @@ export const FEATURES: Feature[] = [
       { title: "Same checks for every model", text: "Whichever model writes, the post is checked against your writing rules and gets a fix pass." },
     ],
     shot: GUIDE_SHOTS.modelPicker,
-    plans: "Free can use Claude Sonnet 5.5 and GPT 5.4 Mini. Every paid plan includes all of them.",
+    plans: "Free accounts write with Claude Sonnet 5.5. Every paid plan includes all of them.",
     limits: ["Premium models cost more credits per post, so you get fewer posts a month on them."],
     faqs: [
       { q: "Which AI model does Draftly use?", a: `Claude Sonnet 5.5 by default. Paid plans can switch per post to any of ${APP_MODEL_COUNT} models.` },
@@ -260,7 +260,7 @@ export const FEATURES: Feature[] = [
     ],
     steps: [
       { title: "Draftly writes the draft", text: "Using your voice, your rules and any source material for the topic." },
-      { title: "Code checks the rules", text: "No AI guesses here: word lists, lengths, headings, links and every number are checked by code." },
+      { title: "Code checks the rules", text: "Word lists, lengths, headings, links and every number are checked by code, with no AI judgment involved." },
       { title: "A fix pass runs", text: "If a hard rule fails, Draftly rewrites only what's needed and checks again." },
       { title: "A reader-quality check", text: "A second model scores whether it makes sense, answers the question and reads like an expert wrote it." },
     ],
@@ -410,7 +410,7 @@ export const FEATURES: Feature[] = [
       { q: "Where does Draftly's SEO data come from?", a: "From DataForSEO, the same kind of data source many SEO tools use, fetched live and cached for 30 days." },
       { q: "How do I find the keywords my competitors rank for?", a: "Add your website and Draftly finds the domains you compete with, and you can edit the list. On the Autopilot plan it shows the keywords they rank for that you don't. Keyword gaps and backlinks are Autopilot features." },
       { q: "Does Draftly show People Also Ask questions?", a: "Yes. From the Growth plan, a lookup shows Google's live first page for a keyword along with its People Also Ask questions." },
-      { q: "Do I need a separate SEO tool?", a: "For blog planning, often not. For rank tracking or a full backlink audit, a dedicated SEO tool goes further." },
+      { q: "Do I need a separate SEO tool?", a: "For planning blog posts, Draftly's data covers it. For rank tracking or a full backlink audit, use a dedicated SEO tool." },
     ],
     related: ["topic-ideas", "mcp", "seo-meta"],
     guide: { href: "/mcp", label: "SEO MCP connector" },
@@ -513,7 +513,7 @@ export const FEATURES: Feature[] = [
     ],
     shot: dashboardShot,
     plans: "Every plan, including Free.",
-    limits: ["Draftly reports on your traffic. It isn't a full replacement for Google Analytics."],
+    limits: ["Draftly shows the traffic your posts bring in. For full site reports, keep using Google Analytics."],
     faqs: [
       { q: "Is the Search Console connection free?", a: "Yes, on every plan." },
       { q: "Can Draftly change my Google settings?", a: "No. It asks for read-only access to Analytics and Search Console." },

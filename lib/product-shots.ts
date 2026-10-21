@@ -57,10 +57,10 @@ export const FEATURE_SLIDES: FeatureSlide[] = [
   {
     title: "Your topic, your model",
     href: "/feature/ai-models",
-    description: "Type any topic and pick the model that writes it. Claude Sonnet 5.5 is the default, and paid plans unlock the rest, including GPT 6 Luna, Gemini and DeepSeek.",
+    description: "Type any topic and pick the model that writes it. Claude Sonnet 5.5 is the default. Paid plans can pick any other model, including GPT 6 Luna, Gemini and DeepSeek.",
     shot: shot("feature-slide-models.webp", 1600, 1200,
       "Draftly's Write Your Own Topic screen on the Free plan with a topic box and a model picker: Claude Sonnet 5.5 (default, Best quality, 150 credits) selected, GPT 5.4 Mini at 150 credits, and GPT 6 Luna (Budget), Claude Haiku 4.5, Claude Sonnet 4.6, GPT 5.4, Gemini 3 Flash and DeepSeek V3.2 locked",
-      "Pick the model per post. Paid plans unlock the rest, including GPT 6 Luna, Gemini and DeepSeek."),
+      "Pick the model per post. Paid plans can use any of them, including GPT 6 Luna, Gemini and DeepSeek."),
   },
   {
     title: "SEO meta, drafted every time",
@@ -120,7 +120,7 @@ export const GUIDE_SHOTS = {
     "Slug, meta title and meta description come with every draft."),
   modelPicker: shot("guide-model-picker.webp", 1600, 900,
     "Draftly's Write Your Own Topic screen with a model picker: Claude Sonnet 5.5 selected as the default (Best quality, 150 credits), GPT 5.4 Mini at 150 credits, and GPT 6 Luna (Budget), Claude, GPT, Gemini and DeepSeek models locked on the Free plan",
-    "Pick the model per post. Paid plans unlock the rest, including GPT 6 Luna, Gemini and DeepSeek."),
+    "Pick the model per post. Paid plans can use any of them, including GPT 6 Luna, Gemini and DeepSeek."),
 } satisfies Record<string, ProductShot>;
 
 export const ALL_PRODUCT_SHOTS = [SHOWCASE_WIDE, ...STEP_SHOTS, ...FEATURE_SLIDES.map((f) => f.shot), INTEGRATIONS_SHOT];
