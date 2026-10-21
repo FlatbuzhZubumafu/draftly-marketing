@@ -13,12 +13,18 @@ const ALLOWED_TAGS = [
 // `id` keeps in-page anchors working (legal pages' table of contents, post jump links).
 const ALLOWED_ATTR = ["id", "href", "src", "alt", "title", "class", "target", "rel", "width", "height", "colspan", "rowspan", "scope"];
 
+// The Salient theme on WordPress appends its own share row (Love / Share / Pin)
+// to every post's content. Its icon font and scripts don't load here, so it
+// renders as dead "#" text links. Posts get ShareLinks instead.
+const THEME_WIDGET = /(^|\s)(sharing-default-minimal|nectar-social)(\s|$)/;
+
 export function sanitizeHtml(dirty: string): string {
   return sanitize(dirty, {
     allowedTags: ALLOWED_TAGS,
     allowedAttributes: { "*": ALLOWED_ATTR },
     allowedSchemes: ["http", "https", "mailto"],
     allowProtocolRelative: false,
+    exclusiveFilter: (frame) => THEME_WIDGET.test(frame.attribs.class ?? ""),
   });
 }
 
