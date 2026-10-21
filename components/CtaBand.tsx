@@ -5,6 +5,10 @@ type Props = {
   body: string;
   /** Secondary link next to the main button. */
   secondary?: { href: string; label: string };
+  /** Main button override, e.g. a feature's free trial. Defaults to the free first post. */
+  primary?: { href: string; label: string };
+  /** Small line under the buttons. */
+  note?: string;
   tone?: "light" | "accent";
 };
 
@@ -12,7 +16,7 @@ type Props = {
  * A call to action between homepage sections. The main button always starts
  * the free first post, so every band leads to the same next step.
  */
-export async function CtaBand({ heading, body, secondary, tone = "light" }: Props) {
+export async function CtaBand({ heading, body, secondary, primary, note, tone = "light" }: Props) {
   const { marketingSettings: s } = await getHomepageData();
   const registerUrl = `${s.appName}/register`;
   const accent = tone === "accent";
@@ -27,8 +31,8 @@ export async function CtaBand({ heading, body, secondary, tone = "light" }: Prop
           {body}
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <a href={registerUrl} className="btn btn-primary">
-            {s.heroCtaText}
+          <a href={primary?.href ?? registerUrl} className="btn btn-primary">
+            {primary?.label ?? s.heroCtaText}
           </a>
           {secondary ? (
             <a href={secondary.href} className="btn btn-secondary">
@@ -37,7 +41,7 @@ export async function CtaBand({ heading, body, secondary, tone = "light" }: Prop
           ) : null}
         </div>
         <p className="mt-4 text-sm" style={{ color: "var(--color-text-muted)" }}>
-          Free first post. No credit card.
+          {note ?? "Free first post. No credit card."}
         </p>
       </div>
     </section>

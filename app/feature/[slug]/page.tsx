@@ -61,6 +61,22 @@ const FREE_TOOL: Partial<Record<FeatureId, { lead: string; label: string; href: 
   "ai-detector": { lead: "No sign-up needed:", label: "Try the free detector", href: "/tools/ai-content-detector" },
 };
 
+/**
+ * Features with their own free trial in the app: the page's main buttons start that
+ * trial (signup with ?intent=) instead of the free first post. Add a feature here only
+ * once the app handles its intent.
+ */
+const TRIAL: Partial<Record<FeatureId, { intent: string; label: string; cardTitle: string; cardBody: string; bandBody: string; note: string }>> = {
+  "ai-detector": {
+    intent: "detector",
+    label: "Check your first post free",
+    cardTitle: "Check your own copy",
+    cardBody: "Create an account, add your website and paste a post or a page URL. Free accounts get 10 AI checks a month.",
+    bandBody: "Paste a post, see which sentences read like AI, then decide.",
+    note: "10 free checks a month. No credit card.",
+  },
+};
+
 const Dot = () => <span className="mt-[11px] h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: "var(--color-accent)" }} aria-hidden="true" />;
 
 export default async function FeaturePage({ params }: Props) {
@@ -68,6 +84,9 @@ export default async function FeaturePage({ params }: Props) {
   if (!feature) notFound();
   const { marketingSettings: s } = await getHomepageData();
   const registerUrl = `${s.appName}/register`;
+  const trial = TRIAL[feature.id];
+  const ctaHref = trial ? `${registerUrl}?intent=${trial.intent}` : registerUrl;
+  const ctaLabel = trial ? trial.label : s.heroCtaText;
 
   const path = featurePath(feature);
   const category = CATEGORIES.find((c) => c.id === feature.category);
@@ -125,8 +144,8 @@ export default async function FeaturePage({ params }: Props) {
                   {introLead}
                 </p>
                 <div className="flex flex-wrap items-center gap-3">
-                  <a href={registerUrl} className="btn btn-primary">
-                    {s.heroCtaText} <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                  <a href={ctaHref} className="btn btn-primary">
+                    {ctaLabel} <ArrowRight className="w-4 h-4" aria-hidden="true" />
                   </a>
                   <Link href="/pricing" className="btn btn-secondary" style={{ background: "rgba(255,255,255,0.7)" }}>
                     See pricing
@@ -342,16 +361,16 @@ export default async function FeaturePage({ params }: Props) {
                 ) : (
                   <div className="rounded-2xl p-6 sm:p-8" style={{ background: tint.bg, border: `1px solid ${tint.grid}` }}>
                     <p className="font-mono text-xs uppercase tracking-[0.12em] mb-3" style={{ color: "#333" }}>
-                      Your first post
+                      {trial ? "Free check" : "Your first post"}
                     </p>
                     <p className="text-2xl font-medium mb-3" style={{ letterSpacing: "-0.02em" }}>
-                      Try it on your own site
+                      {trial ? trial.cardTitle : "Try it on your own site"}
                     </p>
                     <p className="leading-relaxed mb-6" style={{ color: "#3a3a3a" }}>
-                      Paste your URL and Draftly writes a post in your brand&apos;s voice. The first one is free, with no credit card.
+                      {trial ? trial.cardBody : "Paste your URL and Draftly writes a post in your brand\u2019s voice. The first one is free, with no credit card."}
                     </p>
-                    <a href={registerUrl} className="btn btn-primary">
-                      {s.heroCtaText} <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                    <a href={ctaHref} className="btn btn-primary">
+                      {ctaLabel} <ArrowRight className="w-4 h-4" aria-hidden="true" />
                     </a>
                   </div>
                 )}
@@ -393,7 +412,9 @@ export default async function FeaturePage({ params }: Props) {
         <CtaBand
           tone="accent"
           heading={<>{hd.cta.lead} <em className="italic" style={{ color: "var(--color-accent)" }}>{hd.cta.accent}</em></>}
-          body="Paste your URL, read the draft, then decide."
+          body={trial ? trial.bandBody : "Paste your URL, read the draft, then decide."}
+          primary={trial ? { href: ctaHref, label: ctaLabel } : undefined}
+          note={trial?.note}
           secondary={{ href: FEATURES_HUB.path, label: "See all features" }}
         />
       </main>
