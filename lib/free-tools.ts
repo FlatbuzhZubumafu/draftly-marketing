@@ -400,7 +400,7 @@ export const FREE_TOOLS: FreeTool[] = [
       },
       {
         q: "How do I show E-E-A-T on a blog post?",
-        a: "Name the author, link to an author page with their real experience, date the post, cite your sources, and make it easy to see who runs the site through About and Contact pages.",
+        a: "Name the author, link to an author page that shows their experience, date the post, cite your sources, and make it easy to see who runs the site through About and Contact pages.",
       },
       {
         q: "What counts as an authoritative source?",
@@ -457,8 +457,8 @@ export const FREE_TOOLS: FreeTool[] = [
         heading: "Why add FAQ markup anyway",
         paragraphs: [
           "FAQPage is still a valid schema.org type. Any crawler that reads JSON-LD can pick out your questions and answers without guessing from the layout, and that includes the bots behind AI search tools.",
-          "No search engine or AI company has promised to rank or cite a page more because of it. Think of the markup as a clear label on content that has to be good on its own.",
-          "The part that does the work is the FAQ itself. Real questions your customers ask, each with a short, direct answer, are easy for a reader to scan and easy for an AI assistant to quote.",
+          "No search engine or AI company has promised to rank or cite a page more because of it. The markup labels your questions and answers. Readers still judge the answers.",
+          "Write the FAQ for readers first. Questions your customers ask, each with a short, direct answer, are quick to scan and easy for an AI assistant to quote.",
         ],
       },
       {
@@ -479,7 +479,7 @@ export const FREE_TOOLS: FreeTool[] = [
     draftly: {
       title: "Draftly writes the post and its FAQ",
       points: [
-        "Draftly writes blog posts in your brand's voice. With the FAQ setting on (it is by default), a post's FAQ uses questions readers actually ask, answered from the post itself.",
+        "Draftly writes blog posts in your brand's voice. With the FAQ setting on (it is by default), a post's FAQ uses questions readers ask, answered from the post itself.",
         "Every FAQ answer is checked for length. Answers over three sentences get flagged before you publish.",
         "Drop the finished FAQ into this generator for the schema, and publish the post to WordPress, Shopify, Webflow, Ghost, Squarespace or HubSpot.",
       ],
@@ -504,11 +504,11 @@ export const FREE_TOOLS: FreeTool[] = [
       },
       {
         q: "How many questions should an FAQ have?",
-        a: "Three to eight is typical. Use questions customers really ask you, and answer each one in one to three sentences.",
+        a: "Three to eight is typical. Use questions customers ask you, and answer each one in one to three sentences.",
       },
       {
         q: "Can I add FAQ schema to every page?",
-        a: "Only to pages with a real FAQ that readers can see. Questions invented to repeat a keyword don't help the reader, and they won't help the page.",
+        a: "Only to pages with a real FAQ that readers can see. Questions invented to repeat a keyword don't help the reader or the page.",
       },
     ],
     ogAlt: "Free FAQ schema generator from Draftly: FAQPage JSON-LD and matching FAQ HTML",
@@ -548,7 +548,7 @@ export const FREE_TOOLS: FreeTool[] = [
         id: "where-the-brief-comes-from",
         heading: "Where the brief comes from",
         paragraphs: [
-          "An AI model (GPT 6 Luna, the same default model Draftly uses to write posts) builds the brief from your keyword and, if you add it, your homepage and sitemap. Internal links are limited to real URLs from your sitemap, so it can't invent a page you don't have.",
+          "An AI model (GPT 6 Luna, the budget model on Draftly's paid plans) builds the brief from your keyword and, if you add it, your homepage and sitemap. Internal links are limited to real URLs from your sitemap, so it can't invent a page you don't have.",
           "It doesn't pull live Google results. The \"what ranking pages cover\" list comes from the model's general knowledge of the topic, so search the keyword yourself and check the outline against the top five pages before you write.",
           "It also won't make up numbers. Where the post needs a price, a statistic or a rule, the brief tells you what kind of source to cite.",
         ],

@@ -114,7 +114,7 @@ export default function ToolsHub() {
           <SignupCta
             className="mt-16 max-w-3xl"
             heading="Next step: a fresh post for your blog"
-            body="Your blog needs fresh posts that answer real questions. Paste your URL and Draftly writes one in your brand's voice, with the meta title, description and slug filled in."
+            body="Paste your URL and Draftly writes a post in your brand's voice, with the meta title, description and slug filled in. Run the checkers on it before it goes live."
           />
 
           <FaqList faqs={FAQS} />
