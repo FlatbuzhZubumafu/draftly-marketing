@@ -12,6 +12,7 @@ import { NOINDEX_POST_SLUGS } from "@/lib/related";
 import { PostByline, postAuthorJsonLd } from "@/components/PostByline";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { SignupCta } from "@/components/SignupCta";
+import { ShareLinks } from "@/components/ShareLinks";
 
 export const revalidate = 60;
 
@@ -127,6 +128,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             className="prose prose-lg max-w-none text-gray-700 leading-relaxed"
             dangerouslySetInnerHTML={{ __html: tidyPostHtml(sanitizeHtml(post.content), post.title) }}
           />
+          <ShareLinks url={url} title={post.title} image={post.featuredImage?.node?.sourceUrl} className="mt-10" />
           <SignupCta className="mt-16" />
           <NewsletterSignup location="blog_post" className="mt-16" />
           <KeepReading
