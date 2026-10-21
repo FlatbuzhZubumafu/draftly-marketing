@@ -24,14 +24,15 @@ export function BeforeAfter() {
       <div className="container-draftly max-w-5xl">
         <div className="reveal text-center mb-12">
           <h2 className="text-3xl font-medium mb-4" style={{ letterSpacing: "-0.03em" }}>
-            Every Draft Gets{" "}
+            How Draftly Writes{" "}
             <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">
-              Checked
+              Better AI Copy
             </AccentText>
           </h2>
           <p className="max-w-xl mx-auto text-lg" style={{ color: "var(--color-text-secondary)" }}>
-            Draftly runs each post through a rule checker before you see it. It also checks the figures in the post against
-            the sources the writer was given, so a made-up statistic gets flagged. Here is what it catches in a typical AI paragraph.
+            Draftly is a self-learning, self-healing, strict copywriter and editor that absolutely hates AI copy. One click
+            gets you a post in your brand&apos;s voice, with no made-up stats and the AI tells already edited out, so you&apos;re not
+            rewriting it before it goes live.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
