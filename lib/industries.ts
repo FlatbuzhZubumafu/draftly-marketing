@@ -133,7 +133,8 @@ export const INDUSTRIES: Industry[] = [
       },
       {
         heading: "Show your license number",
-        body: "Many state plumbing boards require a license number on advertising. Check your board's rules and put the number in the blog footer or author box so every post carries it.",
+        body: "Some states require a license number on plumbing ads. Maryland's plumbing board, for one, says a missing master plumber license number is the advertising problem it contacts companies about most. Check your board's rules and put the number in the blog footer or author box so every post carries it.",
+        sources: [{ label: "Maryland Board of Plumbing: contents of advertisements", href: "https://labor.maryland.gov/license/pl/plad.shtml" }],
       },
       {
         heading: "Date your prices",
@@ -556,7 +557,7 @@ export const INDUSTRIES: Industry[] = [
       },
       {
         q: "How long should a legal blog post be?",
-        a: "Long enough to answer the question for your state, often 800 to 1,500 words. A clear answer in the first paragraph matters more than length.",
+        a: "Long enough to answer the question for your state. Google's guidance on helpful content says it has no preferred word count, so a clear answer in the first paragraph matters more than length.",
       },
     ],
     readingTopic: "law firm legal blog lawyer attorney small business write blog post brand voice",
@@ -960,7 +961,7 @@ export const INDUSTRIES: Industry[] = [
       "Blog topics for CPA and accounting firms: tax season, small business questions and year-end planning, plus the Circular 230 and confidentiality rules to check.",
     h1: { lead: "Accounting blog topics", accent: "for CPA firms" },
     intro: [
-      "An accounting firm's blog runs on the calendar. Clients search for document checklists in January, extensions in April, estimated payments in June and year-end moves in November. The firms that win those searches publish a few weeks early and update the same posts every year.",
+      "An accounting firm's blog runs on the calendar. Clients search for document checklists in January, extensions in April, estimated payments in June and year-end moves in November. Publish each post a few weeks before its deadline on the IRS tax calendar (Publication 509), and update the same posts every year.",
       "Small business owners are the other big audience. They search before they hire anyone: which entity to pick, when to run payroll, whether they need a CPA at all. The topics below cover both, with notes on the rules for advertising tax services.",
     ],
     groups: [
