@@ -369,7 +369,7 @@ export default function ClaudeVsChatGptPage() {
           <div className="max-w-3xl mt-16">
             <SignupCta
               heading="See how Claude writes for your site"
-              body="Paste your URL and Draftly writes your first blog post with Claude Sonnet 5.5, in your brand's voice, free."
+              body="Paste your URL and Draftly writes your first blog post with Claude Haiku 5.5, in your brand's voice, free."
             />
           </div>
 

@@ -83,7 +83,7 @@ export const COMPARE_ROWS: { label: string; values: (string | boolean)[] }[] = [
   { label: "Posts a month", values: ["1", "About 66", "About 233", "About 333"] },
   { label: "Credits a month", values: ["1,000", "10,000", "35,000", "50,000"] },
   { label: "Team members", values: PLANS.map((p) => String(p.seats ?? "Unlimited")) },
-  { label: "AI models", values: ["Claude Sonnet 5.5", `All ${APP_MODEL_COUNT}`, `All ${APP_MODEL_COUNT}`, `All ${APP_MODEL_COUNT}`] },
+  { label: "AI models", values: ["Claude Haiku 5.5", `All ${APP_MODEL_COUNT}`, `All ${APP_MODEL_COUNT}`, `All ${APP_MODEL_COUNT}`] },
   { label: "Brand voice from your site", values: [true, true, true, true] },
   { label: "Publish to WordPress, Shopify, Webflow, Ghost, Squarespace, HubSpot", values: [true, true, true, true] },
   { label: "Google Analytics and Search Console reports", values: [true, true, true, true] },

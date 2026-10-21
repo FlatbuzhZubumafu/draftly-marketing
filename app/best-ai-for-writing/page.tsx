@@ -613,7 +613,7 @@ export default async function BenchmarkPage() {
               {IN_DRAFTLY.length} of the {BENCHMARK.length} models we tested are available in Draftly. Five were added on
               October 21, 2026: Claude Haiku 5.5 and DeepSeek V4.1 Flash cost 50 credits a post, and Gemini 4 Argon, Muse
               Spark Open and MiniMax M3.1 Flash cost 150. Paid plans pick the model for each post. Claude Sonnet 5.5 stays
-              the default on every plan and writes the free first post.
+              the default on paid plans, and Claude Haiku 5.5 writes the free first post and every post on the Free plan.
             </p>
             <div className="mt-6 overflow-x-auto rounded-xl" style={{ border: "1px solid var(--color-border)" }}>
               <table className="w-full text-sm">

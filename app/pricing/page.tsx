@@ -223,7 +223,7 @@ export default async function PricingPage() {
               The Models You Can Pick
             </h2>
             <p className="text-sm leading-relaxed mb-5" style={{ color: "var(--color-text-secondary)" }}>
-              Free accounts write with Claude Sonnet 5.5. Paid plans choose per post from all {APP_MODEL_COUNT}. Credits are per blog post.
+              Free accounts write with Claude Haiku 5.5. Paid plans choose per post from all {APP_MODEL_COUNT}. Credits are per blog post.
             </p>
             <ul className="space-y-2 text-sm">
               {APP_MODELS.map((m) => (

@@ -72,7 +72,7 @@ export function buildLlmsTxt(): string {
 
 > Draftly (${SITE_URL}) is an AI blog writer for small businesses: paste your website URL and it writes SEO-ready blog posts in your brand's voice, then publishes them to your CMS.
 
-Draftly learns a brand's voice from its website, suggests topics from industry news, writes posts with a 0 to 100 human-voice score, and publishes to WordPress, Shopify, Ghost, Webflow, HubSpot and Squarespace. The default model is Claude Sonnet 5.5; in a 20-brief test, 95% of Claude Sonnet 5.5 posts passed Draftly's reader-quality bar after its quality check. GPT 6 Luna, Claude Haiku 5.5 and DeepSeek V4.1 Flash are 50-credit budget options on paid plans. A Preston Vawdrey SEO product.
+Draftly learns a brand's voice from its website, suggests topics from industry news, writes posts with a 0 to 100 human-voice score, and publishes to WordPress, Shopify, Ghost, Webflow, HubSpot and Squarespace. The default model on paid plans is Claude Sonnet 5.5; in a 20-brief test, 95% of Claude Sonnet 5.5 posts passed Draftly's reader-quality bar after its quality check. Free accounts write with Claude Haiku 5.5. GPT 6 Luna, Claude Haiku 5.5 and DeepSeek V4.1 Flash are 50-credit budget options on paid plans. A Preston Vawdrey SEO product.
 
 ## Plans
 
@@ -82,7 +82,7 @@ ${plansTable()}
 
 ## AI Models
 
-Claude Sonnet 5.5 is the default writer, including for the free first post. Paid plans pick the model for each post from this list.
+Claude Sonnet 5.5 is the default writer on paid plans. Free accounts, including the free first post, write with Claude Haiku 5.5. Paid plans pick the model for each post from this list.
 
 ${modelsTable()}
 
