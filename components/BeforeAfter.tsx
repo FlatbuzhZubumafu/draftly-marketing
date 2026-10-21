@@ -24,9 +24,9 @@ export function BeforeAfter() {
       <div className="container-draftly max-w-5xl">
         <div className="reveal text-center mb-12">
           <h2 className="text-3xl font-medium mb-4" style={{ letterSpacing: "-0.03em" }}>
-            Every Draft Gets{" "}
+            How Draftly Writes{" "}
             <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">
-              Checked
+              Better AI Copy
             </AccentText>
           </h2>
           <p className="max-w-xl mx-auto text-lg" style={{ color: "var(--color-text-secondary)" }}>
