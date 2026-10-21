@@ -7,9 +7,11 @@ const ALLOWED_TAGS = [
   "p", "br", "strong", "em", "b", "i", "a", "ul", "ol", "li",
   "h1", "h2", "h3", "h4", "h5", "h6", "blockquote", "img",
   "figure", "figcaption", "hr", "span", "div", "pre", "code",
+  // Tables: legal pages (cookie, provider and retention tables) and post comparison tables.
+  "table", "thead", "tbody", "tfoot", "tr", "th", "td", "caption", "colgroup", "col",
 ];
 // `id` keeps in-page anchors working (legal pages' table of contents, post jump links).
-const ALLOWED_ATTR = ["id", "href", "src", "alt", "title", "class", "target", "rel", "width", "height"];
+const ALLOWED_ATTR = ["id", "href", "src", "alt", "title", "class", "target", "rel", "width", "height", "colspan", "rowspan", "scope"];
 
 export function sanitizeHtml(dirty: string): string {
   return sanitize(dirty, {
