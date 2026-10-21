@@ -285,13 +285,13 @@ export const FEATURES: Feature[] = [
   {
     id: "ai-detector",
     slug: "ai-detector",
-    name: "AI content detector",
+    name: "AI detection score",
     icon: "ScanSearch",
     category: "check",
     summary: "A Reads as AI score and the exact passages that sound machine-written, with a one-click fix.",
-    title: "AI Content Detector That Fixes Flagged Sentences | Draftly",
+    title: "AI Detection Score That Fixes Flagged Sentences | Draftly",
     description:
-      "Draftly's AI content detector scores how much your copy reads like AI, highlights the passages that do and rewrites only those sentences. Works on any copy.",
+      "Draftly gives your copy an AI detection score, highlights the passages that read machine-written and rewrites only those sentences. Works on any copy you paste.",
     h1: { lead: "An AI detection score with", accent: "the sentences to fix" },
     intro: [
       "Draftly gives every piece of copy a Reads as AI score from 0 to 100, lower is better. It flags the passages that pull the score up and says why: stock transitions, three-item lists, sentences all the same length, filler words.",

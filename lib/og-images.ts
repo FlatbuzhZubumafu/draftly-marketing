@@ -46,7 +46,7 @@ export const OG_IMAGES: Record<string, { file: string; alt: string }> = {
   "/feature/brand-voice": { file: "feature-brand-voice.jpg", alt: "Draftly brand voice: tone sliders set from your website, adjustable any time" },
   "/feature/ai-models": { file: "feature-ai-models.jpg", alt: "Draftly's model picker: Claude Sonnet 5.5 by default and 14 models on paid plans" },
   "/feature/writing-rules": { file: "feature-writing-rules.jpg", alt: "Draftly's writing rule checker: a generic AI paragraph with four flagged rules beside a Draftly draft with none" },
-  "/feature/ai-detector": { file: "feature-ai-detector.jpg", alt: "Draftly's AI content detector: a Reads as AI score with the passages that sound machine-written" },
+  "/feature/ai-detector": { file: "feature-ai-detector.jpg", alt: "Draftly's AI detection score: a Reads as AI score with the passages that sound machine-written" },
   "/feature/ai-copy-editor": { file: "feature-ai-copy-editor.jpg", alt: "Draftly's AI copy editor scoring a page loaded from its URL: SEO, Human voice, Readability and Reads as AI" },
   "/feature/seo-meta": { file: "feature-seo-meta.jpg", alt: "SEO fields Draftly writes with every post: URL slug, meta title and meta description" },
   "/feature/keyword-research": { file: "feature-keyword-research.jpg", alt: "Draftly keyword research: keyword volume, Google results, People Also Ask and competitor keywords" },

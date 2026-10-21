@@ -33,7 +33,7 @@ export const PAIN_POINTS: PainPoint[] = [
         "Draftly checks every draft for those patterns before you see it, and a draft that fails a rule gets one automatic fix pass. That's the ",
         { id: "writing-rules", text: "writing rules checker" },
         ". For copy you already have, the ",
-        { id: "ai-detector", text: "AI content detector" },
+        { id: "ai-detector", text: "AI detection score" },
         " shows which passages read like AI, and the ",
         { id: "editor", text: "AI copy editor" },
         " rewrites only those sentences.",
