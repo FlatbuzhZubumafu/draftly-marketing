@@ -1,10 +1,12 @@
 import { AccentText } from "./AccentText";
 
-// The flags below are what Draftly's post checker (supabase/functions/_shared/post-checks.ts
-// in the app repo) reports for the left paragraph. The right paragraph is the opening of an
-// example post Claude Sonnet 5.5 wrote with Draftly's writer prompt for a fictional plumber
-// (evals/content-quality pipeline, 2026-10-09). The checker reports none of these four rules on it,
-// and the whole post passed every rule.
+// Both cards open the same post: how often to flush a tank water heater, for Harbor & Pine
+// Plumbing, a fictional plumber. The left paragraph is a constructed generic-AI opening (no
+// model wrote it); the flags below are exactly what Draftly's post checker
+// (supabase/functions/_shared/post-checks.ts in the app repo) reports for it, and nothing else
+// in the style rules fires. The right paragraph is the opening of the example post Claude
+// Sonnet 5.5 wrote with Draftly's writer prompt (evals/content-quality pipeline, 2026-10-09).
+// The checker reports none of these four rules on it, and the whole post passed every rule.
 const RULES = [
   { id: "banned_vocabulary", label: "Overused AI words", bg: "#ffe1d6" },
   { id: "contrast_phrasing", label: "\"Not just X\" framing", bg: "#efe2ff" },
@@ -40,11 +42,12 @@ export function BeforeAfter() {
               <span className="w-2.5 h-2.5 rounded-full" style={{ background: "#d64545" }} aria-hidden /> Generic AI draft
             </figcaption>
             <blockquote className="leading-relaxed">
-              In today&apos;s <Flag r="banned_vocabulary">ever-evolving</Flag> <Flag r="banned_vocabulary">landscape</Flag>, Google search is
-              changing fast. <Flag r="mechanical_openers">Additionally</Flag>, it&apos;s <Flag r="contrast_phrasing">not just</Flag> about
-              keywords — it&apos;s about creating a <Flag r="banned_vocabulary">seamless</Flag> <Flag r="banned_vocabulary">journey</Flag> for
-              your readers. This <Flag r="banned_vocabulary">comprehensive</Flag> guide <Flag r="hedging">may help</Flag> you navigate the
-              changes and <Flag r="banned_vocabulary">unlock</Flag> the full potential of your content!
+              <Flag r="banned_vocabulary">{"In today's fast-paced world"}</Flag>, flushing your water heater is{" "}
+              <Flag r="banned_vocabulary">crucial</Flag>. <Flag r="mechanical_openers">Additionally</Flag>, it&apos;s{" "}
+              <Flag r="contrast_phrasing">not just</Flag> about hot water — it&apos;s about ensuring a{" "}
+              <Flag r="banned_vocabulary">seamless</Flag> experience for your entire household. This{" "}
+              <Flag r="banned_vocabulary">comprehensive</Flag> guide <Flag r="hedging">may help</Flag> you navigate everything
+              you need to know and <Flag r="banned_vocabulary">unlock</Flag> the full potential of your water heater!
             </blockquote>
             <ul className="flex flex-wrap gap-2 mt-5" aria-label="Rules flagged">
               {RULES.map((r) => (
@@ -54,6 +57,10 @@ export function BeforeAfter() {
               ))}
             </ul>
             <p className="mt-4 text-sm font-semibold" style={{ color: "#c03a2b" }}>4 rules flagged</p>
+            <p className="mt-2 text-sm" style={{ color: "var(--color-text-secondary)" }}>
+              Example: a typical generic-AI opening for the same Harbor &amp; Pine Plumbing post, put together for this
+              comparison. The highlights are what Draftly&apos;s checker reports on it.
+            </p>
           </figure>
           <figure className="reveal p-6 card-depth min-w-0" style={{ background: "var(--color-bg-surface)", transitionDelay: "0.08s" }}>
             <figcaption className="font-semibold mb-3 flex items-center gap-2">
