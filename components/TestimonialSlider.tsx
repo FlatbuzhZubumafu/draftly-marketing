@@ -24,9 +24,9 @@ export function TestimonialSlider({ testimonials }: { testimonials: WPTestimonia
       <div className="container-draftly max-w-5xl">
         <div className="reveal text-center mb-14">
           <h2 className="text-3xl font-medium" style={{ letterSpacing: "-0.03em" }}>
-            Early users are already seeing{" "}
+            What early users{" "}
             <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">
-              the value
+              told us
             </AccentText>
           </h2>
         </div>

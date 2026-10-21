@@ -53,7 +53,7 @@ export default async function HomePage() {
         <TestimonialSlider testimonials={testimonials} />
         <CtaBand
           heading={<>See What Draftly Writes <em className="italic" style={{ color: "var(--color-accent)" }}>for Your Site</em></>}
-          body="Paste your URL and get a finished, SEO-ready post in your brand's voice in about a minute."
+          body="Paste your URL and get a finished, SEO-ready post in your brand's voice in one to two minutes."
           secondary={{ href: "/pricing", label: "See Pricing" }}
         />
         <HowItWorks />

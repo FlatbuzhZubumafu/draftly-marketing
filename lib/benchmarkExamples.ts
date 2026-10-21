@@ -295,7 +295,7 @@ export const COPY_CRITERIA: Criterion[] = [
     lesson: "A benefit bullet names one concrete thing the reader gets, short enough to take in at a glance. Every model stayed under 15 words here. AI bullets usually go wrong on content: a feature with no payoff, or three bullets that say the same thing in different words, a habit that comes from the model’s fondness for groups of three.",
     example: { before: "Fast, reliable and efficient service you can count on.", after: "Saturday appointments that fit around work and school." },
     body: "Each pack ended with three benefit bullets of 15 words or less. No model went over on any bullet, so this check separated no one.",
-    draftly: "Draftly writes posts, not ad bullets, but the same rules cover lists in a post: use a list only when the items are truly parallel, never to pad, and never three items that all mean the same thing.",
+    draftly: "Draftly writes blog posts, and the same rules cover lists inside a post: use a list only when the items are truly parallel, never to pad, and never three items that all mean the same thing.",
     examples: [
       {
         verdict: "pass",

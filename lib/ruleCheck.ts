@@ -29,7 +29,7 @@ export const DEFAULT_WRITER = {
 } as const;
 
 export const READER_QUALITY_EVIDENCE =
-  "In our 20-brief test, 95% of Sonnet + quality-check posts passed our reader-quality bar.";
+  "In our 20-brief test, 95% of Claude Sonnet 5.5 posts passed our reader-quality bar after Draftly's quality check.";
 
 /** The run the before/after rule EXAMPLES come from. */
 export const RULE_CHECK_TEST = {
