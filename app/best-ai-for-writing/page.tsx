@@ -275,7 +275,8 @@ export default async function BenchmarkPage() {
             ))}
           </section>
 
-          <Section id="new-models" title={`New Models Added ${SHORT_UPDATED}`}>
+          {/* "new ai models" 1,900/KD 39, US (DataForSEO, 2026-10-21). Title case to match this page's other H2s. */}
+          <Section id="new-models" title={`New AI Models Added ${SHORT_UPDATED}`}>
             <p>
               We ran five models released in October through the same briefs, prompts and judges: Gemini 4 Argon
               (generally available October 13), Muse Spark Open from Meta (October 15), DeepSeek V4.1 Flash in its October

@@ -136,7 +136,7 @@ export default async function FeaturesHub() {
             <div className="reveal">
               <p className="eyebrow mb-5">Features</p>
               <h1 className="page-heading mb-6" style={{ fontSize: "clamp(2.4rem, 5.2vw, 68px)" }}>
-                Every feature, from topic to <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">published post</AccentText>
+                Draftly features, from blog topic to <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">published post</AccentText>
               </h1>
               <p className="text-lg leading-relaxed mb-8 max-w-xl" style={secondary}>
                 Draftly finds a topic from your industry, writes it in your brand&apos;s voice, checks it for AI filler and SEO basics, then publishes it to your blog. These are the {FEATURES.length} features that do it.
@@ -166,7 +166,7 @@ export default async function FeaturesHub() {
           <div className="container-draftly max-w-6xl">
             <div className="reveal text-center mb-10">
               <h2 id="all-features-heading" className="text-3xl sm:text-4xl font-medium" style={{ letterSpacing: "-0.03em" }}>
-                {FEATURES.length} features, grouped by{" "}
+                {FEATURES.length} blog writing features, grouped by{" "}
                 <AccentText squiggle="basic" color="var(--color-accent)" squiggleColor="#ffce59">
                   the job they do
                 </AccentText>
@@ -194,7 +194,7 @@ export default async function FeaturesHub() {
                       Plans
                     </p>
                     <h3 className="feature-tile-title" style={{ fontSize: "1.6rem", color: "#fff" }}>
-                      Which plan has what
+                      Which plan has which features
                     </h3>
                     <p className="text-[15px] leading-relaxed mt-4" style={{ color: "#ccc" }}>
                       Every plan starts with a free post and includes brand voice, the writing checks and one-click publishing. Paid plans cost {paidPriceList()} a month, with no per-seat charge.
@@ -260,7 +260,18 @@ export default async function FeaturesHub() {
 
         <section className="pb-8 px-4" style={{ background: "var(--color-bg-primary)" }}>
           <div className="container-draftly max-w-5xl">
-            <FaqList faqs={FAQS} centered />
+            <FaqList
+              faqs={FAQS}
+              centered
+              title={
+                <>
+                  Draftly features{" "}
+                  <AccentText squiggle="squiggle" color="var(--color-accent)" squiggleColor="#2f8ccc">
+                    FAQ
+                  </AccentText>
+                </>
+              }
+            />
             <p className="max-w-3xl mx-auto mt-4 text-sm text-center" style={{ color: "var(--color-text-muted)" }}>
               Read the full comparison in{" "}
               <Link href="/jasper-vs-draftly" style={{ color: "var(--color-accent-hover)" }}>
@@ -275,7 +286,7 @@ export default async function FeaturesHub() {
           <div className="container-draftly max-w-5xl">
             <p className="eyebrow mb-3">From the blog</p>
             <KeepReading
-              heading="Guides to writing with AI"
+              heading="Read next: guides on writing with AI"
               className=""
               exclude={FEATURES_HUB.path}
               guides={["/seo-copywriting", "/best-ai-for-writing"]}

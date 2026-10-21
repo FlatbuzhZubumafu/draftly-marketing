@@ -50,6 +50,8 @@ export type FreeTool = {
   /** Optional extra sections shown after "What this checker looks at". */
   sections?: { id: string; heading: string; paragraphs: string[]; sources?: { label: string; href: string }[] }[];
   faqs: Faq[];
+  /** FAQ heading, when the default "Frequently asked questions" would repeat another page's H2. The last word gets the squiggle. */
+  faqHeading?: string;
   ogAlt: string;
   ogLine: string;
 };
@@ -88,7 +90,7 @@ export const FREE_TOOLS: FreeTool[] = [
     sections: [
       {
         id: "how-the-score-works",
-        heading: "How the AI score works",
+        heading: "How the AI content detector scores text",
         paragraphs: [
           "The detector splits your text into passages of at least 45 words and three sentences, measures the signals above in each one and in the whole text, and turns them into a score from 0 to 100. Under 40 reads as likely human, 40 to 69 is mixed, and 70 or more reads as likely AI.",
           "A passage that scores 65 or more is flagged, and its sentences with the most tells are highlighted. Headings, block quotes, code and tables are skipped. With little text the score is pulled down toward human, so a two-sentence paragraph can never be called AI on its own.",
@@ -128,6 +130,7 @@ export const FREE_TOOLS: FreeTool[] = [
       cta: "Free first post. No credit card.",
       button: "Fix the flagged sentences",
     },
+    faqHeading: "AI content detector FAQ",
     faqs: [
       {
         q: "Is this AI content detector free?",

@@ -33,7 +33,7 @@ export const PAIN_POINTS: PainPoint[] = [
         "Draftly checks every draft for those patterns before you see it, and a draft that fails a rule gets one automatic fix pass. That's the ",
         { id: "writing-rules", text: "writing rules checker" },
         ". For copy you already have, the ",
-        { id: "ai-detector", text: "AI content detector" },
+        { id: "ai-detector", text: "AI detection score" },
         " shows which passages read like AI, and the ",
         { id: "editor", text: "AI copy editor" },
         " rewrites only those sentences.",
@@ -49,10 +49,12 @@ export const PAIN_POINTS: PainPoint[] = [
   },
   {
     id: "brand-voice",
-    question: "Can I train AI to write in my brand voice?",
+    // Was "Can I train AI to write in my brand voice?". /feature/brand-voice now owns that
+    // PAA question ("How to train AI on your brand voice"), so the hub takes its sibling.
+    question: "How do I adapt AI writing to my brand voice?",
     answer: [
       [
-        "Yes. Draftly reads your website and sets eight tone sliders from it, then fills in what you sell and who you sell to. Every post and every edit uses that ",
+        "Start from your own website. Draftly reads your website and sets eight tone sliders from it, then fills in what you sell and who you sell to. Every post and every edit uses that ",
         { id: "brand-voice", text: "brand voice" },
         ".",
       ],
@@ -66,7 +68,7 @@ export const PAIN_POINTS: PainPoint[] = [
     tint: "write",
     graphic: { shot: GUIDE_SHOTS.brandVoice },
     evidence: [
-      "Google SERP for \"how to make ai write in your brand voice\" (DataForSEO, 2026-10-20): PAA \"Can I train an AI to use my voice?\"; related search \"How to make ai write in your brand voice reddit\"",
+      "Google SERP for \"how to make ai write in your brand voice\" (DataForSEO, 2026-10-20): PAA \"Is it how do I adapt AI written text to my brand voice?\" and \"Can I train an AI to use my voice?\"; related search \"How to make ai write in your brand voice reddit\"",
       "r/DigitalMarketing thread ranking #2: https://www.reddit.com/r/DigitalMarketing/comments/1kqj2s1/use_this_prompt_to_create_a_simple_brand_voice/",
     ],
   },
