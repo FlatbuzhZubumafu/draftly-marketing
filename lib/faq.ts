@@ -8,7 +8,9 @@ import { PAID_PLANS } from "./pricing";
 
 const defaultModel = APP_MODELS.find((m) => m.note?.startsWith("default")) ?? APP_MODELS[0];
 const premium = Math.max(...APP_MODELS.map((m) => m.credits));
-const budget = APP_MODELS.reduce((a, b) => (b.credits < a.credits ? b : a));
+const budgetCredits = Math.min(...APP_MODELS.map((m) => m.credits));
+const budget = APP_MODELS.filter((m) => m.credits === budgetCredits).map((m) => m.name);
+const budgetList = budget.length > 1 ? `${budget.slice(0, -1).join(", ")} and ${budget[budget.length - 1]}` : budget[0];
 const starter = PAID_PLANS[0];
 const starterCredits = starter.credits.replace(/ credits.*/, "");
 const starterPosts = starter.posts.replace(/\D+/g, "");
@@ -21,7 +23,7 @@ export const CODE_FAQS: WPFaq[] = [
       `A post on the default model, ${defaultModel.name}, uses ${defaultModel.credits} credits, so ${starter.name}'s ` +
       `${starterCredits} monthly credits cover about ${starterPosts} posts. Premium models such as Claude Opus 5.5 and ` +
       `GPT 5.5 use ${premium} credits a post, about ${(premium / defaultModel.credits).toFixed(1)} times as much, and ` +
-      `${budget.name} uses ${budget.credits}. An AI image inside a post costs 53 credits. The pricing page lists every cost.`,
+      `${budgetList} ${budget.length > 1 ? "use" : "uses"} ${budgetCredits}. An AI image inside a post costs 53 credits. The pricing page lists every cost.`,
   },
   {
     // What the app actually does: the no_fabrication and attribution prompt rules

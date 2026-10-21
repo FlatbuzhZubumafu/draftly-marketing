@@ -70,7 +70,7 @@ export const BAKEOFF: BakeoffRun[] = [
     humanVoice: { jasper: 95, draftly: 95 },
     readsAsAi: { jasper: 25, draftly: 24 },
     ownLinks: { jasper: 0, draftly: 2 },
-    note: "A tie on the writing. Draftly linked the company's real rental reimbursement and coverage pages.",
+    note: "A tie on the writing. Draftly linked the company's rental reimbursement and coverage pages.",
   },
   {
     business: "A marketing consultant",
@@ -112,7 +112,7 @@ export const CALLOUTS: Callout[] = [
       text: "Read about dental implants at [the practice], then schedule a consultation and bring this list of questions with you.",
       link: "dental implants at [the practice]",
     },
-    takeaway: "Jasper invented the practice's experience. Draftly linked its real implant page.",
+    takeaway: "Jasper invented the practice's experience. Draftly linked the practice's implant page.",
   },
   {
     business: "A real estate lead provider",
@@ -148,7 +148,7 @@ export type TableRow = { label: string; draftly: Cell; jasper: Cell; draftlyNote
 export const TABLE: TableRow[] = [
   { label: "Built for", draftly: "Small-business blogs", jasper: "Marketing teams" },
   { label: "Starting price", draftly: "$29 a month", jasper: `$${JASPER_PRO.monthly} per seat a month` },
-  { label: "One price, not per seat", draftly: true, draftlyNote: `${GROWTH.seats} people on Growth for $${GROWTH.price} a month`, jasper: false, jasperNote: `${GROWTH.seats} seats on Pro: $${JASPER_PRO.monthly * (GROWTH.seats ?? 1)} a month` },
+  { label: "One price for the whole team", draftly: true, draftlyNote: `${GROWTH.seats} people on Growth for $${GROWTH.price} a month`, jasper: false, jasperNote: `${GROWTH.seats} seats on Pro: $${JASPER_PRO.monthly * (GROWTH.seats ?? 1)} a month` },
   { label: "Team members included", feature: "teams", draftly: `${SOLO.seats} on Solopreneur, ${GROWTH.seats} on Growth, unlimited on Autopilot`, jasper: `Billed per seat, $${JASPER_PRO.monthly} a month each` },
   { label: "Free first post, no credit card", draftly: true, jasper: false, jasperNote: "7-day trial of Pro" },
   { label: "Brand voice on every plan", feature: "brand-voice", draftly: true, draftlyNote: "Built from your website", jasper: "2 voices on Pro, unlimited on Business" },

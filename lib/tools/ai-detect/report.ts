@@ -56,7 +56,7 @@ export const SIGNAL_INFO: Record<AiSignal, { name: string; text: string }> = {
   },
   tricolons: {
     name: "Three-item lists",
-    text: "Lists of three short items used for rhythm rather than content, like \"comfort, safety, and peace of mind\".",
+    text: "Lists of three short items that add rhythm and little meaning, like \"comfort, safety, and peace of mind\".",
   },
   repeated_openers: {
     name: "Sentences open the same way",

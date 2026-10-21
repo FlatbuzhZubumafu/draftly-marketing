@@ -24,7 +24,7 @@ export function Features() {
         <FeatureCarousel slides={FEATURE_SLIDES} />
 
         <h3 className="text-2xl font-medium text-center mt-20 mb-10" style={{ letterSpacing: "-0.03em" }}>
-          And much, much more
+          More of what Draftly does
         </h3>
         <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {GRID.map((f, index) => (

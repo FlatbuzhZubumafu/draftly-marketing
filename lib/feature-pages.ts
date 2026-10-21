@@ -17,9 +17,9 @@ export type Difference = {
 /** Keyed by feature id (lib/features.ts), which stays the same when a URL slug changes. */
 export const DIFFERENCE: Record<FeatureId, Difference> = {
   "topic-ideas": {
-    problem: "Most AI writing tools start with an empty box and ask what you want to write about. Coming up with a topic every week is the part that stalls a blog.",
+    problem: "Picking next week's topic is where a small-business blog usually stalls, and an empty prompt box is no help.",
     approach: "Draftly brings the topics to you, checked against your business first.",
-    lead: "Every topic is:",
+    lead: "Each topic is:",
     points: [
       "Pulled from your industry's news, read every day",
       "Backed by real Google searches and People Also Ask questions on paid plans",
@@ -31,7 +31,7 @@ export const DIFFERENCE: Record<FeatureId, Difference> = {
   "seo-research": {
     problem: "Keyword data usually lives in a separate SEO tool, with its own login and its own bill.",
     approach: "Draftly puts live search data next to your writing.",
-    lead: "Every lookup can show:",
+    lead: "A lookup can show:",
     points: [
       "Search volume, difficulty, intent and trend for a keyword",
       "Google's live first page and its People Also Ask questions",
@@ -43,7 +43,7 @@ export const DIFFERENCE: Record<FeatureId, Difference> = {
   "brand-voice": {
     problem: "A general AI tool writes the same way for everyone, so you end up rewriting each draft to sound like your business.",
     approach: "Draftly sets your voice from your own website on day one.",
-    lead: "Every brand voice has:",
+    lead: "Your voice settings include:",
     points: [
       "Eight tone sliders, set from your site",
       "Words you always use and words you never use",
@@ -53,9 +53,9 @@ export const DIFFERENCE: Record<FeatureId, Difference> = {
     close: "Move a slider and the next post follows it.",
   },
   "ai-models": {
-    problem: "Most writing tools choose one model for you and don't show what each post costs.",
-    approach: "Draftly lets you pick the model for each post, with the price shown first.",
-    lead: "Every model gets:",
+    problem: "The model decides how a post sounds and what it costs. In our 19-model benchmark, blog post scores ran from 74.0 to 95.1.",
+    approach: "Draftly lets you pick the model for each post and shows the price first.",
+    lead: "Whichever model you pick gets:",
     points: [
       "Your brand voice",
       "The same writing rules checks",
@@ -67,7 +67,7 @@ export const DIFFERENCE: Record<FeatureId, Difference> = {
   "writing-rules": {
     problem: "AI drafts repeat the same habits: filler words, numbers with no source, meta titles too long for Google.",
     approach: "Draftly checks every draft with code before you see it.",
-    lead: "Every draft is checked for:",
+    lead: "The check looks for:",
     points: [
       "Banned AI words and phrases",
       "Numbers with no source",
@@ -79,7 +79,7 @@ export const DIFFERENCE: Record<FeatureId, Difference> = {
   "ai-detector": {
     problem: "A detector score alone leaves you hunting for the sentences that caused it.",
     approach: "Draftly shows the passages that read like AI and says why.",
-    lead: "Every check shows:",
+    lead: "Each check shows:",
     points: [
       "A Reads as AI score from 0 to 100, lower is better",
       "The passages that pull the score up",
@@ -91,7 +91,7 @@ export const DIFFERENCE: Record<FeatureId, Difference> = {
   editor: {
     problem: "Checking copy you already have usually means copying it out of your CMS, into a tool, and back again.",
     approach: "The Editor brings the copy in for you and fixes only what breaks a rule.",
-    lead: "Every run:",
+    lead: "Each run:",
     points: [
       "Takes pasted text, a page URL or a post from your CMS",
       "Scores the copy against your writing rules and brand voice",
@@ -101,9 +101,9 @@ export const DIFFERENCE: Record<FeatureId, Difference> = {
     close: "You accept or reject each change.",
   },
   "seo-meta": {
-    problem: "Meta titles and descriptions are easy to forget, and easy to get the wrong length.",
+    problem: "Meta titles and descriptions get skipped, or written too long for Google to show in full.",
     approach: "Draftly writes them with every draft and checks their length.",
-    lead: "Every draft comes with:",
+    lead: "Each draft comes with:",
     points: [
       "A URL slug",
       "A meta title of 50 to 60 characters",
@@ -115,7 +115,7 @@ export const DIFFERENCE: Record<FeatureId, Difference> = {
   publishing: {
     problem: "Getting a finished post onto your blog usually means copy, paste, reformatting and filling in the SEO fields by hand.",
     approach: "Draftly sends the post to your CMS with everything in place.",
-    lead: "Every post goes out with:",
+    lead: "Each post goes out with:",
     points: [
       "Its title and body",
       "Its URL slug",
@@ -125,9 +125,9 @@ export const DIFFERENCE: Record<FeatureId, Difference> = {
     close: "Updating a live post never unpublishes it.",
   },
   autopilot: {
-    problem: "A blog only works if it keeps publishing, and writing is the first thing to slip in a busy week.",
+    problem: "Writing is the first thing to slip in a busy week, and then the blog goes quiet for months.",
     approach: "Autopilot runs the whole job on a schedule you set.",
-    lead: "Every scheduled post is:",
+    lead: "On a schedule, each post is:",
     points: [
       "On a topic Draftly picks for you",
       "Written in your brand voice",
@@ -137,9 +137,9 @@ export const DIFFERENCE: Record<FeatureId, Difference> = {
     close: "A weekly email lists everything it published.",
   },
   analytics: {
-    problem: "Most small-business blogs never learn which posts bring in readers, because the numbers sit in two other Google tools.",
+    problem: "The numbers that show which posts bring in readers sit in Google Analytics and Search Console, two tools a busy owner rarely opens.",
     approach: "Draftly shows your Analytics and Search Console data next to the posts it wrote.",
-    lead: "Every connection is:",
+    lead: "The connection is:",
     points: [
       "Free on every plan, including Free",
       "Read-only access to your Google accounts",
@@ -151,7 +151,7 @@ export const DIFFERENCE: Record<FeatureId, Difference> = {
   mcp: {
     problem: "If you already write with Claude or ChatGPT, it doesn't know your brand voice, your topics or your rules.",
     approach: "The Draftly connector gives your AI all three.",
-    lead: "Every connected AI gets:",
+    lead: "Your connected AI gets:",
     points: [
       "Your brand voice",
       "Topic ideas for your business",
@@ -163,7 +163,7 @@ export const DIFFERENCE: Record<FeatureId, Difference> = {
   "wordpress-plugin": {
     problem: "Posts already in WordPress rarely get a second look, and fixing them means copying each one out to another tool.",
     approach: "The Draftly plugin checks and fixes posts inside WordPress.",
-    lead: "Every suggestion is:",
+    lead: "Each suggestion is:",
     points: [
       "Checked against your writing rules",
       "Written in your brand voice",
@@ -175,7 +175,7 @@ export const DIFFERENCE: Record<FeatureId, Difference> = {
   teams: {
     problem: "Per-seat pricing makes the bill grow every time someone joins.",
     approach: "Draftly includes your team in the plan price.",
-    lead: "Every extra website gets:",
+    lead: "Each extra website gets:",
     points: [
       "Its own brand voice",
       "Its own writing rules",

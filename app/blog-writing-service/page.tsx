@@ -303,7 +303,7 @@ export default async function BlogWritingServicePage() {
               <ProductFigure shot={GUIDE_SHOTS.brandVoice} aspect="16 / 10" fit="contain" />
             </div>
             <p>
-              Want to know which AI model writes best before you trust one with your blog? We tested {BENCHMARK.length} of them in the{" "}
+              Before you trust a model with your blog, see how {BENCHMARK.length} of them did in the{" "}
               <A href="/best-ai-for-writing">best AI for writing benchmark</A>. Every plan and what it includes is on the{" "}
               <A href="/pricing">pricing page</A>.
             </p>

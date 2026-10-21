@@ -5,7 +5,7 @@ import { getHomepageData } from "@/lib/graphql";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { A, B, Bullets, Byline, DarkCta, FaqList, Section, faqJsonLd, type Faq } from "@/components/ArticleParts";
-import { BANNED_SAMPLE, DEFAULT_WRITER as D, EXAMPLES, READER_QUALITY_EVIDENCE, RULE_CHECK_TEST as T } from "@/lib/ruleCheck";
+import { BANNED_SAMPLE, DEFAULT_WRITER as D, EXAMPLES, RULE_CHECK_TEST as T } from "@/lib/ruleCheck";
 import { BENCHMARK } from "@/lib/benchmark";
 import { jsonLdHtml, authorRef } from "@/lib/schema";
 import { TocLayout } from "@/components/OnThisPage";
@@ -53,7 +53,7 @@ const FAQS: Faq[] = [
   },
   {
     q: "Can AI write good SEO copy?",
-    a: `It can when the output is checked. In a ${D.briefs}-brief test, ${D.model} posts passed every hard rule ${D.rulePass}% of the time after one automatic fix pass. ${READER_QUALITY_EVIDENCE}`,
+    a: `Yes, when the output is checked. In a ${D.briefs}-brief test, ${D.rulePass}% of ${D.model} posts passed every hard rule after one automatic fix pass, and ${D.readerPass}% passed our reader-quality bar.`,
   },
 ];
 
@@ -169,8 +169,8 @@ export default async function SeoCopywritingPage() {
             </h3>
             <p>
               Every number needs a source from the material Draftly was given, such as your website or the brief. If the
-              figure is missing, it stays out of the post. Sources are named inline, so you will not see &ldquo;experts
-              say&rdquo; or &ldquo;studies show&rdquo;. Quotes use a person&apos;s exact words or do not appear at all.
+              figure is missing, it stays out of the post. Sources are named inline, so you won&apos;t see &ldquo;experts
+              say&rdquo; or &ldquo;studies show&rdquo;. Quotes use a person&apos;s exact words or don&apos;t appear at all.
             </p>
             <h3 className="text-lg font-semibold" style={{ color: "var(--color-text-primary)" }}>
               No contrast phrasing or hedges
@@ -249,8 +249,8 @@ export default async function SeoCopywritingPage() {
             <ProductFigure shot={GUIDE_SHOTS.genericVsDraftly} className="mt-2" />
             <p>
               {D.model} is Draftly&apos;s default writer. In a {D.briefs}-brief test against Draftly&apos;s production
-              rules, its posts passed every hard rule <B>{D.rulePass}% of the time</B> after the fix pass.{" "}
-              {READER_QUALITY_EVIDENCE} The previous default, {D.previousModel}, cleared that bar{" "}
+              rules, its posts passed every hard rule <B>{D.rulePass}% of the time</B> after the fix pass, and{" "}
+              {D.readerPass}% passed our reader-quality bar. The previous default, {D.previousModel}, cleared that bar{" "}
               {D.previousReaderPass}% of the time with the same check.
             </p>
             <p>

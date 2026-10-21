@@ -104,7 +104,7 @@ export function NewsletterSignup({ location, tone = "light", compact = false, cl
       </h2>
       {compact ? null : (
         <p className="mt-2 text-base" style={{ color: muted }}>
-          Short, useful, no fluff. Unsubscribe anytime.
+          One tip per email. Unsubscribe anytime.
         </p>
       )}
 

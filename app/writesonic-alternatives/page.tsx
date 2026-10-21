@@ -74,7 +74,7 @@ function SourceLinks({ items }: { items: Source[] }) {
 const FAQS: Faq[] = [
   {
     q: "What is the best Writesonic alternative?",
-    a: "It depends on what you used Writesonic for. For SEO blog posts in your brand voice, published to your CMS, Draftly. For bulk articles at the lowest price, Koala or SEOWriting.ai. For ads, emails and social posts across a marketing team, Jasper.",
+    a: "For SEO blog posts in your brand voice, published to your CMS, Draftly. For bulk articles at the lowest price, Koala or SEOWriting.ai. For ads, emails and social posts across a marketing team, Jasper.",
   },
   {
     q: "Is there a free Writesonic alternative?",
@@ -94,7 +94,7 @@ const FAQS: Faq[] = [
   },
   {
     q: "Is Writesonic worth it for a small business?",
-    a: `If you need AI visibility tracking and site audits, it can be. If you mostly need blog posts, Starter works out to about ${usd2(WRITESONIC_PER_ARTICLE)} per article, while Draftly's $${SOLO.price} plan covers ${SOLO.posts.toLowerCase()}.`,
+    a: `Yes, if you need AI visibility tracking and site audits. If you mostly need blog posts, Starter works out to about ${usd2(WRITESONIC_PER_ARTICLE)} per article, while Draftly's $${SOLO.price} plan covers ${SOLO.posts.toLowerCase()}.`,
   },
 ];
 
@@ -168,7 +168,7 @@ export default function WritesonicAlternativesPage() {
             </p>
             <ContentImage
               image={STOCK.contentStrategyPlanner}
-              caption="Before you switch, list what you actually use each month: articles, brand voices, tracking or audits."
+              caption="Before you switch, list what you use each month: articles, brand voices, tracking or audits."
             />
           </Section>
 
@@ -232,7 +232,7 @@ export default function WritesonicAlternativesPage() {
           </section>
 
           {ALTERNATIVES.map((a, i) => (
-            <Section key={a.id} id={a.id} title={`${i + 1}. ${a.name}: ${a.bestFor.charAt(0).toLowerCase()}${a.bestFor.slice(1)}`}>
+            <Section key={a.id} id={a.id} title={`${i + 1}. ${a.name}: ${/^[A-Z]{2}/.test(a.bestFor) ? a.bestFor : a.bestFor.charAt(0).toLowerCase() + a.bestFor.slice(1)}`}>
               <p>
                 {a.summary}
                 <SourceLinks items={a.sources} />

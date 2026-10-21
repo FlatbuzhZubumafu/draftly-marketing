@@ -223,7 +223,7 @@ export default function ClaudeVsChatGptPage() {
             </p>
             <p>
               The version matters more than the brand. Claude Sonnet 4.6 scored {SONNET46.overall}, {(SONNET.overall - SONNET46.overall).toFixed(1)} points below
-              Sonnet 5.5, and Claude Haiku 4.5 came last of the 14 at {HAIKU.overall}. If you write with an older Claude
+              Sonnet 5.5, and Claude Haiku 4.5 came last of all {N} at {HAIKU.overall}. If you write with an older Claude
               model, GPT 5.4 Mini beats it.
             </p>
             <BarChart
@@ -283,7 +283,7 @@ export default function ClaudeVsChatGptPage() {
               GPT 5.5 {copy(GPT55.model).overall}. With three packs per model, a gap that small is a tie.
             </p>
             <p>
-              The real difference is character limits. Every GPT model and both Claude 5.5 models met all 15 Google Ads
+              The bigger difference is character limits. Every GPT model and both Claude 5.5 models met all 15 Google Ads
               limits. Claude Sonnet 4.6 met {copy(SONNET46.model).adLimits} and Claude Haiku 4.5 met{" "}
               {copy(HAIKU.model).adLimits}, so their ads would need trimming before you could upload them.
             </p>

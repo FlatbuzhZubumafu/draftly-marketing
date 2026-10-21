@@ -32,7 +32,7 @@ const EVERY_PLAN = [
   },
   {
     title: "Newsroom Topics",
-    body: "Curated industry RSS feeds and news, turned into blog topics for your site every day.",
+    body: "Your industry's RSS feeds and news, turned into blog topics for your site every day.",
   },
   {
     title: "Human-Voice Score",
@@ -53,7 +53,7 @@ const EVERY_PLAN = [
 ];
 
 const CREDIT_COSTS = [
-  { action: "Blog post", credits: "150 on Claude Sonnet 5.5, the default (50 on GPT 6 Luna, 250 on premium models such as Claude Opus 5.5 and GPT 5.5)" },
+  { action: "Blog post", credits: "150 on Claude Sonnet 5.5, the default (50 on budget models such as GPT 6 Luna and Claude Haiku 5.5, 250 on premium models such as Claude Opus 5.5 and GPT 5.5)" },
   { action: "Thumbnail image", credits: "55 (free with your first post)" },
   { action: "Image inside a post (Solopreneur and up)", credits: "53" },
   { action: "Outline", credits: "15 (free on paid plans)" },
@@ -168,7 +168,7 @@ export default async function PricingPage() {
             </p>
             <p>
               Every paid plan includes keyword data. Growth adds the live top 10 and domain data, and Autopilot opens
-              every dataset, including keyword gaps and backlinks. Need more lookups? Add a data pack any time.
+              every dataset, including keyword gaps and backlinks. Data packs add more lookups any time.
             </p>
             <p className="font-semibold text-white">
               Free accounts can connect and write one post with their own AI.{" "}

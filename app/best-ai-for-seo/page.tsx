@@ -72,7 +72,7 @@ function SourceLinks({ items }: { items: Source[] }) {
 const FAQS: Faq[] = [
   {
     q: "What is the best AI for SEO?",
-    a: "It depends on the job. Ahrefs or Semrush for keyword research, Draftly for writing and publishing blog posts, Surfer or Clearscope for optimizing pages against the top results, and Google Search Console for technical checks.",
+    a: "One pick per job: Ahrefs or Semrush for keyword research, Draftly for writing and publishing blog posts, Surfer or Clearscope for optimizing pages against the top results, and Google Search Console for technical checks.",
   },
   {
     q: "Can ChatGPT do SEO?",
@@ -80,7 +80,7 @@ const FAQS: Faq[] = [
   },
   {
     q: "Which AI model writes the best SEO content?",
-    a: `In Draftly's ${BENCHMARK_DATE} benchmark, ${TOP.model} scored highest at ${TOP.overall}, followed by Kimi K3 and Claude Opus 5.5 at ${OPUS.overall}. Claude Sonnet 5.5 scored ${SONNET.overall} at about half Opus's cost per post.`,
+    a: `In Draftly's ${BENCHMARK_DATE} benchmark, ${TOP.model} scored highest at ${TOP.overall}, followed by Kimi K3 at ${model("Kimi K3").overall} and Claude Opus 5.5 at ${OPUS.overall}. Claude Sonnet 5.5 scored ${SONNET.overall} at about half Opus's cost per post.`,
   },
   {
     q: "Is there a free AI tool for SEO?",
@@ -201,7 +201,7 @@ export default function BestAiForSeoPage() {
 
           <Section id="keyword-research" title="Keyword research: Ahrefs or Semrush">
             <p>
-              Picking what to write about is where the money is, and it takes real search volume and difficulty data.
+              Picking what to write about is where the money is, and it takes search volume and difficulty data.
               Ahrefs and Semrush both run their own keyword databases and track competitors&apos; rankings.
             </p>
             <p>
@@ -330,8 +330,8 @@ export default function BestAiForSeoPage() {
 
           <Section id="ai-visibility" title="Tracking AI search visibility">
             <p>
-              The question everyone is asking now: does ChatGPT or Gemini mention you? Most of the big tools have added
-              tracking for it, so check what you already pay for first.
+              Most of the big SEO tools now track whether ChatGPT or Gemini mentions your brand, so check what you
+              already pay for first.
             </p>
             <Bullets
               items={[

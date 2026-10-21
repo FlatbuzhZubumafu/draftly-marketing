@@ -46,7 +46,7 @@ const STEPS = [
   },
   {
     title: "Approve it as a revision, revert any time",
-    body: "Approved edits are saved as a normal WordPress revision. Changed your mind? Revert restores the version from before Draftly touched the post, SEO title and description included.",
+    body: "Approved edits are saved as a normal WordPress revision. Revert restores the version from before Draftly touched the post, SEO title and description included.",
     shots: [WP_SHOTS.approved, WP_SHOTS.reverted],
   },
 ];
@@ -233,8 +233,8 @@ export default function WordPressAiPluginPage() {
             What it fixes on posts you already have
           </h2>
           <p className="mb-10 max-w-3xl leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-            Most WordPress AI plugins are built to write new posts. Draftly works as an AI content editor for the ones
-            already on your site, the posts that used to rank and the drafts that read like a chatbot wrote them.
+            Draftly works as an AI content editor for the posts already on your site: the ones that used to rank and
+            the drafts that read like a chatbot wrote them.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {FIXES.map((f) => (
@@ -266,7 +266,7 @@ export default function WordPressAiPluginPage() {
                 it uses, so they show up in its snippet preview like any title you typed yourself.
               </p>
               <p>
-                Think of it as the AI SEO plugin for WordPress that sits on top: your SEO plugin flags the problem,
+                It&apos;s the AI SEO plugin for WordPress that sits on top: your SEO plugin flags the problem,
                 Draftly writes the fix, and you approve it.
               </p>
             </div>
@@ -313,8 +313,8 @@ export default function WordPressAiPluginPage() {
               SEO, Rank Math and All in One SEO. De-AI already runs in the Draftly web editor.
             </p>
             <p>
-              Want Draftly to write new posts as well? Topic ideas from your industry&apos;s news, AI images and
-              autopilot publishing are on the <A href="/pricing">main Draftly plans</A>, from ${PAID_PLANS[0].price} a
+              If you want Draftly to write new posts too, topic ideas from your industry&apos;s news, AI images and
+              autopilot publishing come with the <A href="/pricing">main Draftly plans</A>, from ${PAID_PLANS[0].price} a
               month.
             </p>
           </div>

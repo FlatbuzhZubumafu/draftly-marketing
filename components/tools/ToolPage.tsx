@@ -64,7 +64,7 @@ export function OtherTools({ exclude, heading = "More free tools" }: { exclude?:
               <span className="eyebrow">Free tool</span>
               <span className="block font-semibold mt-2">{t.name}</span>
               <span className="block text-sm mt-1 leading-relaxed" style={secondary}>
-                {t.description.split(". ")[0]}.
+                {t.description.split(". ")[0].replace(/\.$/, "")}.
               </span>
             </a>
           </li>

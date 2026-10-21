@@ -201,7 +201,7 @@ export default function KoalaReviewPage() {
               Plans continue up to Scale III at $2,000 a month for 10 million words. New accounts get {KOALA_FREE}.
             </p>
             <p>
-              Features unlock by tier. Starter includes bulk writing, Amazon data, KoalaImages, the API and the MCP
+              Features are split by tier. Starter includes bulk writing, Amazon data, KoalaImages, the API and the MCP
               server. Professional adds the Search Console and Analytics dashboard, the article editor with an SEO score,
               KoalaLinks and Deep Research. Boost adds Content Calendar Autopilot and full SEO agent access.
             </p>
@@ -260,7 +260,7 @@ export default function KoalaReviewPage() {
             <Bullets
               items={[
                 <>
-                  <B>Words, not posts.</B> Your real cost per article depends on length and model, so work it out before you
+                  <B>You pay for words.</B> Your cost per article depends on length and model, so work it out before you
                   pick a plan.
                 </>,
                 <>

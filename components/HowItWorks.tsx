@@ -12,7 +12,7 @@ export async function HowItWorks() {
       <div className="container-draftly max-w-5xl">
         <div className="reveal text-center mb-10">
           <h2 className="text-3xl font-medium" style={{ letterSpacing: "-0.03em" }}>
-            How Draftly Actually{" "}
+            How Draftly{" "}
             <AccentText squiggle="squiggle" color="var(--color-accent)" squiggleColor="#2f8ccc">
               Works
             </AccentText>
