@@ -113,7 +113,7 @@ const IN_DRAFTLY = BENCHMARK.flatMap((r) => {
   return credits === undefined ? [] : [{ ...r, credits }];
 }).sort((a, b) => b.overall - a.overall);
 
-const NEW_IN_DRAFTLY = ["Qwen 3.8 Max", "Claude Opus 5.5", "Kimi K3", "GPT 5.5", "DeepSeek V4 Pro", "Gemini 3.8 Flash"];
+const NEW_IN_DRAFTLY = ["Claude Haiku 5.5", "DeepSeek V4.1 Flash", "Gemini 4 Argon", "Muse Spark Open", "MiniMax M3.1 Flash"];
 
 const FAQS = [
   {
@@ -610,10 +610,10 @@ export default async function BenchmarkPage() {
 
           <Section id="in-draftly" title="Which of These Models Can You Use in Draftly?">
             <p>
-              {IN_DRAFTLY.length} of the {BENCHMARK.length} models we tested are available in Draftly. Six of them are new:
-              Qwen 3.8 Max, Claude Opus 5.5, Kimi K3 and GPT 5.5 cost 250 credits a post, and DeepSeek V4 Pro and Gemini 3.8
-              Flash cost 150. Paid plans pick the model for each post. Claude Sonnet 5.5 stays the default on every plan
-              and writes the free first post.
+              {IN_DRAFTLY.length} of the {BENCHMARK.length} models we tested are available in Draftly. Five were added on
+              October 21, 2026: Claude Haiku 5.5 and DeepSeek V4.1 Flash cost 50 credits a post, and Gemini 4 Argon, Muse
+              Spark Open and MiniMax M3.1 Flash cost 150. Paid plans pick the model for each post. Claude Sonnet 5.5 stays
+              the default on every plan and writes the free first post.
             </p>
             <div className="mt-6 overflow-x-auto rounded-xl" style={{ border: "1px solid var(--color-border)" }}>
               <table className="w-full text-sm">
@@ -675,8 +675,8 @@ export default async function BenchmarkPage() {
             </h2>
             <p className="max-w-2xl mb-8 leading-relaxed" style={{ color: "#bbb" }}>
               Draftly writes with Claude Sonnet 5.5 by default. Paid plans can switch any post to Claude Opus 5.5, Kimi K3,
-              GPT 5.5, DeepSeek V4 Pro, Gemini 3.8 Flash or GPT 6 Luna, the budget option, and every post gets the same
-              writing rules. Your first post, written by Sonnet, is free.
+              GPT 5.5, Gemini 3.8 Flash, or a 50-credit budget model such as Claude Haiku 5.5 or GPT 6 Luna, and every
+              post gets the same writing rules. Your first post, written by Sonnet, is free.
             </p>
             <a href={registerUrl} className="btn btn-primary">
               {s.heroCtaText}

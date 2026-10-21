@@ -1,7 +1,9 @@
 // The writing models a Draftly user can pick, mirroring model_catalog in the
 // draftly.blog repo (enabled rows only, in the app's sort order). A blog post
 // costs 250 credits x credit_multiplier: 0.2 = 50, 0.6 = 150, 1.0 = 250.
-// Checked against production on 2026-10-12. Change model_catalog first, then this.
+// Checked against production on 2026-10-12; five models added 2026-10-21 (Claude Haiku 5.5,
+// DeepSeek V4.1 Flash, Gemini 4 Argon, Muse Spark Open, MiniMax M3.1 Flash), listed last
+// until their app sort order is confirmed. Change model_catalog first, then this.
 
 export type AppModel = {
   name: string;
@@ -25,6 +27,11 @@ export const APP_MODELS: AppModel[] = [
   { name: "Gemini 3 Flash", credits: 150 },
   { name: "DeepSeek V4 Pro", credits: 150 },
   { name: "DeepSeek V3.2", credits: 150 },
+  { name: "Claude Haiku 5.5", credits: 50 },
+  { name: "DeepSeek V4.1 Flash", credits: 50 },
+  { name: "Gemini 4 Argon", credits: 150 },
+  { name: "Muse Spark Open", credits: 150 },
+  { name: "MiniMax M3.1 Flash", credits: 150 },
 ];
 
 export const APP_MODEL_COUNT = APP_MODELS.length;
