@@ -41,8 +41,8 @@ export const PLANS: Plan[] = [
     features: [
       `${APP_MODEL_COUNT} AI models to choose from`,
       "AI images inside your posts",
+      "Import your own keywords and brand docs",
       "Keyword data, 40 lookups a month",
-      "Keep writing with your own AI",
     ],
   },
   {
@@ -89,6 +89,8 @@ export const COMPARE_ROWS: { label: string; values: (string | boolean)[] }[] = [
   { label: "Google Analytics and Search Console reports", values: [true, true, true, true] },
   { label: "Write with your own AI (Claude, ChatGPT, Cursor)", values: ["1 post", true, true, true] },
   { label: "Outlines and topic refreshes", values: ["Use credits", "Free", "Free", "Free"] },
+  { label: "Import your own keyword lists", values: [false, true, true, true] },
+  { label: "Upload brand docs (PDF, Word, text)", values: [false, true, true, true] },
   { label: "AI images inside posts", values: ["Thumbnail on your free post", "53 credits each", "53 credits each", "53 credits each"] },
   { label: "SEO data calls a month", values: [false, "40, keyword data", "150, plus live Google and domain data", "300, every dataset"] },
   { label: "Email alerts when posts are ready", values: [false, false, true, true] },
