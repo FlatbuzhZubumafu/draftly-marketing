@@ -53,7 +53,7 @@ export const DIFFERENCE: Record<FeatureId, Difference> = {
     close: "Move a slider and the next post follows it.",
   },
   "ai-models": {
-    problem: "The model decides how a post sounds and what it costs. In our 19-model benchmark, overall scores ran from 74.0 to 95.1.",
+    problem: "The model decides how a post sounds and what it costs. In our 19-model benchmark, blog post scores ran from 74.0 to 95.1.",
     approach: "Draftly lets you pick the model for each post and shows the price first.",
     lead: "Whichever model you pick gets:",
     points: [

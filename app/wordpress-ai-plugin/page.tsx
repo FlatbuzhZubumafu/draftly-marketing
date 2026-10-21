@@ -313,8 +313,8 @@ export default function WordPressAiPluginPage() {
               SEO, Rank Math and All in One SEO. De-AI already runs in the Draftly web editor.
             </p>
             <p>
-              To have Draftly write new posts too, topic ideas from your industry&apos;s news, AI images and
-              autopilot publishing are on the <A href="/pricing">main Draftly plans</A>, from ${PAID_PLANS[0].price} a
+              If you want Draftly to write new posts too, topic ideas from your industry&apos;s news, AI images and
+              autopilot publishing come with the <A href="/pricing">main Draftly plans</A>, from ${PAID_PLANS[0].price} a
               month.
             </p>
           </div>
