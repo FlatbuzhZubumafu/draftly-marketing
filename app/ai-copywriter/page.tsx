@@ -63,7 +63,7 @@ const FAQS: Faq[] = [
   },
   {
     q: "Which AI model does Draftly use?",
-    a: `${D.model} is the default writer, on every plan including the free post. Paid plans can choose from ${APP_MODEL_COUNT} AI models for each post, including Claude Opus 5.5, GPT 5.5, Gemini 3.8 Flash, Kimi K3 and DeepSeek V4 Pro.`,
+    a: `${D.model} is the default writer on paid plans. Free accounts, including the free first post, write with Claude Haiku 5.5. Paid plans can choose from ${APP_MODEL_COUNT} AI models for each post, including Claude Opus 5.5, GPT 5.5, Gemini 3.8 Flash, Kimi K3 and DeepSeek V4 Pro.`,
   },
   {
     q: "Will the posts sound like AI wrote them?",

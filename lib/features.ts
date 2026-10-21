@@ -232,7 +232,7 @@ export const FEATURES: Feature[] = [
       { title: "Same checks for every model", text: "Whichever model writes, the post is checked against your writing rules and gets a fix pass." },
     ],
     shot: GUIDE_SHOTS.modelPicker,
-    plans: "Free accounts write with Claude Sonnet 5.5. Every paid plan includes all of them.",
+    plans: "Free accounts write with Claude Haiku 5.5. Every paid plan includes all of them.",
     limits: ["Premium models cost more credits per post, so you get fewer posts a month on them."],
     faqs: [
       { q: "Which AI model does Draftly use?", a: `Claude Sonnet 5.5 by default. Paid plans can switch per post to any of ${APP_MODEL_COUNT} models.` },

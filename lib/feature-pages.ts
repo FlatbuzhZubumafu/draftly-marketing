@@ -252,7 +252,7 @@ export const HEADINGS: Record<FeatureId, FeatureHeadings> = {
     limits: "What premium models cost in credits",
     faq: "AI model picker FAQ",
     related: "Features that work with any model",
-    cta: { lead: "Try Claude Sonnet 5.5 on", accent: "a free post" },
+    cta: { lead: "Try Claude Haiku 5.5 on", accent: "a free post" },
   },
   "writing-rules": {
     difference: { lead: "Common AI words and phrases,", accent: "caught by code" },
