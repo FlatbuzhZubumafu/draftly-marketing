@@ -38,6 +38,20 @@ document.addEventListener('click', function (e) {
     link_url: href,
     transport_type: 'beacon'
   });
+}, true);
+// Sign-up intent: one signup_click event per click on any link to the app's /register page.
+document.addEventListener('click', function (e) {
+  var a = e.target && e.target.closest ? e.target.closest('a[href^="https://app.draftly.blog/register"]') : null;
+  if (!a) return;
+  var url = new URL(a.href);
+  var location = a.getAttribute('data-cta-location')
+    || (a.closest('header') ? 'header' : a.closest('footer') ? 'footer' : a.closest('#pricing') ? 'pricing' : (a.closest('[data-toc-skip]') ? 'closing_cta' : 'other'));
+  gtag('event', 'signup_click', {
+    link_location: location,
+    link_url: url.pathname + url.search,
+    signup_origin: url.searchParams.get('origin') || url.searchParams.get('intent') || 'site',
+    transport_type: 'beacon'
+  });
 }, true);`}
       </Script>
     </>
