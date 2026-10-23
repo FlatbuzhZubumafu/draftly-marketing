@@ -28,7 +28,7 @@ const PATH = "/best-ai-for-seo";
 const PUBLISHED = { iso: CHECKED.iso, label: CHECKED.label };
 const TITLE = "Best AI for SEO in 2026: The Right Tool for Each Job";
 const DESCRIPTION =
-  "The best AI for SEO depends on the job. Our picks for keyword research, blog writing, optimization, AI visibility and technical SEO, with prices checked October 2026.";
+  "The best AI for SEO depends on the job. Our picks for keyword research, blog writing, optimization, AI visibility and technical SEO. Prices checked Oct 2026.";
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
