@@ -28,6 +28,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/for-teams`, lastModified: new Date("2026-10-15"), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/claude-vs-chatgpt-for-writing`, lastModified: new Date("2026-10-16"), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/writesonic-alternatives`, lastModified: new Date("2026-10-16"), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/writesonic-vs-draftly`, lastModified: new Date("2026-10-23"), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/best-ai-for-seo`, lastModified: new Date("2026-10-16"), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/koala-ai-review`, lastModified: new Date("2026-10-16"), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/arvow-review`, lastModified: new Date("2026-10-16"), changeFrequency: "monthly", priority: 0.7 },

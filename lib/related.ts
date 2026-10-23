@@ -72,6 +72,12 @@ export const GUIDES: Pillar[] = [
     keywords: ["writesonic", "alternative", "koala", "seowriting", "copy.ai", "compare"],
   },
   {
+    href: "/writesonic-vs-draftly",
+    title: "Writesonic vs Draftly",
+    blurb: "Writesonic's plans against Draftly's: price per post, brand voices, team size, publishing and AI visibility tracking.",
+    keywords: ["writesonic", "pricing", "review", "free trial", "versus", " vs "],
+  },
+  {
     href: "/copy-ai-alternatives",
     title: "Copy.ai alternatives for blog posts and marketing",
     blurb: "Draftly, Jasper, Writesonic, Koala and Claude compared on price and publishing, plus Jasper vs Copy.ai.",
@@ -120,6 +126,7 @@ export function guideTag(href: string): string {
     "/for-teams": "Teams",
     "/claude-vs-chatgpt-for-writing": "Benchmark",
     "/writesonic-alternatives": "Comparison",
+    "/writesonic-vs-draftly": "Comparison",
     "/copy-ai-alternatives": "Comparison",
     "/koala-ai-review": "Review",
     "/arvow-review": "Review",

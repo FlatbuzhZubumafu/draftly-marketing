@@ -310,7 +310,7 @@ export default function WritesonicAlternativesPage() {
           </div>
 
           <div className="max-w-3xl">
-            <KeepReading exclude={PATH} guides={["/jasper-vs-draftly", "/blog-writing-service"]} topic="writesonic alternative AI writing tool compare pricing" />
+            <KeepReading exclude={PATH} guides={["/writesonic-vs-draftly", "/jasper-vs-draftly"]} topic="writesonic alternative AI writing tool compare pricing" />
           </div>
           <FaqList faqs={FAQS} />
         </TocLayout>
