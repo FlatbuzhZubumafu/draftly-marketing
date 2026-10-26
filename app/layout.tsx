@@ -4,6 +4,7 @@ import "./globals.css";
 import { GlobalAnimations } from "@/components/GlobalAnimations";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { AhrefsAnalytics } from "@/components/AhrefsAnalytics";
+import { Analytics } from "@vercel/analytics/next";
 import { jsonLdHtml, organizationJsonLd, personJsonLd, websiteJsonLd } from "@/lib/schema";
 import { HOME_DESCRIPTION, HOME_TITLE, SITE_URL } from "@/lib/site";
 
@@ -43,6 +44,7 @@ export default function RootLayout({
         <GlobalAnimations />
         <GoogleAnalytics />
         <AhrefsAnalytics />
+        <Analytics />
       </body>
     </html>
   );
