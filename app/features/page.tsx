@@ -14,7 +14,7 @@ import { CATEGORIES, FEATURES, FEATURES_HUB, featurePath, featurePathById, getFe
 import { PAIN_POINTS, answerText, type PainPoint } from "@/lib/features-hub";
 import { TINTS, tintVars } from "@/lib/feature-tints";
 import { getHomepageData } from "@/lib/graphql";
-import { jsonLdHtml } from "@/lib/schema";
+import { jsonLdHtml, softwareApplicationJsonLd } from "@/lib/schema";
 import { SITE_URL } from "@/lib/site";
 import { pageImages } from "@/lib/og";
 import { paidPriceList } from "@/lib/pricing";
@@ -105,14 +105,7 @@ export default async function FeaturesHub() {
         itemListElement: FEATURES.map((f, i) => ({ "@type": "ListItem", position: i + 1, name: f.name, url: `${SITE_URL}${featurePath(f)}` })),
       },
     },
-    {
-      "@type": "SoftwareApplication",
-      name: "Draftly",
-      applicationCategory: "BusinessApplication",
-      operatingSystem: "Web",
-      url: SITE_URL,
-      featureList: FEATURES.map((f) => f.name),
-    },
+    { ...softwareApplicationJsonLd, featureList: FEATURES.map((f) => f.name) },
     faqJsonLd([...PAIN_POINTS.map((p) => ({ q: p.question, a: answerText(p) })), ...FAQS]),
   );
 
