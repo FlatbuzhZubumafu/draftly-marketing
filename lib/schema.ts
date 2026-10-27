@@ -3,7 +3,7 @@ import { APP_URL, LOGO_URL, SITE_URL } from "@/lib/site";
 import { ALL_PRODUCT_SHOTS, imageObjectJsonLd } from "@/lib/product-shots";
 
 // Structured data shared across pages. Organization and WebSite render once in
-// the root layout; SoftwareApplication renders on the homepage and /pricing.
+// the root layout; SoftwareApplication renders on the homepage, /pricing and /features; other pages reference it by SOFTWARE_ID.
 
 const ORG_ID = `${SITE_URL}/#organization`;
 const SITE_ID = `${SITE_URL}/#website`;
@@ -79,8 +79,12 @@ export const websiteJsonLd = {
   publisher: { "@id": ORG_ID },
 };
 
+/** Pages that mention Draftly without defining it reference this id, so Google sees one app entity. */
+export const SOFTWARE_ID = `${SITE_URL}/#software`;
+
 export const softwareApplicationJsonLd = {
   "@type": "SoftwareApplication",
+  "@id": SOFTWARE_ID,
   name: "Draftly",
   url: SITE_URL,
   applicationCategory: "BusinessApplication",

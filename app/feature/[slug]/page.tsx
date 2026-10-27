@@ -17,7 +17,7 @@ import { TINTS, tintVars } from "@/lib/feature-tints";
 import { getHomepageData } from "@/lib/graphql";
 import { GUIDES } from "@/lib/related";
 import { GUIDE_THUMBS, imageObjectJsonLd } from "@/lib/product-shots";
-import { jsonLdHtml } from "@/lib/schema";
+import { SOFTWARE_ID, jsonLdHtml } from "@/lib/schema";
 import { SITE_URL } from "@/lib/site";
 import { pageImages } from "@/lib/og";
 
@@ -104,7 +104,7 @@ export default async function FeaturePage({ params }: Props) {
       name: feature.title,
       description: feature.description,
       url: `${SITE_URL}${path}`,
-      about: { "@type": "SoftwareApplication", name: "Draftly", applicationCategory: "BusinessApplication", operatingSystem: "Web", url: SITE_URL },
+      about: { "@id": SOFTWARE_ID },
       ...(feature.shot ? { primaryImageOfPage: imageObjectJsonLd(feature.shot) } : {}),
     },
     {
