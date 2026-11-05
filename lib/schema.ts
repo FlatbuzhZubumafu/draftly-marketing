@@ -27,10 +27,21 @@ export const COMPANY = {
   country: "US",
 };
 
+/** What Draftly is (Organization schema), and which Draftly it is (also the homepage FAQ and llms.txt). */
+export const BRAND_DESCRIPTION =
+  "Draftly (draftly.blog) is an AI blog writer for small businesses that writes SEO-ready posts in your brand's voice and publishes them to your CMS.";
+export const BRAND_DISAMBIGUATION =
+  "Draftly at draftly.blog is an AI blog writer from Meta-Marketing LLC in Spanish Fork, Utah. It isn't connected to Draft.ly, the sports and NIL app, or the Draftly WordPress theme.";
+
 export const organizationJsonLd = {
   "@type": "Organization",
   "@id": ORG_ID,
   name: "Draftly",
+  // "Draftly" is also Draft.ly (a sports and NIL app) and a WordPress theme, both ahead of us
+  // for the bare name in Google (checked 2026-11-05). These tell search engines which one this is.
+  alternateName: ["Draftly AI", "Draftly.blog"],
+  description: BRAND_DESCRIPTION,
+  disambiguatingDescription: BRAND_DISAMBIGUATION,
   legalName: COMPANY.legalName,
   url: SITE_URL,
   logo: LOGO_URL,
@@ -75,6 +86,7 @@ export const websiteJsonLd = {
   "@type": "WebSite",
   "@id": SITE_ID,
   name: "Draftly",
+  alternateName: ["Draftly AI", "Draftly.blog"],
   url: SITE_URL,
   publisher: { "@id": ORG_ID },
 };

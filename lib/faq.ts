@@ -1,6 +1,7 @@
 import type { WPFaq } from "./graphql";
 import { APP_MODELS } from "./app-models";
 import { PAID_PLANS } from "./pricing";
+import { BRAND_DISAMBIGUATION } from "./schema";
 
 // Homepage questions that live in code because their answers come from data
 // here (credit prices) or from the app's writing rules. The rest of the FAQ is
@@ -16,6 +17,11 @@ const starterCredits = starter.credits.replace(/ credits.*/, "");
 const starterPosts = starter.posts.replace(/\D+/g, "");
 
 export const CODE_FAQS: WPFaq[] = [
+  {
+    // "Draftly" is shared with Draft.ly and a WordPress theme; this answers "draftly ai" searches directly.
+    title: "Is this the same Draftly as Draft.ly or the WordPress theme?",
+    answer: `No. ${BRAND_DISAMBIGUATION} Sign in to the app at app.draftly.blog.`,
+  },
   {
     // Credit prices: model_catalog and credit_costs in production, mirrored in lib/app-models.ts.
     title: "How far do my credits go?",
