@@ -621,10 +621,13 @@ export const INDUSTRIES: Industry[] = [
     name: "Roofing",
     audience: "roofing contractors",
     // "roofing blog" 350/mo KD 2, "roofing blog topics" 100 KD 1, "roofing blog ideas" 50 KD 0.
-    keywords: "roofing blog, roofing blog topics, roofing blog ideas",
-    title: "Roofing Blog Topics: Ideas for Contractors, With Storm Rules",
+    // Rechecked 2026-11-06: "roofing blog" 300 KD 4, "roofing blog topics" 150 KD 1,
+    // "roofing social media" 100 KD 0. The title and description state the topic count.
+    keywords: "roofing blog, roofing blog topics, roofing blog ideas, roofing social media",
+    title: "Roofing Blog Topics: 30 Ideas for Contractors, With Storm Rules",
     description:
-      "Roofing blog topics for storm damage, insurance claims, replacement costs and materials, plus the deductible and adjuster rules to check before you publish.",
+      "30 roofing blog topics for storms, insurance claims, leaks and replacements, plus social media post ideas and the deductible rules to check before you publish.",
+    updated: { iso: "2026-11-06", label: "November 6, 2026" },
     h1: { lead: "Roofing blog topics", accent: "for contractors" },
     intro: [
       "Many roofing searches start after something happens: a hailstorm, a stain on the ceiling, an insurance letter. The rest come from homeowners pricing a replacement they've put off for years. A roofing blog that wins jobs has posts ready for both.",
@@ -658,6 +661,19 @@ export const INDUSTRIES: Industry[] = [
         ],
       },
       {
+        id: "leaks",
+        heading: "Leaks and repairs",
+        intro:
+          "A stain on the ceiling sends people searching before they call anyone. Help them figure out whether it's the roof, and be honest about when a repair is enough.",
+        topics: [
+          { title: "Water stain on the ceiling: is it the roof?", note: "If it shows up after rain, the roof or flashing is the likely cause. If it doesn't, think plumbing, an AC line or attic condensation." },
+          { title: "Flashing: the part of the roof that usually leaks", note: "Around chimneys, skylights, vents and walls. Show failed flashing from your own jobs." },
+          { title: "Skylight leaks: the skylight or the flashing?", note: "Fogging between panes means a failed seal. Water around the frame usually means flashing." },
+          { title: "Roof repair or replacement: how we decide", note: "Age, how many problem spots, the number of layers. Share the rule your crew actually uses." },
+          { title: "Black streaks and moss: cosmetic or a problem?", note: "The streaks are usually algae and mostly cosmetic. Moss holds water and lifts shingles. Say which one you'd fix." },
+        ],
+      },
+      {
         id: "replacement",
         heading: "Planning a replacement",
         intro:
@@ -680,6 +696,19 @@ export const INDUSTRIES: Industry[] = [
           { title: "Ice dams: why they form and how to prevent them", note: "Attic insulation and ventilation do more than heat cables. Skip this one if you work where it doesn't snow." },
           { title: "How to check a roofer's license or registration in your state", note: "Link the lookup if your state has one. Then show yours." },
           { title: "A recent roof replacement, start to finish", note: "The problem, what you found under the shingles, the cost and photos. Get the homeowner's OK and leave out the address." },
+        ],
+      },
+      {
+        id: "social",
+        heading: "Social media post ideas for a roofing company",
+        intro:
+          "Each blog post above can become a few social posts. Treat them as advertising: the deductible and adjuster rules below apply to a Facebook post the same as a web page.",
+        topics: [
+          { title: "Before and after photos of a finished roof", note: "Drone or ladder shots work. Get the homeowner's OK and keep the house number out of frame." },
+          { title: "What we found under the shingles", note: "A short video from a tear-off showing rotted decking or bad flashing, and what you did about it." },
+          { title: "A storm-season reminder of what to check from the ground", note: "Link the hail damage post. No deductible offers, even in a comment reply." },
+          { title: "Meet the crew", note: "Names, how long they've been roofing, and a photo on a job. Homeowners like knowing who'll be on their roof." },
+          { title: "One question a homeowner asked this week", note: "Answer it in two or three sentences and link the post that covers it in full." },
         ],
       },
     ],
@@ -738,6 +767,10 @@ export const INDUSTRIES: Industry[] = [
       {
         q: "When should roofers publish storm posts?",
         a: "Four to six weeks before your hail or hurricane season, so they're indexed when the first storm hits.",
+      },
+      {
+        q: "What should a roofing company post on social media?",
+        a: "Before and after photos of real jobs, short videos of what you found during a tear-off, and storm-season reminders that link to a full blog post. Get the homeowner's permission, and skip deductible offers in posts and comments.",
       },
       {
         q: "Can AI write roofing blog posts?",
