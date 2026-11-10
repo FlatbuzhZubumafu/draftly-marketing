@@ -21,6 +21,8 @@ export type Industry = {
   postNoun: string;
   title: string;
   description: string;
+  /** Set when this page was revised after INDUSTRIES_DATE. */
+  updated?: { iso: string; label: string };
   h1: { lead: string; accent: string };
   /** Opening paragraphs under the H1. */
   intro: string[];
@@ -58,15 +60,20 @@ export const INDUSTRIES: Industry[] = [
     postNoun: "plumbing",
     name: "Plumbing",
     audience: "plumbers",
-    // "plumbing blog ideas" 150/mo KD 0, "plumbing blog topics" 50 KD 0, "plumber blog" 90 KD 0.
-    keywords: "plumbing blog ideas, plumbing blog topics, plumber blog",
-    title: "Plumbing Blog Ideas: Topics Grouped by What Homeowners Need",
+    // "plumbing blog ideas" 150/mo KD 0, "plumbing blog topics" 50 KD 0, "plumber blog" 90 KD 0,
+    // "plumbing social media" 150 KD 0, "content ideas for plumbing company" 60, "commercial plumbing blog" 30.
+    // Ranked 15 to 16 for the first two in Search Console (Aug to Nov 2026) before the November update.
+    // The title and description state the topic count: update them when topics change (test in lib/tools/__tests__).
+    keywords: "plumbing blog ideas, plumbing blog topics, plumber blog, plumbing social media post ideas",
+    title: "Plumbing Blog Ideas: 41 Topics Grouped by What Customers Need",
     description:
-      "Plumbing blog ideas grouped by what the homeowner is dealing with: leaks right now, replacement costs, seasonal jobs and local trust, plus what to check first.",
+      "41 plumbing blog ideas grouped by what the customer is dealing with, from burst pipes to sewer lines and commercial jobs, plus social media post ideas.",
+    updated: { iso: "2026-11-05", label: "November 5, 2026" },
     h1: { lead: "Plumbing blog ideas", accent: "homeowners search for" },
     intro: [
       "People look up a plumber in one of two moods. Something is leaking right now, or they're planning a bigger job like a water heater or a repipe. A plumbing blog that brings in calls answers both.",
-      "This list is short and grouped by what the reader is going through, with a note on what makes each post worth writing. Swap in your city, your prices and your own jobs, because that's the part a national site can't copy.",
+      "This list is grouped by what the reader is going through, with a note on what makes each post worth writing. Swap in your city, your prices and your own jobs, because that's the part a national site can't copy.",
+      "Commercial work gets its own group, since a restaurant owner or property manager searches differently from a homeowner. The last group turns the blog posts into social media posts, so one afternoon of writing covers both.",
     ],
     groups: [
       {
@@ -82,6 +89,21 @@ export const INDUSTRIES: Industry[] = [
           { title: "Sewer smell in the basement: what it usually means", note: "Often a dry floor drain trap. Say when it means a cracked vent or sewer line instead." },
           { title: "No hot water: what to check on a gas or electric heater", note: "Pilot, breaker, reset button. Stop at anything that means opening a gas line." },
           { title: "You smell gas: what to do first", note: "Leave the house, then call the gas utility or 911 from outside. Keep this one short and put it where people can find it fast." },
+        ],
+      },
+      {
+        id: "drains-sewer",
+        heading: "Drains and sewer lines",
+        intro:
+          "Drain calls are steady all year, and sewer line jobs are some of the biggest tickets a residential plumber writes. Readers want to know how bad it is and what it'll cost before you show up.",
+        topics: [
+          { title: "Every drain in the house is slow: what that points to", note: "One slow sink is a local clog. Several at once, or a toilet that gurgles when the washer drains, usually means the main line." },
+          { title: "Snaking vs hydro jetting a drain", note: "When a cable clears it and when you need water pressure to scour the pipe. Give your price for each." },
+          { title: "Tree roots in the sewer line: signs and fixes", note: "Slow drains and gurgling that come back after every snaking. Explain the camera inspection and what root cutting or lining involves." },
+          { title: "Trenchless sewer repair: how pipe lining and pipe bursting work", note: "Say when the yard doesn't get dug up, and when a collapsed or sagging line rules it out." },
+          { title: "Who pays to fix the sewer line, you or the city?", note: "Cities split the lateral differently. Link your city's rule and show where the property line usually falls." },
+          { title: "Are flushable wipes safe to flush?", note: "Many wastewater utilities ask people to keep wipes out of the toilet. Quote yours and show a photo of what you pull out of lines." },
+          { title: "Chemical drain cleaner: why we ask you to tell us first", note: "It's caustic, and it splashes back when a tech opens the line. Suggest what to try instead." },
         ],
       },
       {
@@ -121,6 +143,32 @@ export const INDUSTRIES: Industry[] = [
           { title: "How to check a plumber's license in your state", note: "Link your state board's lookup. Then show your own license number." },
           { title: "A recent job, start to finish", note: "The problem, what you found, what it cost and photos. Ask the customer first and leave out their address." },
           { title: "What our maintenance plan covers", note: "What you check, how often, and what it costs. Readers want the list." },
+        ],
+      },
+      {
+        id: "commercial",
+        heading: "Commercial plumbing",
+        intro:
+          "Business owners and property managers search for rules and schedules. They care about downtime, inspections and who's on the hook when water reaches the unit below.",
+        topics: [
+          { title: "How often a restaurant needs its grease trap pumped", note: "Many cities run a fats, oils and grease program with a set schedule. Link yours and say what an inspector looks for." },
+          { title: "Annual backflow testing: who needs it and what happens", note: "Many water utilities require a yearly test on backflow assemblies. Explain the test, how long it takes and who files the report." },
+          { title: "Sizing a water heater for a restaurant, salon or gym", note: "Peak demand drives the size more than square footage. Walk through how you size one." },
+          { title: "A leak in one unit flooded the one below: what to do first", note: "Shut off the water to the unit, document the damage, then call. Written for property managers." },
+          { title: "A plumbing maintenance checklist for property managers", note: "Water heaters, shutoffs, drains and sewer camera checks, with how often you'd do each." },
+        ],
+      },
+      {
+        id: "social",
+        heading: "Social media post ideas for a plumbing company",
+        intro:
+          "Each post above can become two or three social posts. These are quick to make from jobs you're already doing, and they link back to the blog.",
+        topics: [
+          { title: "Before and after photos from one job", note: "One line on what went wrong and what you did. Get the customer's OK and crop out anything personal." },
+          { title: "A 30-second video showing where the main shutoff is", note: "Film it at a real job and link the full shutoff post." },
+          { title: "The strangest thing pulled from a drain this month", note: "People share these. Keep the customer out of it." },
+          { title: "A seasonal reminder with a link to the full post", note: "Winterize spigots in fall, test the sump pump in spring. Post it the same week the blog post goes up." },
+          { title: "Meet the tech who'll show up at your door", note: "A photo, a name and how long they've been with you. It answers the question people have before they let someone in." },
         ],
       },
     ],
@@ -175,6 +223,10 @@ export const INDUSTRIES: Industry[] = [
       {
         q: "Should a plumbing blog explain DIY fixes?",
         a: "Yes for simple jobs like running toilets and finding the shutoff. Say clearly where DIY stops, especially for gas, relief valves and anything that needs a permit.",
+      },
+      {
+        q: "What social media content works for a plumbing company?",
+        a: "Before and after photos from real jobs, short how-to videos like finding the main shutoff, and seasonal reminders that link to a full blog post. Ask customers before you post photos of their homes.",
       },
       {
         q: "Can AI write plumbing blog posts?",
@@ -569,10 +621,13 @@ export const INDUSTRIES: Industry[] = [
     name: "Roofing",
     audience: "roofing contractors",
     // "roofing blog" 350/mo KD 2, "roofing blog topics" 100 KD 1, "roofing blog ideas" 50 KD 0.
-    keywords: "roofing blog, roofing blog topics, roofing blog ideas",
-    title: "Roofing Blog Topics: Ideas for Contractors, With Storm Rules",
+    // Rechecked 2026-11-06: "roofing blog" 300 KD 4, "roofing blog topics" 150 KD 1,
+    // "roofing social media" 100 KD 0. The title and description state the topic count.
+    keywords: "roofing blog, roofing blog topics, roofing blog ideas, roofing social media",
+    title: "Roofing Blog Topics: 30 Ideas for Contractors, With Storm Rules",
     description:
-      "Roofing blog topics for storm damage, insurance claims, replacement costs and materials, plus the deductible and adjuster rules to check before you publish.",
+      "30 roofing blog topics for storms, insurance claims, leaks and replacements, plus social media post ideas and the deductible rules to check before you publish.",
+    updated: { iso: "2026-11-06", label: "November 6, 2026" },
     h1: { lead: "Roofing blog topics", accent: "for contractors" },
     intro: [
       "Many roofing searches start after something happens: a hailstorm, a stain on the ceiling, an insurance letter. The rest come from homeowners pricing a replacement they've put off for years. A roofing blog that wins jobs has posts ready for both.",
@@ -606,6 +661,19 @@ export const INDUSTRIES: Industry[] = [
         ],
       },
       {
+        id: "leaks",
+        heading: "Leaks and repairs",
+        intro:
+          "A stain on the ceiling sends people searching before they call anyone. Help them figure out whether it's the roof, and be honest about when a repair is enough.",
+        topics: [
+          { title: "Water stain on the ceiling: is it the roof?", note: "If it shows up after rain, the roof or flashing is the likely cause. If it doesn't, think plumbing, an AC line or attic condensation." },
+          { title: "Flashing: the part of the roof that usually leaks", note: "Around chimneys, skylights, vents and walls. Show failed flashing from your own jobs." },
+          { title: "Skylight leaks: the skylight or the flashing?", note: "Fogging between panes means a failed seal. Water around the frame usually means flashing." },
+          { title: "Roof repair or replacement: how we decide", note: "Age, how many problem spots, the number of layers. Share the rule your crew actually uses." },
+          { title: "Black streaks and moss: cosmetic or a problem?", note: "The streaks are usually algae and mostly cosmetic. Moss holds water and lifts shingles. Say which one you'd fix." },
+        ],
+      },
+      {
         id: "replacement",
         heading: "Planning a replacement",
         intro:
@@ -628,6 +696,19 @@ export const INDUSTRIES: Industry[] = [
           { title: "Ice dams: why they form and how to prevent them", note: "Attic insulation and ventilation do more than heat cables. Skip this one if you work where it doesn't snow." },
           { title: "How to check a roofer's license or registration in your state", note: "Link the lookup if your state has one. Then show yours." },
           { title: "A recent roof replacement, start to finish", note: "The problem, what you found under the shingles, the cost and photos. Get the homeowner's OK and leave out the address." },
+        ],
+      },
+      {
+        id: "social",
+        heading: "Social media post ideas for a roofing company",
+        intro:
+          "Each blog post above can become a few social posts. Treat them as advertising: the deductible and adjuster rules below apply to a Facebook post the same as a web page.",
+        topics: [
+          { title: "Before and after photos of a finished roof", note: "Drone or ladder shots work. Get the homeowner's OK and keep the house number out of frame." },
+          { title: "What we found under the shingles", note: "A short video from a tear-off showing rotted decking or bad flashing, and what you did about it." },
+          { title: "A storm-season reminder of what to check from the ground", note: "Link the hail damage post. No deductible offers, even in a comment reply." },
+          { title: "Meet the crew", note: "Names, how long they've been roofing, and a photo on a job. Homeowners like knowing who'll be on their roof." },
+          { title: "One question a homeowner asked this week", note: "Answer it in two or three sentences and link the post that covers it in full." },
         ],
       },
     ],
@@ -686,6 +767,10 @@ export const INDUSTRIES: Industry[] = [
       {
         q: "When should roofers publish storm posts?",
         a: "Four to six weeks before your hail or hurricane season, so they're indexed when the first storm hits.",
+      },
+      {
+        q: "What should a roofing company post on social media?",
+        a: "Before and after photos of real jobs, short videos of what you found during a tear-off, and storm-season reminders that link to a full blog post. Get the homeowner's permission, and skip deductible offers in posts and comments.",
       },
       {
         q: "Can AI write roofing blog posts?",

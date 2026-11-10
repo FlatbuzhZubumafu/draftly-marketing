@@ -71,6 +71,7 @@ export default async function IndustryPage({ params }: Props) {
   const count = topicCount(industry);
   const others = INDUSTRIES.filter((i) => i.slug !== industry.slug);
   const photos = INDUSTRY_PHOTOS[industry.slug];
+  const modified = industry.updated ?? INDUSTRIES_DATE;
 
   const jsonLd = jsonLdHtml(
     {
@@ -79,7 +80,7 @@ export default async function IndustryPage({ params }: Props) {
       description: industry.description,
       url: `${SITE_URL}${path}`,
       datePublished: INDUSTRIES_DATE.iso,
-      dateModified: INDUSTRIES_DATE.iso,
+      dateModified: modified.iso,
       author: authorRef,
       publisher: { "@type": "Organization", name: "Draftly", url: SITE_URL },
       image: [imageObjectJsonLd(shot), ...(photos ? [photos.hero, ...Object.values(photos.groups), photos.rules].map(photoJsonLd) : [])],
@@ -120,7 +121,7 @@ export default async function IndustryPage({ params }: Props) {
             <p className="leading-relaxed mb-4" style={secondary}>
               {count} topics in {industry.groups.length} groups, then the rules to check before you publish.
             </p>
-            <Byline verb="Written" date={INDUSTRIES_DATE.label} />
+            <Byline verb={industry.updated ? "Updated" : "Written"} date={modified.label} />
           </header>
 
           {photos ? <StockPhoto photo={photos.hero} className="max-w-3xl mt-10" /> : null}
@@ -155,7 +156,7 @@ export default async function IndustryPage({ params }: Props) {
               </div>
             ))}
             <p className="text-sm" style={muted}>
-              This is a summary for planning posts, checked {INDUSTRIES_DATE.label}. It isn&apos;t legal advice, and rules
+              This is a summary for planning posts, checked {modified.label}. It isn&apos;t legal advice, and rules
               change, so confirm the current version at each source.
             </p>
           </Section>

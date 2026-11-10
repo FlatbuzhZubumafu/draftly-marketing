@@ -1,9 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import type { MarketingSettings } from "@/lib/graphql";
 import { Globe, Loader2, ArrowRight } from "lucide-react";
-import { HeroHeadline, HeroHeadlineNoScript, useHeadlineEdit } from "./HeroHeadline";
+import { HeroHeadline } from "./HeroHeadline";
 import { normalizeSiteUrl } from "@/lib/siteUrl";
 
 const HERO_URL_ERROR_ID = "hero-url-error";
@@ -13,8 +13,6 @@ export function HeroDemo({ settings, startingPrice }: { settings: MarketingSetti
   const [url, setUrl] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
-  const sectionRef = useRef<HTMLElement>(null);
-  const edit = useHeadlineEdit(sectionRef);
 
   const handleGenerate = (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,7 +35,6 @@ export function HeroDemo({ settings, startingPrice }: { settings: MarketingSetti
 
   return (
     <section
-      ref={sectionRef}
       id="hero"
       className="relative flex items-center overflow-hidden pt-24 pb-16 px-4"
       style={{ background: "var(--color-bg-primary)", minHeight: "90vh" }}
@@ -54,13 +51,10 @@ export function HeroDemo({ settings, startingPrice }: { settings: MarketingSetti
         }}
       />
 
-      <div className="container-draftly relative z-10 max-w-4xl text-center" data-flip-root>
-        <div className="reveal">
-          <HeroHeadline phase={edit.phase} struck={edit.struck} />
-          <HeroHeadlineNoScript />
-        </div>
+      <div className="container-draftly relative z-10 max-w-4xl text-center">
+        <HeroHeadline />
 
-        <div className="reveal" style={{ transitionDelay: "0.1s" }} data-flip>
+        <div>
           <p className="text-lg leading-relaxed mb-8 max-w-xl mx-auto" style={{ color: "var(--color-text-secondary)" }}>
             {s.heroSubhead}
           </p>
