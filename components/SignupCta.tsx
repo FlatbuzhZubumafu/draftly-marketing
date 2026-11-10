@@ -1,5 +1,5 @@
 import { getHomepageData } from "@/lib/graphql";
-import { APP_URL } from "@/lib/site";
+import { SiteUrlForm } from "@/components/SiteUrlForm";
 
 type Props = {
   heading?: string;
@@ -31,14 +31,10 @@ export async function SignupCta({
       <p className="leading-relaxed mb-6" style={{ color: "var(--color-text-secondary)" }}>
         {body}
       </p>
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-        <a href={`${APP_URL}/register`} className="btn btn-primary">
-          {s.heroCtaText || "Generate Free Post"}
-        </a>
-        <span className="text-sm" style={{ color: "var(--color-text-muted)" }}>
-          Free first post. No credit card.
-        </span>
-      </div>
+      <SiteUrlForm label={s.heroCtaText || "Generate Free Post"} />
+      <p className="text-sm mt-3" style={{ color: "var(--color-text-muted)" }}>
+        Free first post. No credit card.
+      </p>
     </aside>
   );
 }

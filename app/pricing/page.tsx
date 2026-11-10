@@ -5,6 +5,7 @@ import { ProviderLogo } from "@/components/ProviderLogo";
 import { READER_QUALITY_EVIDENCE } from "@/lib/ruleCheck";
 import { getHomepageData } from "@/lib/graphql";
 import { Header } from "@/components/Header";
+import { TrackView } from "@/components/TrackView";
 import { Footer } from "@/components/Footer";
 import { AccentText } from "@/components/AccentText";
 import { PricingPlans } from "@/components/PricingPlans";
@@ -91,6 +92,7 @@ export default async function PricingPage() {
   return (
     <>
       <Header />
+      <TrackView event="pricing_viewed" />
       <main className="pt-28 pb-24 px-4" style={{ background: "var(--color-bg-primary)" }}>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdHtml(softwareApplicationJsonLd, faqJsonLd(FAQS)) }} />
         <section className="container-draftly max-w-6xl">

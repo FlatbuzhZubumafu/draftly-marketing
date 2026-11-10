@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { APP_URL, SITE_URL } from "@/lib/site";
 import { getHomepageData } from "@/lib/graphql";
 import { Header } from "@/components/Header";
+import { SiteUrlForm } from "@/components/SiteUrlForm";
 import { Footer } from "@/components/Footer";
 import { A, B, Bullets, DarkCta, FaqList, faqJsonLd, type Faq } from "@/components/ArticleParts";
 import { ProductFigure } from "@/components/ProductFigure";
@@ -356,9 +357,7 @@ export default async function JasperVsDraftlyPage() {
               <p className="text-sm mt-2" style={secondary}>
                 for {SOLO.seats} people, no per-seat charge. First post free.
               </p>
-              <a href={registerUrl} className="btn btn-primary mt-6 self-start">
-                {ctaLabel}
-              </a>
+              <SiteUrlForm label={ctaLabel} className="mt-6" />
             </div>
           </div>
           <p className="mt-4 text-center text-sm" style={muted}>
