@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { LOGO_URL, SITE_URL } from "@/lib/site";
 import { plainExcerpt } from "@/lib/text";
 import { getPost, getPosts } from "@/lib/graphql";
-import { sanitizeHtml, tidyPostHtml } from "@/lib/sanitize";
+import { sanitizeHtml, splitAtMiddleH2, tidyPostHtml } from "@/lib/sanitize";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { notFound } from "next/navigation";
@@ -124,10 +124,25 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               className="w-full h-auto aspect-video object-cover rounded-xl mb-8"
             />
           )}
-          <div
-            className="prose prose-lg max-w-none text-gray-700 leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: tidyPostHtml(sanitizeHtml(post.content), post.title) }}
-          />
+          {(() => {
+            const body = tidyPostHtml(sanitizeHtml(post.content), post.title);
+            const prose = "prose prose-lg max-w-none text-gray-700 leading-relaxed";
+            // Halfway through the article, so readers who stop early (most on
+            // phones) still see the next step. The full CTA stays at the end.
+            const halves = splitAtMiddleH2(body);
+            if (!halves) return <div className={prose} dangerouslySetInnerHTML={{ __html: body }} />;
+            return (
+              <>
+                <div className={prose} dangerouslySetInnerHTML={{ __html: halves[0] }} />
+                <SignupCta
+                  className="my-10"
+                  heading="Try it on your own site"
+                  body="Paste your URL and Draftly writes your first post free, in your brand's voice."
+                />
+                <div className={prose} dangerouslySetInnerHTML={{ __html: halves[1] }} />
+              </>
+            );
+          })()}
           <ShareLinks url={url} title={post.title} image={post.featuredImage?.node?.sourceUrl} className="mt-10" />
           <SignupCta className="mt-16" />
           <NewsletterSignup location="blog_post" className="mt-16" />
