@@ -9,7 +9,9 @@ const PORTRAIT_SRCSET = [768, 1024, 1536].map((w) => `${PORTRAIT_BASE}-${w}x${Ma
 
 export async function PersonalStory() {
   const { marketingSettings: s } = await getHomepageData();
-  const paragraphs = s.personalStoryBody.split("\n\n");
+  const paragraphs = s.personalStoryBody.split("\n\n").filter((p) => p.trim());
+  // Empty when WordPress is unreachable: a heading with no story under it reads as broken.
+  if (paragraphs.length === 0) return null;
 
   return (
     <section className="py-24 px-4" style={{ background: "var(--color-bg-primary)" }}>

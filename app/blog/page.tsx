@@ -28,10 +28,16 @@ export const metadata: Metadata = {
   ...pageImages("/blog", { title: TITLE, description: DESCRIPTION, url: "/blog", type: "website" }),
 };
 
+// The newest posts get thumbnail cards; older ones are a plain list of links, so
+// every post stays one click from the hub without the page growing hundreds of images.
+const CARD_POSTS = 24;
+
 const dateLabel = (iso: string) => new Date(iso).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 
 export default async function BlogPage() {
-  const posts = await getPosts();
+  const posts = [...(await getPosts())].sort((a, b) => +new Date(b.date) - +new Date(a.date));
+  const cardPosts = posts.slice(0, CARD_POSTS);
+  const olderPosts = posts.slice(CARD_POSTS);
   const indexed = posts.filter((p) => !NOINDEX_POST_SLUGS.has(p.slug));
 
   const blogJsonLd = {
@@ -100,23 +106,44 @@ export default async function BlogPage() {
               Latest Posts
             </h2>
             <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[...posts]
-                .sort((a, b) => +new Date(b.date) - +new Date(a.date))
-                .map((p) => (
-                  <li key={p.id}>
-                    <ThumbCard
-                      href={`/blog/${p.slug}`}
-                      tag={dateLabel(p.date)}
-                      title={plainExcerpt(p.title, 1000)}
-                      blurb={plainExcerpt(p.excerpt, 160)}
-                      image={postImage(p)}
-                      titleClass="text-lg"
-                      sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw"
-                    />
+              {cardPosts.map((p) => (
+                <li key={p.id}>
+                  <ThumbCard
+                    href={`/blog/${p.slug}`}
+                    tag={dateLabel(p.date)}
+                    title={plainExcerpt(p.title, 1000)}
+                    blurb={plainExcerpt(p.excerpt, 160)}
+                    image={postImage(p)}
+                    titleClass="text-lg"
+                    sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw"
+                  />
+                </li>
+              ))}
+            </ul>
+            {posts.length === 0 && (
+              <p className="text-base" style={{ color: "var(--color-text-secondary)" }}>
+                Posts didn&apos;t load just now. Refresh in a minute, or start with the guides above.
+              </p>
+            )}
+          </section>
+
+          {olderPosts.length > 0 && (
+            <section id="older-posts" aria-labelledby="older-posts-heading" className="mt-16 scroll-mt-28 max-w-3xl">
+              <h2 id="older-posts-heading" className="text-2xl font-medium mb-5" style={{ letterSpacing: "-0.02em" }}>
+                Older Posts
+              </h2>
+              <ul className="space-y-3">
+                {olderPosts.map((p) => (
+                  <li key={p.id} className="flex flex-col sm:flex-row sm:items-baseline sm:gap-4">
+                    <a href={`/blog/${p.slug}`} className="font-medium hover:underline underline-offset-2" style={{ color: "var(--color-text-primary)" }}>
+                      {plainExcerpt(p.title, 1000)}
+                    </a>
+                    <span className="text-sm shrink-0" style={{ color: "var(--color-text-muted)" }}>{dateLabel(p.date)}</span>
                   </li>
                 ))}
-            </ul>
-          </section>
+              </ul>
+            </section>
+          )}
 
           <SignupCta className="mt-20 max-w-3xl" />
           <NewsletterSignup location="blog_index" className="mt-12 max-w-3xl" />
