@@ -11,7 +11,12 @@ export const revalidate = 3600;
 const legalModified = (page: { modified: string } | null, fallback: string) => new Date(page?.modified || fallback);
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [posts, privacy, terms] = await Promise.all([getPosts(), getPage("privacy-policy"), getPage("terms-and-conditions")]);
+  // getPosts falls back to [] on its own; the legal pages fall back to their fixed dates.
+  const [posts, privacy, terms] = await Promise.all([
+    getPosts(),
+    getPage("privacy-policy").catch(() => null),
+    getPage("terms-and-conditions").catch(() => null),
+  ]);
   const baseUrl = "https://www.draftly.blog";
 
   const staticRoutes: MetadataRoute.Sitemap = [

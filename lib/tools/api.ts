@@ -22,7 +22,16 @@ const RUNNERS: Record<ToolId, (url: string, extra?: string) => Promise<ToolRepor
 };
 
 const MAX_BODY = 4096;
-const HARD_TIMEOUT_MS = 55_000;
+// Each limit sits a few seconds under that route's maxDuration, so the visitor gets
+// our 504 message instead of the platform killing the function. Keep them in step:
+// the checkers' routes allow 60 seconds, the AI detector's (one page fetch) 30.
+const HARD_TIMEOUT_MS: Record<ToolId, number> = {
+  "ai-visibility": 55_000,
+  "blog-seo": 55_000,
+  "content-refresh": 55_000,
+  eeat: 55_000,
+  "ai-detector": 25_000,
+};
 
 function json(body: unknown, status = 200, extra: Record<string, string> = {}) {
   return new Response(JSON.stringify(body), {
@@ -84,7 +93,7 @@ export async function handleTool(tool: ToolId, req: Request): Promise<Response> 
   try {
     const report = await Promise.race([
       RUNNERS[tool](body.url, typeof body.homepage === "string" ? body.homepage : undefined),
-      new Promise<never>((_, reject) => setTimeout(() => reject(new ToolError("The check took too long. Try again, or try a single page.", 504)), HARD_TIMEOUT_MS)),
+      new Promise<never>((_, reject) => setTimeout(() => reject(new ToolError("The check took too long. Try again, or try a single page.", 504)), HARD_TIMEOUT_MS[tool])),
     ]);
     return json(report);
   } catch (e) {

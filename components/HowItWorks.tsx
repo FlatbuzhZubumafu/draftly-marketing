@@ -6,6 +6,8 @@ import { STEP_SHOTS } from "@/lib/product-shots";
 export async function HowItWorks() {
   const { steps, marketingSettings: s } = await getHomepageData();
   const registerUrl = `${s.appName}/register`;
+  // No steps means WordPress is unreachable; skip the section instead of showing an empty grid.
+  if (steps.nodes.length === 0) return null;
 
   return (
     <section id="how-it-works" className="py-24 px-4" style={{ background: "var(--color-bg-primary)" }}>

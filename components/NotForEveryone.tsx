@@ -29,20 +29,25 @@ export async function NotForEveryone() {
                 the hours to write. Each post reads like you wrote it, so you can put your name on it.
               </p>
             </div>
-            <div className="reveal rounded-xl p-8 card-depth" style={{ background: "var(--color-bg-primary)", transitionDelay: "0.1s" }}>
-              <p className="text-sm font-semibold mb-4">Draftly is built for people who:</p>
-              <div className="space-y-3 mb-6">
-                {points.map((point, i) => (
-                  <div key={i} className="flex items-start gap-2 text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-                    <span className="mt-[11px] h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: "var(--color-accent)" }} aria-hidden="true" />
-                    <span>{point}</span>
-                  </div>
-                ))}
+            {/* The list comes from WordPress; without it (an outage) the intro and CTA stand alone. */}
+            {points.length > 0 && (
+              <div className="reveal rounded-xl p-8 card-depth" style={{ background: "var(--color-bg-primary)", transitionDelay: "0.1s" }}>
+                <p className="text-sm font-semibold mb-4">Draftly is built for people who:</p>
+                <div className="space-y-3 mb-6">
+                  {points.map((point, i) => (
+                    <div key={i} className="flex items-start gap-2 text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
+                      <span className="mt-[11px] h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: "var(--color-accent)" }} aria-hidden="true" />
+                      <span>{point}</span>
+                    </div>
+                  ))}
+                </div>
+                {s.notForEveryoneUrgency && (
+                  <p className="text-sm font-medium pt-4" style={{ borderTop: "1px solid var(--color-border)", color: "var(--color-text-primary)" }}>
+                    {s.notForEveryoneUrgency}
+                  </p>
+                )}
               </div>
-              <p className="text-sm font-medium pt-4" style={{ borderTop: "1px solid var(--color-border)", color: "var(--color-text-primary)" }}>
-                {s.notForEveryoneUrgency}
-              </p>
-            </div>
+            )}
             <div className="reveal text-center lg:text-left mt-8" style={{ transitionDelay: "0.2s" }}>
               <a href={registerUrl} className="btn btn-primary">
                 {s.heroCtaText}
