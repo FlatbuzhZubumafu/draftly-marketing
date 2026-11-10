@@ -5,6 +5,8 @@ import { ProviderLogo } from "@/components/ProviderLogo";
 import { READER_QUALITY_EVIDENCE } from "@/lib/ruleCheck";
 import { getHomepageData } from "@/lib/graphql";
 import { Header } from "@/components/Header";
+import { TrackView } from "@/components/TrackView";
+import { SiteUrlForm } from "@/components/SiteUrlForm";
 import { Footer } from "@/components/Footer";
 import { AccentText } from "@/components/AccentText";
 import { PricingPlans } from "@/components/PricingPlans";
@@ -91,6 +93,7 @@ export default async function PricingPage() {
   return (
     <>
       <Header />
+      <TrackView event="pricing_viewed" />
       <main className="pt-28 pb-24 px-4" style={{ background: "var(--color-bg-primary)" }}>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdHtml(softwareApplicationJsonLd, faqJsonLd(FAQS)) }} />
         <section className="container-draftly max-w-6xl">
@@ -251,9 +254,7 @@ export default async function PricingPage() {
           <p className="mb-8" style={{ color: "var(--color-text-secondary)" }}>
             Paste your URL and Draftly writes your first post. No credit card required.
           </p>
-          <a href={registerUrl} className="btn btn-primary">
-            {s.heroCtaText}
-          </a>
+          <SiteUrlForm label={s.heroCtaText || "Generate Free Post"} className="flex justify-center" />
         </section>
       </main>
       <Footer />

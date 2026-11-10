@@ -1,4 +1,5 @@
 import { getHomepageData } from "@/lib/graphql";
+import { SiteUrlForm } from "@/components/SiteUrlForm";
 
 type Props = {
   heading: React.ReactNode;
@@ -18,7 +19,6 @@ type Props = {
  */
 export async function CtaBand({ heading, body, secondary, primary, note, tone = "light" }: Props) {
   const { marketingSettings: s } = await getHomepageData();
-  const registerUrl = `${s.appName}/register`;
   const accent = tone === "accent";
 
   return (
@@ -30,10 +30,18 @@ export async function CtaBand({ heading, body, secondary, primary, note, tone = 
         <p className="text-base sm:text-lg mb-8" style={{ color: "var(--color-text-secondary)" }}>
           {body}
         </p>
+        {primary ? null : (
+          // The free first post: take the site here so the app can start writing right after sign-up.
+          <div className="flex justify-center mb-3">
+            <SiteUrlForm label={s.heroCtaText || "Generate Free Post"} className="w-full max-w-xl text-left" />
+          </div>
+        )}
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <a href={primary?.href ?? registerUrl} className="btn btn-primary">
-            {primary?.label ?? s.heroCtaText}
-          </a>
+          {primary ? (
+            <a href={primary.href} className="btn btn-primary">
+              {primary.label}
+            </a>
+          ) : null}
           {secondary ? (
             <a href={secondary.href} className="btn btn-secondary">
               {secondary.label}

@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { analytics } from "@heycatch/sdk";
 import type { CheckerId } from "@/lib/free-tools";
+import { APP_URL } from "@/lib/site";
 
 type Status = "pass" | "warn" | "fail" | "info";
 type Item = {
@@ -147,6 +148,8 @@ export function ToolChecker({
               ))}
             </div>
           ) : null}
+
+          <NextStep checked={report.checked} />
         </div>
       ) : null}
     </div>
@@ -259,5 +262,38 @@ function ResultItem({ item }: { item: Item }) {
         </div>
       ) : null}
     </li>
+  );
+}
+
+/**
+ * After a check, the next step is a post that passes it. The checked page's
+ * site goes along as ?url=, so the app starts the first post for that site as
+ * soon as the account exists.
+ */
+function NextStep({ checked }: { checked: string }) {
+  let site = "";
+  try {
+    site = new URL(checked).origin;
+  } catch {}
+  const params = new URLSearchParams();
+  if (site) params.set("url", site);
+  params.set("ref", window.location.pathname);
+  return (
+    <aside aria-label="Try Draftly" className="mt-8 rounded-2xl p-6" style={{ background: "var(--color-accent-muted)", border: "1px solid var(--color-border-accent)" }}>
+      <p className="text-xl font-medium mb-2" style={{ letterSpacing: "-0.02em" }}>
+        Want a post that passes these checks?
+      </p>
+      <p className="leading-relaxed mb-5" style={secondary}>
+        Draftly writes a full blog post{site ? ` for ${new URL(site).hostname.replace(/^www\./, "")}` : ""} in your brand&apos;s voice, checked against its writing rules and scored for SEO before you see it.
+      </p>
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+        <a href={`${APP_URL}/register?${params.toString()}`} className="btn btn-primary">
+          Write my first post free
+        </a>
+        <span className="text-sm" style={muted}>
+          No credit card.
+        </span>
+      </div>
+    </aside>
   );
 }

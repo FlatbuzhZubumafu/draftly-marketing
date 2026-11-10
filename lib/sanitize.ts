@@ -89,3 +89,27 @@ export function fixLegalAnchors(html: string): string {
   });
   return out;
 }
+
+/**
+ * Splits a post's HTML just before the top-level <h2> nearest its middle, so
+ * an in-article call to action can sit between two sections. Returns null
+ * when there is no safe split: fewer than three H2s, or the chosen H2 sits
+ * inside another element (unbalanced div/section/blockquote/ul/ol/table
+ * before it).
+ */
+export function splitAtMiddleH2(html: string): [string, string] | null {
+  const starts = [...html.matchAll(/<h2[\s>]/gi)].map((m) => m.index ?? 0);
+  if (starts.length < 3) return null;
+  const middle = html.length / 2;
+  const candidates = starts.slice(1).sort((a, b) => Math.abs(a - middle) - Math.abs(b - middle));
+  for (const at of candidates) {
+    const before = html.slice(0, at);
+    const balanced = ["div", "section", "blockquote", "ul", "ol", "table", "figure", "details"].every((tag) => {
+      const open = (before.match(new RegExp(`<${tag}[\\s>]`, "gi")) ?? []).length;
+      const close = (before.match(new RegExp(`</${tag}>`, "gi")) ?? []).length;
+      return open === close;
+    });
+    if (balanced) return [before, html.slice(at)];
+  }
+  return null;
+}

@@ -3,6 +3,8 @@
 
 import { ChevronDown } from "lucide-react";
 import { AccentText } from "./AccentText";
+import { SiteUrlForm } from "./SiteUrlForm";
+import { APP_URL } from "@/lib/site";
 
 export type Faq = { q: string; a: string };
 
@@ -124,6 +126,11 @@ export function faqJsonLd(faqs: Faq[]) {
   };
 }
 
+/** A bare link to the app's sign-up page, with no plan or intent attached. */
+function isPlainSignupLink(href: string): boolean {
+  return href === `${APP_URL}/register`;
+}
+
 export function DarkCta({ title, body, href, label, secondary }: { title: string; body: string; href: string; label: string; secondary?: { href: string; label: string } }) {
   return (
     <section data-toc-skip className="mt-20 rounded-2xl p-8 sm:p-12" style={{ background: "#111", color: "var(--color-text-inverted)" }}>
@@ -133,10 +140,13 @@ export function DarkCta({ title, body, href, label, secondary }: { title: string
       <p className="max-w-2xl mb-8 leading-relaxed" style={{ color: "#bbb" }}>
         {body}
       </p>
+      {isPlainSignupLink(href) ? <SiteUrlForm label={label} variant="dark" className="mb-4" /> : null}
       <div className="flex flex-wrap gap-3">
-        <a href={href} className="btn btn-primary">
-          {label}
-        </a>
+        {isPlainSignupLink(href) ? null : (
+          <a href={href} className="btn btn-primary">
+            {label}
+          </a>
+        )}
         {secondary ? (
           <a href={secondary.href} className="underline self-center font-semibold" style={{ color: "#ffce59" }}>
             {secondary.label}
