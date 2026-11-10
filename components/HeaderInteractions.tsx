@@ -75,5 +75,17 @@ export function HeaderInteractions() {
     };
   }, []);
 
+  // Escape closes the open menu and puts focus back on the toggle, so keyboard users aren't stranded.
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setMobileOpen(false);
+      document.getElementById("mobile-toggle")?.focus();
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [mobileOpen]);
+
   return null;
 }

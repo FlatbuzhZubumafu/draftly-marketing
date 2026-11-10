@@ -4,6 +4,7 @@ import { handleTool, methodNotAllowed } from "@/lib/tools/api";
 // SSRF-guarded fetcher and returns the article text. The browser does the scoring.
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+// lib/tools/api.ts gives up at 25 seconds; the fetch budget is 20.
 export const maxDuration = 30;
 
 export function POST(req: Request) {
