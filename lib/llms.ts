@@ -18,6 +18,7 @@ import { WP_FEATURES, WP_PLANS, WP_PLUGIN_VERSION, WP_TOP_UPS } from "@/lib/word
 import { FREE_TOOLS, TOOLS_HUB } from "@/lib/free-tools";
 import { INDUSTRIES, INDUSTRIES_HUB, industryPath, topicCount } from "@/lib/industries";
 import { FEATURES, FEATURES_HUB, featurePath } from "@/lib/features";
+import { DECISION_PAGES, isPublishable } from "@/lib/decision-pages";
 
 // Builds /llms.txt and /llms-full.txt from the same data the pages render, so
 // prices, tools and benchmark numbers match the site.
@@ -140,6 +141,7 @@ ${FREE_TOOLS.map((t) => `- [${t.name}](${SITE_URL}${t.path}): ${t.intro.split(".
 - [Koala AI Review](${SITE_URL}/koala-ai-review): Koala AI (KoalaWriter) plans from $25 a month for 45,000 words on GPT-6 Luna, with 2x and 3x word multipliers for Claude Sonnet 5 and Opus 5.5, features by plan, publishing to WordPress, Shopify, Webflow and Ghost, and Koala vs Draftly. From koala.sh as of October 2026.
 - [Arvow Review](${SITE_URL}/arvow-review): Arvow, formerly Journalist AI: Solo $69 a month or $39 billed yearly for 1,000 credits (15 credits an article), AutoBlog, 150+ languages, the backlink exchange and Google's link spam policy, AI visibility tracking, and Arvow vs Draftly. From arvow.com as of October 2026.
 - [Best AI for SEO](${SITE_URL}/best-ai-for-seo): AI tools picked by SEO job, with prices from each company's own page as of October 2026: Ahrefs or Semrush for keyword research, Draftly for writing and publishing blog posts (Koala and SEOWriting.ai as cheaper volume options), Surfer or Clearscope for optimizing pages, AI visibility tracking in Semrush, Clearscope, Surfer and Ahrefs, Google Search Console and Ahrefs Free for technical SEO, and which AI models wrote the best SEO content in Draftly's benchmark.
+${DECISION_PAGES.filter(isPublishable).map((p) => `- [${p.h1.charAt(0).toUpperCase() + p.h1.slice(1)} ${p.h1Accent}](${SITE_URL}${p.path}): ${p.answer}`).join("\n")}
 - [Blog Ideas by Industry](${SITE_URL}${INDUSTRIES_HUB.path}): ${INDUSTRIES_HUB.description}
 ${INDUSTRIES.map((i) => `  - [${i.title}](${SITE_URL}${industryPath(i)}): ${topicCount(i)} topics. ${i.description}`).join("\n")}
 - [SEO MCP Server](${SITE_URL}/mcp): What an SEO MCP is, setup steps for each AI app, the tool list and data allowances by plan.
